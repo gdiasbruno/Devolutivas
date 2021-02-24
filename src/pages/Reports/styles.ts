@@ -19,19 +19,22 @@ export const Header = styled.div`
   padding: 20px;
 `;
 
-export const Options = styled.div`
+export const FirstSection = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top: 100px;
+  justify-content:space-between;
+  padding: 20px;
 `;
 
 export const MyButton = styled(Button)`
- display: flex;;
+ display: flex;
  flex-direction: row;
  align-items: center;
  padding: 10px 50px;
-
  border-radius: 5px;
  text-align: center;
+`;
+
+export const SecondSection = styled.div`
+  display: flex;
 `;

@@ -26,12 +26,13 @@ export const Options = styled.div`
   margin-top: 100px;
 `;
 
-export const MyButton = styled(Button)`
- display: flex;;
- flex-direction: row;
- align-items: center;
- padding: 10px 50px;
+export const FirstSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  padding: 20px;
+`;
 
- border-radius: 5px;
- text-align: center;
+export const MyButton = styled(Button)`
+
 `;

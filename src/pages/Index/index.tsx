@@ -6,8 +6,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
 
-import { Title, Header } from './styles';
+import {
+  Title, Header, Options, MyButton,
+} from './styles';
 import logoImg from '../../assets/logo.svg';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -49,7 +52,7 @@ const Index: React.FC = () => {
         <Title>Relatório de Informações dos Serviços da Rede de Assistência Social</Title>
       </Header>
 
-      <div>
+      <Options>
         <Button className={classes.button} onClick={handleOpen}>
           Escolha uma SAS:
         </Button>
@@ -65,15 +68,18 @@ const Index: React.FC = () => {
             onChange={handleChange}
           >
             <MenuItem value="">
-              <em>None</em>
+              <em>Nenhuma</em>
             </MenuItem>
             <MenuItem value={10}>SAS Arincaduva</MenuItem>
             <MenuItem value={20}>SAS Butantã</MenuItem>
             <MenuItem value={30}>SAS Centro</MenuItem>
           </Select>
         </FormControl>
-        <Button variant="contained" color="primary">Default</Button>
-      </div>
+        <Link href="/months">
+          <MyButton variant="contained" color="primary">Consultar</MyButton>
+        </Link>
+
+      </Options>
 
     </>
   );
