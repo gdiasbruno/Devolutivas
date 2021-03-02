@@ -21,9 +21,12 @@ export const Header = styled.div`
 
 export const Options = styled.div`
   display: flex;
+  flex-direction:column;
   align-items: center;
   justify-content: center;
   margin-top: 100px;
+
+
 `;
 
 export const MyButton = styled(Button)`

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '@material-ui/core/Link';
 import {
-  makeStyles, Theme, createStyles,
+  makeStyles, Theme, createStyles, withStyles, emphasize,
 } from '@material-ui/core/styles';
 
 import Card from '@material-ui/core/Card';
@@ -15,11 +15,30 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Chip from '@material-ui/core/Chip';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import HomeIcon from '@material-ui/icons/Home';
 
 import {
   Title, Header, FirstSection, MyButton, SecondSection,
 } from './styles';
 import logoImg from '../../assets/logo.svg';
+
+const StyledBreadcrumb = withStyles((theme: Theme) => ({
+  root: {
+    backgroundColor: theme.palette.grey[100],
+    height: theme.spacing(3),
+    color: theme.palette.grey[800],
+    fontWeight: theme.typography.fontWeightRegular,
+    '&:hover, &:focus': {
+      backgroundColor: theme.palette.grey[300],
+    },
+    '&:active': {
+      boxShadow: theme.shadows[1],
+      backgroundColor: emphasize(theme.palette.grey[300], 0.12),
+    },
+  },
+}))(Chip) as typeof Chip;
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   formControl: {
@@ -72,7 +91,17 @@ const Reports: React.FC = () => {
         <Title>Relatório de Informações dos Serviços da Rede de Assistência Social</Title>
       </Header>
       <FirstSection>
-        <h2>SAS Aricanduva</h2>
+        <Breadcrumbs aria-label="breadcrumb">
+          <StyledBreadcrumb
+            component="a"
+            href="/"
+            label="SAS Aricanduva"
+            icon={<HomeIcon fontSize="small" />}
+          />
+          <StyledBreadcrumb component="a" href="/months" label="Novembro" />
+          <StyledBreadcrumb component="a" href="/Reports" label="Serviços" />
+          <Typography color="textPrimary">CCA Jardim das Rosas</Typography>
+        </Breadcrumbs>
         <Link href="/months">
           <MyButton variant="contained" color="primary">Voltar</MyButton>
         </Link>

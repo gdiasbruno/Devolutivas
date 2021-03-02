@@ -7,6 +7,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
+import CustomizedBreadcrumbs from '../../components/customizedBreadcrumbs';
+
 import {
   Title, Header, Options, FirstSection, MyButton,
 } from './styles';
@@ -26,6 +28,7 @@ const Months: React.FC = () => {
         <Title>Relatório de Informações dos Serviços da Rede de Assistência Social</Title>
       </Header>
       <FirstSection>
+        <CustomizedBreadcrumbs label="Frango" />
         <h2>SAS Aricanduva</h2>
         <Link href="/">
           <MyButton variant="contained" color="primary">Voltar</MyButton>
