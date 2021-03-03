@@ -24,10 +24,12 @@ export const Options = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 100px;
+  flex-direction: column;
 `;
 
 export const FirstSection = styled.div`
   display: flex;
+
   align-items: center;
   justify-content:space-between;
   padding: 20px;

@@ -4,12 +4,7 @@ import {
   makeStyles, Theme, createStyles, withStyles, emphasize,
 } from '@material-ui/core/styles';
 
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -18,6 +13,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
+
+import List from '@material-ui/core/List';
+import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 import {
   Title, Header, FirstSection, MyButton, SecondSection,
@@ -28,14 +28,11 @@ const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.grey[100],
     height: theme.spacing(3),
-    color: theme.palette.grey[800],
-    fontWeight: theme.typography.fontWeightRegular,
+    color: theme.palette.grey[900],
+    fontWeight: theme.typography.fontWeightBold,
+    fontSize: 15,
     '&:hover, &:focus': {
       backgroundColor: theme.palette.grey[300],
-    },
-    '&:active': {
-      boxShadow: theme.shadows[1],
-      backgroundColor: emphasize(theme.palette.grey[300], 0.12),
     },
   },
 }))(Chip) as typeof Chip;
@@ -47,6 +44,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
     minWidth: 100,
 
+  },
+  root1: {
+    width: '100%',
+    maxWidth: 1200,
+    flex: 1,
   },
   bullet: {
     display: 'inline-block',
@@ -99,8 +101,7 @@ const Reports: React.FC = () => {
             icon={<HomeIcon fontSize="small" />}
           />
           <StyledBreadcrumb component="a" href="/months" label="Novembro" />
-          <StyledBreadcrumb component="a" href="/Reports" label="Serviços" />
-          <Typography color="textPrimary">CCA Jardim das Rosas</Typography>
+          <Typography color="textPrimary">Serviços</Typography>
         </Breadcrumbs>
         <Link href="/months">
           <MyButton variant="contained" color="primary">Voltar</MyButton>
@@ -124,47 +125,44 @@ const Reports: React.FC = () => {
             />
           </FormGroup>
         </FormControl>
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography variant="h5" component="h2" className={classes.subtitle}>
-              CCA JARDIM DAS ROSAS
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="medium" href="/response" color="secondary">Ver respostas</Button>
-          </CardActions>
-        </Card>
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography variant="h5" component="h2" className={classes.subtitle}>
-              CCA ARICANDUVA - ESPAÇO DA COMUNIDADE I
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="medium" href="/response" color="secondary">Ver respostas</Button>
-          </CardActions>
-        </Card>
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography variant="h5" component="h2" className={classes.subtitle}>
-              CTA - CENTRO TEMPORÁRIO DE ATENDIMENTO - CTA ARICANDUVA
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="medium" href="/response" color="secondary">Ver respostas</Button>
-          </CardActions>
-        </Card>
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography variant="h5" component="h2" className={classes.subtitle}>
-              MSE DOM LUCIANO
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="medium" href="/response" color="secondary">Ver respostas</Button>
-          </CardActions>
-        </Card>
+        <div className={classes.root1}>
+          <List component="nav" aria-label="main mailbox folders">
+            <Link href="/response">
+              <ListItem button href="/response">
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary="CCA JARDIM DAS ROSAS" />
+              </ListItem>
+            </Link>
+            <Link href="/response">
+              <ListItem button>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary="MSE DOM LUCIANO" />
+              </ListItem>
+            </Link>
+            <Link href="/response">
+              <ListItem button>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary="CTA - CENTRO TEMPORÁRIO DE ATENDIMENTO - CTA ARICANDUVA" />
+              </ListItem>
+            </Link>
+            <Link href="/response">
+              <ListItem button>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary="CCA ARICANDUVA - ESPAÇO DA COMUNIDADE I" />
+              </ListItem>
+            </Link>
 
+          </List>
+
+        </div>
       </SecondSection>
 
     </>

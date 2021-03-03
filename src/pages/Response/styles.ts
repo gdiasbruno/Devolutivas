@@ -31,6 +31,23 @@ export const FirstSection = styled.div`
   align-items: center;
   justify-content:space-between;
   padding: 20px;
+
+  div {
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+  }
+`;
+
+export const Section = styled.div`
+  max-width: 1080px;
+  margin: 0 auto;
+`;
+
+export const Chips = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 `;
 
 export const MyButton = styled(Button)`

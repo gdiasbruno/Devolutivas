@@ -28,8 +28,7 @@ const Months: React.FC = () => {
         <Title>Relatório de Informações dos Serviços da Rede de Assistência Social</Title>
       </Header>
       <FirstSection>
-        <CustomizedBreadcrumbs label="Frango" />
-        <h2>SAS Aricanduva</h2>
+        <CustomizedBreadcrumbs label="SAS Aricanduva" />
         <Link href="/">
           <MyButton variant="contained" color="primary">Voltar</MyButton>
         </Link>
@@ -43,9 +42,10 @@ const Months: React.FC = () => {
             <FormControlLabel value="other" control={<Radio color="primary" />} label="Janeiro/2021" />
           </RadioGroup>
         </FormControl>
-        <Link href="/reports">
-          <MyButton variant="contained" color="primary">Consultar</MyButton>
-        </Link>
+        <br />
+        <br />
+        <MyButton variant="contained" color="primary" href="/reports">Consultar</MyButton>
+
       </Options>
 
     </>

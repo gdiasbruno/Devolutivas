@@ -17,6 +17,7 @@ const Index: React.FC = () => (
     <Options>
       <ControlledOpenSelect label="Escolha uma SAS:" menuItems={['Aricanduva', 'Butantã', 'Centro']} />
       <br />
+      <br />
       <MyButton variant="contained" color="primary" href="/months">Consultar</MyButton>
 
     </Options>

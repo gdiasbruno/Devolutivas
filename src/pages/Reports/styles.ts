@@ -27,14 +27,12 @@ export const FirstSection = styled.div`
 `;
 
 export const MyButton = styled(Button)`
- display: flex;
- flex-direction: row;
- align-items: center;
- padding: 10px 50px;
- border-radius: 5px;
- text-align: center;
+
 `;
 
 export const SecondSection = styled.div`
   display: flex;
+  justify-content: flex-start;
+
+
 `;
