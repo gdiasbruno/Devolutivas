@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  withStyles, Theme, createStyles, makeStyles, emphasize,
+  withStyles, Theme, createStyles, makeStyles,
 } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,14 +14,12 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import List from '@material-ui/core/List';
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
+import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
+
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+
 import CloseIcon from '@material-ui/icons/Close';
 
 import { Typography } from '@material-ui/core';
@@ -68,7 +66,7 @@ const rows1 = [
   createData('Transferência para outro serviço', 1, 1, 1, 1),
   createData('Óbito', 1, 1, 1, 1),
   createData('Aplicação de medida restritiva de liberdade', 1, 1, 1, 1),
-  createData('Limite de idade 6 a 11 anos', 4, 4, 4, 4),
+  createData('Limite de idade', 4, 4, 4, 4),
   createData('Total', 4, 4, 4, 4),
 ];
 
@@ -96,6 +94,12 @@ const rows5 = [
   createData('Quinzenal', 1, 1, 1, 1),
   createData('Mensal Nº de crianças e/ou adolescentes', 1, 1, 1, 1),
   createData('Total', 4, 1, 1, 1),
+];
+
+const rows6 = [
+  createData('Feminino', 1, 1, 1, 1),
+  createData('Masculino', 1, 1, 1, 1),
+  createData('Total Geral', 1, 1, 1, 1),
 ];
 
 const useStyles = makeStyles({
@@ -142,7 +146,7 @@ const Response: React.FC = () => {
           <Typography color="textPrimary">Respostas</Typography>
         </Breadcrumbs>
         <div>
-
+          <MyButton variant="contained" color="primary">PDF</MyButton>
           <MyButton variant="contained" color="primary">Imprimir</MyButton>
 
           <MyButton variant="contained" color="primary" href="/reports">Voltar</MyButton>
@@ -157,8 +161,7 @@ const Response: React.FC = () => {
         <br />
         <br />
         <h2>
-          Quantidade de crianças / adolescentes atendidos no mês de referência,
-          por faixa etária e gênero
+          Quantidade de crianças e adolescentes atendidos no mês, por faixa etária e sexo
         </h2>
         <br />
         <TableContainer component={Paper}>
@@ -167,60 +170,37 @@ const Response: React.FC = () => {
               <TableRow>
                 <StyledTableCell />
                 <StyledTableCell align="center">
-                  Nº de crianças
+                  N° de usuários
                   {' '}
                   <br />
-                  e/ou adolescentes
-                  {' '}
-                  <br />
-                  {' '}
-                  que entraram no mês
+                  atendidos no mês
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  Nº de crianças
+                  Nº de usuários que
                   {' '}
                   <br />
                   {' '}
-                  e/ou adolescentes
+                  frequentaram
                   <br />
                   {' '}
-                  que saíram no mês
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  Nº de crianças e/ou
-                  {' '}
-                  <br />
-                  adolescentes que  frequentaram
-                  {' '}
-                  <br />
                   presencialmente o serviço
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  Nº de crianças
+                  Nº de usuários atendidos
                   {' '}
                   <br />
-                  {' '}
-                  e/ou adolescentes que foram
-                  {' '}
-                  <br />
-                  atendidas remotamente
-                  {' '}
-                  <br />
-                  {' '}
-                  pelo serviço
+                  remotamente pelo serviço
                 </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row) => (
                 <StyledTableRow key={row.name}>
-                  <StyledTableCell align="center">
-                    {row.name}
-                  </StyledTableCell>
+                  <StyledTableCell align="center">{row.name}</StyledTableCell>
                   <StyledTableCell align="center">{row.calories}</StyledTableCell>
                   <StyledTableCell align="center">{row.fat}</StyledTableCell>
                   <StyledTableCell align="center">{row.carbs}</StyledTableCell>
-                  <StyledTableCell align="center">{row.protein}</StyledTableCell>
+
                 </StyledTableRow>
               ))}
             </TableBody>
@@ -231,8 +211,48 @@ const Response: React.FC = () => {
         <br />
         <br />
         <h2>
-          Quantidade de crianças / adolescentes por motivo de
-          saída do serviço no mês de referência
+          Quantidade crianças e adolescentes atendidos no mês, por sexo e raça/cor
+        </h2>
+        <br />
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell />
+                <StyledTableCell align="center">Branca</StyledTableCell>
+                <StyledTableCell align="center">Preta</StyledTableCell>
+                <StyledTableCell align="center">Parda</StyledTableCell>
+                <StyledTableCell align="center">Amarela</StyledTableCell>
+                <StyledTableCell align="center">Indígena</StyledTableCell>
+                <StyledTableCell align="center">Não informada</StyledTableCell>
+                <StyledTableCell align="center">Total</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows6.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell align="center">
+                    {row.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">{row.calories}</StyledTableCell>
+                  <StyledTableCell align="center">{row.fat}</StyledTableCell>
+                  <StyledTableCell align="center">{row.fat}</StyledTableCell>
+                  <StyledTableCell align="center">{row.fat}</StyledTableCell>
+                  <StyledTableCell align="center">{row.fat}</StyledTableCell>
+                  <StyledTableCell align="center">{row.fat}</StyledTableCell>
+                  <StyledTableCell align="center">{row.fat}</StyledTableCell>
+
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <br />
+        <br />
+        <br />
+        <br />
+        <h2>
+          Quantidade de crianças e adolescentes por motivo de saída do serviço no mês
         </h2>
         <br />
         <TableContainer component={Paper}>
@@ -268,8 +288,9 @@ const Response: React.FC = () => {
         </Typography>
         <br />
         <Typography variant="h6" gutterBottom>
-          A quantidade de crianças e/ou adolescentes em situação de trabalho
-          infantil encaminhadas pelo Cras/Creas no mês de referência é 1 pessoa(s)
+          A quantidade de crianças e adolescentes
+          com deficiência atendidos no mês de referência é 1 pessoa(s)
+
         </Typography>
 
         <br />

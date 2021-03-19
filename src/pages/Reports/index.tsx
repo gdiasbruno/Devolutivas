@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
 import Link from '@material-ui/core/Link';
 import {
   makeStyles, Theme, createStyles, withStyles, emphasize,
@@ -86,6 +89,21 @@ const Reports: React.FC = () => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
+  const [services, setServices] = useState([]);
+
+  const fetchUserProfiles = () => {
+    axios.get('http://localhost:8080/devolutivas/SE/0121').then((res) => {
+      setServices(res.data.result);
+      console.log(res.data.result);
+    });
+  };
+
+  React.useEffect(() => {
+    fetchUserProfiles();
+  }, []);
+
+  const history = useHistory();
+
   return (
     <>
       <Header>
@@ -103,9 +121,9 @@ const Reports: React.FC = () => {
           <StyledBreadcrumb component="a" href="/months" label="Novembro" />
           <Typography color="textPrimary">Serviços</Typography>
         </Breadcrumbs>
-        <Link href="/months">
-          <MyButton variant="contained" color="primary">Voltar</MyButton>
-        </Link>
+
+        <MyButton variant="contained" color="primary" onClick={() => history.goBack()}>Voltar</MyButton>
+
       </FirstSection>
       <SecondSection>
         <FormControl component="fieldset" className={classes.formControl}>
@@ -127,38 +145,16 @@ const Reports: React.FC = () => {
         </FormControl>
         <div className={classes.root1}>
           <List component="nav" aria-label="main mailbox folders">
-            <Link href="/response">
-              <ListItem button href="/response">
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="CCA JARDIM DAS ROSAS" />
-              </ListItem>
-            </Link>
-            <Link href="/response">
-              <ListItem button>
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="MSE DOM LUCIANO" />
-              </ListItem>
-            </Link>
-            <Link href="/response">
-              <ListItem button>
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="CTA - CENTRO TEMPORÁRIO DE ATENDIMENTO - CTA ARICANDUVA" />
-              </ListItem>
-            </Link>
-            <Link href="/response">
-              <ListItem button>
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="CCA ARICANDUVA - ESPAÇO DA COMUNIDADE I" />
-              </ListItem>
-            </Link>
+            {services.map((service:any) => (
+              <Link href="/response">
+                <ListItem button href="/response">
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={service.participant_info.firstname} />
+                </ListItem>
+              </Link>
+            ))}
 
           </List>
 

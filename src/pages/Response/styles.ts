@@ -35,7 +35,7 @@ export const FirstSection = styled.div`
   div {
     display: flex;
     justify-content: space-around;
-    width: 200px;
+    width: 300px;
   }
 `;
 
@@ -51,5 +51,4 @@ export const Chips = styled.div`
 `;
 
 export const MyButton = styled(Button)`
-
 `;

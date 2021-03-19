@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 import Link from '@material-ui/core/Link';
 import Radio from '@material-ui/core/Radio';
@@ -21,6 +23,29 @@ const Months: React.FC = () => {
     setValue((event.target as HTMLInputElement).value);
   };
 
+  const [service, setService]:any = React.useState([]);
+
+  const fetchUserProfiles = () => {
+    axios.get('http://localhost:8080/devolutivas/SE').then((res) => {
+      setService(res.data);
+      console.log(res);
+    });
+  };
+
+  React.useEffect(() => {
+    fetchUserProfiles();
+  }, []);
+
+  const monthsNames = service.map((month:any) => {
+    const monthString = month.toString();
+    if (monthString === '0121') {
+      return 'Janeiro/2021';
+    }
+    return 'Fevereiro/2021';
+  });
+
+  const history = useHistory();
+
   return (
     <>
       <Header>
@@ -29,17 +54,17 @@ const Months: React.FC = () => {
       </Header>
       <FirstSection>
         <CustomizedBreadcrumbs label="SAS Aricanduva" />
-        <Link href="/">
-          <MyButton variant="contained" color="primary">Voltar</MyButton>
-        </Link>
+
+        <MyButton variant="contained" color="primary" onClick={() => history.goBack()}>Voltar</MyButton>
+
       </FirstSection>
       <Options>
         <FormControl component="fieldset">
           <FormLabel component="legend">Mês da consulta:</FormLabel>
           <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-            <FormControlLabel value="female" control={<Radio color="primary" />} label="Novembro/2020" />
-            <FormControlLabel value="male" control={<Radio color="primary" />} label="Dezembro/2020" />
-            <FormControlLabel value="other" control={<Radio color="primary" />} label="Janeiro/2021" />
+            {monthsNames.map((month:any) => (
+              <FormControlLabel value={month} control={<Radio color="primary" />} label={month} />
+            ))}
           </RadioGroup>
         </FormControl>
         <br />
