@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
+import TableFourColumns from '../../components/TableFourColumns';
 
 export const Title = styled.h1`
   font-size: 48px;
@@ -51,4 +52,8 @@ export const Chips = styled.div`
 `;
 
 export const MyButton = styled(Button)`
+`;
+
+export const TableFourColumnsStyled = styled(TableFourColumns)`
+  padding-top: 1000px;
 `;
