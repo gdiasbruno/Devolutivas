@@ -94,7 +94,7 @@ const Reports: React.FC = () => {
   const fetchUserProfiles = () => {
     axios.get('http://localhost:8080/devolutivas/SE/0121').then((res) => {
       setServices(res.data.result);
-      console.log(res.data.result[0]);
+      console.log(res.data);
     });
   };
 
