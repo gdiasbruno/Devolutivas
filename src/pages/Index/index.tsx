@@ -23,11 +23,6 @@ const Index: React.FC = () => {
 
   return (
     <>
-      <Header>
-        <img src={logoImg} alt="Prefeitura Logo" />
-        <Title>Relatório de Informações dos Serviços da Rede de Assistência Social</Title>
-      </Header>
-
       <Options>
         <ControlledOpenSelect label="Escolha uma SAS:" menuItems={sas} />
         <br />

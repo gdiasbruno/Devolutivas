@@ -2,14 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-import Link from '@material-ui/core/Link';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
-import CustomizedBreadcrumbs from '../../components/customizedBreadcrumbs';
+import CustomizedBreadcrumbs from '../../components/CustomizedBreadcrumbs';
 
 import {
   Title, Header, Options, FirstSection, MyButton,
@@ -48,10 +47,6 @@ const Months: React.FC = () => {
 
   return (
     <>
-      <Header>
-        <img src={logoImg} alt="Prefeitura Logo" />
-        <Title>Relatório de Informações dos Serviços da Rede de Assistência Social</Title>
-      </Header>
       <FirstSection>
         <CustomizedBreadcrumbs label="SAS Aricanduva" />
 

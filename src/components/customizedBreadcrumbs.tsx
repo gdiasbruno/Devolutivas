@@ -1,5 +1,5 @@
 import React from 'react';
-import { emphasize, withStyles, Theme } from '@material-ui/core/styles';
+import { withStyles, Theme } from '@material-ui/core/styles';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Chip from '@material-ui/core/Chip';
 import HomeIcon from '@material-ui/icons/Home';
@@ -17,11 +17,6 @@ const StyledBreadcrumb = withStyles((theme: Theme) => ({
     },
   },
 }))(Chip) as typeof Chip; // TypeScript only: need a type cast here because https://github.com/Microsoft/TypeScript/issues/26591
-
-function handleClick(event: React.MouseEvent<Element, MouseEvent>) {
-  event.preventDefault();
-  console.info('You clicked a breadcrumb.');
-}
 
 export default function CustomizedBreadcrumbs(props: any) {
   const { label } = props;

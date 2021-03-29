@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import Link from '@material-ui/core/Link';
 import {
-  makeStyles, Theme, createStyles, withStyles, emphasize,
+  makeStyles, Theme, createStyles, withStyles,
 } from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
@@ -18,7 +18,7 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 
 import List from '@material-ui/core/List';
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
+import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
@@ -94,7 +94,7 @@ const Reports: React.FC = () => {
   const fetchUserProfiles = () => {
     axios.get('http://localhost:8080/devolutivas/SE/0121').then((res) => {
       setServices(res.data.result);
-      console.log(res.data.result);
+      console.log(res.data.result[0]);
     });
   };
 
@@ -106,10 +106,6 @@ const Reports: React.FC = () => {
 
   return (
     <>
-      <Header>
-        <img src={logoImg} alt="Prefeitura Logo" />
-        <Title>Relatório de Informações dos Serviços da Rede de Assistência Social</Title>
-      </Header>
       <FirstSection>
         <Breadcrumbs aria-label="breadcrumb">
           <StyledBreadcrumb
