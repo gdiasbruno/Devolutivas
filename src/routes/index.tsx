@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Index from '../pages/Index/index';
 import Reports from '../pages/Reports/index';
 import Months from '../pages/Months/index';
-import Response from '../pages/Response/index';
+import Response from '../pages/Response/maskCCA';
 import Header from '../components/Header';
 
 const Routes: React.FC = () => (
