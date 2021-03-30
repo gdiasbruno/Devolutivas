@@ -32,6 +32,9 @@ const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
+  tableContainer: {
+    margin: '30px 0px',
+  },
   root: {
     width: '100%',
   },
@@ -43,7 +46,7 @@ function TableThreeColumns(props:any): JSX.Element {
   const { headers, body } = props;
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer className={classes.tableContainer} component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>

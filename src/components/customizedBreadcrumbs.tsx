@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { withStyles, Theme } from '@material-ui/core/styles';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Chip from '@material-ui/core/Chip';
@@ -20,12 +21,15 @@ const StyledBreadcrumb = withStyles((theme: Theme) => ({
 
 export default function CustomizedBreadcrumbs(props: any) {
   const { label } = props;
+  const history = useHistory();
 
   return (
     <Breadcrumbs aria-label="breadcrumb">
       <StyledBreadcrumb
         component="a"
-        href="/"
+        onClick={() => {
+          history.push('/');
+        }}
         label={label}
         icon={<HomeIcon fontSize="small" />}
       />

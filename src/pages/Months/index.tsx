@@ -11,12 +11,16 @@ import FormLabel from '@material-ui/core/FormLabel';
 import CustomizedBreadcrumbs from '../../components/CustomizedBreadcrumbs';
 
 import {
-  Title, Header, Options, FirstSection, MyButton,
+  Options, FirstSection, MyButton,
 } from './styles';
-import logoImg from '../../assets/logo.svg';
+
+import { infoContext } from '../../providers/reactContext';
 
 const Months: React.FC = () => {
   const [value, setValue] = React.useState('female');
+
+  const { context, setContext }:any = React.useContext(infoContext);
+  const { nomeSAS } = context;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
@@ -25,9 +29,8 @@ const Months: React.FC = () => {
   const [service, setService]:any = React.useState([]);
 
   const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/SE').then((res) => {
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}`).then((res) => {
       setService(res.data);
-      console.log(res);
     });
   };
 
@@ -38,17 +41,31 @@ const Months: React.FC = () => {
   const monthsNames = service.map((month:any) => {
     const monthString = month.toString();
     if (monthString === '0121') {
-      return 'Janeiro/2021';
+      return {
+        name: 'Janeiro 2021',
+        index: month,
+      };
     }
-    return 'Fevereiro/2021';
+    return {
+      name: 'Fevereiro 2021',
+      index: month,
+    };
   });
 
   const history = useHistory();
 
+  const handleClick = () => {
+    setContext({
+      nomeSAS: context.nomeSAS,
+      mes: value,
+    });
+    history.push('/reports');
+  };
+
   return (
     <>
       <FirstSection>
-        <CustomizedBreadcrumbs label="SAS Aricanduva" />
+        <CustomizedBreadcrumbs label={nomeSAS} />
 
         <MyButton variant="contained" color="primary" onClick={() => history.goBack()}>Voltar</MyButton>
 
@@ -58,13 +75,13 @@ const Months: React.FC = () => {
           <FormLabel component="legend">Mês da consulta:</FormLabel>
           <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
             {monthsNames.map((month:any) => (
-              <FormControlLabel value={month} control={<Radio color="primary" />} label={month} />
+              <FormControlLabel value={month.index} control={<Radio color="primary" />} label={month.name} />
             ))}
           </RadioGroup>
         </FormControl>
         <br />
         <br />
-        <MyButton variant="contained" color="primary" href="/reports">Consultar</MyButton>
+        <MyButton onClick={handleClick} variant="contained" color="primary">Consultar</MyButton>
 
       </Options>
 

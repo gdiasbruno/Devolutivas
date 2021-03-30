@@ -6,7 +6,6 @@ import Link from '@material-ui/core/Link';
 import {
   makeStyles, Theme, createStyles, withStyles,
 } from '@material-ui/core/styles';
-
 import Typography from '@material-ui/core/Typography';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -16,16 +15,16 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import {
-  Title, Header, FirstSection, MyButton, SecondSection,
+  FirstSection, MyButton, SecondSection,
 } from './styles';
-import logoImg from '../../assets/logo.svg';
+
+import { infoContext } from '../../providers/reactContext';
 
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
@@ -76,6 +75,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 const Reports: React.FC = () => {
   const classes = useStyles();
+  const { context, setContext }:any = React.useContext(infoContext);
+  const history = useHistory();
+  const { nomeSAS, mes } = context;
 
   const [state, setState] = React.useState({
     gilad: true,
@@ -92,17 +94,14 @@ const Reports: React.FC = () => {
   const [services, setServices] = useState([]);
 
   const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/SE/0121').then((res) => {
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}`).then((res) => {
       setServices(res.data.result);
-      console.log(res.data);
     });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchUserProfiles();
   }, []);
-
-  const history = useHistory();
 
   return (
     <>
@@ -110,15 +109,32 @@ const Reports: React.FC = () => {
         <Breadcrumbs aria-label="breadcrumb">
           <StyledBreadcrumb
             component="a"
-            href="/"
-            label="SAS Aricanduva"
+            onClick={() => {
+              history.push('/');
+            }}
+            label={nomeSAS}
             icon={<HomeIcon fontSize="small" />}
           />
-          <StyledBreadcrumb component="a" href="/months" label="Novembro" />
+          <StyledBreadcrumb
+            component="a"
+            onClick={() => {
+              history.goBack();
+            }}
+            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
+          />
           <Typography color="textPrimary">Serviços</Typography>
         </Breadcrumbs>
 
-        <MyButton variant="contained" color="primary" onClick={() => history.goBack()}>Voltar</MyButton>
+        <MyButton
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            history.push('/months');
+          }}
+        >
+          Voltar
+
+        </MyButton>
 
       </FirstSection>
       <SecondSection>
@@ -141,16 +157,30 @@ const Reports: React.FC = () => {
         </FormControl>
         <div className={classes.root1}>
           <List component="nav" aria-label="main mailbox folders">
-            {services.map((service:any) => (
-              <Link href="/response">
-                <ListItem button href="/response">
+            {services.map((service:any) => {
+              console.log(service.attribute_4);
+
+              return (
+
+                <ListItem
+                  button
+                  onClick={() => {
+                    setContext({
+                      nomeSAS,
+                      mes,
+                      serviceName: service.participant_info.firstname,
+                    });
+                    history.push('/responsecj');
+                  }}
+                >
                   <ListItemIcon>
                     <HomeIcon />
                   </ListItemIcon>
                   <ListItemText primary={service.participant_info.firstname} />
                 </ListItem>
-              </Link>
-            ))}
+
+              );
+            })}
 
           </List>
 
