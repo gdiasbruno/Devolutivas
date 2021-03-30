@@ -31,6 +31,10 @@ const StyledTableRow = withStyles((theme: Theme) => createStyles({
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
+
+  },
+  tableContainer: {
+    margin: '30px 0px',
   },
   root: {
     width: '100%',
@@ -43,7 +47,7 @@ function TableFourColumns(props:any): JSX.Element {
   const { headers, body } = props;
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className={classes.tableContainer}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>

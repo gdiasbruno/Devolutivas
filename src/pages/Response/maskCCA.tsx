@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
 import {
@@ -10,13 +10,16 @@ import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
 
 import {
-  FirstSection, MyButton, Section, TableFourColumnsStyled,
+  FirstSection, MyButton, Section,
 } from './styles';
 
+import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableThreeColumns from '../../components/TableThreeColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import ListComponent from '../../components/ListComponent';
+
+import { infoContext } from '../../providers/reactContext';
 
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
@@ -82,6 +85,8 @@ const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 
 const Response: React.FC = () => {
   const [services, setServices]:any = useState([]);
+  const { context }:any = useContext(infoContext);
+  const { nomeSAS, mes, serviceName } = context;
 
   const fetchUserProfiles = () => {
     axios.get('http://localhost:8080/devolutivas/SE/0121/12120019').then((res) => {
@@ -313,10 +318,10 @@ const Response: React.FC = () => {
           <StyledBreadcrumb
             component="a"
             href="/"
-            label="SAS Aricanduva"
+            label={nomeSAS}
             icon={<HomeIcon fontSize="small" />}
           />
-          <StyledBreadcrumb component="a" href="/months" label="Novembro" />
+          <StyledBreadcrumb component="a" href="/months" label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'} />
           <StyledBreadcrumb component="a" href="/Reports" label="CCA Jardim das Rosas" />
           <Typography color="textPrimary">Respostas</Typography>
         </Breadcrumbs>
@@ -332,21 +337,17 @@ const Response: React.FC = () => {
         <h2>
           1. Quantidade de crianças e adolescentes atendidos no mês, por faixa etária e sexo
         </h2>
-        <br />
-        <TableFourColumnsStyled headers={atendidosMesHeaders} body={atendidosMes} />
-        <br />
+        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
 
         <h2>
           2. Quantidade crianças e adolescentes atendidos no mês, por sexo e raça/cor
         </h2>
-        <br />
         <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
         <h2>
           3. Quantidade de crianças e adolescentes por motivo de saída do serviço no mês
         </h2>
-        <br />
         <TableThreeColumns headers={motivoSaidaHeaders} body={motivoSaida} />
-        <br />
+
         <Typography variant="h5" gutterBottom>
           4. A quantidade de crianças e/ou adolescentes em situação de trabalho
           infantil encaminhadas pelo Cras/Creas no mês de referência é
@@ -368,7 +369,7 @@ const Response: React.FC = () => {
         <br />
         <h2>6. Atendimento às famílias no mês de referência</h2>
         <TableTwoColumns headers={familiasAtendidasHeaders} body={familiasAtendidas} />
-        <br />
+
         <Typography variant="h6" gutterBottom>
           7. A quantidade de visitas domicilares realizadas no mês de referência é
           {' '}
@@ -377,75 +378,75 @@ const Response: React.FC = () => {
           pessoa(s)
 
         </Typography>
-        <br />
+
         <h2>
           8. O número de famílias ou pessoas que buscaram
           atendimento presencial no mês de referência
           devido a alguma vulnerabilidade relacional listada abaixo
         </h2>
-        <br />
+
         <TableTwoColumns headers={familiasVulnerabilidadeHeaders} body={familiasVulnerabilidade} />
-        <br />
+
         <h2>
           9. As atividades
           realizadas com as crianças e adolescentes atendidos pelo serviço no mês
         </h2>
-        <br />
+
         <ListComponent items={atividadesItems} />
-        <br />
+
         <h2>
           10. Os temas discutidos com
           as crianças e adolescentes atendidos pelo serviço no mês
         </h2>
-        <br />
+
         <ListComponent items={temasItems} />
         <br />
         <h2>
           11. Quantidade de crianças e/ou adolescentes incluídos em lista de espera
           (demanda reprimida) no mês de referência
         </h2>
-        <br />
+
         <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
-        <br />
+
         <h2>
           12. Quantidade de famílias que receberam insumos no mês de referência
         </h2>
-        <br />
+
         <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
-        <br />
+
         <h2>
           13. Quantidade de encaminhamentos realizados pelo serviço no mês de referência:
         </h2>
-        <br />
+
         <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
-        <br />
+
         <h2>
           14. Quantidade de atendimentos remotos de
           crianças e adolescentes por semana no mês
         </h2>
-        <br />
+
         <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
-        <br />
+
         <h2>
           15. Quantidade de atividades remotas realizadas no mês,
           pelos meios em que foram disponibilizadas
         </h2>
-        <br />
+
         <TableTwoColumns
           headers={atendimentosRemotosTiposHeaders}
           body={atendimentosRemotosTipos}
         />
-        <br />
+
         <h2>
           16. Quantidade de atendimentos
           remotos de familiares por semana no mês
         </h2>
-        <br />
+
         <TableTwoColumns
           headers={atendimentosRemotosFamiliaSemanaHeaders}
           body={atendimentosRemotosFamiliaSemana}
         />
-        <br />
+
       </Section>
     </>
   );

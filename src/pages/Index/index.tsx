@@ -4,9 +4,8 @@ import axios from 'axios';
 import ControlledOpenSelect from '../../components/ControlledOpenSelect';
 
 import {
-  Title, Header, Options, MyButton,
+  Options,
 } from './styles';
-import logoImg from '../../assets/logo.svg';
 
 const Index: React.FC = () => {
   const [sas, setSas]:any = useState([]);
@@ -25,10 +24,6 @@ const Index: React.FC = () => {
     <>
       <Options>
         <ControlledOpenSelect label="Escolha uma SAS:" menuItems={sas} />
-        <br />
-        <br />
-        <MyButton variant="contained" color="primary" href="/months">Consultar</MyButton>
-
       </Options>
 
     </>
