@@ -303,77 +303,135 @@ const Response: React.FC = () => {
 
       <Section>
         <h2>
-          1. Informe um valor para cada situação apresentada abaixo:
+          1. Quantidade de adolescentes e
+          jovens atendidos no mês, por faixa etária, sexo e tipo de medida socioeducativa
         </h2>
         <TableTwoColumns headers={atendidosMesHeaders} body={atendidosMes} />
 
         <h2>
-          2. Quantidade responsáveis familiares atendidos por sexo e raça/cor no mês de referência.
+          2. Quantidade adolescentes e jovens atendidos por sexo e raça/cor no mês
         </h2>
         <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
         <h2>
-          3. Nº de famílias por motivo de saída do serviço no mês de referência:
+          3. Quantidade de adolescentes e
+          jovens que entraram no serviço
+          no mês, por faixa etária, sexo e tipo de medida socioeducativa
         </h2>
         <TableTwoColumns headers={motivoSaidaHeaders} body={motivoSaida} />
 
         <h2>
-          4. Encaminhamentos realizados pelo serviço no mês de referência:
+          4. Quantidade de adolescentes e jovens
+          que entraram no serviço no mês por tipo de ato infracional praticado
+        </h2>
+
+        <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
+
+        <h2>
+          4.1. Se a opção “Outros” foi preenchida na pergunta
+          anterior, especifique quais foram esses atos infracionais
         </h2>
 
         <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
         <br />
         <h2>
-          5. Nº de famílias que receberam insumos no mês de referência:
+          5. Quantidade de adolescentes e jovens por motivo de saída do serviço no mês
         </h2>
         <TableTwoColumns headers={familiasAtendidasHeaders} body={familiasAtendidas} />
         <br />
         <Typography variant="h5" gutterBottom>
-          6. Nº de pessoas ou famílias beneficiários de
-          Programas de Transferência de Renda e/ou
-          Benefício de Prestação Continuada no mês de referência:
+          6. Nº de atendimentos realizados no mês de referência:
         </Typography>
 
         <h2>
-          7. Informe um valor para as situações abaixo
-          relacionadas ao Plano de Desenvolvimento do Usuário – PDU
+          7. Quantidade de oficinas/grupos realizados no mês de referência:
         </h2>
 
         <TableTwoColumns headers={familiasVulnerabilidadeHeaders} body={familiasVulnerabilidade} />
 
         <h2>
-          8. Indique o número de famílias ou pessoas que buscaram
-          atendimento presencial no mês de referência devido a
-          alguma vulnerabilidade relacional listada abaixo
+          8. Nº de audiências acompanhadas no mês de referência:
         </h2>
 
         <ListComponent items={atividadesItems} />
 
         <h2>
-          9. Indique as atividades realizadas com as
-          famílias atendidas pelo serviço no mês de referência
+          9. Visitas técnicas para acompanhamento de medidas no mês de referência:
         </h2>
 
         <ListComponent items={temasItems} />
 
         <h2>
-          10. Indique os temas discutidos com as
-          famílias atendidas pelo serviço no mês de referência
+          9.1. Se a opção “Outros” foi preenchida na
+          pergunta anterior, especifique no campo abaixo quais foram as visitas técnicas:
+        </h2>
+
+        <ListComponent items={temasItems} />
+
+        <h2>
+          10. Número de Reuniões de Articulação da Rede
         </h2>
 
         <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
         <br />
         <h2>
-          11. Quantidade de atendimentos remotos de famílias por semana no mês
+          11. Nº de adolescentes e jovens com
+          deficiência atendidos pelo serviço no mês de referência:
         </h2>
 
         <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
 
         <h2>
-          12. Quantidade de atividades remotas
-          realizadas no mês, pelos meios em que foram disponibilizadas
+          12. Quantidade de usuários atendidos no
+          mês que também são atendidos em
+          serviços de convivência e
+          fortalecimento de vínculos (SCFV)
         </h2>
 
         <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
+
+        <h2>
+          13. Nº de adolescentes e jovens que residem em serviços de acolhimento:
+        </h2>
+
+        <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
+
+        <h2>
+          14. Nº de adolescentes e jovens
+          atendidos conforme a situação escolar no mês de referência:
+        </h2>
+
+        <TableTwoColumns
+          headers={atendimentosRemotosTiposHeaders}
+          body={atendimentosRemotosTipos}
+        />
+
+        <h2>
+          15. Nº de adolescentes e jovens
+          atendidos conforme a situação de trabalho no mês de referência:
+        </h2>
+
+        <TableTwoColumns
+          headers={atendimentosRemotosFamiliaSemanaHeaders}
+          body={atendimentosRemotosFamiliaSemana}
+        />
+
+        <h2>
+          16. Encaminhamentos realizados no mês de referência:
+        </h2>
+
+        <TableTwoColumns
+          headers={atendimentosRemotosFamiliaSemanaHeaders}
+          body={atendimentosRemotosFamiliaSemana}
+        />
+
+        <h2>
+          17. Quantidade de atendimentos remotos de familiares por semana no mês
+        </h2>
+
+        <TableTwoColumns
+          headers={atendimentosRemotosFamiliaSemanaHeaders}
+          body={atendimentosRemotosFamiliaSemana}
+        />
 
       </Section>
     </>
