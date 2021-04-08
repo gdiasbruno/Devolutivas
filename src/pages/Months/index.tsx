@@ -67,7 +67,7 @@ const Months: React.FC = () => {
       <FirstSection>
         <CustomizedBreadcrumbs label={nomeSAS} />
 
-        <MyButton variant="contained" color="primary" onClick={() => history.goBack()}>Voltar</MyButton>
+        <MyButton variant="contained" color="primary" onClick={() => history.push('/')}>Voltar</MyButton>
 
       </FirstSection>
       <Options>

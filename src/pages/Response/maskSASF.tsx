@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState, useEffect, useContext,
+} from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 import {
   withStyles, Theme,
@@ -15,9 +18,10 @@ import {
 
 import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';
-import TableThreeColumns from '../../components/TableThreeColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import ListComponent from '../../components/ListComponent';
+
+import { infoContext } from '../../providers/reactContext';
 
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
@@ -48,9 +52,9 @@ function createData(
 }
 
 const atendidosMesHeaders = [
-  '',
-  '',
-
+  'N° de usuários atendidos no mês',
+  'Nº de usuários que frequentaram presencialmente o serviço',
+  'Nº de usuários atendidos remotamente pelo serviço',
 ];
 
 const sexoRacaCorHeaders = [
@@ -81,14 +85,19 @@ const atendimentosRemotosTiposHeaders = ['Tipos', ''];
 
 const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 
-const Response: React.FC = () => {
+const Response:any = () => {
   const [services, setServices]:any = useState([]);
+  const { context, setContext }:any = useContext(infoContext);
+  const {
+    nomeSAS, mes, serviceName, token,
+  } = context;
+  const history = useHistory();
+  // eslint-disable-next-line new-cap
 
   const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/SE/0121/12112314').then((res) => {
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}`).then((res) => {
       const index = Object.keys(res.data.responses[0])[0];
       setServices(res.data.responses[0][index]);
-      console.log(res.data.responses[0][index]);
     });
   };
 
@@ -97,12 +106,17 @@ const Response: React.FC = () => {
   }, []);
 
   const atendidosMes = [
-    createData('Nº total de famílias atendidas pelo serviço no mês', services['cjfluxopessoasatend[15a17m_atendmesatual]'], services['cjfluxopessoasatend[15a17m_presmesatual]'], services['cjfluxopessoasatend[15a17m_remmesatual]'], 1, 1, 1, 1),
-    createData('Nº de famílias atendidas presencialmente no mês', services['cjfluxopessoasatend[15a17f_atendmesatual]'], services['cjfluxopessoasatend[15a17f_presmesatual]'], services['cjfluxopessoasatend[15a17f_remmesatual]'], 1, 1, 1, 1),
-    createData('Nº de famílias atendidas remotamente no mês', 1, 1, 1,
-      1, 1, 1, 1),
-    createData('Nº de visitas domiciliares realizadas no mês', 1, 1, 1,
-      1, 1, 1, 1),
+    createData('15 a 17 anos (M)', services['cjfluxopessoasatend[15a17m_atendmesatual]'], services['cjfluxopessoasatend[15a17m_presmesatual]'], services['cjfluxopessoasatend[15a17m_remmesatual]'], 1, 1, 1, 1),
+    createData('15 a 17 anos (F)', services['cjfluxopessoasatend[15a17f_atendmesatual]'], services['cjfluxopessoasatend[15a17f_presmesatual]'], services['cjfluxopessoasatend[15a17f_remmesatual]'], 1, 1, 1, 1),
+    createData('Total', parseInt(services['cjfluxopessoasatend[15a17m_atendmesatual]'], 10)
+                      + parseInt(services['cjfluxopessoasatend[15a17f_atendmesatual]'], 10),
+
+    parseInt(services['cjfluxopessoasatend[15a17m_presmesatual]'], 10)
+    + parseInt(services['cjfluxopessoasatend[15a17f_presmesatual]'], 10),
+
+    parseInt(services['cjfluxopessoasatend[15a17m_remmesatual]'], 10)
+    + parseInt(services['cjfluxopessoasatend[15a17f_remmesatual]'], 10),
+    1, 1, 1, 1),
   ];
 
   const sexoRacaCor = [
@@ -160,19 +174,34 @@ const Response: React.FC = () => {
   ];
 
   const motivoSaida = [
-    createData('Recusa/desistência do acompanhamento',
+    createData('Mudança de endereço',
       services['cjmotivossaida[endereco_qtd]'],
       1,
       1, 1, 1, 1, 1),
-    createData('Mudança de endereço',
+    createData('Transferência para outro serviço',
       services['cjmotivossaida[transferencia_qtd]'],
       1,
       1, 1, 1, 1, 1),
-    createData('Alcance dos objetivos',
+    createData('Óbito',
       services['cjmotivossaida[obito_qtd]'],
       1,
       1, 1, 1, 1, 1),
-
+    createData('Abandono',
+      services['cjmotivossaida[aband_qtd]'],
+      1,
+      1, 1, 1, 1, 1),
+    createData('Aplicação de medida restritiva de liberdade',
+      services['cjmotivossaida[aplicacaodemedida_qtd]'],
+      1,
+      1, 1, 1, 1, 1),
+    createData('Limite de idade',
+      services['cjmotivossaida[limiteidade_qtd]'],
+      1,
+      1, 1, 1, 1, 1),
+    createData('Inserção no jovem aprendiz',
+      services['cjmotivossaida[jovemaprendiz_qtd]'],
+      1,
+      1, 1, 1, 1, 1),
     createData('Total',
       parseInt(services['cjmotivossaida[endereco_qtd]'], 10)
       + parseInt(services['cjmotivossaida[transferencia_qtd]'], 10)
@@ -245,9 +274,6 @@ const Response: React.FC = () => {
     createData('Saúde', services['cjencaminhamentos[saude]'], 1, 1, 1, 1, 1, 1),
     createData('Educação', services['cjencaminhamentos[educacao]'], 1, 1, 1, 1, 1, 1),
     createData('Conselhos de direito', services['cjencaminhamentos[direito]'], 1, 1, 1, 1, 1, 1),
-    createData('Habitação', services['cjencaminhamentos[direito]'], 1, 1, 1, 1, 1, 1),
-    createData('Trabalho e renda', services['cjencaminhamentos[direito]'], 1, 1, 1, 1, 1, 1),
-    createData('Previdência social', services['cjencaminhamentos[direito]'], 1, 1, 1, 1, 1, 1),
     createData('Outras políticas públicas', services['cjencaminhamentos[outraspoliticas]'], 1, 1, 1, 1, 1, 1),
   ];
 
@@ -285,25 +311,69 @@ const Response: React.FC = () => {
         <Breadcrumbs aria-label="breadcrumb">
           <StyledBreadcrumb
             component="a"
-            href="/"
-            label="SAS Aricanduva"
+            onClick={() => {
+              history.push('/');
+            }}
+            label={nomeSAS}
             icon={<HomeIcon fontSize="small" />}
           />
-          <StyledBreadcrumb component="a" href="/months" label="Novembro" />
-          <StyledBreadcrumb component="a" href="/Reports" label="CCA Jardim das Rosas" />
+          <StyledBreadcrumb
+            component="a"
+            onClick={() => {
+              setContext({
+                nomeSAS,
+                mes,
+              });
+              history.push('months');
+            }}
+            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
+          />
+          <StyledBreadcrumb
+            component="a"
+            onClick={() => {
+              setContext({
+                nomeSAS,
+                mes,
+              });
+              history.push('/reports');
+            }}
+            label={serviceName}
+          />
           <Typography color="textPrimary">Respostas</Typography>
         </Breadcrumbs>
         <div>
-          <MyButton variant="contained" color="primary">PDF</MyButton>
-          <MyButton variant="contained" color="primary">Imprimir</MyButton>
-          <MyButton variant="contained" color="primary" href="/reports">Voltar</MyButton>
+
+          <MyButton
+            variant="contained"
+            onClick={() => {
+              window.print();
+            }}
+            color="primary"
+          >
+            Imprimir
+
+          </MyButton>
+          <MyButton
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              setContext({
+                nomeSAS,
+                mes,
+              });
+              history.push('/reports');
+            }}
+          >
+            Voltar
+
+          </MyButton>
         </div>
 
       </FirstSection>
 
       <Section>
         <h2>
-          1. Atendimentos no mês
+          1. Informe um valor para cada situação apresentada abaixo:
         </h2>
         <TableTwoColumns headers={atendidosMesHeaders} body={atendidosMes} />
 
@@ -317,88 +387,63 @@ const Response: React.FC = () => {
         <TableTwoColumns headers={motivoSaidaHeaders} body={motivoSaida} />
 
         <h2>
-          4. Quantidade de encaminhamentos realizados pelo serviço no mês
+          4. Encaminhamentos realizados pelo serviço no mês de referência:
         </h2>
 
         <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
         <br />
         <h2>
-          5. Atendimento às famílias no mês de referência
+          5. Nº de famílias que receberam insumos no mês de referência:
         </h2>
         <TableTwoColumns headers={familiasAtendidasHeaders} body={familiasAtendidas} />
         <br />
         <Typography variant="h5" gutterBottom>
-          6. Quantidade de visitas domicilares realizadas no mês é
-          {' '}
-          {services.cjvisitdom}
-          {' '}
-          pessoa(s)
+          6. Nº de pessoas ou famílias beneficiários de
+          Programas de Transferência de Renda e/ou
+          Benefício de Prestação Continuada no mês de referência:
         </Typography>
 
         <h2>
-          7. O número de famílias ou pessoas que buscaram
-          atendimento presencial no mês de referência
-          devido a alguma vulnerabilidade relacional listada abaixo
+          7. Informe um valor para as situações abaixo
+          relacionadas ao Plano de Desenvolvimento do Usuário – PDU
         </h2>
 
         <TableTwoColumns headers={familiasVulnerabilidadeHeaders} body={familiasVulnerabilidade} />
 
         <h2>
-          8. Indique as atividades realizadas com os adolescentes atendidos pelo serviço no mês
+          8. Indique o número de famílias ou pessoas que buscaram
+          atendimento presencial no mês de referência devido a
+          alguma vulnerabilidade relacional listada abaixo
         </h2>
 
         <ListComponent items={atividadesItems} />
 
         <h2>
-          9. Indique os temas discutidos com os adolescentes atendidos pelo serviço no mês
+          9. Indique as atividades realizadas com as
+          famílias atendidas pelo serviço no mês de referência
         </h2>
 
         <ListComponent items={temasItems} />
 
         <h2>
-          10. Quantidade de adolescentes incluídos na lista de espera
-          (demanda reprimida) do serviço no mês
+          10. Indique os temas discutidos com as
+          famílias atendidas pelo serviço no mês de referência
         </h2>
 
         <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
         <br />
         <h2>
-          11. Quantidade de famílias que receberam insumos no mês
+          11. Quantidade de atendimentos remotos de famílias por semana no mês
         </h2>
 
         <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
 
         <h2>
-          12. Quantidade de encaminhamentos realizados pelo serviço no mês
+          12. Quantidade de atividades remotas
+          realizadas no mês, pelos meios em que foram disponibilizadas
         </h2>
 
         <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
-
-        <h2>
-          13. Quantidade de atendimentos remotos de adolescentes por semana no mês
-        </h2>
-
-        <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
-
-        <h2>
-          14. Quantidade de atividades remotas realizadas no mês,
-          pelo meio em que foram disponibilizadas
-        </h2>
-
-        <TableTwoColumns
-          headers={atendimentosRemotosTiposHeaders}
-          body={atendimentosRemotosTipos}
-        />
-
-        <h2>
-          15. Quantidade de atendimentos
-          remotos de familiares por semana no mês
-        </h2>
-
-        <TableTwoColumns
-          headers={atendimentosRemotosFamiliaSemanaHeaders}
-          body={atendimentosRemotosFamiliaSemana}
-        />
 
       </Section>
     </>

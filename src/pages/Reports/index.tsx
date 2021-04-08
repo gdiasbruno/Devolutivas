@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-import Link from '@material-ui/core/Link';
 import {
   makeStyles, Theme, createStyles, withStyles,
 } from '@material-ui/core/styles';
@@ -47,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     minWidth: 100,
 
   },
-  root1: {
+  bodyServicesItems: {
     width: '100%',
     maxWidth: 1200,
     flex: 1,
@@ -79,24 +78,24 @@ const Reports: React.FC = () => {
   const history = useHistory();
   const { nomeSAS, mes } = context;
 
-  const [state, setState] = React.useState({
-    gilad: true,
-    jason: false,
-    antoine: false,
-  });
-
-  const { gilad, jason, antoine } = state;
-
-  const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
-  const [services, setServices] = useState([]);
+  const [services, setServices]:any = useState([]);
 
   const fetchUserProfiles = () => {
     axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}`).then((res) => {
       setServices(res.data.result);
+      console.log(res.data);
     });
+  };
+
+  // eslint-disable-next-line camelcase
+  const tipologias = services.map((service: { attribute_4: any; }):any => service.attribute_4);
+  const uniqueTipologias = [...new Set<any>(tipologias)];
+
+  const [state, setState] = React.useState({ ...uniqueTipologias });
+  const { CCA, CEDESP, CDI }:any = state;
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   useEffect(() => {
@@ -118,7 +117,7 @@ const Reports: React.FC = () => {
           <StyledBreadcrumb
             component="a"
             onClick={() => {
-              history.goBack();
+              history.push('/months');
             }}
             label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
           />
@@ -141,25 +140,26 @@ const Reports: React.FC = () => {
         <FormControl component="fieldset" className={classes.formControl}>
           <FormLabel component="legend">Escolha o(s) Tipo(s) de Serviço</FormLabel>
           <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={gilad} onChange={handleChange1} name="gilad" color="primary" />}
-              label="CCA"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={jason} onChange={handleChange1} name="jason" color="primary" />}
-              label="CTA"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={antoine} onChange={handleChange1} name="antoine" color="primary" />}
-              label="MSE"
-            />
+            {uniqueTipologias.map((tipologia:any) => (
+              <FormControlLabel
+                control={(
+                  <Checkbox
+                    checked={tipologia}
+                    onChange={handleChange}
+                    name={tipologia}
+                    color="primary"
+                  />
+)}
+                label={tipologia}
+              />
+            ))}
+
           </FormGroup>
         </FormControl>
-        <div className={classes.root1}>
+        <div className={classes.bodyServicesItems}>
           <List component="nav" aria-label="main mailbox folders">
             {services.map((service:any) => {
-              console.log(service.attribute_4);
-
+              console.log(service.token);
               return (
 
                 <ListItem
@@ -169,9 +169,12 @@ const Reports: React.FC = () => {
                       nomeSAS,
                       mes,
                       serviceName: service.participant_info.firstname,
+                      token: service.token,
                     });
-                    history.push('/responsecj');
+                    // history.push(`/response${service.attribute_4}`);
+                    history.push('/responseNCI');
                   }}
+                  className={service.attribute_4}
                 >
                   <ListItemIcon>
                     <HomeIcon />

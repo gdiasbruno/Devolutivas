@@ -36,7 +36,7 @@ export const FirstSection = styled.div`
   div {
     display: flex;
     justify-content: space-around;
-    width: 300px;
+    width: 200px;
   }
 `;
 

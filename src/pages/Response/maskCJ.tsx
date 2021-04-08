@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {
+  useState, useEffect, useContext,
+} from 'react';
 import axios from 'axios';
-
 import { useHistory } from 'react-router-dom';
 
 import {
@@ -84,17 +85,19 @@ const atendimentosRemotosTiposHeaders = ['Tipos', ''];
 
 const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 
-const Response: React.FC = () => {
+const Response:any = () => {
   const [services, setServices]:any = useState([]);
   const { context, setContext }:any = useContext(infoContext);
-  const { nomeSAS, mes, serviceName } = context;
+  const {
+    nomeSAS, mes, serviceName, token,
+  } = context;
   const history = useHistory();
+  // eslint-disable-next-line new-cap
 
   const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/SE/0121/12112314').then((res) => {
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}`).then((res) => {
       const index = Object.keys(res.data.responses[0])[0];
       setServices(res.data.responses[0][index]);
-      console.log(res.data.responses[0][index]);
     });
   };
 
@@ -321,7 +324,7 @@ const Response: React.FC = () => {
                 nomeSAS,
                 mes,
               });
-              history.goBack();
+              history.push('months');
             }}
             label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
           />
@@ -332,15 +335,24 @@ const Response: React.FC = () => {
                 nomeSAS,
                 mes,
               });
-              history.goBack();
+              history.push('/reports');
             }}
             label={serviceName}
           />
           <Typography color="textPrimary">Respostas</Typography>
         </Breadcrumbs>
         <div>
-          <MyButton variant="contained" color="primary">PDF</MyButton>
-          <MyButton variant="contained" color="primary">Imprimir</MyButton>
+
+          <MyButton
+            variant="contained"
+            onClick={() => {
+              window.print();
+            }}
+            color="primary"
+          >
+            Imprimir
+
+          </MyButton>
           <MyButton
             variant="contained"
             color="primary"
@@ -349,7 +361,7 @@ const Response: React.FC = () => {
                 nomeSAS,
                 mes,
               });
-              history.goBack();
+              history.push('/reports');
             }}
           >
             Voltar

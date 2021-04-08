@@ -10,7 +10,7 @@ export const Header = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 48px;
+  font-size: 32px;
   color: #3A3A3A;
   max-width: 1000px;
   text-align: center;

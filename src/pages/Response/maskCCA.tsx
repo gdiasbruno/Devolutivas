@@ -9,6 +9,7 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
 
+import { useHistory } from 'react-router-dom';
 import {
   FirstSection, MyButton, Section,
 } from './styles';
@@ -84,12 +85,15 @@ const atendimentosRemotosTiposHeaders = ['Tipos', ''];
 const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 
 const Response: React.FC = () => {
+  const history = useHistory();
   const [services, setServices]:any = useState([]);
-  const { context }:any = useContext(infoContext);
-  const { nomeSAS, mes, serviceName } = context;
+  const { context, setContext }:any = useContext(infoContext);
+  const {
+    nomeSAS, mes, serviceName, token,
+  } = context;
 
   const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/SE/0121/12120019').then((res) => {
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}`).then((res) => {
       const index = Object.keys(res.data.responses[0])[0];
       setServices(res.data.responses[0][index]);
       console.log(res.data.responses[0][index]);
@@ -317,18 +321,61 @@ const Response: React.FC = () => {
         <Breadcrumbs aria-label="breadcrumb">
           <StyledBreadcrumb
             component="a"
-            href="/"
+            onClick={() => {
+              history.push('/');
+            }}
             label={nomeSAS}
             icon={<HomeIcon fontSize="small" />}
           />
-          <StyledBreadcrumb component="a" href="/months" label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'} />
-          <StyledBreadcrumb component="a" href="/Reports" label="CCA Jardim das Rosas" />
+          <StyledBreadcrumb
+            component="a"
+            onClick={() => {
+              setContext({
+                nomeSAS,
+                mes,
+              });
+              history.push('/months');
+            }}
+            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
+          />
+          <StyledBreadcrumb
+            component="a"
+            onClick={() => {
+              setContext({
+                nomeSAS,
+                mes,
+              });
+              history.push('/reports');
+            }}
+            label={serviceName}
+          />
           <Typography color="textPrimary">Respostas</Typography>
         </Breadcrumbs>
         <div>
-          <MyButton variant="contained" color="primary">PDF</MyButton>
-          <MyButton variant="contained" color="primary">Imprimir</MyButton>
-          <MyButton variant="contained" color="primary" href="/reports">Voltar</MyButton>
+          <MyButton
+            variant="contained"
+            onClick={() => {
+              window.print();
+            }}
+            color="primary"
+          >
+            Imprimir
+
+          </MyButton>
+          <MyButton
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              setContext({
+                nomeSAS,
+                mes,
+              });
+              history.push('/reports');
+            }}
+          >
+            Voltar
+
+          </MyButton>
         </div>
 
       </FirstSection>
