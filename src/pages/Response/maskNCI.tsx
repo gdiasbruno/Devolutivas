@@ -86,11 +86,13 @@ const sexoRacaCorHeaders = [
 ];
 
 const motivosSaidaHeaders = [
-  '6 a 11 anos',
-  '12 a 17 anos',
+  '',
+  'Quantidade',
 ];
 
 const familiasInsumosHeaders = ['', 'N° de famílias'];
+
+const infoIdososHeaders = ['', 'Quantidade'];
 
 const familiasVulnerabilidadeHeaders = ['', 'Nº de famílias'];
 
@@ -129,130 +131,136 @@ const Response:any = () => {
 
   const atendidosMes = [
     createData('60 a 64 anos (M)',
-      services['circofluxoatend[6a11m_atendmesatual]'],
-      services['circofluxoatend[6a11m_presmesatual]'],
-      services['circofluxoatend[6a11m_remmesatual]'],
+      services['ncifluxoconvivencia[60a64m_atendmesatual]'],
+      services['ncifluxoconvivencia[60a64m_presmesatual]'],
+      services['ncifluxoconvivencia[60a64m_remmesatual]'],
       1, 1, 1, 1, 1, 1),
     createData('60 a 64 anos (F)',
-      services['circofluxoatend[6a11f_atendmesatual]'],
-      services['circofluxoatend[6a11f_presmesatual]'],
-      services['circofluxoatend[6a11f_remmesatual]'],
+      services['ncifluxoconvivencia[60a64f_atendmesatual]'],
+      services['ncifluxoconvivencia[60a64f_presmesatual]'],
+      services['ncifluxoconvivencia[60a64f_remmesatual]'],
       1, 1, 1, 1, 1, 1),
     createData('65 a 69 anos (M)',
-      services['circofluxoatend[12a14m_atendmesatual]'],
-      services['circofluxoatend[12a14m_presmesatual]'],
-      services['circofluxoatend[12a14m_remmesatual]'],
+      services['ncifluxoconvivencia[65a69m_atendmesatual]'],
+      services['ncifluxoconvivencia[65a69m_presmesatual]'],
+      services['ncifluxoconvivencia[65a69m_remmesatual]'],
       1, 1, 1, 1, 1, 1),
     createData('65 a 69 anos (F)',
-      services['circofluxoatend[12a14f_atendmesatual]'],
-      services['circofluxoatend[12a14f_presmesatual]'],
-      services['circofluxoatend[12a14f_remmesatual]'],
+      services['ncifluxoconvivencia[65a69f_atendmesatual]'],
+      services['ncifluxoconvivencia[65a69f_presmesatual]'],
+      services['ncifluxoconvivencia[65a69f_remmesatual]'],
       1, 1, 1, 1, 1, 1),
     createData('70 a 74 anos (M)',
-      services['circofluxoatend[15a17m_atendmesatual]'],
-      services['circofluxoatend[15a17m_presmesatual]'],
-      services['circofluxoatend[15a17m_remmesatual]'],
+      services['ncifluxoconvivencia[70a74m_atendmesatual]'],
+      services['ncifluxoconvivencia[70a74m_presmesatual]'],
+      services['ncifluxoconvivencia[70a74m_remmesatual]'],
       1, 1, 1, 1, 1, 1),
     createData('70 a 74 anos (F)',
-      services['circofluxoatend[15a17f_atendmesatual]'],
-      services['circofluxoatend[15a17f_presmesatual]'],
-      services['circofluxoatend[15a17f_remmesatual]'],
+      services['ncifluxoconvivencia[70a74f_atendmesatual]'],
+      services['ncifluxoconvivencia[70a74f_presmesatual]'],
+      services['ncifluxoconvivencia[70a74f_remmesatual]'],
       1, 1, 1, 1, 1, 1),
-    createData('75 anos ou mais (M)',
-      services['circofluxoatend[15a17m_atendmesatual]'],
-      services['circofluxoatend[15a17m_presmesatual]'],
-      services['circofluxoatend[15a17m_remmesatual]'],
+    createData('75 anos mais (M)',
+      services['ncifluxoconvivencia[75maism_atendmesatual]'],
+      services['ncifluxoconvivencia[75maism_presmesatual]'],
+      services['ncifluxoconvivencia[75maism_remmesatual]'],
       1, 1, 1, 1, 1, 1),
-    createData('75 anos ou mais (F)',
-      services['circofluxoatend[15a17f_atendmesatual]'],
-      services['circofluxoatend[15a17f_presmesatual]'],
-      services['circofluxoatend[15a17f_remmesatual]'],
+    createData('75 anos mais (F)',
+      services['ncifluxoconvivencia[75maisf_atendmesatual]'],
+      services['ncifluxoconvivencia[75maisf_presmesatual]'],
+      services['ncifluxoconvivencia[75maisf_remmesatual]'],
       1, 1, 1, 1, 1, 1),
 
     createData('Total',
-      parseInt(services['circofluxoatend[6a11m_atendmesatual]'], 10)
-      + parseInt(services['circofluxoatend[6a11f_atendmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14m_atendmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14f_atendmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17m_atendmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17f_atendmesatual]'], 10),
-      parseInt(services['circofluxoatend[6a11m_presmesatual]'], 10)
-      + parseInt(services['circofluxoatend[6a11f_presmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14m_presmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14f_presmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17m_presmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17f_presmesatual]'], 10),
-      parseInt(services['circofluxoatend[6a11m_remmesatual]'], 10)
-      + parseInt(services['circofluxoatend[6a11f_remmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14m_remmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14f_remmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17m_remmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17f_remmesatual]'], 10),
+      parseInt(services['ncifluxoconvivencia[60a64m_atendmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[60a64f_atendmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[65a69m_atendmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[65a69f_atendmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[70a74m_atendmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[70a74f_atendmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[75maism_atendmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[75maisf_atendmesatual]'], 10),
+      parseInt(services['ncifluxoconvivencia[60a64m_presmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[60a64f_presmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[65a69m_presmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[65a69f_presmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[70a74m_presmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[70a74f_presmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[75maism_presmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[75maisf_presmesatual]'], 10),
+      parseInt(services['ncifluxoconvivencia[60a64m_remmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[60a64f_remmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[65a69m_remmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[65a69f_remmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[70a74m_remmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[70a74f_remmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[75maism_remmesatual]'], 10)
+      + parseInt(services['ncifluxoconvivencia[75maisf_remmesatual]'], 10),
       1, 1, 1, 1, 1, 1),
   ];
 
   const sexoRacaCor = [
     createData('Feminino',
-      services['circoracasexo[fem_branca]'],
-      services['circoracasexo[fem_preta]'],
-      services['circoracasexo[fem_parda]'],
-      services['circoracasexo[fem_amarela]'],
-      services['circoracasexo[fem_indigena]'],
-      services['circoracasexo[fem_naoinf]'],
-      parseInt(services['circoracasexo[fem_branca]'], 10)
-      + parseInt(services['circoracasexo[fem_preta]'], 10)
-      + parseInt(services['circoracasexo[fem_parda]'], 10)
-      + parseInt(services['circoracasexo[fem_amarela]'], 10)
-      + parseInt(services['circoracasexo[fem_indigena]'], 10)
-      + parseInt(services['circoracasexo[fem_naoinf]'], 10), 1, 1),
+      services['nciconvracasexo[fem_branc]'],
+      services['nciconvracasexo[fem_preto]'],
+      services['nciconvracasexo[fem_pardo]'],
+      services['nciconvracasexo[fem_amarelo]'],
+      services['nciconvracasexo[fem_indigena]'],
+      services['nciconvracasexo[fem_naoinf]'],
+      parseInt(services['nciconvracasexo[fem_branc]'], 10)
+      + parseInt(services['nciconvracasexo[fem_preto]'], 10)
+      + parseInt(services['nciconvracasexo[fem_pardo]'], 10)
+      + parseInt(services['nciconvracasexo[fem_amarelo]'], 10)
+      + parseInt(services['nciconvracasexo[fem_indigena]'], 10)
+      + parseInt(services['nciconvracasexo[fem_naoinf]'], 10), 1, 1),
     createData('Masculino',
-      services['circoracasexo[masc_branca]'],
-      services['circoracasexo[masc_preta]'],
-      services['circoracasexo[masc_parda]'],
-      services['circoracasexo[masc_amarela]'],
-      services['circoracasexo[masc_indigena]'],
-      services['circoracasexo[masc_naoinf]'],
-      parseInt(services['circoracasexo[masc_branca]'], 10)
-      + parseInt(services['circoracasexo[masc_preta]'], 10)
-      + parseInt(services['circoracasexo[masc_parda]'], 10)
-      + parseInt(services['circoracasexo[masc_amarela]'], 10)
-      + parseInt(services['circoracasexo[masc_indigena]'], 10)
-      + parseInt(services['circoracasexo[masc_naoinf]'], 10), 1, 1),
+      services['nciconvracasexo[masc_branc]'],
+      services['nciconvracasexo[masc_preto]'],
+      services['nciconvracasexo[masc_pardo]'],
+      services['nciconvracasexo[masc_amarelo]'],
+      services['nciconvracasexo[masc_indigena]'],
+      services['nciconvracasexo[masc_naoinf]'],
+      parseInt(services['nciconvracasexo[masc_branc]'], 10)
+      + parseInt(services['nciconvracasexo[masc_preto]'], 10)
+      + parseInt(services['nciconvracasexo[masc_pardo]'], 10)
+      + parseInt(services['nciconvracasexo[masc_amarelo]'], 10)
+      + parseInt(services['nciconvracasexo[masc_indigena]'], 10)
+      + parseInt(services['nciconvracasexo[masc_naoinf]'], 10), 1, 1),
     createData('Total Geral',
-      parseInt(services['circoracasexo[masc_branca]'], 10)
-      + parseInt(services['circoracasexo[fem_branca]'], 10),
-      parseInt(services['circoracasexo[masc_preta]'], 10)
-      + parseInt(services['circoracasexo[fem_preta]'], 10),
-      parseInt(services['circoracasexo[masc_parda]'], 10)
-      + parseInt(services['circoracasexo[fem_parda]'], 10),
-      parseInt(services['circoracasexo[masc_amarela]'], 10)
-      + parseInt(services['circoracasexo[fem_amarela]'], 10),
-      parseInt(services['circoracasexo[masc_indigena]'], 10)
-      + parseInt(services['circoracasexo[fem_indigena]'], 10),
-      parseInt(services['circoracasexo[masc_naoinf]'], 10)
-      + parseInt(services['circoracasexo[fem_naoinf]'], 10),
-      parseInt(services['circoracasexo[masc_branca]'], 10)
-      + parseInt(services['circoracasexo[fem_branca]'], 10)
-      + parseInt(services['circoracasexo[masc_preta]'], 10)
-      + parseInt(services['circoracasexo[fem_preta]'], 10)
-      + parseInt(services['circoracasexo[masc_parda]'], 10)
-      + parseInt(services['circoracasexo[fem_parda]'], 10)
-      + parseInt(services['circoracasexo[masc_amarela]'], 10)
-      + parseInt(services['circoracasexo[fem_amarela]'], 10)
-      + parseInt(services['circoracasexo[masc_indigena]'], 10)
-      + parseInt(services['circoracasexo[fem_indigena]'], 10)
-      + parseInt(services['circoracasexo[masc_naoinf]'], 10)
-      + parseInt(services['circoracasexo[fem_naoinf]'], 10), 1, 1),
+      parseInt(services['nciconvracasexo[masc_branc]'], 10)
+      + parseInt(services['nciconvracasexo[fem_branc]'], 10),
+      parseInt(services['nciconvracasexo[masc_preto]'], 10)
+      + parseInt(services['nciconvracasexo[fem_preto]'], 10),
+      parseInt(services['nciconvracasexo[masc_pardo]'], 10)
+      + parseInt(services['nciconvracasexo[fem_pardo]'], 10),
+      parseInt(services['nciconvracasexo[masc_amarelo]'], 10)
+      + parseInt(services['nciconvracasexo[fem_amarelo]'], 10),
+      parseInt(services['nciconvracasexo[masc_indigena]'], 10)
+      + parseInt(services['nciconvracasexo[fem_indigena]'], 10),
+      parseInt(services['nciconvracasexo[masc_naoinf]'], 10)
+      + parseInt(services['nciconvracasexo[fem_naoinf]'], 10),
+      parseInt(services['nciconvracasexo[masc_branc]'], 10)
+      + parseInt(services['nciconvracasexo[fem_branc]'], 10)
+      + parseInt(services['nciconvracasexo[masc_preto]'], 10)
+      + parseInt(services['nciconvracasexo[fem_preto]'], 10)
+      + parseInt(services['nciconvracasexo[masc_pardo]'], 10)
+      + parseInt(services['nciconvracasexo[fem_pardo]'], 10)
+      + parseInt(services['nciconvracasexo[masc_amarelo]'], 10)
+      + parseInt(services['nciconvracasexo[fem_amarelo]'], 10)
+      + parseInt(services['nciconvracasexo[masc_indigena]'], 10)
+      + parseInt(services['nciconvracasexo[fem_indigena]'], 10)
+      + parseInt(services['nciconvracasexo[masc_naoinf]'], 10)
+      + parseInt(services['nciconvracasexo[fem_naoinf]'], 10), 1, 1),
   ];
 
   const motivosSaida = [
     createData('Mudança de endereço',
-      services['circomotivossaida[mudancaendereco_6a11]'],
-      services['circomotivossaida[mudancaendereco_12a17]'],
+      services['ncisaidaconvivencia[mudancaendereco_quantidade]'],
+      1,
       1, 1, 1, 1, 1, 1, 1),
     createData('Transferência para outro serviço',
-      services['circomotivossaida[transferencia_6a11]'],
-      services['circomotivossaida[transferencia_12a17]'],
+      services['ncisaidaconvivencia[transferencia_quantidade]'],
+      1,
       1,
       1,
       1,
@@ -261,8 +269,8 @@ const Response:any = () => {
       1,
       1),
     createData('Óbito',
-      services['circomotivossaida[obito_6a11]'],
-      services['circomotivossaida[obito_12a17]'],
+      services['ncisaidaconvivencia[obito_quantidade]'],
+      1,
       1,
       1,
       1,
@@ -271,8 +279,8 @@ const Response:any = () => {
       1,
       1),
     createData('Oferta do Serviço em Domicílio',
-      services['circomotivossaida[aband_6a11]'],
-      services['circomotivossaida[aband_12a17]'],
+      services['ncisaidaconvivencia[ofertadom_quantidade]'],
+      1,
       1,
       1,
       1,
@@ -281,20 +289,11 @@ const Response:any = () => {
       1,
       1),
     createData('Total',
-      parseInt(services['circomotivossaida[aband_6a11]'], 10)
-    + parseInt(services['circomotivossaida[aplicacaodemedida_6a11]'], 10)
-    + parseInt(services['circomotivossaida[jovemaprendiz_6a11]'], 10)
-    + parseInt(services['circomotivossaida[limiteidade_6a11]'], 10)
-    + parseInt(services['circomotivossaida[mudancaendereco_6a11]'], 10)
-    + parseInt(services['circomotivossaida[obito_6a11]'], 10)
-    + parseInt(services['circomotivossaida[transferencia_6a11]'], 10),
-      parseInt(services['circomotivossaida[aband_12a17]'], 10)
-    + parseInt(services['circomotivossaida[aplicacaodemedida_12a17]'], 10)
-    + parseInt(services['circomotivossaida[jovemaprendiz_12a17]'], 10)
-    + parseInt(services['circomotivossaida[limiteidade_12a17]'], 10)
-    + parseInt(services['circomotivossaida[mudancaendereco_12a17]'], 10)
-    + parseInt(services['circomotivossaida[obito_12a17]'], 10)
-    + parseInt(services['circomotivossaida[transferencia_12a17]'], 10),
+      parseInt(services['ncisaidaconvivencia[ofertadom_quantidade]'], 10)
+    + parseInt(services['ncisaidaconvivencia[obito_quantidade]'], 10)
+    + parseInt(services['ncisaidaconvivencia[transferencia_quantidade]'], 10)
+    + parseInt(services['ncisaidaconvivencia[mudancaendereco_quantidade]'], 10),
+      1,
       1,
       1,
       1,
@@ -334,6 +333,14 @@ const Response:any = () => {
   const familiasInsumos = [
     createData('Cesta de alimentos', services['circoinsumo[cestasaliment_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Kit de material de higiene', services['circoinsumo[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  ];
+
+  const infoIdosos = [
+    createData('Nº de idosos do serviço em domicílio que recebem BPC', services['circoinsumo[cestasaliment_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de idosos do serviço de convivência que recebem BPC', services['circoinsumo[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de idosos do serviço em domicílio com PDU em andamento', services['circoinsumo[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de visitas domiciliares realizadas no mês para o público da convivência', services['circoinsumo[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de visitas domiciliares realizadas no mês para o público do serviço em domicílio', services['circoinsumo[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const familiasVulnerabilidade = [
@@ -498,7 +505,7 @@ const Response:any = () => {
         <br />
         <br />
         <h2>
-          1. Quantidade de pessoas do sexo feminino atendidas no mês, por faixa etária:
+          1. Quantidade de pessoas atendidas do serviço de convivência no mês de referência:
         </h2>
         <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
 
@@ -511,7 +518,7 @@ const Response:any = () => {
         <h2>
           3. Quantidade de usuários por motivo de saída do serviço no mês:
         </h2>
-        <TableThreeColumns headers={motivosSaidaHeaders} body={motivosSaida} />
+        <TableTwoColumns headers={motivosSaidaHeaders} body={motivosSaida} />
         <br />
         <h2>
           4. N° de idosos atendidos no serviço de convivência que moram sozinhos
@@ -522,7 +529,7 @@ const Response:any = () => {
         <br />
         <h2>
           5. Os valores das seguites questões sobre atendimento
-          às familías dos idosos do serviço de convivência no mês de referência:
+          às familías dos idosos do serviço de convivência no mês de referência::
         </h2>
         <TableTwoColumns headers={idososFamiliasHeaders} body={idososFamilias} />
         <h2>
@@ -540,7 +547,7 @@ const Response:any = () => {
         <ListComponent items={atividadesItems} />
 
         <h2>
-          8. Indique os temas discutidos com as pessoas atendidas
+          8. Os temas discutidos com as pessoas atendidas
           pelo serviço na modalidade convivência no mês de referência:
         </h2>
         <ListComponent items={temasItems} />
@@ -569,57 +576,6 @@ const Response:any = () => {
           body={atendimentosRemotosFamiliaSemana}
         />
         <br />
-        <Typography variant="h5" gutterBottom>
-          4. Nº de crianças e adolescentes em situação de trabalho infantil encaminhados
-          pelo CRAS/CREAS no mês de referência é de
-          {' '}
-          {services['circonovostrabinfant[total]']}
-          {' '}
-          pessoa(s)
-        </Typography>
-        <br />
-        <br />
-        <Typography variant="h5" gutterBottom>
-          5. Quantidade de pessoas com deficiência atendidas no mês é de
-          {' '}
-          {services.circousuariospcd}
-          {' '}
-          pessoa(s)
-        </Typography>
-        <br />
-        <h2>
-          6. Atendimento às famílias no mês:
-        </h2>
-        <TableTwoColumns headers={atendimentoFamiliaHeaders} body={atendimentoFamilia} />
-
-        <Typography variant="h5" gutterBottom>
-          7. Quantidade de visitas domicilares realizadas no mês é
-          {' '}
-          {services.circovisdom}
-          {' '}
-          pessoa(s)
-        </Typography>
-        <br />
-
-        <h2>
-          11. Quantidade de pessoas incluídas em lista de
-          espera (demanda reprimida) no mês, por faixa etária:
-        </h2>
-
-        <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
-
-        <h2>
-          12. Quantidade de famílias que receberam insumos no mês
-        </h2>
-
-        <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
-
-        <h2>
-          13. Quantidade de encaminhamentos realizados pelo serviço no mês:
-        </h2>
-        <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
-        <br />
-
         <h2>
           Informações sobre o acompanhamento social em domicílio
         </h2>
@@ -640,7 +596,7 @@ const Response:any = () => {
         <h2>
           3. Nº de pessoas por motivo de saída do serviço em domicílio  no mês de referência:
         </h2>
-        <TableThreeColumns headers={motivosSaidaHeaders} body={motivosSaida} />
+        <TableTwoColumns headers={motivosSaidaHeaders} body={motivosSaida} />
         <br />
         <h2>
           4.N° de idosos atendidos no serviço em domicílio que moram sozinhos e
@@ -650,7 +606,7 @@ const Response:any = () => {
 
         <br />
         <h2>
-          5. Os valores das seguites questões sobre atendimento
+          5. Os valores das seguintes questões sobre atendimento
           às famílias dos idosos do serviço em domicílio no mês de referência:
         </h2>
         <TableTwoColumns headers={idososFamiliasHeaders} body={idososFamilias} />
@@ -706,34 +662,21 @@ const Response:any = () => {
           2. Quantidade de pessoas incluídas em lista de
           espera (demanda reprimida) no mês, por faixa etária:
         </h2>
+        <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
         <h2>
           3. Quantidade de encaminhamentos realizados pelo serviço no mês:
         </h2>
         <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
         <br />
-
-        <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
         <h2>
-          2. Atendimento às famílias no mês:
+          4. Quantifique as informações abaixo com os dados do mês de referência
         </h2>
-        <TableTwoColumns headers={atendimentoFamiliaHeaders} body={atendimentoFamilia} />
-
-        <Typography variant="h5" gutterBottom>
-          7. Quantidade de visitas domicilares realizadas no mês é
-          {' '}
-          {services.circovisdom}
-          {' '}
-          pessoa(s)
-        </Typography>
-        <br />
-
+        <TableTwoColumns headers={infoIdososHeaders} body={infoIdosos} />
         <h2>
-          12. Quantidade de famílias que receberam insumos no mês
+          5. Nº de idosos que receberam insumos no mês de referência:
         </h2>
-
         <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
 
-        <br />
       </Section>
     </>
   );
