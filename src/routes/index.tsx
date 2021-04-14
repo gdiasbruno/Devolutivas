@@ -12,6 +12,10 @@ import ResponseCCInter from '../pages/Response/maskCCInter';
 import ResponseCEDESP from '../pages/Response/maskCEDESP';
 import ResponseCIRCOSOCIAL from '../pages/Response/maskCIRCOSOCIAL';
 import ResponseNCI from '../pages/Response/maskNCI';
+import ResponseRE from '../pages/Response/maskRE';
+import ResponseSADPI from '../pages/Response/maskSADPI';
+import ResponseCDCM from '../pages/Response/maskCDCM';
+import ResponseCDI from '../pages/Response/maskCDI';
 import Header from '../components/Header';
 
 import { infoContext } from '../providers/reactContext';
@@ -22,39 +26,43 @@ const Routes: React.FC = () => {
   return (
 
     <>
-      {context
-        ? (
-          <>
-            <Header />
-            <Switch>
-              <Route path="/" exact component={Index} />
-              <Route path="/reports" component={Reports} />
-              <Route path="/months" component={Months} />
-              <Route path="/responseCCA" component={ResponseCCA} />
-              <Route path="/responseCJ" component={ResponseCJ} />
-              <Route path="/responseSASF" component={ResponseSASF} />
-              <Route path="/responseCRECI" component={ResponseCRECI} />
-              <Route path="/responseCCInter" component={ResponseCCInter} />
-              <Route path="/responseCEDESP" component={ResponseCEDESP} />
-              <Route path="/responseCIRCOSOCIAL" component={ResponseCIRCOSOCIAL} />
-              <Route path="/responseNCI" component={ResponseNCI} />
-            </Switch>
-          </>
-        )
-        : (
-          <>
-            <Header />
-            <Switch>
-              <Route path="/" exact component={Index} />
-              <Route path="/reports" component={Index} />
-              <Route path="/months" component={Index} />
-              <Route path="/responsecca" component={Index} />
-              <Route path="/responsecj" component={Index} />
-              <Route path="/responsesasf" component={Index} />
+      {/* {context
+        ? ( */}
+      <>
+        <Header />
+        <Switch>
+          <Route path="/" exact component={Index} />
+          <Route path="/reports" component={Reports} />
+          <Route path="/months" component={Months} />
+          <Route path="/responseCCA" component={ResponseCCA} />
+          <Route path="/responseCJ" component={ResponseCJ} />
+          <Route path="/responseSASF" component={ResponseSASF} />
+          <Route path="/responseCRECI" component={ResponseCRECI} />
+          <Route path="/responseCCInter" component={ResponseCCInter} />
+          <Route path="/responseCEDESP" component={ResponseCEDESP} />
+          <Route path="/responseCIRCOSOCIAL" component={ResponseCIRCOSOCIAL} />
+          <Route path="/responseNCI" component={ResponseNCI} />
+          <Route path="/responseRE" component={ResponseRE} />
+          <Route path="/responseSADPI" component={ResponseSADPI} />
+          <Route path="/responseCDCM" component={ResponseCDCM} />
+          <Route path="/responseCDI" component={ResponseCDI} />
+        </Switch>
+      </>
+      )
+      {/* // : (
+        //   <>
+        //     <Header />
+        //     <Switch>
+        //       <Route path="/" exact component={Index} />
+        //       <Route path="/reports" component={Index} />
+        //       <Route path="/months" component={Index} />
+        //       <Route path="/responsecca" component={Index} />
+        //       <Route path="/responsecj" component={Index} />
+        //       <Route path="/responsesasf" component={Index} />
 
-            </Switch>
-          </>
-        )}
+        //     </Switch>
+        //   </>
+        // )} */}
 
     </>
   );

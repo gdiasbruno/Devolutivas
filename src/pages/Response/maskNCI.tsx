@@ -199,6 +199,76 @@ const Response:any = () => {
       1, 1, 1, 1, 1, 1),
   ];
 
+  const atendidosMesDomicilio = [
+    createData('60 a 64 anos (M)',
+      services['ncifluxodomicilio[60a64m_atendmesatual]'],
+      services['ncifluxodomicilio[60a64m_presmesatual]'],
+      services['ncifluxodomicilio[60a64m_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+    createData('60 a 64 anos (F)',
+      services['ncifluxodomicilio[60a64f_atendmesatual]'],
+      services['ncifluxodomicilio[60a64f_presmesatual]'],
+      services['ncifluxodomicilio[60a64f_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+    createData('65 a 69 anos (M)',
+      services['ncifluxodomicilio[65a69m_atendmesatual]'],
+      services['ncifluxodomicilio[65a69m_presmesatual]'],
+      services['ncifluxodomicilio[65a69m_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+    createData('65 a 69 anos (F)',
+      services['ncifluxodomicilio[65a69f_atendmesatual]'],
+      services['ncifluxodomicilio[65a69f_presmesatual]'],
+      services['ncifluxodomicilio[65a69f_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+    createData('70 a 74 anos (M)',
+      services['ncifluxodomicilio[70a74m_atendmesatual]'],
+      services['ncifluxodomicilio[70a74m_presmesatual]'],
+      services['ncifluxodomicilio[70a74m_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+    createData('70 a 74 anos (F)',
+      services['ncifluxodomicilio[70a74f_atendmesatual]'],
+      services['ncifluxodomicilio[70a74f_presmesatual]'],
+      services['ncifluxodomicilio[70a74f_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+    createData('75 anos mais (M)',
+      services['ncifluxodomicilio[75maism_atendmesatual]'],
+      services['ncifluxodomicilio[75maism_presmesatual]'],
+      services['ncifluxodomicilio[75maism_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+    createData('75 anos mais (F)',
+      services['ncifluxodomicilio[75maisf_atendmesatual]'],
+      services['ncifluxodomicilio[75maisf_presmesatual]'],
+      services['ncifluxodomicilio[75maisf_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+
+    createData('Total',
+      parseInt(services['ncifluxodomicilio[60a64m_atendmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[60a64f_atendmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[65a69m_atendmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[65a69f_atendmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[70a74m_atendmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[70a74f_atendmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[75maism_atendmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[75maisf_atendmesatual]'], 10),
+      parseInt(services['ncifluxodomicilio[60a64m_presmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[60a64f_presmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[65a69m_presmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[65a69f_presmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[70a74m_presmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[70a74f_presmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[75maism_presmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[75maisf_presmesatual]'], 10),
+      parseInt(services['ncifluxodomicilio[60a64m_remmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[60a64f_remmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[65a69m_remmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[65a69f_remmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[70a74m_remmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[70a74f_remmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[75maism_remmesatual]'], 10)
+      + parseInt(services['ncifluxodomicilio[75maisf_remmesatual]'], 10),
+      1, 1, 1, 1, 1, 1),
+  ];
+
   const sexoRacaCor = [
     createData('Feminino',
       services['nciconvracasexo[fem_branc]'],
@@ -252,6 +322,59 @@ const Response:any = () => {
       + parseInt(services['nciconvracasexo[masc_naoinf]'], 10)
       + parseInt(services['nciconvracasexo[fem_naoinf]'], 10), 1, 1),
   ];
+  const sexoRacaCorDomicilio = [
+    createData('Feminino',
+      services['ncidomracasexo[fem_branc]'],
+      services['ncidomracasexo[fem_preto]'],
+      services['ncidomracasexo[fem_pardo]'],
+      services['ncidomracasexo[fem_amarelo]'],
+      services['ncidomracasexo[fem_indigena]'],
+      services['ncidomracasexo[fem_naoinf]'],
+      parseInt(services['ncidomracasexo[fem_branc]'], 10)
+      + parseInt(services['ncidomracasexo[fem_preto]'], 10)
+      + parseInt(services['ncidomracasexo[fem_pardo]'], 10)
+      + parseInt(services['ncidomracasexo[fem_amarelo]'], 10)
+      + parseInt(services['ncidomracasexo[fem_indigena]'], 10)
+      + parseInt(services['ncidomracasexo[fem_naoinf]'], 10), 1, 1),
+    createData('Masculino',
+      services['ncidomracasexo[masc_branc]'],
+      services['ncidomracasexo[masc_preto]'],
+      services['ncidomracasexo[masc_pardo]'],
+      services['ncidomracasexo[masc_amarelo]'],
+      services['ncidomracasexo[masc_indigena]'],
+      services['ncidomracasexo[masc_naoinf]'],
+      parseInt(services['ncidomracasexo[masc_branc]'], 10)
+      + parseInt(services['ncidomracasexo[masc_preto]'], 10)
+      + parseInt(services['ncidomracasexo[masc_pardo]'], 10)
+      + parseInt(services['ncidomracasexo[masc_amarelo]'], 10)
+      + parseInt(services['ncidomracasexo[masc_indigena]'], 10)
+      + parseInt(services['ncidomracasexo[masc_naoinf]'], 10), 1, 1),
+    createData('Total Geral',
+      parseInt(services['ncidomracasexo[masc_branc]'], 10)
+      + parseInt(services['ncidomracasexo[fem_branc]'], 10),
+      parseInt(services['ncidomracasexo[masc_preto]'], 10)
+      + parseInt(services['ncidomracasexo[fem_preto]'], 10),
+      parseInt(services['ncidomracasexo[masc_pardo]'], 10)
+      + parseInt(services['ncidomracasexo[fem_pardo]'], 10),
+      parseInt(services['ncidomracasexo[masc_amarelo]'], 10)
+      + parseInt(services['ncidomracasexo[fem_amarelo]'], 10),
+      parseInt(services['ncidomracasexo[masc_indigena]'], 10)
+      + parseInt(services['ncidomracasexo[fem_indigena]'], 10),
+      parseInt(services['ncidomracasexo[masc_naoinf]'], 10)
+      + parseInt(services['ncidomracasexo[fem_naoinf]'], 10),
+      parseInt(services['ncidomracasexo[masc_branc]'], 10)
+      + parseInt(services['ncidomracasexo[fem_branc]'], 10)
+      + parseInt(services['ncidomracasexo[masc_preto]'], 10)
+      + parseInt(services['ncidomracasexo[fem_preto]'], 10)
+      + parseInt(services['ncidomracasexo[masc_pardo]'], 10)
+      + parseInt(services['ncidomracasexo[fem_pardo]'], 10)
+      + parseInt(services['ncidomracasexo[masc_amarelo]'], 10)
+      + parseInt(services['ncidomracasexo[fem_amarelo]'], 10)
+      + parseInt(services['ncidomracasexo[masc_indigena]'], 10)
+      + parseInt(services['ncidomracasexo[fem_indigena]'], 10)
+      + parseInt(services['ncidomracasexo[masc_naoinf]'], 10)
+      + parseInt(services['ncidomracasexo[fem_naoinf]'], 10), 1, 1),
+  ];
 
   const motivosSaida = [
     createData('Mudança de endereço',
@@ -304,53 +427,173 @@ const Response:any = () => {
 
   ];
 
+  const motivosSaidaDomicilio = [
+    createData('Mudança de endereço',
+      services['ncisaidadomicilio[mudancaendereco_quantidade]'],
+      1,
+      1, 1, 1, 1, 1, 1, 1),
+    createData('Transferência para outro serviço',
+      services['ncisaidadomicilio[transferencia_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Óbito',
+      services['ncisaidadomicilio[obito_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Recusa de acompanhamento',
+      services['ncisaidadomicilio[recusa_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Ganhou autonomia',
+      services['ncisaidadomicilio[autonomia_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Resgate de vínculos familiares',
+      services['ncisaidadomicilio[resgate_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Passou a participar das atividades de convivência',
+      services['ncisaidadomicilio[conclusaocurso_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Total',
+      parseInt(services['ncisaidadomicilio[conclusaocurso_quantidade]'], 10)
+      + parseInt(services['ncisaidadomicilio[resgate_quantidade]'], 10)
+      + parseInt(services['ncisaidadomicilio[autonomia_quantidade]'], 10)
+      + parseInt(services['ncisaidadomicilio[recusa_quantidade]'], 10)
+    + parseInt(services['ncisaidadomicilio[obito_quantidade]'], 10)
+    + parseInt(services['ncisaidadomicilio[transferencia_quantidade]'], 10)
+    + parseInt(services['ncisaidadomicilio[mudancaendereco_quantidade]'], 10),
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+
+  ];
+
   const idososMoramSozinho = [
     createData('Quantidade de idosos que moram sozinhos',
-      services['crecisozinho[idososo]'],
+      services['nciconvidososozinho[idososo]'],
       1,
       1, 1, 1, 1, 1, 1, 1),
     createData('Desses idosos, informe a quantidade de idosos que precisam de ajuda',
-      services['crecisozinho[idososo]'],
+      services['nciconvidososozinho[ajudaidosos]'],
+      1,
+      1, 1, 1, 1, 1, 1, 1),
+  ];
+
+  const idososMoramSozinhoDomicilio = [
+    createData('Quantidade de idosos que moram sozinhos',
+      services['ncidomsosozinho[idososo]'],
+      1,
+      1, 1, 1, 1, 1, 1, 1),
+    createData('Desses idosos, informe a quantidade de idosos que precisam de ajuda',
+      services['ncidomsosozinho[ajudaidosos]'],
       1,
       1, 1, 1, 1, 1, 1, 1),
   ];
 
   const idososFamilias = [
     createData('Nº de famílias de idosos atendidas presencialmente no mês de referência ',
-      services['crecisozinho[idososo]'],
+      services['nciconvatenfam[ccafampres]'],
       1,
       1, 1, 1, 1, 1, 1, 1),
     createData('Nº de famílias de idosos acompanhadas de forma remota no mês de referência',
-      services['crecisozinho[idososo]'],
+      services['nciconvatenfam[ccafamrem]'],
       1,
       1, 1, 1, 1, 1, 1, 1),
     createData('Nº total de famílias de idosos atendidas no mês de referência',
-      services['crecisozinho[idososo]'],
+      services['nciconvatenfam[ccafamtotal]'],
+      1,
+      1, 1, 1, 1, 1, 1, 1),
+  ];
+
+  const idososFamiliasDomicilio = [
+    createData('Nº de famílias de idosos atendidas presencialmente no mês de referência ',
+      services['ncidomatendfam[ccafampres]'],
+      1,
+      1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de famílias de idosos acompanhadas de forma remota no mês de referência',
+      services['ncidomatendfam[ccafamrem]'],
+      1,
+      1, 1, 1, 1, 1, 1, 1),
+    createData('Nº total de famílias de idosos atendidas no mês de referência',
+      services['ncidomatendfam[ccafamtotal]'],
       1,
       1, 1, 1, 1, 1, 1, 1),
   ];
 
   const familiasInsumos = [
-    createData('Cesta de alimentos', services['circoinsumo[cestasaliment_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Kit de material de higiene', services['circoinsumo[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Cesta de alimentos', services['nciinsumos[alimentos_SQ001]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Kit de material de higiene', services['nciinsumos[higiene_SQ001]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const infoIdosos = [
-    createData('Nº de idosos do serviço em domicílio que recebem BPC', services['circoinsumo[cestasaliment_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de idosos do serviço de convivência que recebem BPC', services['circoinsumo[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de idosos do serviço em domicílio com PDU em andamento', services['circoinsumo[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de visitas domiciliares realizadas no mês para o público da convivência', services['circoinsumo[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de visitas domiciliares realizadas no mês para o público do serviço em domicílio', services['circoinsumo[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de idosos do serviço em domicílio que recebem BPC', services['nciinfoimportantes[bpcdomicilio_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de idosos do serviço de convivência que recebem BPC', services['nciinfoimportantes[bpcconvivencia_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de idosos do serviço em domicílio com PDU em andamento', services['nciinfoimportantes[pdudomicilio_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de visitas domiciliares realizadas no mês para o público da convivência', services['nciinfoimportantes[visitasconvivi_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de visitas domiciliares realizadas no mês para o público do serviço em domicílio', services['nciinfoimportantes[residemsos1_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const familiasVulnerabilidade = [
-    createData('Conflitos', services['circovulnerab[conflit]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Preconceitos/discriminação', services['circovulnerab[Precon]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Abandono', services['circovulnerab[aband]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Apartação', services['circovulnerab[apart]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Confinamento', services['circovulnerab[confinamet]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Isolamento', services['circovulnerab[isolament]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Violência', services['circovulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Conflitos', services['nciconvvulnerab[conflit]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Preconceitos/discriminação', services['nciconvvulnerab[Precon]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Abandono', services['nciconvvulnerab[aband]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Apartação', services['nciconvvulnerab[apart]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Confinamento', services['nciconvvulnerab[confinamet]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Isolamento', services['nciconvvulnerab[isolament]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Violência', services['nciconvvulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  ];
+
+  const familiasVulnerabilidadeDomicilio = [
+    createData('Conflitos', services['ncidomvulnerab[conflit]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Preconceitos/discriminação', services['ncidomvulnerab[Precon]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Abandono', services['ncidomvulnerab[aband]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Apartação', services['ncidomvulnerab[apart]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Confinamento', services['ncidomvulnerab[confinamet]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Isolamento', services['ncidomvulnerab[isolament]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Violência', services['ncidomvulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentoFamilia = [
@@ -359,77 +602,109 @@ const Response:any = () => {
   ];
 
   const atividadesItems = [
-    ['Atividades esportivas', services['circosocialatividade[atvesporte]']],
-    ['Musicalidade (cantar, tocar instrumentos etc.)', services['circosocialatividade[atvmusica]']],
-    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['circosocialatividade[atvcultura]']],
-    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['circosocialatividade[atvarte]']],
-    ['Atividades de inclusão digital', services['circosocialatividade[atvincdigital]']],
-    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['circosocialatividade[atvlinguagem]']],
-    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['circosocialatividade[atvculinaria]']],
-    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['circosocialatividade[atvrecreacao]']],
+    ['Atividades esportivas', services['nciatvidades[atvesporte]']],
+    ['Musicalidade (cantar, tocar instrumentos etc.)', services['nciatvidades[atvmusica]']],
+    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['nciatvidades[atvcultura]']],
+    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['nciatvidades[atvarte]']],
+    ['Atividades de inclusão digital', services['nciatvidades[atvincdigital]']],
+    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['nciatvidades[atvlinguagem]']],
+    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['nciatvidades[atvculinaria]']],
+    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['nciatvidades[atvrecreacao]']],
 
   ];
 
   const temasItems = [
-    ['Temas transversais (saúde, meio ambiente, cultura, esporte etc.)', services['circosocialtema[tematransversal]']],
-    ['Direitos e programas sociais', services['circosocialtema[temadireitos]']],
-    ['Segurança alimentar e nutricional', services['circosocialtema[temanutricao]']],
-    ['Igualdade entre homens e mulheres', services['circosocialtema[temaigualdade]']],
-    ['Orientação sexual e de identidade de gênero', services['circosocialtema[temaorientsexual]']],
-    ['Relações étnico-raciais', services['circosocialtema[temaetnico]']],
-    ['Prevenção ao uso de álcool e drogas', services['circosocialtema[temaalccoldrogas]']],
-    ['Prevenção à violência', services['circosocialtema[temaprevencaovio]']],
-    ['Parentalidade', services['circosocialtema[temaparental]']],
-    ['Deficiência e acessibilidade', services['circosocialtema[temapcd]']],
+    ['Temas transversais (saúde, meio ambiente, cultura, esporte etc.)', services['ncitema[tematransversal]']],
+    ['Direitos e programas sociais', services['ncitema[temadireitos]']],
+    ['Segurança alimentar e nutricional', services['ncitema[temanutricao]']],
+    ['Igualdade entre homens e mulheres', services['ncitema[temaigualdade]']],
+    ['Orientação sexual e de identidade de gênero', services['ncitema[temaorientsexual]']],
+    ['Relações étnico-raciais', services['ncitema[temaetnico]']],
+    ['Prevenção ao uso de álcool e drogas', services['ncitema[temaalccoldrogas]']],
+    ['Prevenção à violência', services['ncitema[temaprevencaovio]']],
+    ['Parentalidade', services['ncitema[temaparental]']],
+    ['Deficiência e acessibilidade', services['ncitema[temapcd]']],
+    ['Envelhecimento saudável', services['ncitema[temaenvelhsaudavel]']],
   ];
   const demandaReprimida = [
-    createData('6 a 11 anos', services['circolistaespera[6a11_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('12 a 14 anos', services['circolistaespera[12a14_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('15 a 17 anos', services['circolistaespera[15a17_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('60 a 64 anos', services['ncilistaespera[60a64_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('65 a 69 anos', services['ncilistaespera[65a69_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('70 a 74 anos', services['ncilistaespera[70a74_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('75 anos ou mais', services['ncilistaespera[75mais_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
 
     createData('Total',
-      parseInt(services['circolistaespera[6a11_quantidade]'], 10)
-      + parseInt(services['circolistaespera[12a14_quantidade]'], 10)
-      + parseInt(services['circolistaespera[15a17_quantidade]'], 10),
+      parseInt(services['ncilistaespera[60a64_qtdade]'], 10)
+      + parseInt(services['ncilistaespera[65a69_qtdade]'], 10)
+      + parseInt(services['ncilistaespera[70a74_qtdade]'], 10)
+      + parseInt(services['ncilistaespera[75mais_qtdade]'], 10),
       1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const encaminhamentos = [
-    createData('CRAS', services['circoencaminha[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['circoencaminha[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['circoencaminha[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['circoencaminha[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Educação', services['circoencaminha[educacao]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['circoencaminha[direito]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['circoencaminha[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('CRAS', services['nciencaminhamento[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('CREAS', services['nciencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outro serviço da rede socioassistencial', services['nciencaminhamento[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Saúde', services['nciencaminhamento[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Habitação', services['nciencaminhamento[hab]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Previdêncial Social', services['nciencaminhamento[prev]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Conselhos de direito', services['nciencaminhamento[direito]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outras políticas públicas', services['nciencaminhamento[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotos = [
-    createData('Semana 1', services['circoatendremperi[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['circoatendremperi[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['circoatendremperi[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['circoatendremperi[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['circoatendremperi[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['circoatendremperi[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 1', services['nciconvivatendrempes[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 2', services['nciconvivatendrempes[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 3', services['nciconvivatendrempes[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 4', services['nciconvivatendrempes[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 5', services['nciconvivatendrempes[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 6', services['nciconvivatendrempes[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  ];
+
+  const atendimentosRemotosDomicilio = [
+    createData('Semana 1', services['ncidomatendremperio[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 2', services['ncidomatendremperio[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 3', services['ncidomatendremperio[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 4', services['ncidomatendremperio[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 5', services['ncidomatendremperio[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 6', services['ncidomatendremperio[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['circoremadisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Email', services['circoremadisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['circoremadisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['circoremadisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['circoremadisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['circoremadisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['circoremadisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Telefone / Celular / Whatsapp', services['nciconvivenciremdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Email', services['nciconvivenciremdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Facebook', services['nciconvivenciremdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('YouTube', services['nciconvivenciremdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outras redes sociais', services['nciconvivenciremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Entrega de kits de atividades', services['nciconvivenciremdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outros', services['nciconvivenciremdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  ];
+
+  const atendimentosRemotosTiposDomicilio = [
+    createData('Telefone / Celular / Whatsapp', services['ncidomremdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Email', services['ncidomremdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Facebook', services['ncidomremdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('YouTube', services['ncidomremdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outras redes sociais', services['ncidomremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Entrega de kits de atividades', services['ncidomremdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outros', services['ncidomremdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['circofamatendperio[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['circofamatendperio[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['circofamatendperio[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['circofamatendperio[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['circofamatendperio[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['circofamatendperio[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 1', services['nciconvivatendremfam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 2', services['nciconvivatendremfam[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 3', services['nciconvivatendremfam[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 4', services['nciconvivatendremfam[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 5', services['nciconvivatendremfam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 6', services['nciconvivatendremfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  ];
+
+  const atendimentosRemotosFamiliaSemanaDomicilio = [
+    createData('Semana 1', services['ncidomatendremfam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 2', services['ncidomatendremfam[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 3', services['ncidomatendremfam[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 4', services['ncidomatendremfam[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 5', services['ncidomatendremfam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 6', services['ncidomatendremfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   return (
@@ -584,38 +859,41 @@ const Response:any = () => {
         <h2>
           1. Quantidade de pessoas atendidas do serviço em domicílio no mês de referência:
         </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
+        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesDomicilio} />
 
         <h2>
           2. Quantidade de pessoas atendidas por sexo e raça/cor
           no serviço em domicílio no mês de referência:
         </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
+        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCorDomicilio} />
 
         <br />
         <h2>
           3. Nº de pessoas por motivo de saída do serviço em domicílio  no mês de referência:
         </h2>
-        <TableTwoColumns headers={motivosSaidaHeaders} body={motivosSaida} />
+        <TableTwoColumns headers={motivosSaidaHeaders} body={motivosSaidaDomicilio} />
         <br />
         <h2>
           4.N° de idosos atendidos no serviço em domicílio que moram sozinhos e
           caso morem sozinhos, quantos contam com alguém se precisarem de ajuda:
         </h2>
-        <TableTwoColumns headers={idososMoramSozinhoHeaders} body={idososMoramSozinho} />
+        <TableTwoColumns headers={idososMoramSozinhoHeaders} body={idososMoramSozinhoDomicilio} />
 
         <br />
         <h2>
           5. Os valores das seguintes questões sobre atendimento
           às famílias dos idosos do serviço em domicílio no mês de referência:
         </h2>
-        <TableTwoColumns headers={idososFamiliasHeaders} body={idososFamilias} />
+        <TableTwoColumns headers={idososFamiliasHeaders} body={idososFamiliasDomicilio} />
         <h2>
           6. O número de famílias ou pessoas que buscaram atendimento
           presencial do serviço em domicílio no mês de referência devido
           a alguma vulnerabilidade relacional:
         </h2>
-        <TableTwoColumns headers={familiasVulnerabilidadeHeaders} body={familiasVulnerabilidade} />
+        <TableTwoColumns
+          headers={familiasVulnerabilidadeHeaders}
+          body={familiasVulnerabilidadeDomicilio}
+        />
         <br />
 
         <h2>
@@ -623,7 +901,10 @@ const Response:any = () => {
           do serviço em domicílio por semana no mês:
         </h2>
 
-        <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
+        <TableTwoColumns
+          headers={atendimentosRemotosHeaders}
+          body={atendimentosRemotosDomicilio}
+        />
         <br />
         <h2>
           8. Quantidade de atividades remotas realizadas pelo
@@ -631,7 +912,7 @@ const Response:any = () => {
         </h2>
         <TableTwoColumns
           headers={atendimentosRemotosTiposHeaders}
-          body={atendimentosRemotosTipos}
+          body={atendimentosRemotosTiposDomicilio}
         />
         <br />
         <h2>
@@ -640,7 +921,7 @@ const Response:any = () => {
         </h2>
         <TableTwoColumns
           headers={atendimentosRemotosFamiliaSemanaHeaders}
-          body={atendimentosRemotosFamiliaSemana}
+          body={atendimentosRemotosFamiliaSemanaDomicilio}
         />
         <br />
 
@@ -653,7 +934,7 @@ const Response:any = () => {
         <Typography variant="h5" gutterBottom>
           1. Quantidade de pessoas com deficiência atendidas no mês é de
           {' '}
-          {services.circousuariospcd}
+          {services.nciusuariospcd}
           {' '}
           pessoa(s)
         </Typography>

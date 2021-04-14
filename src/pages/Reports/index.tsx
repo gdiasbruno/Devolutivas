@@ -172,7 +172,7 @@ const Reports: React.FC = () => {
                       token: service.token,
                     });
                     // history.push(`/response${service.attribute_4}`);
-                    history.push('/responseNCI');
+                    history.push('/responseCDI');
                   }}
                   className={service.attribute_4}
                 >
