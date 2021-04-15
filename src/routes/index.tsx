@@ -16,9 +16,16 @@ import ResponseRE from '../pages/Response/maskRE';
 import ResponseSADPI from '../pages/Response/maskSADPI';
 import ResponseCDCM from '../pages/Response/maskCDCM';
 import ResponseCDI from '../pages/Response/maskCDI';
+<<<<<<< HEAD
 import ResponseMSE from '../pages/Response/maskMSE';
 import ResponseNCPOPRUA from '../pages/Response/maskNCPOPRUA';
 import ResponseBAGAGEIRO from '../pages/Response/maskBAGAGEIRO';
+=======
+import ResponseSPVV from '../pages/Response/maskSPVV';
+import ResponseSISP from '../pages/Response/maskSISP';
+import ResponseNAISPD from '../pages/Response/maskNAISPD';
+
+>>>>>>> 08863f4638397eab89bb353fb08818b0c21464f5
 import Header from '../components/Header';
 
 import { infoContext } from '../providers/reactContext';
@@ -49,9 +56,15 @@ const Routes: React.FC = () => {
           <Route path="/responseSADPI" component={ResponseSADPI} />
           <Route path="/responseCDCM" component={ResponseCDCM} />
           <Route path="/responseCDI" component={ResponseCDI} />
+<<<<<<< HEAD
           <Route path="/responseMSE" component={ResponseMSE} />
           <Route path="/responseNCPOPRUA" component={ResponseNCPOPRUA} />
           <Route path="/responseBAGAGEIRO" component={ResponseBAGAGEIRO} />
+=======
+          <Route path="/responseSPVV" component={ResponseSPVV} />
+          <Route path="/responseSISP" component={ResponseSISP} />
+          <Route path="/responseNAISPD" component={ResponseNAISPD} />
+>>>>>>> 08863f4638397eab89bb353fb08818b0c21464f5
         </Switch>
       </>
       )
