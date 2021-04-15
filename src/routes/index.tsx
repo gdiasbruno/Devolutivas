@@ -18,6 +18,8 @@ import ResponseCDCM from '../pages/Response/maskCDCM';
 import ResponseCDI from '../pages/Response/maskCDI';
 import ResponseSPVV from '../pages/Response/maskSPVV';
 import ResponseSISP from '../pages/Response/maskSISP';
+import ResponseNAISPD from '../pages/Response/maskNAISPD';
+
 import Header from '../components/Header';
 
 import { infoContext } from '../providers/reactContext';
@@ -50,6 +52,7 @@ const Routes: React.FC = () => {
           <Route path="/responseCDI" component={ResponseCDI} />
           <Route path="/responseSPVV" component={ResponseSPVV} />
           <Route path="/responseSISP" component={ResponseSISP} />
+          <Route path="/responseNAISPD" component={ResponseNAISPD} />
         </Switch>
       </>
       )
