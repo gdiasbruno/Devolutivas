@@ -16,6 +16,8 @@ import ResponseRE from '../pages/Response/maskRE';
 import ResponseSADPI from '../pages/Response/maskSADPI';
 import ResponseCDCM from '../pages/Response/maskCDCM';
 import ResponseCDI from '../pages/Response/maskCDI';
+import ResponseSPVV from '../pages/Response/maskSPVV';
+import ResponseSISP from '../pages/Response/maskSISP';
 import Header from '../components/Header';
 
 import { infoContext } from '../providers/reactContext';
@@ -46,6 +48,8 @@ const Routes: React.FC = () => {
           <Route path="/responseSADPI" component={ResponseSADPI} />
           <Route path="/responseCDCM" component={ResponseCDCM} />
           <Route path="/responseCDI" component={ResponseCDI} />
+          <Route path="/responseSPVV" component={ResponseSPVV} />
+          <Route path="/responseSISP" component={ResponseSISP} />
         </Switch>
       </>
       )
