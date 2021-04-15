@@ -76,13 +76,13 @@ const Reports: React.FC = () => {
   const classes = useStyles();
   const { context, setContext }:any = React.useContext(infoContext);
   const history = useHistory();
-  const { nomeSAS, mes } = context;
+  // const { nomeSAS, mes } = context;
 
   const [services, setServices]:any = useState([]);
 
   const fetchUserProfiles = () => {
-    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}`).then((res) => {
-      setServices(res.data.result);
+    axios.get('http://localhost:8080/devolutivas/ITAQUERA/0121').then((res) => {
+      setServices(res.data);
       console.log(res.data);
     });
   };
@@ -111,7 +111,7 @@ const Reports: React.FC = () => {
             onClick={() => {
               history.push('/');
             }}
-            label={nomeSAS}
+            label="'{nomeSAS}'"
             icon={<HomeIcon fontSize="small" />}
           />
           <StyledBreadcrumb
@@ -119,7 +119,7 @@ const Reports: React.FC = () => {
             onClick={() => {
               history.push('/months');
             }}
-            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
+            label="{mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}"
           />
           <Typography color="textPrimary">Serviços</Typography>
         </Breadcrumbs>
@@ -137,7 +137,7 @@ const Reports: React.FC = () => {
 
       </FirstSection>
       <SecondSection>
-        <FormControl component="fieldset" className={classes.formControl}>
+        {/* <FormControl component="fieldset" className={classes.formControl}>
           <FormLabel component="legend">Escolha o(s) Tipo(s) de Serviço</FormLabel>
           <FormGroup>
             {uniqueTipologias.map((tipologia:any) => (
@@ -155,7 +155,7 @@ const Reports: React.FC = () => {
             ))}
 
           </FormGroup>
-        </FormControl>
+        </FormControl> */}
         <div className={classes.bodyServicesItems}>
           <List component="nav" aria-label="main mailbox folders">
             {services.map((service:any) => {
@@ -164,22 +164,22 @@ const Reports: React.FC = () => {
 
                 <ListItem
                   button
-                  onClick={() => {
-                    setContext({
-                      nomeSAS,
-                      mes,
-                      serviceName: service.participant_info.firstname,
-                      token: service.token,
-                    });
-                    // history.push(`/response${service.attribute_4}`);
-                    history.push('/responseCDI');
-                  }}
+                  // onClick={() => {
+                  //   setContext({
+                  //     nomeSAS,
+                  //     mes,
+                  //     serviceName: service.participant_info.firstname,
+                  //     token: service.token,
+                  //   });
+                  //   // history.push(`/response${service.attribute_4}`);
+                  //   history.push('/responseCDI');
+                  // }}
                   className={service.attribute_4}
                 >
                   <ListItemIcon>
                     <HomeIcon />
                   </ListItemIcon>
-                  <ListItemText primary={service.participant_info.firstname} />
+                  <ListItemText primary={service.firstname} />
                 </ListItem>
 
               );

@@ -108,14 +108,14 @@ const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 const Response:any = () => {
   const [services, setServices]:any = useState([]);
   const { context, setContext }:any = useContext(infoContext);
-  const {
-    nomeSAS, mes, serviceName, token,
-  } = context;
+  // const {
+  //   nomeSAS, mes, serviceName, token,
+  // } = context;
   const history = useHistory();
   // eslint-disable-next-line new-cap
 
   const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/SE/0121/12112324/nca').then((res) => {
+    axios.get('http://localhost:8080/devolutivas/SE/0121/12112325/bag').then((res) => {
       setServices(res.data);
       console.log(res.data);
     });
@@ -187,56 +187,56 @@ const Response:any = () => {
 
   const sexoRacaCor = [
     createData('Feminino',
-      services['cedesracasexo[fem_branca]'],
-      services['cedesracasexo[fem_preta]'],
-      services['cedesracasexo[fem_parda]'],
-      services['cedesracasexo[fem_amarela]'],
-      services['cedesracasexo[fem_indigena]'],
-      services['cedesracasexo[fem_naoinf]'],
-      parseInt(services['cedesracasexo[fem_branca]'], 10)
-      + parseInt(services['cedesracasexo[fem_preta]'], 10)
-      + parseInt(services['cedesracasexo[fem_parda]'], 10)
-      + parseInt(services['cedesracasexo[fem_amarela]'], 10)
-      + parseInt(services['cedesracasexo[fem_indigena]'], 10)
-      + parseInt(services['cedesracasexo[fem_naoinf]'], 10), 1, 1),
+      services['bagracasexo[fem_branca]'],
+      services['bagracasexo[fem_preta]'],
+      services['bagracasexo[fem_parda]'],
+      services['bagracasexo[fem_amarela]'],
+      services['bagracasexo[fem_indigena]'],
+      services['bagracasexo[fem_naoinf]'],
+      parseInt(services['bagracasexo[fem_branca]'], 10)
+      + parseInt(services['bagracasexo[fem_preta]'], 10)
+      + parseInt(services['bagracasexo[fem_parda]'], 10)
+      + parseInt(services['bagracasexo[fem_amarela]'], 10)
+      + parseInt(services['bagracasexo[fem_indigena]'], 10)
+      + parseInt(services['bagracasexo[fem_naoinf]'], 10), 1, 1),
     createData('Masculino',
-      services['cedesracasexo[masc_branca]'],
-      services['cedesracasexo[masc_preta]'],
-      services['cedesracasexo[masc_parda]'],
-      services['cedesracasexo[masc_amarela]'],
-      services['cedesracasexo[masc_indigena]'],
-      services['cedesracasexo[masc_naoinf]'],
-      parseInt(services['cedesracasexo[masc_branca]'], 10)
-      + parseInt(services['cedesracasexo[masc_preta]'], 10)
-      + parseInt(services['cedesracasexo[masc_parda]'], 10)
-      + parseInt(services['cedesracasexo[masc_amarela]'], 10)
-      + parseInt(services['cedesracasexo[masc_indigena]'], 10)
-      + parseInt(services['cedesracasexo[masc_naoinf]'], 10), 1, 1),
+      services['bagracasexo[mas_branca]'],
+      services['bagracasexo[mas_preta]'],
+      services['bagracasexo[mas_parda]'],
+      services['bagracasexo[mas_amarela]'],
+      services['bagracasexo[mas_indigena]'],
+      services['bagracasexo[mas_naoinf]'],
+      parseInt(services['bagracasexo[mas_branca]'], 10)
+      + parseInt(services['bagracasexo[mas_preta]'], 10)
+      + parseInt(services['bagracasexo[mas_parda]'], 10)
+      + parseInt(services['bagracasexo[mas_amarela]'], 10)
+      + parseInt(services['bagracasexo[mas_indigena]'], 10)
+      + parseInt(services['bagracasexo[mas_naoinf]'], 10), 1, 1),
     createData('Total Geral',
-      parseInt(services['cedesracasexo[masc_branca]'], 10)
-      + parseInt(services['cedesracasexo[fem_branca]'], 10),
-      parseInt(services['cedesracasexo[masc_preta]'], 10)
-      + parseInt(services['cedesracasexo[fem_preta]'], 10),
-      parseInt(services['cedesracasexo[masc_parda]'], 10)
-      + parseInt(services['cedesracasexo[fem_parda]'], 10),
-      parseInt(services['cedesracasexo[masc_amarela]'], 10)
-      + parseInt(services['cedesracasexo[fem_amarela]'], 10),
-      parseInt(services['cedesracasexo[masc_indigena]'], 10)
-      + parseInt(services['cedesracasexo[fem_indigena]'], 10),
-      parseInt(services['cedesracasexo[masc_naoinf]'], 10)
-      + parseInt(services['cedesracasexo[fem_naoinf]'], 10),
-      parseInt(services['cedesracasexo[masc_branca]'], 10)
-      + parseInt(services['cedesracasexo[fem_branca]'], 10)
-      + parseInt(services['cedesracasexo[masc_preta]'], 10)
-      + parseInt(services['cedesracasexo[fem_preta]'], 10)
-      + parseInt(services['cedesracasexo[masc_parda]'], 10)
-      + parseInt(services['cedesracasexo[fem_parda]'], 10)
-      + parseInt(services['cedesracasexo[masc_amarela]'], 10)
-      + parseInt(services['cedesracasexo[fem_amarela]'], 10)
-      + parseInt(services['cedesracasexo[masc_indigena]'], 10)
-      + parseInt(services['cedesracasexo[fem_indigena]'], 10)
-      + parseInt(services['cedesracasexo[masc_naoinf]'], 10)
-      + parseInt(services['cedesracasexo[fem_naoinf]'], 10), 1, 1),
+      parseInt(services['bagracasexo[mas_branca]'], 10)
+      + parseInt(services['bagracasexo[fem_branca]'], 10),
+      parseInt(services['bagracasexo[mas_preta]'], 10)
+      + parseInt(services['bagracasexo[fem_preta]'], 10),
+      parseInt(services['bagracasexo[mas_parda]'], 10)
+      + parseInt(services['bagracasexo[fem_parda]'], 10),
+      parseInt(services['bagracasexo[mas_amarela]'], 10)
+      + parseInt(services['bagracasexo[fem_amarela]'], 10),
+      parseInt(services['bagracasexo[mas_indigena]'], 10)
+      + parseInt(services['bagracasexo[fem_indigena]'], 10),
+      parseInt(services['bagracasexo[mas_naoinf]'], 10)
+      + parseInt(services['bagracasexo[fem_naoinf]'], 10),
+      parseInt(services['bagracasexo[mas_branca]'], 10)
+      + parseInt(services['bagracasexo[fem_branca]'], 10)
+      + parseInt(services['bagracasexo[mas_preta]'], 10)
+      + parseInt(services['bagracasexo[fem_preta]'], 10)
+      + parseInt(services['bagracasexo[mas_parda]'], 10)
+      + parseInt(services['bagracasexo[fem_parda]'], 10)
+      + parseInt(services['bagracasexo[mas_amarela]'], 10)
+      + parseInt(services['bagracasexo[fem_amarela]'], 10)
+      + parseInt(services['bagracasexo[mas_indigena]'], 10)
+      + parseInt(services['bagracasexo[fem_indigena]'], 10)
+      + parseInt(services['bagracasexo[mas_naoinf]'], 10)
+      + parseInt(services['bagracasexo[fem_naoinf]'], 10), 1, 1),
   ];
 
   const motivosSaida = [
@@ -393,14 +393,11 @@ const Response:any = () => {
   ];
 
   const encaminhamentos = [
-    createData('CRAS', services['cedesencaminhamento[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['cedesencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['cedesencaminhamento[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['cedesencaminhamento[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Educação', services['cedesencaminhamento[educa]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['cedesencaminhamento[cdireito]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Trabalho e renda', services['cedesencaminhamento[trabalho]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['cedesencaminhamento[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('CRAS', services['bagencaminhamento[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('CREAS', services['bagencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('CENTRO POP', services['bagencaminhamento[cpop]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outro serviço da rede socioassistencial', services['bagencaminhamento[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outras políticas públicas', services['bagencaminhamento[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotos = [
@@ -440,30 +437,30 @@ const Response:any = () => {
             onClick={() => {
               history.push('/');
             }}
-            label={nomeSAS}
+            label="{nomeSAS}"
             icon={<HomeIcon fontSize="small" />}
           />
           <StyledBreadcrumb
             component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('months');
-            }}
-            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
+            // onClick={() => {
+            //   setContext({
+            //     nomeSAS,
+            //     mes,
+            //   });
+            //   history.push('months');
+            // }}
+            label="{mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}"
           />
           <StyledBreadcrumb
             component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('/reports');
-            }}
-            label={serviceName}
+            // onClick={() => {
+            //   setContext({
+            //     nomeSAS,
+            //     mes,
+            //   });
+            //   history.push('/reports');
+            // }}
+            label="{serviceName}"
           />
           <Typography color="textPrimary">Respostas</Typography>
         </Breadcrumbs>
@@ -482,13 +479,13 @@ const Response:any = () => {
           <MyButton
             variant="contained"
             color="primary"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('/reports');
-            }}
+            // onClick={() => {
+            //   setContext({
+            //     nomeSAS,
+            //     mes,
+            //   });
+            //   history.push('/reports');
+            // }}
           >
             Voltar
 
@@ -498,102 +495,38 @@ const Response:any = () => {
       </FirstSection>
 
       <Section>
-        <h2>
-          1. Quantidade de pessoas do sexo feminino atendidas no mês, por faixa etária:
-        </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesFeminino} />
+        <Typography variant="h5" gutterBottom>
+          1. Número de pessoas que utilizaram o serviço no mês
+          {services.bagatendmes}
+        </Typography>
 
         <h2>
-          2. Quantidade de pessoas do sexo masculino atendidas no mês, por faixa etária:
-        </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesMasculino} />
-
-        <h2>
-          3. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência:
+          2. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência.
         </h2>
         <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
 
-        <br />
-        <h2>
-          4. Quantidade de usuários por motivo de saída do serviço no mês:
-        </h2>
-        <TableFiveColumns headers={motivosSaidaHeaders} body={motivosSaida} />
-        <br />
-        <h2>
-          5. Atendimento às famílias no mês:
-        </h2>
-        <TableTwoColumns headers={atendimentoFamiliaHeaders} body={atendimentoFamilia} />
-        <br />
         <Typography variant="h5" gutterBottom>
-          6. Quantidade de pessoas com deficiência atendidas no mês é de
-          {' '}
-          {services.cedespcd}
-          {' '}
-          pessoa(s)
+          3. Número de boxes utilizados no mês de referência:
+          {services.bagbox}
         </Typography>
-        <br />
-
         <Typography variant="h5" gutterBottom>
-          7. Quantidade de visitas domicilares realizadas no mês é
-          {' '}
-          {services.cedesvisitadom}
-          {' '}
-          pessoa(s)
+          4. Nº de pessoas que utilizaram o
+          serviço Bagageiro e estão vinculadas a um Centro de Acolhida no mês de referência:
+          {services.bagvinca}
         </Typography>
-        <br />
-        <h2>
-          8. O número de famílias ou pessoas que buscaram atendimento presencial
-          no mês de referência devido a alguma vulnerabilidade relacional:
-        </h2>
-        <TableTwoColumns headers={familiasVulnerabilidadeHeaders} body={familiasVulnerabilidade} />
-        <br />
+        <Typography variant="h5" gutterBottom>
+          5. Número de pessoas que receberam atendimento social no mês de referência:
+          {services.bagatendsocial}
+        </Typography>
+        <Typography variant="h5" gutterBottom>
+          6. Nº de pessoas com deficiência atendidas pelo serviço no mês de referência:
+          {services.bagpcd}
+        </Typography>
 
         <h2>
-          9. Os temas discutidos com pessoas atendidas pelo serviço no mês:
-        </h2>
-        <ListComponent items={temasItems} />
-        <br />
-        <h2>
-          11. Quantidade de pessoas incluídas em lista de
-          espera (demanda reprimida) no mês, por faixa etária:
-        </h2>
-
-        <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
-
-        <h2>
-          12. Quantidade de famílias que receberam insumos no mês
-        </h2>
-
-        <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
-
-        <h2>
-          13. Quantidade de encaminhamentos realizados pelo serviço no mês:
+          7. Encaminhamentos realizados pelo serviço no mês de referência
         </h2>
         <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
-        <br />
-
-        <h2>
-          14. Quantidade de atendimentos remotos de usuários por semana no mês:
-        </h2>
-        <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
-        <br />
-        <h2>
-          15. Quantidade de atividades remotas realizadas no mês,
-          pelos meios em que foram disponibilizadas:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosTiposHeaders}
-          body={atendimentosRemotosTipos}
-        />
-        <br />
-        <h2>
-          16. Quantidade de atendimentos remotos de familiares por semana no mês:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosFamiliaSemanaHeaders}
-          body={atendimentosRemotosFamiliaSemana}
-        />
-        <br />
       </Section>
     </>
   );

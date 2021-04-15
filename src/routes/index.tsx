@@ -16,6 +16,9 @@ import ResponseRE from '../pages/Response/maskRE';
 import ResponseSADPI from '../pages/Response/maskSADPI';
 import ResponseCDCM from '../pages/Response/maskCDCM';
 import ResponseCDI from '../pages/Response/maskCDI';
+import ResponseMSE from '../pages/Response/maskMSE';
+import ResponseNCPOPRUA from '../pages/Response/maskNCPOPRUA';
+import ResponseBAGAGEIRO from '../pages/Response/maskBAGAGEIRO';
 import Header from '../components/Header';
 
 import { infoContext } from '../providers/reactContext';
@@ -46,6 +49,9 @@ const Routes: React.FC = () => {
           <Route path="/responseSADPI" component={ResponseSADPI} />
           <Route path="/responseCDCM" component={ResponseCDCM} />
           <Route path="/responseCDI" component={ResponseCDI} />
+          <Route path="/responseMSE" component={ResponseMSE} />
+          <Route path="/responseNCPOPRUA" component={ResponseNCPOPRUA} />
+          <Route path="/responseBAGAGEIRO" component={ResponseBAGAGEIRO} />
         </Switch>
       </>
       )
