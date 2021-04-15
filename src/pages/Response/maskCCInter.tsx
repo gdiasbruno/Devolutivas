@@ -111,16 +111,14 @@ const ResponseCRECI:any = () => {
   const [services, setServices]:any = useState([]);
   const { context, setContext }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, token,
+    nomeSAS, mes, serviceName, token, tipologia,
   } = context;
   const history = useHistory();
   // eslint-disable-next-line new-cap
 
   const fetchUserProfiles = () => {
-    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/12112311`).then((res) => {
-      const index = Object.keys(res.data.responses[0])[0];
-      setServices(res.data.responses[0][index]);
-      console.log(res.data);
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
+      setServices(res.data);
     });
   };
 

@@ -76,12 +76,12 @@ const Reports: React.FC = () => {
   const classes = useStyles();
   const { context, setContext }:any = React.useContext(infoContext);
   const history = useHistory();
-  // const { nomeSAS, mes } = context;
+  const { nomeSAS, mes } = context;
 
   const [services, setServices]:any = useState([]);
 
   const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/ITAQUERA/0121').then((res) => {
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}`).then((res) => {
       setServices(res.data);
       console.log(res.data);
     });
@@ -111,7 +111,7 @@ const Reports: React.FC = () => {
             onClick={() => {
               history.push('/');
             }}
-            label="'{nomeSAS}'"
+            label={nomeSAS}
             icon={<HomeIcon fontSize="small" />}
           />
           <StyledBreadcrumb
@@ -119,7 +119,7 @@ const Reports: React.FC = () => {
             onClick={() => {
               history.push('/months');
             }}
-            label="{mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}"
+            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
           />
           <Typography color="textPrimary">Serviços</Typography>
         </Breadcrumbs>
@@ -164,16 +164,16 @@ const Reports: React.FC = () => {
 
                 <ListItem
                   button
-                  // onClick={() => {
-                  //   setContext({
-                  //     nomeSAS,
-                  //     mes,
-                  //     serviceName: service.participant_info.firstname,
-                  //     token: service.token,
-                  //   });
-                  //   // history.push(`/response${service.attribute_4}`);
-                  //   history.push('/responseCDI');
-                  // }}
+                  onClick={() => {
+                    setContext({
+                      nomeSAS,
+                      mes,
+                      serviceName: service.firstname,
+                      token: service.token,
+                      tipologia: service.attribute_4.substring(0, 3),
+                    });
+                    history.push(`/response${service.attribute_4}`);
+                  }}
                   className={service.attribute_4}
                 >
                   <ListItemIcon>

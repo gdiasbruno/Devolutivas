@@ -114,11 +114,11 @@ const ResponseCRECI:any = () => {
   const history = useHistory();
   // eslint-disable-next-line new-cap
 
+  const tipologia = 'sad';
+
   const fetchUserProfiles = () => {
-    // eslint-disable-next-line no-template-curly-in-string
-    axios.get('http://localhost:8080/devolutivas/0/0/12112319').then((res) => {
-      const index = Object.keys(res.data.responses[0])[0];
-      setServices(res.data.responses[0][index]);
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
+      setServices(res.data);
       console.log(res.data);
     });
   };

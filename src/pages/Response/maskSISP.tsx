@@ -81,14 +81,14 @@ const genericTotalTecHeader = ['', 'Total'];
 const Response:any = () => {
   const [services, setServices]:any = useState([]);
   const { context, setContext }:any = useContext(infoContext);
-  // const {
-  //   nomeSAS, mes, serviceName, token,
-  // } = context;
+  const {
+    nomeSAS, mes, serviceName, token, tipologia,
+  } = context;
   const history = useHistory();
   // eslint-disable-next-line new-cap
 
   const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/SE/0121/12112326/sisp').then((res) => {
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
       setServices(res.data);
       console.log(res.data);
     });

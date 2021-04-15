@@ -124,16 +124,14 @@ const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 const Response:any = () => {
   const [services, setServices]:any = useState([]);
   const { context, setContext }:any = useContext(infoContext);
-  // const {
-  //   nomeSAS, mes, serviceName, token,
-  // } = context;
+  const {
+    nomeSAS, mes, serviceName, token, tipologia,
+  } = context;
   const history = useHistory();
   // eslint-disable-next-line new-cap
 
   const fetchUserProfiles = () => {
-    // eslint-disable-next-line no-template-curly-in-string
-    axios.get('http://localhost:8080/devolutivas/SE/0121/12112320/cdcm').then((res) => {
-      // const index = Object.keys(res.data.responses[0])[0];
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
       setServices(res.data);
       console.log(res.data);
     });
@@ -471,6 +469,11 @@ const Response:any = () => {
 
   ];
 
+  const teste = [
+    createData('N° de mulheres que participaram de oficinas de convivência', services.cdcmacolhidas, 1, 1, 1, 1, 1, 1, 1, 1),
+
+  ];
+
   const visitasReunioes = [
     createData('N° de visitas domiciliares', services['cdcmvisitas[visdom]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('N° de reuniões de articulação com a rede', services['cdcmvisitas[visinst]'], 1, 1, 1, 1, 1, 1, 1, 1),
@@ -588,30 +591,30 @@ const Response:any = () => {
             onClick={() => {
               history.push('/');
             }}
-            label="nomeSAS"
+            label={nomeSAS}
             icon={<HomeIcon fontSize="small" />}
           />
           <StyledBreadcrumb
             component="a"
-            // onClick={() => {
-            //   setContext({
-            //     nomeSAS,
-            //     mes,
-            //   });
-            //   history.push('months');
-            // }}
-            label="{'mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021''}"
+            onClick={() => {
+              setContext({
+                nomeSAS,
+                mes,
+              });
+              history.push('months');
+            }}
+            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
           />
           <StyledBreadcrumb
             component="a"
-            // onClick={() => {
-            //   setContext({
-            //     nomeSAS,
-            //     mes,
-            //   });
-            //   history.push('/reports');
-            // }}
-            label="{serviceName}"
+            onClick={() => {
+              setContext({
+                nomeSAS,
+                mes,
+              });
+              history.push('/reports');
+            }}
+            label={serviceName}
           />
           <Typography color="textPrimary">Respostas</Typography>
         </Breadcrumbs>
@@ -630,13 +633,13 @@ const Response:any = () => {
           <MyButton
             variant="contained"
             color="primary"
-            // onClick={() => {
-            //   setContext({
-            //     nomeSAS,
-            //     mes,
-            //   });
-            //   history.push('/reports');
-            // }}
+            onClick={() => {
+              setContext({
+                nomeSAS,
+                mes,
+              });
+              history.push('/reports');
+            }}
           >
             Voltar
 
@@ -687,21 +690,29 @@ const Response:any = () => {
 
         <TableTwoColumns headers={['', 'Pessoas']} body={visitasReunioes} />
 
-        <Typography variant="h5" gutterBottom>
+        <h2>
           9. A quantidade de mulheres atendidas
-          no mês que estão acolhidas
+          no mês que estão
           em algum Centro de Acolhida
           para Mulheres em Situação de Violência é de
           {' '}
-          {services.cdcmacolhidas}
-        </Typography>
+          <strong>{services.cdcmacolhidas}</strong>
+          {' '}
+          pessoa(s)
+        </h2>
+        <TableTwoColumns
+          headers={['', 'Pessoas']}
+          body={teste}
+        />
 
-        <Typography variant="h5" gutterBottom>
+        <br />
+        <h2>
           10. A quantidade de mulheres com deficiência atendidas no mês é de
           {' '}
-          {services.cdcmpcd}
-        </Typography>
-
+          <strong>{services.cdcmpcd}</strong>
+          {' '}
+          pessoa(s)
+        </h2>
         <br />
         <h2>
           11. Encaminhamentos realizados pelo serviço no mês de referência
@@ -709,13 +720,17 @@ const Response:any = () => {
 
         <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
 
-        <Typography variant="h5" gutterBottom>
+        <h2>
           12. Quantidade de mulheres incluídas
           na lista de espera (demanda reprimida) do serviço no mês é de
           {' '}
-          {services.cdcmlistaespera}
-        </Typography>
-
+          <strong>
+            {services.cdcmlistaespera}
+          </strong>
+          {' '}
+          pessoa(s)
+        </h2>
+        <br />
         <h2>
           13. Quantidade de atendimentos remotos de familiares por semana no mês
         </h2>
