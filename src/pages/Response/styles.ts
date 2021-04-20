@@ -36,7 +36,7 @@ export const FirstSection = styled.div`
   div {
     display: flex;
     justify-content: space-around;
-    width: 300px;
+    width: 200px;
   }
 `;
 
@@ -56,4 +56,11 @@ export const MyButton = styled(Button)`
 
 export const TableFourColumnsStyled = styled(TableFourColumns)`
   padding-top: 1000px;
+`;
+
+export const LoaderBody = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
 `;

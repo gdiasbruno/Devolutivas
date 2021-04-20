@@ -1,9 +1,7 @@
-
 import React, {
   useState, useEffect, useContext,
 } from 'react';
 import axios from 'axios';
-
 import { useHistory } from 'react-router-dom';
 
 import {
@@ -13,7 +11,6 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
-
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
@@ -25,7 +22,6 @@ import TableFourColumns from '../../components/TableFourColumns';
 import TableTenColumns from '../../components/TableTenColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import TableFiveColumns from '../../components/TableFiveColumns';
-
 import ListComponent from '../../components/ListComponent';
 
 import { infoContext } from '../../providers/reactContext';
@@ -52,7 +48,6 @@ function createData(
   attribute5: number,
   attribute6: number,
   attribute7: number,
-
   attribute8: number,
   attribute9: number,
 ) {
@@ -71,7 +66,6 @@ function createData(
 }
 
 const idososMoramSozinhoHeaders = ['', 'Quantidade'];
-
 
 const atendidosMesHeaders = [
   'N° de usuários atendidos no mês',
@@ -103,7 +97,6 @@ const familiasVulnerabilidadeHeaders = ['', 'Nº de famílias'];
 const atendimentoFamiliaHeaders = ['', 'Nº de famílias'];
 
 const demandaReprimidaHeaders = ['', 'Nº de pessoas'];
-
 
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
 
@@ -192,61 +185,60 @@ const Response:any = () => {
       + parseInt(services['cedesfluxohomensaten[18a29m_remmesatual]'], 10)
       + parseInt(services['cedesfluxohomensaten[30a59m_remmesatual]'], 10),
       1, 1, 1, 1, 1, 1),
-
   ];
 
   const sexoRacaCor = [
     createData('Feminino',
-      services['bagracasexo[fem_branca]'],
-      services['bagracasexo[fem_preta]'],
-      services['bagracasexo[fem_parda]'],
-      services['bagracasexo[fem_amarela]'],
-      services['bagracasexo[fem_indigena]'],
-      services['bagracasexo[fem_naoinf]'],
-      parseInt(services['bagracasexo[fem_branca]'], 10)
-      + parseInt(services['bagracasexo[fem_preta]'], 10)
-      + parseInt(services['bagracasexo[fem_parda]'], 10)
-      + parseInt(services['bagracasexo[fem_amarela]'], 10)
-      + parseInt(services['bagracasexo[fem_indigena]'], 10)
-      + parseInt(services['bagracasexo[fem_naoinf]'], 10), 1, 1),
+      services['cedesracasexo[fem_branca]'],
+      services['cedesracasexo[fem_preta]'],
+      services['cedesracasexo[fem_parda]'],
+      services['cedesracasexo[fem_amarela]'],
+      services['cedesracasexo[fem_indigena]'],
+      services['cedesracasexo[fem_naoinf]'],
+      parseInt(services['cedesracasexo[fem_branca]'], 10)
+      + parseInt(services['cedesracasexo[fem_preta]'], 10)
+      + parseInt(services['cedesracasexo[fem_parda]'], 10)
+      + parseInt(services['cedesracasexo[fem_amarela]'], 10)
+      + parseInt(services['cedesracasexo[fem_indigena]'], 10)
+      + parseInt(services['cedesracasexo[fem_naoinf]'], 10), 1, 1),
     createData('Masculino',
-      services['bagracasexo[mas_branca]'],
-      services['bagracasexo[mas_preta]'],
-      services['bagracasexo[mas_parda]'],
-      services['bagracasexo[mas_amarela]'],
-      services['bagracasexo[mas_indigena]'],
-      services['bagracasexo[mas_naoinf]'],
-      parseInt(services['bagracasexo[mas_branca]'], 10)
-      + parseInt(services['bagracasexo[mas_preta]'], 10)
-      + parseInt(services['bagracasexo[mas_parda]'], 10)
-      + parseInt(services['bagracasexo[mas_amarela]'], 10)
-      + parseInt(services['bagracasexo[mas_indigena]'], 10)
-      + parseInt(services['bagracasexo[mas_naoinf]'], 10), 1, 1),
+      services['cedesracasexo[masc_branca]'],
+      services['cedesracasexo[masc_preta]'],
+      services['cedesracasexo[masc_parda]'],
+      services['cedesracasexo[masc_amarela]'],
+      services['cedesracasexo[masc_indigena]'],
+      services['cedesracasexo[masc_naoinf]'],
+      parseInt(services['cedesracasexo[masc_branca]'], 10)
+      + parseInt(services['cedesracasexo[masc_preta]'], 10)
+      + parseInt(services['cedesracasexo[masc_parda]'], 10)
+      + parseInt(services['cedesracasexo[masc_amarela]'], 10)
+      + parseInt(services['cedesracasexo[masc_indigena]'], 10)
+      + parseInt(services['cedesracasexo[masc_naoinf]'], 10), 1, 1),
     createData('Total Geral',
-      parseInt(services['bagracasexo[mas_branca]'], 10)
-      + parseInt(services['bagracasexo[fem_branca]'], 10),
-      parseInt(services['bagracasexo[mas_preta]'], 10)
-      + parseInt(services['bagracasexo[fem_preta]'], 10),
-      parseInt(services['bagracasexo[mas_parda]'], 10)
-      + parseInt(services['bagracasexo[fem_parda]'], 10),
-      parseInt(services['bagracasexo[mas_amarela]'], 10)
-      + parseInt(services['bagracasexo[fem_amarela]'], 10),
-      parseInt(services['bagracasexo[mas_indigena]'], 10)
-      + parseInt(services['bagracasexo[fem_indigena]'], 10),
-      parseInt(services['bagracasexo[mas_naoinf]'], 10)
-      + parseInt(services['bagracasexo[fem_naoinf]'], 10),
-      parseInt(services['bagracasexo[mas_branca]'], 10)
-      + parseInt(services['bagracasexo[fem_branca]'], 10)
-      + parseInt(services['bagracasexo[mas_preta]'], 10)
-      + parseInt(services['bagracasexo[fem_preta]'], 10)
-      + parseInt(services['bagracasexo[mas_parda]'], 10)
-      + parseInt(services['bagracasexo[fem_parda]'], 10)
-      + parseInt(services['bagracasexo[mas_amarela]'], 10)
-      + parseInt(services['bagracasexo[fem_amarela]'], 10)
-      + parseInt(services['bagracasexo[mas_indigena]'], 10)
-      + parseInt(services['bagracasexo[fem_indigena]'], 10)
-      + parseInt(services['bagracasexo[mas_naoinf]'], 10)
-      + parseInt(services['bagracasexo[fem_naoinf]'], 10), 1, 1),
+      parseInt(services['cedesracasexo[masc_branca]'], 10)
+      + parseInt(services['cedesracasexo[fem_branca]'], 10),
+      parseInt(services['cedesracasexo[masc_preta]'], 10)
+      + parseInt(services['cedesracasexo[fem_preta]'], 10),
+      parseInt(services['cedesracasexo[masc_parda]'], 10)
+      + parseInt(services['cedesracasexo[fem_parda]'], 10),
+      parseInt(services['cedesracasexo[masc_amarela]'], 10)
+      + parseInt(services['cedesracasexo[fem_amarela]'], 10),
+      parseInt(services['cedesracasexo[masc_indigena]'], 10)
+      + parseInt(services['cedesracasexo[fem_indigena]'], 10),
+      parseInt(services['cedesracasexo[masc_naoinf]'], 10)
+      + parseInt(services['cedesracasexo[fem_naoinf]'], 10),
+      parseInt(services['cedesracasexo[masc_branca]'], 10)
+      + parseInt(services['cedesracasexo[fem_branca]'], 10)
+      + parseInt(services['cedesracasexo[masc_preta]'], 10)
+      + parseInt(services['cedesracasexo[fem_preta]'], 10)
+      + parseInt(services['cedesracasexo[masc_parda]'], 10)
+      + parseInt(services['cedesracasexo[fem_parda]'], 10)
+      + parseInt(services['cedesracasexo[masc_amarela]'], 10)
+      + parseInt(services['cedesracasexo[fem_amarela]'], 10)
+      + parseInt(services['cedesracasexo[masc_indigena]'], 10)
+      + parseInt(services['cedesracasexo[fem_indigena]'], 10)
+      + parseInt(services['cedesracasexo[masc_naoinf]'], 10)
+      + parseInt(services['cedesracasexo[fem_naoinf]'], 10), 1, 1),
   ];
 
   const motivosSaida = [
@@ -403,11 +395,14 @@ const Response:any = () => {
   ];
 
   const encaminhamentos = [
-    createData('CRAS', services['bagencaminhamento[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['bagencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('CENTRO POP', services['bagencaminhamento[cpop]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['bagencaminhamento[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['bagencaminhamento[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('CRAS', services['cedesencaminhamento[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('CREAS', services['cedesencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outro serviço da rede socioassistencial', services['cedesencaminhamento[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Saúde', services['cedesencaminhamento[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Educação', services['cedesencaminhamento[educa]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Conselhos de direito', services['cedesencaminhamento[cdireito]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Trabalho e renda', services['cedesencaminhamento[trabalho]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outras políticas públicas', services['cedesencaminhamento[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotos = [
@@ -501,6 +496,7 @@ const Response:any = () => {
                 color="primary"
               >
                 Imprimir
+
               </MyButton>
               <MyButton
                 variant="contained"
@@ -522,42 +518,97 @@ const Response:any = () => {
 
           <Section>
             <h2>
-              1. Número de pessoas que utilizaram o serviço no mês:
+              1. Quantidade de pessoas do sexo feminino atendidas no mês, por faixa etária:
             </h2>
-            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Visita(s)', services.bagatendmes, 1, 1, 1, 1, 1, 1, 1, 1)]} />
+            <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesFeminino} />
 
             <h2>
-              2. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência.
+              2. Quantidade de pessoas do sexo masculino atendidas no mês, por faixa etária:
+            </h2>
+            <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesMasculino} />
+
+            <h2>
+              3. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência:
             </h2>
             <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
 
             <h2>
-              3. Número de boxes utilizados no mês de referência:
+              4. Quantidade de usuários por motivo de saída do serviço no mês:
             </h2>
-            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Boxe(s)', services.bagbox, 1, 1, 1, 1, 1, 1, 1, 1)]} />
-            <h2>
-              4. Nº de pessoas que utilizaram o
-              serviço Bagageiro e estão vinculadas a um Centro de Acolhida no mês de referência:
-            </h2>
-            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Pessoas(s)', services.bagvinca, 1, 1, 1, 1, 1, 1, 1, 1)]} />
+            <TableFiveColumns headers={motivosSaidaHeaders} body={motivosSaida} />
 
             <h2>
-              5. Nº de pessoas que receberam atendimento social no mês de referência:
+              5. Atendimento às famílias no mês:
             </h2>
-            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Pessoa(s)', services.bagatendsocial, 1, 1, 1, 1, 1, 1, 1, 1)]} />
-            <h2>
-              6. Nº de pessoas com deficiência atendidas pelo serviço no mês de referência:
-            </h2>
-            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Pessoa(s)', services.bagpcd, 1, 1, 1, 1, 1, 1, 1, 1)]} />
+            <TableTwoColumns headers={atendimentoFamiliaHeaders} body={atendimentoFamilia} />
 
             <h2>
-              7. Encaminhamentos realizados pelo serviço no mês de referência
+              6. Quantidade de pessoas com deficiência atendidas no mês
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Pessoa(s)', services.cedespcd, 1, 1, 1, 1, 1, 1, 1, 1)]} />
+
+            <h2>
+              7. Quantidade de visitas domicilares realizadas no mês
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Visita(s)', services.cedesvisitadom, 1, 1, 1, 1, 1, 1, 1, 1)]} />
+
+            <h2>
+              8. O número de famílias ou pessoas que buscaram atendimento presencial
+              no mês de referência devido a alguma vulnerabilidade relacional:
+            </h2>
+            <TableTwoColumns
+              headers={familiasVulnerabilidadeHeaders}
+              body={familiasVulnerabilidade}
+            />
+
+            <h2>
+              9. Os temas discutidos com pessoas atendidas pelo serviço no mês:
+            </h2>
+            <ListComponent items={temasItems} />
+
+            <h2>
+              11. Quantidade de pessoas incluídas em lista de
+              espera (demanda reprimida) no mês, por faixa etária:
+            </h2>
+
+            <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
+
+            <h2>
+              12. Quantidade de famílias que receberam insumos no mês
+            </h2>
+
+            <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
+
+            <h2>
+              13. Quantidade de encaminhamentos realizados pelo serviço no mês:
             </h2>
             <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
+
+            <h2>
+              14. Quantidade de atendimentos remotos de usuários por semana no mês:
+            </h2>
+            <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
+
+            <h2>
+              15. Quantidade de atividades remotas realizadas no mês,
+              pelos meios em que foram disponibilizadas:
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosTiposHeaders}
+              body={atendimentosRemotosTipos}
+            />
+
+            <h2>
+              16. Quantidade de atendimentos remotos de familiares por semana no mês:
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosFamiliaSemanaHeaders}
+              body={atendimentosRemotosFamiliaSemana}
+            />
+
           </Section>
         </>
       )
-
   );
 };
 

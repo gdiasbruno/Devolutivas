@@ -32,7 +32,5 @@ export const MyButton = styled(Button)`
 
 export const SecondSection = styled.div`
   display: flex;
-  justify-content: flex-start;
-
-
+  justify-content: center;
 `;

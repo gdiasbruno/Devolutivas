@@ -1,5 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+
+import React, {
+  useState, useEffect, useContext,
+} from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
 
 import {
   withStyles, Theme,
@@ -8,18 +13,22 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section,
+  FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
 
-import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';
-import TableThreeColumns from '../../components/TableThreeColumns';
+import TableFourColumns from '../../components/TableFourColumns';
+import TableTenColumns from '../../components/TableTenColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
+import TableFiveColumns from '../../components/TableFiveColumns';
 import ListComponent from '../../components/ListComponent';
 
 import { infoContext } from '../../providers/reactContext';
+import TableThreeColumns from '../../components/TableThreeColumns';
+
 
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
@@ -43,11 +52,25 @@ function createData(
   attribute5: number,
   attribute6: number,
   attribute7: number,
+  attribute8: number,
+  attribute9: number,
 ) {
   return {
-    title, attribute1, attribute2, attribute3, attribute4, attribute5, attribute6, attribute7,
+    title,
+    attribute1,
+    attribute2,
+    attribute3,
+    attribute4,
+    attribute5,
+    attribute6,
+    attribute7,
+    attribute8,
+    attribute9,
   };
 }
+
+const idososMoramSozinhoHeaders = ['', 'Quantidade'];
+
 
 const atendidosMesHeaders = [
   'N° de usuários atendidos no mês',
@@ -65,15 +88,19 @@ const sexoRacaCorHeaders = [
   'Total',
 ];
 
-const motivoSaidaHeaders = ['6 a 11 anos', '12 a 14 anos'];
+const motivosSaidaHeaders = [
+  '15 a 17 anos',
+  '18 a 21 anos',
+];
 
-const familiasAtendidasHeaders = ['', 'Nº de famílias'];
+const familiasInsumosHeaders = ['', 'N° de famílias'];
 
 const familiasVulnerabilidadeHeaders = ['', 'Nº de famílias'];
 
-const demandaReprimidaHeaders = ['', 'Nº de crianças e/ou adolescentes'];
+const atendimentoFamiliaHeaders = ['', 'Nº de famílias'];
 
-const familiasInsumosHeaders = ['', 'N° de famílias'];
+const demandaReprimidaHeaders = ['', 'Nº de pessoas'];
+
 
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
 
@@ -83,16 +110,21 @@ const atendimentosRemotosTiposHeaders = ['Tipos', ''];
 
 const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 
-const Response: React.FC = () => {
+const Response:any = () => {
   const [services, setServices]:any = useState([]);
-  const { context }:any = useContext(infoContext);
-  const { nomeSAS, mes, serviceName } = context;
+  const { context, setContext }:any = useContext(infoContext);
+  const {
+    nomeSAS, mes, serviceName, token, tipologia,
+  } = context;
+  const history = useHistory();
+  const [loading, setLoading] = useState(true);
 
   const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/SE/0121/12120019').then((res) => {
-      const index = Object.keys(res.data.responses[0])[0];
-      setServices(res.data.responses[0][index]);
-      console.log(res.data.responses[0][index]);
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
+      setServices(res.data);
+      console.log(res.data);
+      setLoading(true);
+
     });
   };
 
@@ -101,308 +133,439 @@ const Response: React.FC = () => {
   }, []);
 
   const atendidosMes = [
-    createData('6 a 11 anos (M)', services['ccafluxopessoasatend[6a11m_atendmesatual]'], services['ccafluxopessoasatend[6a11m_presmesatual]'], services['ccafluxopessoasatend[6a11m_remmesatual]'], 1, 1, 1, 1),
-    createData('6 a 11 anos (F)', services['ccafluxopessoasatend[6a11f_atendmesatual]'], services['ccafluxopessoasatend[6a11f_presmesatual]'], services['ccafluxopessoasatend[6a11f_remmesatual]'], 1, 1, 1, 1),
-    createData('12 a 14 anos (M)', services['ccafluxopessoasatend[12a14m_atendmesatual]'], services['ccafluxopessoasatend[12a14m_presmesatual]'], services['ccafluxopessoasatend[12a14m_remmesatual]'], 1, 1, 1, 1),
-    createData('12 a 14 anos (F)', services['ccafluxopessoasatend[12a14f_atendmesatual]'], services['ccafluxopessoasatend[12a14f_presmesatual]'], services['ccafluxopessoasatend[12a14f_remmesatual]'], 1, 1, 1, 1),
-    createData('Total', parseInt(services['ccafluxopessoasatend[6a11m_atendmesatual]'], 10)
-                      + parseInt(services['ccafluxopessoasatend[6a11f_atendmesatual]'], 10)
-                      + parseInt(services['ccafluxopessoasatend[12a14m_atendmesatual]'], 10)
-                      + parseInt(services['ccafluxopessoasatend[12a14f_atendmesatual]'], 10),
+    createData('15 a 17 anos (M)',
+      services['restafluxopessoasate[15a17m_atendmesatual]'],
+      services['restafluxopessoasate[15a17m_presmesatual]'],
+      services['restafluxopessoasate[15a17m_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+    createData('15 a 17 anos (F)',
+      services['restafluxopessoasate[15a17f_atendmesatual]'],
+      services['restafluxopessoasate[15a17f_presmesatual]'],
+      services['restafluxopessoasate[15a17f_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+    createData('18 a 21 anos (M)',
+      services['restafluxopessoasate[18a21m_atendmesatual]'],
+      services['restafluxopessoasate[18a21m_presmesatual]'],
+      services['restafluxopessoasate[18a21m_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+    createData('18 a 21 anos (F)',
+      services['restafluxopessoasate[18a21f_atendmesatual]'],
+      services['restafluxopessoasate[18a21f_presmesatual]'],
+      services['restafluxopessoasate[18a21f_remmesatual]'],
+      1, 1, 1, 1, 1, 1),
+    createData('Total',
+      parseInt(services['restafluxopessoasate[15a17m_atendmesatual]'], 10)
+      + parseInt(services['restafluxopessoasate[15a17f_atendmesatual]'], 10)
+      + parseInt(services['restafluxopessoasate[18a21m_atendmesatual]'], 10)
+      + parseInt(services['restafluxopessoasate[18a21f_atendmesatual]'], 10),
+      parseInt(services['restafluxopessoasate[15a17m_presmesatual]'], 10)
+      + parseInt(services['restafluxopessoasate[15a17f_presmesatual]'], 10)
+      + parseInt(services['restafluxopessoasate[18a21m_presmesatual]'], 10)
+      + parseInt(services['restafluxopessoasate[18a21f_presmesatual]'], 10),
+      parseInt(services['restafluxopessoasate[15a17m_remmesatual]'], 10)
+      + parseInt(services['restafluxopessoasate[15a17f_remmesatual]'], 10)
+      + parseInt(services['restafluxopessoasate[18a21m_remmesatual]'], 10)
+      + parseInt(services['restafluxopessoasate[18a21f_remmesatual]'], 10),
+      1, 1, 1, 1, 1, 1),
 
-    parseInt(services['ccafluxopessoasatend[6a11m_presmesatual]'], 10)
-    + parseInt(services['ccafluxopessoasatend[6a11f_presmesatual]'], 10)
-    + parseInt(services['ccafluxopessoasatend[12a14m_presmesatual]'], 10)
-    + parseInt(services['ccafluxopessoasatend[12a14f_presmesatual]'], 10),
-
-    parseInt(services['ccafluxopessoasatend[6a11m_remmesatual]'], 10)
-    + parseInt(services['ccafluxopessoasatend[6a11f_remmesatual]'], 10)
-    + parseInt(services['ccafluxopessoasatend[12a14m_remmesatual]'], 10)
-    + parseInt(services['ccafluxopessoasatend[12a14f_remmesatual]'], 10),
-    1, 1, 1, 1),
   ];
 
   const sexoRacaCor = [
     createData('Feminino',
-      services['ccaracasexo[fem_branca]'],
-      services['ccaracasexo[fem_preta]'],
-      services['ccaracasexo[fem_parda]'],
-      services['ccaracasexo[fem_amarela]'],
-      services['ccaracasexo[fem_indigena]'],
-      services['ccaracasexo[fem_naoinf]'],
-      parseInt(services['ccaracasexo[fem_branca]'], 10)
-      + parseInt(services['ccaracasexo[fem_preta]'], 10)
-      + parseInt(services['ccaracasexo[fem_parda]'], 10)
-      + parseInt(services['ccaracasexo[fem_amarela]'], 10)
-      + parseInt(services['ccaracasexo[fem_indigena]'], 10)
-      + parseInt(services['ccaracasexo[fem_naoinf]'], 10)),
+      services['restaracasexo[fem_branc]'],
+      services['restaracasexo[fem_preto]'],
+      services['restaracasexo[fem_pardo]'],
+      services['restaracasexo[fem_amarelo]'],
+      services['restaracasexo[fem_indigena]'],
+      services['restaracasexo[fem_naoinf]'],
+      parseInt(services['restaracasexo[fem_branc]'], 10)
+      + parseInt(services['restaracasexo[fem_preto]'], 10)
+      + parseInt(services['restaracasexo[fem_pardo]'], 10)
+      + parseInt(services['restaracasexo[fem_amarelo]'], 10)
+      + parseInt(services['restaracasexo[fem_indigena]'], 10)
+      + parseInt(services['restaracasexo[fem_naoinf]'], 10), 1, 1),
     createData('Masculino',
-      services['ccaracasexo[masc_branca]'],
-      services['ccaracasexo[masc_preta]'],
-      services['ccaracasexo[masc_parda]'],
-      services['ccaracasexo[masc_amarela]'],
-      services['ccaracasexo[masc_indigena]'],
-      services['ccaracasexo[masc_naoinf]'],
-      parseInt(services['ccaracasexo[masc_branca]'], 10)
-      + parseInt(services['ccaracasexo[masc_preta]'], 10)
-      + parseInt(services['ccaracasexo[masc_parda]'], 10)
-      + parseInt(services['ccaracasexo[masc_amarela]'], 10)
-      + parseInt(services['ccaracasexo[masc_indigena]'], 10)
-      + parseInt(services['ccaracasexo[masc_naoinf]'], 10)),
+      services['restaracasexo[masc_branc]'],
+      services['restaracasexo[masc_preto]'],
+      services['restaracasexo[masc_pardo]'],
+      services['restaracasexo[masc_amarelo]'],
+      services['restaracasexo[masc_indigena]'],
+      services['restaracasexo[masc_naoinf]'],
+      parseInt(services['restaracasexo[masc_branc]'], 10)
+      + parseInt(services['restaracasexo[masc_preto]'], 10)
+      + parseInt(services['restaracasexo[masc_pardo]'], 10)
+      + parseInt(services['restaracasexo[masc_amarelo]'], 10)
+      + parseInt(services['restaracasexo[masc_indigena]'], 10)
+      + parseInt(services['restaracasexo[masc_naoinf]'], 10), 1, 1),
     createData('Total Geral',
-      parseInt(services['ccaracasexo[masc_branca]'], 10)
-      + parseInt(services['ccaracasexo[fem_branca]'], 10),
-      parseInt(services['ccaracasexo[masc_preta]'], 10)
-      + parseInt(services['ccaracasexo[fem_preta]'], 10),
-      parseInt(services['ccaracasexo[masc_parda]'], 10)
-      + parseInt(services['ccaracasexo[fem_parda]'], 10),
-      parseInt(services['ccaracasexo[masc_amarela]'], 10)
-      + parseInt(services['ccaracasexo[fem_amarela]'], 10),
-      parseInt(services['ccaracasexo[masc_indigena]'], 10)
-      + parseInt(services['ccaracasexo[fem_indigena]'], 10),
-      parseInt(services['ccaracasexo[masc_naoinf]'], 10)
-      + parseInt(services['ccaracasexo[fem_naoinf]'], 10),
-      parseInt(services['ccaracasexo[masc_branca]'], 10)
-      + parseInt(services['ccaracasexo[fem_branca]'], 10)
-      + parseInt(services['ccaracasexo[masc_preta]'], 10)
-      + parseInt(services['ccaracasexo[fem_preta]'], 10)
-      + parseInt(services['ccaracasexo[masc_parda]'], 10)
-      + parseInt(services['ccaracasexo[fem_parda]'], 10)
-      + parseInt(services['ccaracasexo[masc_amarela]'], 10)
-      + parseInt(services['ccaracasexo[fem_amarela]'], 10)
-      + parseInt(services['ccaracasexo[masc_indigena]'], 10)
-      + parseInt(services['ccaracasexo[fem_indigena]'], 10)
-      + parseInt(services['ccaracasexo[masc_naoinf]'], 10)
-      + parseInt(services['ccaracasexo[fem_naoinf]'], 10)),
+      parseInt(services['restaracasexo[masc_branc]'], 10)
+      + parseInt(services['restaracasexo[fem_branc]'], 10),
+      parseInt(services['restaracasexo[masc_preto]'], 10)
+      + parseInt(services['restaracasexo[fem_preto]'], 10),
+      parseInt(services['restaracasexo[masc_pardo]'], 10)
+      + parseInt(services['restaracasexo[fem_pardo]'], 10),
+      parseInt(services['restaracasexo[masc_amarelo]'], 10)
+      + parseInt(services['restaracasexo[fem_amarelo]'], 10),
+      parseInt(services['restaracasexo[masc_indigena]'], 10)
+      + parseInt(services['restaracasexo[fem_indigena]'], 10),
+      parseInt(services['restaracasexo[masc_naoinf]'], 10)
+      + parseInt(services['restaracasexo[fem_naoinf]'], 10),
+      parseInt(services['restaracasexo[masc_branc]'], 10)
+      + parseInt(services['restaracasexo[fem_branc]'], 10)
+      + parseInt(services['restaracasexo[masc_preto]'], 10)
+      + parseInt(services['restaracasexo[fem_preto]'], 10)
+      + parseInt(services['restaracasexo[masc_pardo]'], 10)
+      + parseInt(services['restaracasexo[fem_pardo]'], 10)
+      + parseInt(services['restaracasexo[masc_amarelo]'], 10)
+      + parseInt(services['restaracasexo[fem_amarelo]'], 10)
+      + parseInt(services['restaracasexo[masc_indigena]'], 10)
+      + parseInt(services['restaracasexo[fem_indigena]'], 10)
+      + parseInt(services['restaracasexo[masc_naoinf]'], 10)
+      + parseInt(services['restaracasexo[fem_naoinf]'], 10), 1, 1),
   ];
 
-  const motivoSaida = [
+  const motivosSaida = [
     createData('Mudança de endereço',
-      services['ccamotivossaida[endereco_6a11]'],
-      services['ccamotivossaida[endereco_12a14]'],
-      1, 1, 1, 1, 1),
+      services['restamotivosaida[mudancaendereco_15a17]'],
+      services['restamotivosaida[mudancaendereco_18a21]'],
+      1, 1, 1, 1, 1, 1, 1),
     createData('Transferência para outro serviço',
-      services['ccamotivossaida[transferencia_6a11]'],
-      services['ccamotivossaida[transferencia_12a14]'],
-      1, 1, 1, 1, 1),
+      services['restamotivosaida[transferencia_15a17]'],
+      services['restamotivosaida[transferencia_18a21]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
     createData('Óbito',
-      services['ccamotivossaida[obito_6a11]'],
-      services['ccamotivossaida[obito_12a14]'],
-      1, 1, 1, 1, 1),
-    createData('Abandono',
-      services['ccamotivossaida[aband_6a11]'],
-      services['ccamotivossaida[aband_12a14]'],
-      1, 1, 1, 1, 1),
+      services['restamotivosaida[obito_15a17]'],
+      services['restamotivosaida[obito_18a21]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
     createData('Aplicação de medida restritiva de liberdade',
-      services['ccamotivossaida[liberdade_6a11]'],
-      services['ccamotivossaida[liberdade_12a14]'],
-      1, 1, 1, 1, 1),
-    createData('Limite de idade',
-      services['ccamotivossaida[idade_6a11]'],
-      services['ccamotivossaida[idade_12a14]'],
-      1, 1, 1, 1, 1),
+      services['restamotivosaida[aplicacaodemedida_15a17]'],
+      services['restamotivosaida[aplicacaodemedida_18a21]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1, 1),
+    createData('Inserção no Programa Jovem Aprendiz',
+      services['restamotivosaida[jovemaprendiz_15a17]'],
+      services['restamotivosaida[jovemaprendiz_18a21]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Inserção no mercado de trabalho',
+      services['restamotivosaida[insercaotrabalho_15a17]'],
+      services['restamotivosaida[insercaotrabalho_18a21]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Conlusão de curso',
+      services['restamotivosaida[conclusaocurso_15a17]'],
+      services['restamotivosaida[conclusaocurso_18a21]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
     createData('Total',
-      parseInt(services['ccamotivossaida[endereco_6a11]'], 10)
-      + parseInt(services['ccamotivossaida[transferencia_6a11]'], 10)
-      + parseInt(services['ccamotivossaida[obito_6a11]'], 10)
-      + parseInt(services['ccamotivossaida[aband_6a11]'], 10)
-      + parseInt(services['ccamotivossaida[liberdade_6a11]'], 10)
-      + parseInt(services['ccamotivossaida[idade_6a11]'], 10),
-      parseInt(services['ccamotivossaida[endereco_12a14]'], 10)
-      + parseInt(services['ccamotivossaida[transferencia_12a14]'], 10)
-      + parseInt(services['ccamotivossaida[obito_12a14]'], 10)
-      + parseInt(services['ccamotivossaida[aband_12a14]'], 10)
-      + parseInt(services['ccamotivossaida[liberdade_12a14]'], 10)
-      + parseInt(services['ccamotivossaida[idade_12a14]'], 10),
+      parseInt(services['restamotivosaida[insercaotrabalho_15a17]'], 10)
+    + parseInt(services['restamotivosaida[aplicacaodemedida_15a17]'], 10)
+    + parseInt(services['restamotivosaida[jovemaprendiz_15a17]'], 10)
+    + parseInt(services['restamotivosaida[conclusaocurso_15a17]'], 10)
+    + parseInt(services['restamotivosaida[mudancaendereco_15a17]'], 10)
+    + parseInt(services['restamotivosaida[obito_15a17]'], 10)
+    + parseInt(services['restamotivosaida[transferencia_15a17]'], 10),
+      parseInt(services['restamotivosaida[insercaotrabalho_18a21]'], 10)
+    + parseInt(services['restamotivosaida[aplicacaodemedida_18a21]'], 10)
+    + parseInt(services['restamotivosaida[jovemaprendiz_18a21]'], 10)
+    + parseInt(services['restamotivosaida[conclusaocurso_18a21]'], 10)
+    + parseInt(services['restamotivosaida[mudancaendereco_18a21]'], 10)
+    + parseInt(services['restamotivosaida[obito_18a21]'], 10)
+    + parseInt(services['restamotivosaida[transferencia_18a21]'], 10),
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
 
-      1, 1, 1, 1, 1),
-  ];
-
-  const familiasAtendidas = [
-    createData('Nº de famílias atendidas presencialmente no mês', services['ccaatendfam[ccafampres]'], 1, 1, 1, 1, 1, 1),
-    createData('Nº de famílias acompanhadas de forma remota no mês', services['ccaatendfam[ccafamrem]'], 1, 1, 1, 1, 1, 1),
-    createData('Nº total de famílias atendidas no mês', services['ccaatendfam[ccafamtotal]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const familiasVulnerabilidade = [
-    createData('Conflitos', services['ccavulnerab[conflit]'], 1, 1, 1, 1, 1, 1),
-    createData('Preconceitos/discriminação', services['ccavulnerab[Precon]'], 1, 1, 1, 1, 1, 1),
-    createData('Abandono', services['ccavulnerab[aband]'], 1, 1, 1, 1, 1, 1),
-    createData('Apartação', services['ccavulnerab[apart]'], 1, 1, 1, 1, 1, 1),
-    createData('Confinamento', services['ccavulnerab[confinamet]'], 1, 1, 1, 1, 1, 1),
-    createData('Isolamento', services['ccavulnerab[isolament]'], 1, 1, 1, 1, 1, 1),
-    createData('Violência', services['ccavulnerab[violen]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atividadesItems = [
-    ['Atividades esportivas', services['ccaatividades[atvesporte]']],
-    ['Musicalidade (cantar, tocar instrumentos etc.)', services['ccaatividades[atvmusica]']],
-    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['ccaatividades[atvcultura]']],
-    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['ccaatividades[atvarte]']],
-    ['Atividades de inclusão digital', services['ccaatividades[atvincdigital]']],
-    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['ccaatividades[atvlinguagem]']],
-    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['ccaatividades[atvculinaria]']],
-    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['ccaatividades[atvrecreacao]']],
-  ];
-
-  const temasItems = [
-    ['Temas transversais (saúde, meio ambiente, cultura, esporte etc.)', services['ccatema[tematransversal]']],
-    ['Direitos e programas sociais', services['ccatema[temadireitos]']],
-    ['Segurança alimentar e nutricional', services['ccatema[temanutricao]']],
-    ['Igualdade entre homens e mulheres', services['ccatema[temaigualdade]']],
-    ['Orientação sexual e de identidade de gênero', services['ccatema[temaorientsexual]']],
-    ['Relações étnico-raciais', services['ccatema[temaetnico]']],
-    ['Prevenção ao uso de álcool e drogas', services['ccatema[temaalccoldrogas]']],
-    ['Prevenção à violência', services['ccatema[temaprevencaovio]']],
-    ['Parentalidade', services['ccatema[temaparental]']],
-    ['Deficiência e acessibilidade', services['ccatema[temapcd]']],
-    ['Mundo do trabalho', services['ccatema[temamundotrabalho]']],
-  ];
-
-  const demandaReprimida = [
-    createData('6 a 11 anos', services['ccalistaespera[6a11_quantidade]'], 1, 1, 1, 1, 1, 1),
-    createData('12 a 14 anos', services['ccalistaespera[12a14_quantidade]'], 1, 1, 1, 1, 1, 1),
-    createData('Total',
-      parseInt(services['ccalistaespera[6a11_quantidade]'], 10)
-      + parseInt(services['ccalistaespera[12a14_quantidade]'], 10),
-      1, 1, 1, 1, 1, 1),
   ];
 
   const familiasInsumos = [
-    createData('Cesta de alimentos', services['ccainsumos[cestasaliment_numero]'], 1, 1, 1, 1, 1, 1),
-    createData('Kit de material de higiene', services['ccainsumos[kithiginene_numero]'], 1, 1, 1, 1, 1, 1),
+    createData('Cesta de alimentos', services['restainsumo[cesta]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Kit de material de higiene', services['restainsumo[higiene]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  ];
+
+  const familiasVulnerabilidade = [
+    createData('Conflitos', services['restavulnerab[conflit]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Preconceitos/discriminação', services['restavulnerab[Precon]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Abandono', services['restavulnerab[aband]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Apartação', services['restavulnerab[apart]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Confinamento', services['restavulnerab[confinamet]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Isolamento', services['restavulnerab[isolament]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Violência', services['restavulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  ];
+
+  const atendimentoFamilia = [
+    createData('Nº de famílias atendidas', services['restafamiliaatend[familiasatendtotal_SQ001]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de famílias atendidas remotamente pelo serviço no mê', services['restafamiliaatend[familiasatendremoto_SQ001]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de famílias atendidas presencialmente pelo serviço no mês', services['restafamiliaatend[familiasatendpresenc_SQ001]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Nº de visitas domiciliares realizadas pelo serviço no mês', services['restafamiliaatend[visitasdomiciliares_SQ001]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  ];
+
+  const atividadesItems = [
+    ['Atividades esportivas', services['circosocialatividade[atvesporte]']],
+    ['Musicalidade (cantar, tocar instrumentos etc.)', services['circosocialatividade[atvmusica]']],
+    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['circosocialatividade[atvcultura]']],
+    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['circosocialatividade[atvarte]']],
+    ['Atividades de inclusão digital', services['circosocialatividade[atvincdigital]']],
+    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['circosocialatividade[atvlinguagem]']],
+    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['circosocialatividade[atvculinaria]']],
+    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['circosocialatividade[atvrecreacao]']],
+
+  ];
+
+  const temasItems = [
+    ['Garantia de direitos sociais (saúde, educação, previdência, moradia, envelhecimento, saúde mental, etc.)', services['restaurantetemas[temadireitossociais]']],
+    ['Relacionamento familiar (gravidez na adolescência, álcool e drogas, orientação sexual, aborto, etc.)', services['restaurantetemas[temanutricao]']],
+    ['Direitos e programas sociais', services['restaurantetemas[temadireitos]']],
+    ['Igualdade entre homens e mulheres', services['restaurantetemas[temaigualdade]']],
+    ['Relações étnico-raciais', services['restaurantetemas[temaetnico]']],
+    ['Prevenção à violência', services['restaurantetemas[temaprevencaovio]']],
+    ['Parentalidade', services['restaurantetemas[temaparental]']],
+    ['Deficiência e acessibilidade', services['restaurantetemas[temapcd]']],
+    ['Mundo do trabalho', services['restaurantetemas[tematrabalho]']],
+  ];
+  const demandaReprimida = [
+    createData('15 a 17 anos', services['restalistavaga[15a17_aguardandovaga]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('18 a 21 anos', services['restalistavaga[18a21anos_aguardandovaga]'], 1, 1, 1, 1, 1, 1, 1, 1),
+
+    createData('Total',
+      parseInt(services['restalistavaga[18a21anos_aguardandovaga]'], 10)
+      + parseInt(services['restalistavaga[15a17_aguardandovaga]'], 10),
+      1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const encaminhamentos = [
-    createData('CRAS', services['ccaencaminhamentos[cras]'], 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['ccaencaminhamentos[creas]'], 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['ccaencaminhamentos[servicosrede]'], 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['ccaencaminhamentos[saude]'], 1, 1, 1, 1, 1, 1),
-    createData('Educação', services['ccaencaminhamentos[educacao]'], 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['ccaencaminhamentos[direito]'], 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['ccaencaminhamentos[outraspoliticas]'], 1, 1, 1, 1, 1, 1),
+    createData('CRAS', services['restaencaminhamentos[CRAS]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('CREAS', services['restaencaminhamentos[CREAS]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outro serviço da rede socioassistencial', services['restaencaminhamentos[outrorede]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Saúde', services['restaencaminhamentos[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Educação', services['restaencaminhamentos[educacao]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Conselhos de direito', services['restaencaminhamentos[conselho]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outras políticas públicas', services['restaencaminhamentos[outrapp]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotos = [
-    createData('Semana 1', services['ccaatendremotoperiod[1sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['ccaatendremotoperiod[2sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['ccaatendremotoperiod[3sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['ccaatendremotoperiod[4sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['ccaatendremotoperiod[5sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['ccaatendremotoperiod[6sem]'], 1, 1, 1, 1, 1, 1),
+    createData('Semana 1', services['restaatendrempperiod[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 2', services['restaatendrempperiod[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 3', services['restaatendrempperiod[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 4', services['restaatendrempperiod[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 5', services['restaatendrempperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 6', services['restaatendrempperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['ccaatendremotodisp[telef]'], 1, 1, 1, 1, 1, 1),
-    createData('Email', services['ccaatendremotodisp[email]'], 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['ccaatendremotodisp[face]'], 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['ccaatendremotodisp[youtu]'], 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['ccaatendremotodisp[outrasredes]'], 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['ccaatendremotodisp[entreg]'], 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['ccaatendremotodisp[outros]'], 1, 1, 1, 1, 1, 1),
+    createData('Telefone / Celular / Whatsapp', services['circoremadisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Email', services['circoremadisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Facebook', services['circoremadisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('YouTube', services['circoremadisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outras redes sociais', services['circoremadisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Entrega de kits de atividades', services['circoremadisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outros', services['circoremadisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['ccaperiodfam[1sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['ccaperiodfam[2sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['ccaperiodfam[3sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['ccaperiodfam[4sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['ccaperiodfam[5sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['ccaperiodfam[6sem]'], 1, 1, 1, 1, 1, 1),
+    createData('Semana 1', services['restaatendremfamperi[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 2', services['restaatendremfamperi[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 3', services['restaatendremfamperi[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 4', services['restaatendremfamperi[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 5', services['restaatendremfamperi[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 6', services['restaatendremfamperi[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
+  let monthString = '';
+
+  if (mes === '0121') {
+    monthString = 'Janeiro 2021';
+  } else if (mes === '0221') {
+    monthString = 'Fevereiro 2021';
+  } else if (mes === '0321') {
+    monthString = 'Março 2021';
+  }
+
   return (
-    <>
-      <FirstSection>
-        <Breadcrumbs aria-label="breadcrumb">
-          <StyledBreadcrumb
-            component="a"
-            href="/"
-            label={nomeSAS}
-            icon={<HomeIcon fontSize="small" />}
-          />
-          <StyledBreadcrumb component="a" href="/months" label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'} />
-          <StyledBreadcrumb component="a" href="/Reports" label="CCA Jardim das Rosas" />
-          <Typography color="textPrimary">Respostas</Typography>
-        </Breadcrumbs>
-        <div>
-          <MyButton variant="contained" color="primary">PDF</MyButton>
-          <MyButton variant="contained" color="primary">Imprimir</MyButton>
-          <MyButton variant="contained" color="primary" href="/reports">Voltar</MyButton>
-        </div>
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <FirstSection>
+            <Breadcrumbs aria-label="breadcrumb">
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  history.push('/');
+                }}
+                label={nomeSAS}
+                icon={<HomeIcon fontSize="small" />}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('months');
+                }}
+                label={monthString}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+                label={serviceName}
+              />
+              <Typography color="textPrimary">Respostas</Typography>
+            </Breadcrumbs>
+            <div>
 
-      </FirstSection>
+              <MyButton
+                variant="contained"
+                onClick={() => {
+                  window.print();
+                }}
+                color="primary"
+              >
+                Imprimir
 
-      <Section>
-        <h2>
-          1. Quantidade de pessoas atendidas no mês de referência:
-        </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
+              </MyButton>
+              <MyButton
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+              >
+                Voltar
 
-        <h2>
-          2. Quantidade pessoas atendidas por sexo e raça/cor no mês de referência.
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
-        <h2>
-          3. Nº de pessoas por motivo de saída do serviço no mês de referência:
-        </h2>
-        <TableThreeColumns headers={motivoSaidaHeaders} body={motivoSaida} />
+              </MyButton>
+            </div>
 
-        <Typography variant="h5" gutterBottom>
-          4. Nº de pessoas com deficiência atendidas no mês de referência:
-        </Typography>
-        <br />
-        <Typography variant="h5" gutterBottom>
-          5. Nº de pessoas incluídas em lista de espera (demanda reprimida) no mês de referência:
-        </Typography>
-        <br />
-        <h2>6. Encaminhamentos realizados pelo serviço no mês de referência:</h2>
-        <TableTwoColumns headers={familiasAtendidasHeaders} body={familiasAtendidas} />
+          </FirstSection>
 
-        <Typography variant="h6" gutterBottom>
-          7. Nº de famílias que receberam insumos no mês de referência:
-        </Typography>
+          <Section>
+            <h2>
+              1. Quantidade de pessoas atendidas no mês de referência:
+            </h2>
+            <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
 
-        <h2>
-          8. Quantidade de refeições servidas no espaço no mês de referência
-        </h2>
+            <h2>
+              2. Quantidade pessoas atendidas por sexo e raça/cor no mês de referência.
+            </h2>
+            <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
+            <h2>
+              3. Nº de pessoas por motivo de saída do serviço no mês de referência:
+            </h2>
+            <TableThreeColumns headers={motivosSaidaHeaders} body={motivosSaida} />
 
-        <TableTwoColumns headers={familiasVulnerabilidadeHeaders} body={familiasVulnerabilidade} />
+            <h2>
+              4. Nº de pessoas com deficiência atendidas no mês de referência
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Pessoa(s)', services.restausuariospcd, 1, 1, 1, 1, 1, 1, 1, 1)]} />
 
-        <h2>
-          9. Famílias atendidas no mês de referência
-        </h2>
+            <h2>
+              5. Nº de pessoas incluídas em lista de espera (
+              demanda reprimida) no mês de referência:
+            </h2>
+            <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
 
-        <ListComponent items={atividadesItems} />
+            <h2>6. Encaminhamentos realizados pelo serviço no mês de referência:</h2>
+            <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
 
-        <h2>
-          10. Indique o número de famílias ou pessoas que
-          buscaram atendimento presencial no mês de
-          referência devido a alguma vulnerabilidade relacional listada abaixo
-        </h2>
+            <h2>
+              7. Nº de famílias que receberam insumos no mês de referência:
+            </h2>
+            <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
 
-        <ListComponent items={temasItems} />
-        <br />
-        <h2>
-          11. Indique os temas discutidos com as pessoas atendidas pelo serviço no mês de referência
-        </h2>
+            <h2>
+              8. Quantidade de refeições servidas no espaço no mês de referência
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Refeição/Refeições', services.restarefeicao, 1, 1, 1, 1, 1, 1, 1, 1)]} />
 
-        <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
+            <h2>
+              9. Famílias atendidas no mês de referência:
+            </h2>
+            <TableTwoColumns headers={atendimentoFamiliaHeaders} body={atendimentoFamilia} />
 
-        <h2>
-          12. Quantidade de atendimentos remotos de usuários por semana no mês
-        </h2>
+            <h2>
+              10. Indique o número de famílias ou pessoas que
+              buscaram atendimento presencial no mês de
+              referência devido a alguma vulnerabilidade relacional listada abaixo
+            </h2>
+            <TableTwoColumns
+              headers={familiasVulnerabilidadeHeaders}
+              body={familiasVulnerabilidade}
+            />
 
-        <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
+            <h2>
+              11. Indique os temas discutidos com as pessoas atendidas
+              pelo serviço no mês de referência
+            </h2>
+            <ListComponent items={temasItems} />
 
-        <h2>
-          13. Quantidade de atendimentos remotos de familiares por semana no mês
-        </h2>
+            <h2>
+              12. Quantidade de atendimentos remotos de usuários por semana no mês
+            </h2>
+            <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
 
-        <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
+            <h2>
+              13. Quantidade de atendimentos remotos de familiares por semana no mês
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosFamiliaSemanaHeaders}
+              body={atendimentosRemotosFamiliaSemana}
+            />
 
-      </Section>
-    </>
+          </Section>
+        </>
+      )
+
   );
 };
 
