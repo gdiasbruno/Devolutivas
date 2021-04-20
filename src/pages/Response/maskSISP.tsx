@@ -4,6 +4,7 @@ import React, {
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
+
 import {
   withStyles, Theme,
 } from '@material-ui/core/styles';
@@ -23,6 +24,7 @@ import TableTenColumns from '../../components/TableTenColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import TableSevenColumns from '../../components/TableSevenColumns';
 import TableFiveColumns from '../../components/TableFiveColumns';
+
 import ListComponent from '../../components/ListComponent';
 
 import { infoContext } from '../../providers/reactContext';
@@ -66,6 +68,7 @@ function createData(
   };
 }
 
+
 const sexoRacaCorHeaders = [
   'Branca',
   'Preta',
@@ -93,6 +96,7 @@ const Response:any = () => {
       setServices(res.data);
       console.log(res.data);
       setLoading(false);
+
     });
   };
 
@@ -140,6 +144,7 @@ const Response:any = () => {
     createData('75 anos ou mais (M)',
       services['sispatendmasc[75maism]'],
       1, 1, 1, 1, 1, 1, 1, 1),
+
   ];
 
   const sexoRacaCor = [
@@ -347,6 +352,7 @@ const Response:any = () => {
           </Section>
         </>
       )
+
   );
 };
 

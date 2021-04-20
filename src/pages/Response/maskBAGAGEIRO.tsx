@@ -1,7 +1,9 @@
+
 import React, {
   useState, useEffect, useContext,
 } from 'react';
 import axios from 'axios';
+
 import { useHistory } from 'react-router-dom';
 
 import {
@@ -11,6 +13,7 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
@@ -22,6 +25,7 @@ import TableFourColumns from '../../components/TableFourColumns';
 import TableTenColumns from '../../components/TableTenColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import TableFiveColumns from '../../components/TableFiveColumns';
+
 import ListComponent from '../../components/ListComponent';
 
 import { infoContext } from '../../providers/reactContext';
@@ -48,6 +52,7 @@ function createData(
   attribute5: number,
   attribute6: number,
   attribute7: number,
+
   attribute8: number,
   attribute9: number,
 ) {
@@ -66,6 +71,7 @@ function createData(
 }
 
 const idososMoramSozinhoHeaders = ['', 'Quantidade'];
+
 
 const atendidosMesHeaders = [
   'N° de usuários atendidos no mês',
@@ -98,6 +104,7 @@ const atendimentoFamiliaHeaders = ['', 'Nº de famílias'];
 
 const demandaReprimidaHeaders = ['', 'Nº de pessoas'];
 
+
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
 
 const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
@@ -122,6 +129,7 @@ const Response:any = () => {
       setLoading(false);
     });
   };
+
   useEffect(() => {
     fetchUserProfiles();
   }, []);
@@ -184,6 +192,7 @@ const Response:any = () => {
       + parseInt(services['cedesfluxohomensaten[18a29m_remmesatual]'], 10)
       + parseInt(services['cedesfluxohomensaten[30a59m_remmesatual]'], 10),
       1, 1, 1, 1, 1, 1),
+
   ];
 
   const sexoRacaCor = [
@@ -548,6 +557,7 @@ const Response:any = () => {
           </Section>
         </>
       )
+
   );
 };
 

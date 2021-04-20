@@ -4,6 +4,7 @@ import React, {
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
+
 import {
   withStyles, Theme,
 } from '@material-ui/core/styles';
@@ -23,6 +24,7 @@ import TableThreeColumns from '../../components/TableThreeColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import TableFiveColumns from '../../components/TableFiveColumns';
 import TableTenColumns from '../../components/TableTenColumns';
+
 import ListComponent from '../../components/ListComponent';
 
 import { infoContext } from '../../providers/reactContext';
@@ -49,6 +51,7 @@ function createData(
   attribute5: number,
   attribute6: number,
   attribute7: number,
+
   attribute8: number,
   attribute9: number,
 ) {
@@ -84,6 +87,7 @@ const violenciaAgressorHeaders = [
   'Outros Familiares',
   'Outras Pessoas',
   'Total',
+
 ];
 
 const sexoRacaCorHeaders = [
@@ -114,6 +118,7 @@ const atendimentoFamiliaHeaders = ['', 'Nº de famílias'];
 
 const demandaReprimidaHeaders = ['', 'Nº de pessoas'];
 
+
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
 
 const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
@@ -136,6 +141,7 @@ const Response:any = () => {
       setServices(res.data);
       console.log(res.data);
       setLoading(false);
+
     });
   };
 
@@ -764,6 +770,7 @@ const Response:any = () => {
           </Section>
         </>
       )
+
   );
 };
 

@@ -4,6 +4,7 @@ import React, {
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
+
 import {
   withStyles, Theme,
 } from '@material-ui/core/styles';
@@ -21,6 +22,7 @@ import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import TableSevenColumns from '../../components/TableSevenColumns';
+
 
 import { infoContext } from '../../providers/reactContext';
 
@@ -64,6 +66,7 @@ function createData(
 }
 
 const qtdCriAdoMesHeader = [
+
   'N° de usuários atendidos no mês',
   'Nº de usuários que frequentaram presencialmente o serviço',
   'Nº de usuários atendidos remotamente pelo serviço',
@@ -108,6 +111,7 @@ const Response:any = () => {
       setServices(res.data);
       console.log(res.data);
       setLoading(false);
+
     });
   };
 
@@ -182,6 +186,7 @@ const Response:any = () => {
       + parseInt(services['spvvatenfxetaria[15a17f_remmesatual]'], 10)
       + parseInt(services['spvvatenfxetaria[15a17m_remmesatual]'], 10),
       1, 1, 1, 1, 1, 1),
+
   ];
 
   const sexoRacaCor = [
@@ -716,6 +721,7 @@ const Response:any = () => {
           </Section>
         </>
       )
+
   );
 };
 

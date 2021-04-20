@@ -1,8 +1,10 @@
+
 import React, {
   useState, useEffect, useContext,
 } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+
 
 import {
   withStyles, Theme,
@@ -26,6 +28,7 @@ import ListComponent from '../../components/ListComponent';
 
 import { infoContext } from '../../providers/reactContext';
 import TableThreeColumns from '../../components/TableThreeColumns';
+
 
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
@@ -68,6 +71,7 @@ function createData(
 
 const idososMoramSozinhoHeaders = ['', 'Quantidade'];
 
+
 const atendidosMesHeaders = [
   'N° de usuários atendidos no mês',
   'Nº de usuários que frequentaram presencialmente o serviço',
@@ -97,6 +101,7 @@ const atendimentoFamiliaHeaders = ['', 'Nº de famílias'];
 
 const demandaReprimidaHeaders = ['', 'Nº de pessoas'];
 
+
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
 
 const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
@@ -119,6 +124,7 @@ const Response:any = () => {
       setServices(res.data);
       console.log(res.data);
       setLoading(true);
+
     });
   };
 
@@ -161,6 +167,7 @@ const Response:any = () => {
       + parseInt(services['restafluxopessoasate[18a21m_remmesatual]'], 10)
       + parseInt(services['restafluxopessoasate[18a21f_remmesatual]'], 10),
       1, 1, 1, 1, 1, 1),
+
   ];
 
   const sexoRacaCor = [
@@ -558,6 +565,7 @@ const Response:any = () => {
           </Section>
         </>
       )
+
   );
 };
 

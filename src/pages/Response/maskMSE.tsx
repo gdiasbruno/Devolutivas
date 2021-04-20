@@ -4,6 +4,7 @@ import React, {
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
+
 import {
   withStyles, Theme,
 } from '@material-ui/core/styles';
@@ -26,6 +27,7 @@ import ListComponent from '../../components/ListComponent';
 
 import { infoContext } from '../../providers/reactContext';
 import TableThreeColumns from '../../components/TableThreeColumns';
+
 
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
@@ -74,6 +76,7 @@ const atendidosMesHeaders = [
   'LA',
   'Medida Acumulada - PSC+LA',
   'Segunda Medida',
+
 ];
 
 const sexoRacaCorHeaders = [
@@ -101,6 +104,7 @@ const atendimentoFamiliaHeaders = ['', 'Nº de famílias'];
 
 const demandaReprimidaHeaders = ['', 'Nº de pessoas'];
 
+
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
 
 const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
@@ -108,6 +112,7 @@ const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
 const atendimentosRemotosTiposHeaders = ['Tipos', ''];
 
 const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
+
 
 const Response:any = () => {
   const [services, setServices]:any = useState([]);
@@ -123,6 +128,7 @@ const Response:any = () => {
       setServices(res.data);
       console.log(res.data);
       setLoading(false);
+
     });
   };
 
@@ -131,6 +137,7 @@ const Response:any = () => {
   }, []);
 
   const atendidosMes = [
+
     createData('12 a 14 (F)',
       services['mseatend[12a14f_atendpsc]'],
       services['mseatend[12a14f_atendla]'],
@@ -294,10 +301,12 @@ const Response:any = () => {
       + parseInt(services['cedesfluxohomensaten[18a29m_remmesatual]'], 10)
       + parseInt(services['cedesfluxohomensaten[30a59m_remmesatual]'], 10),
       1, 1, 1, 1, 1, 1),
+
   ];
 
   const sexoRacaCor = [
     createData('Feminino',
+
       services['mseracasexo[fem_branca]'],
       services['mseracasexo[fem_preta]'],
       services['mseracasexo[fem_parda]'],
@@ -791,6 +800,7 @@ const Response:any = () => {
           </Section>
         </>
       )
+
   );
 };
 
