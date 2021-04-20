@@ -11,9 +11,10 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section,
+  FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
 
 import TableEigthColumns from '../../components/TableEightColumns';
@@ -112,14 +113,14 @@ const ResponseCRECI:any = () => {
     nomeSAS, mes, serviceName, token,
   } = context;
   const history = useHistory();
-  // eslint-disable-next-line new-cap
-
+  const [loading, setLoading] = useState(true);
   const tipologia = 'sad';
 
   const fetchUserProfiles = () => {
     axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
       setServices(res.data);
       console.log(res.data);
+      setLoading(false);
     });
   };
 
@@ -336,110 +337,131 @@ const ResponseCRECI:any = () => {
     createData('Semana 6', services['creciremfamperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
+  let monthString = '';
+
+  if (mes === '0121') {
+    monthString = 'Janeiro 2021';
+  } else if (mes === '0221') {
+    monthString = 'Fevereiro 2021';
+  } else if (mes === '0321') {
+    monthString = 'Março 2021';
+  }
+
   return (
-    <>
-      <FirstSection>
-        <Breadcrumbs aria-label="breadcrumb">
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              history.push('/');
-            }}
-            label={nomeSAS}
-            icon={<HomeIcon fontSize="small" />}
-          />
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('months');
-            }}
-            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
-          />
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('/reports');
-            }}
-            label={serviceName}
-          />
-          <Typography color="textPrimary">Respostas</Typography>
-        </Breadcrumbs>
-        <div>
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <FirstSection>
+            <Breadcrumbs aria-label="breadcrumb">
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  history.push('/');
+                }}
+                label={nomeSAS}
+                icon={<HomeIcon fontSize="small" />}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('months');
+                }}
+                label={monthString}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+                label={serviceName}
+              />
+              <Typography color="textPrimary">Respostas</Typography>
+            </Breadcrumbs>
+            <div>
 
-          <MyButton
-            variant="contained"
-            onClick={() => {
-              window.print();
-            }}
-            color="primary"
-          >
-            Imprimir
+              <MyButton
+                variant="contained"
+                onClick={() => {
+                  window.print();
+                }}
+                color="primary"
+              >
+                Imprimir
 
-          </MyButton>
-          <MyButton
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('/reports');
-            }}
-          >
-            Voltar
+              </MyButton>
+              <MyButton
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+              >
+                Voltar
 
-          </MyButton>
-        </div>
+              </MyButton>
+            </div>
 
-      </FirstSection>
+          </FirstSection>
 
-      <Section>
-        <h2>
-          1. Quantidade de pessoas atendidas no mês, por sexo e faixa etária
-        </h2>
-        <TableTenColumns headers={atendidosMesHeaders} body={atendidosMes} />
-        <h2>
-          2. Quantidade idosos atendidos no mês, por sexo e raça/cor
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
-        <h2>
-          3. Quantidade de usuários por motivo de saída do serviço no mês
-        </h2>
-        <TableTwoColumns headers={motivoSaidaHeaders} body={motivoSaida} />
-        <h2>
-          4. Informe um valor para as situações apresentadas abaixo
-        </h2>
-        <TableTwoColumns headers={idososMoramSozinhoHeaders} body={idososMoramSozinho} />
+          <Section>
+            <h2>
+              1. Quantidade de pessoas atendidas no mês, por sexo e faixa etária
+            </h2>
+            <TableTenColumns headers={atendidosMesHeaders} body={atendidosMes} />
+            <h2>
+              2. Quantidade idosos atendidos no mês, por sexo e raça/cor
+            </h2>
+            <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
+            <h2>
+              3. Quantidade de usuários por motivo de saída do serviço no mês
+            </h2>
+            <TableTwoColumns headers={motivoSaidaHeaders} body={motivoSaida} />
+            <h2>
+              4. Informe um valor para as situações apresentadas abaixo
+            </h2>
+            <TableTwoColumns headers={idososMoramSozinhoHeaders} body={idososMoramSozinho} />
 
-        <br />
-        <h2>
-          5. Os temas discutidos com as pessoas atendidas pelo serviço no mês de referência
-        </h2>
-        <ListComponent items={temasItems} />
-        <br />
-        <h2>
-          6. O número de famílias ou pessoas
-          que buscaram atendimento presencial no mês
-          de referência devido a alguma vulnerabilidade
-          relacional
-        </h2>
-        <TableTwoColumns headers={familiasVulnerabilidadeHeaders} body={familiasVulnerabilidade} />
+            <br />
+            <h2>
+              5. Os temas discutidos com as pessoas atendidas pelo serviço no mês de referência
+            </h2>
+            <ListComponent items={temasItems} />
+            <br />
+            <h2>
+              6. O número de famílias ou pessoas
+              que buscaram atendimento presencial no mês
+              de referência devido a alguma vulnerabilidade
+              relacional
+            </h2>
+            <TableTwoColumns
+              headers={familiasVulnerabilidadeHeaders}
+              body={familiasVulnerabilidade}
+            />
 
-        <h2>
-          7. Quantifique as situações abaixo com os dados do mês de referência:
-        </h2>
-        <TableTwoColumns headers={infoSobreIdososHeaders} body={infoSobreIdosos} />
-      </Section>
-    </>
+            <h2>
+              7. Quantifique as situações abaixo com os dados do mês de referência:
+            </h2>
+            <TableTwoColumns headers={infoSobreIdososHeaders} body={infoSobreIdosos} />
+          </Section>
+        </>
+      )
   );
 };
 

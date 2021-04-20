@@ -6,11 +6,6 @@ import {
   makeStyles, Theme, createStyles, withStyles,
 } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
@@ -102,6 +97,16 @@ const Reports: React.FC = () => {
     fetchUserProfiles();
   }, []);
 
+  let monthString = '';
+
+  if (mes === '0121') {
+    monthString = 'Janeiro 2021';
+  } else if (mes === '0221') {
+    monthString = 'Fevereiro 2021';
+  } else if (mes === '0321') {
+    monthString = 'Março 2021';
+  }
+
   return (
     <>
       <FirstSection>
@@ -159,7 +164,7 @@ const Reports: React.FC = () => {
         <div className={classes.bodyServicesItems}>
           <List component="nav" aria-label="main mailbox folders">
             {services.map((service:any) => {
-              console.log(service.token);
+              console.log(service);
               return (
 
                 <ListItem
@@ -170,11 +175,11 @@ const Reports: React.FC = () => {
                       mes,
                       serviceName: service.firstname,
                       token: service.token,
-                      tipologia: service.attribute_4.substring(0, 3),
+                      tipologia: service.typology.substring(0, 3),
                     });
-                    history.push(`/response${service.attribute_4}`);
+                    history.push(`/response${service.typology}`);
                   }}
-                  className={service.attribute_4}
+
                 >
                   <ListItemIcon>
                     <HomeIcon />

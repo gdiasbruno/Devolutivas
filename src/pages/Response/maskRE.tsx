@@ -11,9 +11,10 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section,
+  FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
 
 import TableEigthColumns from '../../components/TableEightColumns';
@@ -111,12 +112,13 @@ const Response:any = () => {
     nomeSAS, mes, serviceName, token, tipologia,
   } = context;
   const history = useHistory();
-  // eslint-disable-next-line new-cap
+  const [loading, setLoading] = useState(true);
 
   const fetchUserProfiles = () => {
     axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
       setServices(res.data);
       console.log(res.data);
+      setLoading(true);
     });
   };
 
@@ -397,150 +399,165 @@ const Response:any = () => {
     createData('Semana 6', services['restaatendremfamperi[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
+  let monthString = '';
+
+  if (mes === '0121') {
+    monthString = 'Janeiro 2021';
+  } else if (mes === '0221') {
+    monthString = 'Fevereiro 2021';
+  } else if (mes === '0321') {
+    monthString = 'Março 2021';
+  }
+
   return (
-    <>
-      <FirstSection>
-        <Breadcrumbs aria-label="breadcrumb">
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              history.push('/');
-            }}
-            label={nomeSAS}
-            icon={<HomeIcon fontSize="small" />}
-          />
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('months');
-            }}
-            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
-          />
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('/reports');
-            }}
-            label={serviceName}
-          />
-          <Typography color="textPrimary">Respostas</Typography>
-        </Breadcrumbs>
-        <div>
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <FirstSection>
+            <Breadcrumbs aria-label="breadcrumb">
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  history.push('/');
+                }}
+                label={nomeSAS}
+                icon={<HomeIcon fontSize="small" />}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('months');
+                }}
+                label={monthString}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+                label={serviceName}
+              />
+              <Typography color="textPrimary">Respostas</Typography>
+            </Breadcrumbs>
+            <div>
 
-          <MyButton
-            variant="contained"
-            onClick={() => {
-              window.print();
-            }}
-            color="primary"
-          >
-            Imprimir
+              <MyButton
+                variant="contained"
+                onClick={() => {
+                  window.print();
+                }}
+                color="primary"
+              >
+                Imprimir
 
-          </MyButton>
-          <MyButton
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('/reports');
-            }}
-          >
-            Voltar
+              </MyButton>
+              <MyButton
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+              >
+                Voltar
 
-          </MyButton>
-        </div>
+              </MyButton>
+            </div>
 
-      </FirstSection>
+          </FirstSection>
 
-      <Section>
-        <h2>
-          1. Quantidade de pessoas atendidas no mês de referência:
-        </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
+          <Section>
+            <h2>
+              1. Quantidade de pessoas atendidas no mês de referência:
+            </h2>
+            <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
 
-        <h2>
-          2. Quantidade pessoas atendidas por sexo e raça/cor no mês de referência.
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
-        <h2>
-          3. Nº de pessoas por motivo de saída do serviço no mês de referência:
-        </h2>
-        <TableThreeColumns headers={motivosSaidaHeaders} body={motivosSaida} />
+            <h2>
+              2. Quantidade pessoas atendidas por sexo e raça/cor no mês de referência.
+            </h2>
+            <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
+            <h2>
+              3. Nº de pessoas por motivo de saída do serviço no mês de referência:
+            </h2>
+            <TableThreeColumns headers={motivosSaidaHeaders} body={motivosSaida} />
 
-        <Typography variant="h5" gutterBottom>
-          4. Nº de pessoas com deficiência atendidas no mês de referência é de
-          {' '}
-          {services.restausuariospcd}
-          {' '}
-          pessoa(s)
-        </Typography>
-        <br />
-        <h2>
-          5. Nº de pessoas incluídas em lista de espera (demanda reprimida) no mês de referência:
-        </h2>
-        <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
+            <h2>
+              4. Nº de pessoas com deficiência atendidas no mês de referência
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Pessoa(s)', services.restausuariospcd, 1, 1, 1, 1, 1, 1, 1, 1)]} />
 
-        <br />
-        <h2>6. Encaminhamentos realizados pelo serviço no mês de referência:</h2>
-        <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
+            <h2>
+              5. Nº de pessoas incluídas em lista de espera (
+              demanda reprimida) no mês de referência:
+            </h2>
+            <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
 
-        <h2>
-          7. Nº de famílias que receberam insumos no mês de referência:
-        </h2>
-        <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
+            <h2>6. Encaminhamentos realizados pelo serviço no mês de referência:</h2>
+            <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
 
-        <Typography variant="h5" gutterBottom>
-          8. Quantidade de refeições servidas no espaço no mês de referência é de
-          {' '}
-          {services.restarefeicao}
-          {' '}
-          refeições
-        </Typography>
+            <h2>
+              7. Nº de famílias que receberam insumos no mês de referência:
+            </h2>
+            <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
 
-        <h2>
-          9. Famílias atendidas no mês de referência:
-        </h2>
-        <TableTwoColumns headers={atendimentoFamiliaHeaders} body={atendimentoFamilia} />
+            <h2>
+              8. Quantidade de refeições servidas no espaço no mês de referência
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Refeição/Refeições', services.restarefeicao, 1, 1, 1, 1, 1, 1, 1, 1)]} />
 
-        <h2>
-          10. Indique o número de famílias ou pessoas que
-          buscaram atendimento presencial no mês de
-          referência devido a alguma vulnerabilidade relacional listada abaixo
-        </h2>
-        <TableTwoColumns headers={familiasVulnerabilidadeHeaders} body={familiasVulnerabilidade} />
+            <h2>
+              9. Famílias atendidas no mês de referência:
+            </h2>
+            <TableTwoColumns headers={atendimentoFamiliaHeaders} body={atendimentoFamilia} />
 
-        <br />
-        <h2>
-          11. Indique os temas discutidos com as pessoas atendidas pelo serviço no mês de referência
-        </h2>
-        <ListComponent items={temasItems} />
+            <h2>
+              10. Indique o número de famílias ou pessoas que
+              buscaram atendimento presencial no mês de
+              referência devido a alguma vulnerabilidade relacional listada abaixo
+            </h2>
+            <TableTwoColumns
+              headers={familiasVulnerabilidadeHeaders}
+              body={familiasVulnerabilidade}
+            />
 
-        <h2>
-          12. Quantidade de atendimentos remotos de usuários por semana no mês
-        </h2>
-        <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
+            <h2>
+              11. Indique os temas discutidos com as pessoas atendidas
+              pelo serviço no mês de referência
+            </h2>
+            <ListComponent items={temasItems} />
 
-        <h2>
-          13. Quantidade de atendimentos remotos de familiares por semana no mês
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosFamiliaSemanaHeaders}
-          body={atendimentosRemotosFamiliaSemana}
-        />
+            <h2>
+              12. Quantidade de atendimentos remotos de usuários por semana no mês
+            </h2>
+            <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
 
-      </Section>
-    </>
+            <h2>
+              13. Quantidade de atendimentos remotos de familiares por semana no mês
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosFamiliaSemanaHeaders}
+              body={atendimentosRemotosFamiliaSemana}
+            />
+
+          </Section>
+        </>
+      )
   );
 };
 

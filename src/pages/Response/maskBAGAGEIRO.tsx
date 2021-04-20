@@ -11,9 +11,10 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section,
+  FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
 
 import TableEigthColumns from '../../components/TableEightColumns';
@@ -112,12 +113,13 @@ const Response:any = () => {
     nomeSAS, mes, serviceName, token, tipologia,
   } = context;
   const history = useHistory();
-  // eslint-disable-next-line new-cap
+  const [loading, setLoading] = useState(true);
 
   const fetchUserProfiles = () => {
     axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
       setServices(res.data);
       console.log(res.data);
+      setLoading(false);
     });
   };
   useEffect(() => {
@@ -427,107 +429,125 @@ const Response:any = () => {
     createData('Semana 6', services['cedesfamremperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
+  let monthString = '';
+
+  if (mes === '0121') {
+    monthString = 'Janeiro 2021';
+  } else if (mes === '0221') {
+    monthString = 'Fevereiro 2021';
+  } else if (mes === '0321') {
+    monthString = 'Março 2021';
+  }
+
   return (
-    <>
-      <FirstSection>
-        <Breadcrumbs aria-label="breadcrumb">
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              history.push('/');
-            }}
-            label="{nomeSAS}"
-            icon={<HomeIcon fontSize="small" />}
-          />
-          <StyledBreadcrumb
-            component="a"
-            // onClick={() => {
-            //   setContext({
-            //     nomeSAS,
-            //     mes,
-            //   });
-            //   history.push('months');
-            // }}
-            label="{mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}"
-          />
-          <StyledBreadcrumb
-            component="a"
-            // onClick={() => {
-            //   setContext({
-            //     nomeSAS,
-            //     mes,
-            //   });
-            //   history.push('/reports');
-            // }}
-            label="{serviceName}"
-          />
-          <Typography color="textPrimary">Respostas</Typography>
-        </Breadcrumbs>
-        <div>
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <FirstSection>
+            <Breadcrumbs aria-label="breadcrumb">
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  history.push('/');
+                }}
+                label={nomeSAS}
+                icon={<HomeIcon fontSize="small" />}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('months');
+                }}
+                label={monthString}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+                label={serviceName}
+              />
+              <Typography color="textPrimary">Respostas</Typography>
+            </Breadcrumbs>
+            <div>
 
-          <MyButton
-            variant="contained"
-            onClick={() => {
-              window.print();
-            }}
-            color="primary"
-          >
-            Imprimir
+              <MyButton
+                variant="contained"
+                onClick={() => {
+                  window.print();
+                }}
+                color="primary"
+              >
+                Imprimir
+              </MyButton>
+              <MyButton
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+              >
+                Voltar
 
-          </MyButton>
-          <MyButton
-            variant="contained"
-            color="primary"
-            // onClick={() => {
-            //   setContext({
-            //     nomeSAS,
-            //     mes,
-            //   });
-            //   history.push('/reports');
-            // }}
-          >
-            Voltar
+              </MyButton>
+            </div>
 
-          </MyButton>
-        </div>
+          </FirstSection>
 
-      </FirstSection>
+          <Section>
+            <h2>
+              1. Número de pessoas que utilizaram o serviço no mês:
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Visita(s)', services.bagatendmes, 1, 1, 1, 1, 1, 1, 1, 1)]} />
 
-      <Section>
-        <Typography variant="h5" gutterBottom>
-          1. Número de pessoas que utilizaram o serviço no mês
-          {services.bagatendmes}
-        </Typography>
+            <h2>
+              2. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência.
+            </h2>
+            <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
 
-        <h2>
-          2. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência.
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
+            <h2>
+              3. Número de boxes utilizados no mês de referência:
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Boxe(s)', services.bagbox, 1, 1, 1, 1, 1, 1, 1, 1)]} />
+            <h2>
+              4. Nº de pessoas que utilizaram o
+              serviço Bagageiro e estão vinculadas a um Centro de Acolhida no mês de referência:
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Pessoas(s)', services.bagvinca, 1, 1, 1, 1, 1, 1, 1, 1)]} />
 
-        <Typography variant="h5" gutterBottom>
-          3. Número de boxes utilizados no mês de referência:
-          {services.bagbox}
-        </Typography>
-        <Typography variant="h5" gutterBottom>
-          4. Nº de pessoas que utilizaram o
-          serviço Bagageiro e estão vinculadas a um Centro de Acolhida no mês de referência:
-          {services.bagvinca}
-        </Typography>
-        <Typography variant="h5" gutterBottom>
-          5. Número de pessoas que receberam atendimento social no mês de referência:
-          {services.bagatendsocial}
-        </Typography>
-        <Typography variant="h5" gutterBottom>
-          6. Nº de pessoas com deficiência atendidas pelo serviço no mês de referência:
-          {services.bagpcd}
-        </Typography>
+            <h2>
+              5. Nº de pessoas que receberam atendimento social no mês de referência:
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Pessoa(s)', services.bagatendsocial, 1, 1, 1, 1, 1, 1, 1, 1)]} />
+            <h2>
+              6. Nº de pessoas com deficiência atendidas pelo serviço no mês de referência:
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Pessoa(s)', services.bagpcd, 1, 1, 1, 1, 1, 1, 1, 1)]} />
 
-        <h2>
-          7. Encaminhamentos realizados pelo serviço no mês de referência
-        </h2>
-        <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
-      </Section>
-    </>
+            <h2>
+              7. Encaminhamentos realizados pelo serviço no mês de referência
+            </h2>
+            <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
+          </Section>
+        </>
+      )
   );
 };
 

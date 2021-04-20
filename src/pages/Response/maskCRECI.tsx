@@ -11,9 +11,10 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section,
+  FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
 
 import TableEigthColumns from '../../components/TableEightColumns';
@@ -106,12 +107,13 @@ const ResponseCRECI:any = () => {
     nomeSAS, mes, serviceName, token, tipologia,
   } = context;
   const history = useHistory();
-  // eslint-disable-next-line new-cap
+  const [loading, setLoading] = useState(true);
 
   const fetchUserProfiles = () => {
     axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
       setServices(res.data);
       console.log(res.data);
+      setLoading(false);
     });
   };
 
@@ -297,164 +299,177 @@ const ResponseCRECI:any = () => {
     createData('Semana 6', services['creciremfamperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1),
   ];
 
+  let monthString = '';
+
+  if (mes === '0121') {
+    monthString = 'Janeiro 2021';
+  } else if (mes === '0221') {
+    monthString = 'Fevereiro 2021';
+  } else if (mes === '0321') {
+    monthString = 'Março 2021';
+  }
+
   return (
-    <>
-      <FirstSection>
-        <Breadcrumbs aria-label="breadcrumb">
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              history.push('/');
-            }}
-            label={nomeSAS}
-            icon={<HomeIcon fontSize="small" />}
-          />
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('months');
-            }}
-            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
-          />
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('/reports');
-            }}
-            label={serviceName}
-          />
-          <Typography color="textPrimary">Respostas</Typography>
-        </Breadcrumbs>
-        <div>
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <FirstSection>
+            <Breadcrumbs aria-label="breadcrumb">
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  history.push('/');
+                }}
+                label={nomeSAS}
+                icon={<HomeIcon fontSize="small" />}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('months');
+                }}
+                label={monthString}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+                label={serviceName}
+              />
+              <Typography color="textPrimary">Respostas</Typography>
+            </Breadcrumbs>
+            <div>
 
-          <MyButton
-            variant="contained"
-            onClick={() => {
-              window.print();
-            }}
-            color="primary"
-          >
-            Imprimir
+              <MyButton
+                variant="contained"
+                onClick={() => {
+                  window.print();
+                }}
+                color="primary"
+              >
+                Imprimir
 
-          </MyButton>
-          <MyButton
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('/reports');
-            }}
-          >
-            Voltar
+              </MyButton>
+              <MyButton
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+              >
+                Voltar
 
-          </MyButton>
-        </div>
+              </MyButton>
+            </div>
 
-      </FirstSection>
+          </FirstSection>
 
-      <Section>
-        <h2>
-          1. Quantidade de idosos atendidos no mês, por faixa etária e sexo:
-        </h2>
-        <TableNineColumns headers={atendidosMesHeaders} body={atendidosMes} />
+          <Section>
+            <h2>
+              1. Quantidade de idosos atendidos no mês, por faixa etária e sexo:
+            </h2>
+            <TableNineColumns headers={atendidosMesHeaders} body={atendidosMes} />
 
-        <h2>
-          2. Quantidade de idosos atendidos no mês, por sexo e raça/cor:
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
+            <h2>
+              2. Quantidade de idosos atendidos no mês, por sexo e raça/cor:
+            </h2>
+            <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
 
-        <Typography variant="h5" gutterBottom>
-          3. A quantidade de idosos com deficiência atendidos no mês de referência é
-          {' '}
-          {services.creciusuariospcd}
-          {' '}
-          pessoa(s)
-        </Typography>
-        <br />
-        <h2>
-          4. Quantidade de idosos que moram sozinhos atendidos no mês:
-        </h2>
-        <TableTwoColumns headers={idososMoramSozinhoHeaders} body={idososMoramSozinho} />
+            <h2>
+              3. A quantidade de idosos com deficiência atendidos no mês de referência
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Idoso(s)', services.creciusuariospcd, 1, 1, 1, 1, 1, 1, 1)]} />
 
-        <h2>
-          4. o número de famílias ou pessoas que buscaram atendimento
-          presencial no mês de referência devido a alguma vulnerabilidade relacional :
-        </h2>
+            <h2>
+              4. Quantidade de idosos que moram sozinhos atendidos no mês:
+            </h2>
+            <TableTwoColumns headers={idososMoramSozinhoHeaders} body={idososMoramSozinho} />
 
-        <TableTwoColumns headers={familiasVulnerabilidadeHeaders} body={familiasVulnerabilidade} />
-        <br />
+            <h2>
+              4. o número de famílias ou pessoas que buscaram atendimento
+              presencial no mês de referência devido a alguma vulnerabilidade relacional :
+            </h2>
 
-        <h2>
-          5. Quantidade de idosos incluídos na lista de espera
-          (demanda reprimida) do serviço no mês:
-        </h2>
-        <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
-        <br />
+            <TableTwoColumns
+              headers={familiasVulnerabilidadeHeaders}
+              body={familiasVulnerabilidade}
+            />
 
-        <h2>
-          6. Quantifique as informações abaixo com os dados do mês de referência
-        </h2>
-        <TableTwoColumns headers={infoSobreIdososHeaders} body={infoSobreIdosos} />
-        <br />
+            <h2>
+              5. Quantidade de idosos incluídos na lista de espera
+              (demanda reprimida) do serviço no mês:
+            </h2>
+            <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
 
-        <h2>
-          7. As atividades realizadas com os idosos atendidas no mês pelo serviço
-        </h2>
-        <ListComponent items={atividadesItems} />
-        <br />
+            <h2>
+              6. Quantifique as informações abaixo com os dados do mês de referência
+            </h2>
+            <TableTwoColumns headers={infoSobreIdososHeaders} body={infoSobreIdosos} />
 
-        <h2>
-          8. Os temas discutidos com os idosos atendidos no mês pelo serviço:
-        </h2>
-        <ListComponent items={temasItems} />
-        <br />
+            <h2>
+              7. As atividades realizadas com os idosos atendidas no mês pelo serviço
+            </h2>
+            <ListComponent items={atividadesItems} />
 
-        <h2>
-          9. Encaminhamentos realizados pelo serviço no mês:
-        </h2>
+            <h2>
+              8. Os temas discutidos com os idosos atendidos no mês pelo serviço:
+            </h2>
+            <ListComponent items={temasItems} />
 
-        <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
+            <h2>
+              9. Encaminhamentos realizados pelo serviço no mês:
+            </h2>
 
-        <h2>
-          10. Quantidade de idosos que receberam insumos no mês:
-        </h2>
-        <TableTwoColumns headers={idososInsumosHeaders} body={idososInsumos} />
-        <br />
-        <h2>
-          11. Quantidade de atendimentos remotos de usuários por semana no mês:
-        </h2>
-        <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
-        <br />
-        <h2>
-          12. Quantidade de atividades remotas realizadas no mês,
-          pelos meios em que foram disponibilizadas:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosTiposHeaders}
-          body={atendimentosRemotosTipos}
-        />
-        <br />
-        <h2>
-          13. Quantidade de atendimentos remotos de familiares por semana no mês:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosFamiliaSemanaHeaders}
-          body={atendimentosRemotosFamiliaSemana}
-        />
-        <br />
-      </Section>
-    </>
+            <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
+
+            <h2>
+              10. Quantidade de idosos que receberam insumos no mês:
+            </h2>
+            <TableTwoColumns headers={idososInsumosHeaders} body={idososInsumos} />
+
+            <h2>
+              11. Quantidade de atendimentos remotos de usuários por semana no mês:
+            </h2>
+            <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
+
+            <h2>
+              12. Quantidade de atividades remotas realizadas no mês,
+              pelos meios em que foram disponibilizadas:
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosTiposHeaders}
+              body={atendimentosRemotosTipos}
+            />
+
+            <h2>
+              13. Quantidade de atendimentos remotos de familiares por semana no mês:
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosFamiliaSemanaHeaders}
+              body={atendimentosRemotosFamiliaSemana}
+            />
+
+          </Section>
+        </>
+      )
   );
 };
 

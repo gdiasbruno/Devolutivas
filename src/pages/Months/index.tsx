@@ -45,12 +45,16 @@ const Months: React.FC = () => {
         name: 'Janeiro 2021',
         index: month,
       };
+    } if (monthString === '0221') {
+      return {
+        name: 'Fevereiro 2021',
+        index: month,
+      };
     }
-    return {
-      name: 'Fevereiro 2021',
-      index: month,
-    };
+    return null;
   });
+
+  const monthsFiltered = monthsNames.filter((month:any) => month !== null);
 
   const history = useHistory();
 
@@ -74,9 +78,11 @@ const Months: React.FC = () => {
         <FormControl component="fieldset">
           <FormLabel component="legend">Mês da consulta:</FormLabel>
           <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-            {monthsNames.map((month:any) => (
-              <FormControlLabel value={month.index} control={<Radio color="primary" />} label={month.name} />
-            ))}
+            {
+              monthsFiltered.map((month:any) => (
+                <FormControlLabel value={month.index} control={<Radio color="primary" />} label={month.name} />
+              ))
+            }
           </RadioGroup>
         </FormControl>
         <br />

@@ -57,3 +57,10 @@ export const MyButton = styled(Button)`
 export const TableFourColumnsStyled = styled(TableFourColumns)`
   padding-top: 1000px;
 `;
+
+export const LoaderBody = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+`;

@@ -11,9 +11,10 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section,
+  FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
 
 import TableEigthColumns from '../../components/TableEightColumns';
@@ -111,12 +112,13 @@ const Response:any = () => {
     nomeSAS, mes, serviceName, token,
   } = context;
   const history = useHistory();
-  // eslint-disable-next-line new-cap
+  const [loading, setLoading] = useState(true);
   const tipologia = 'ncp';
   const fetchUserProfiles = () => {
     axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
       setServices(res.data);
       console.log(res.data);
+      setLoading(false);
     });
   };
 
@@ -427,106 +429,125 @@ const Response:any = () => {
     createData('Semana 6', services['cedesfamremperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
+  let monthString = '';
+
+  if (mes === '0121') {
+    monthString = 'Janeiro 2021';
+  } else if (mes === '0221') {
+    monthString = 'Fevereiro 2021';
+  } else if (mes === '0321') {
+    monthString = 'Março 2021';
+  }
+
   return (
-    <>
-      <FirstSection>
-        <Breadcrumbs aria-label="breadcrumb">
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              history.push('/');
-            }}
-            label="{nomeSAS}"
-            icon={<HomeIcon fontSize="small" />}
-          />
-          <StyledBreadcrumb
-            component="a"
-            // onClick={() => {
-            //   setContext({
-            //     nomeSAS,
-            //     mes,
-            //   });
-            //   history.push('months');
-            // }}
-            label="{mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}"
-          />
-          <StyledBreadcrumb
-            component="a"
-            // onClick={() => {
-            //   setContext({
-            //     nomeSAS,
-            //     mes,
-            //   });
-            //   history.push('/reports');
-            // }}
-            label="{serviceName}"
-          />
-          <Typography color="textPrimary">Respostas</Typography>
-        </Breadcrumbs>
-        <div>
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <FirstSection>
+            <Breadcrumbs aria-label="breadcrumb">
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  history.push('/');
+                }}
+                label={nomeSAS}
+                icon={<HomeIcon fontSize="small" />}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('months');
+                }}
+                label={monthString}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+                label={serviceName}
+              />
+              <Typography color="textPrimary">Respostas</Typography>
+            </Breadcrumbs>
+            <div>
 
-          <MyButton
-            variant="contained"
-            onClick={() => {
-              window.print();
-            }}
-            color="primary"
-          >
-            Imprimir
+              <MyButton
+                variant="contained"
+                onClick={() => {
+                  window.print();
+                }}
+                color="primary"
+              >
+                Imprimir
 
-          </MyButton>
-          <MyButton
-            variant="contained"
-            color="primary"
-            // onClick={() => {
-            //   setContext({
-            //     nomeSAS,
-            //     mes,
-            //   });
-            //   history.push('/reports');
-            // }}
-          >
-            Voltar
+              </MyButton>
+              <MyButton
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+              >
+                Voltar
 
-          </MyButton>
-        </div>
+              </MyButton>
+            </div>
 
-      </FirstSection>
+          </FirstSection>
 
-      <Section>
-        <h2>
-          1. Quantidade de pessoas do sexo feminino atendidas pelo serviço no mês de referência:
-        </h2>
-        <TableTwoColumns headers={atendidosMesHeaders} body={atendidosMesFeminino} />
+          <Section>
+            <h2>
+              1. Quantidade de pessoas do sexo feminino atendidas pelo serviço no mês de referência:
+            </h2>
+            <TableTwoColumns headers={atendidosMesHeaders} body={atendidosMesFeminino} />
 
-        <h2>
-          2. Quantidade de pessoas do sexo masculino atendidos pelo serviço no mês de referência:
-        </h2>
-        <TableTwoColumns headers={atendidosMesHeaders} body={atendidosMesMasculino} />
-        <h2>
-          3. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência.
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
+            <h2>
+              2. Quantidade de pessoas do sexo masculino
+              atendidos pelo serviço no mês de referência:
+            </h2>
+            <TableTwoColumns headers={atendidosMesHeaders} body={atendidosMesMasculino} />
+            <h2>
+              3. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência.
+            </h2>
+            <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
 
-        <h2>
-          4. Nº de pessoas que participaram das atividades propostas pelo serviço:
-        </h2>
-        <br />
-        <TableThreeColumns headers={['Número de atividades realizadas', 'Número de participantes na atividade']} body={atividades} />
+            <h2>
+              4. Nº de pessoas que participaram das atividades propostas pelo serviço:
+            </h2>
+            <br />
+            <TableThreeColumns headers={['Número de atividades realizadas', 'Número de participantes na atividade']} body={atividades} />
 
-        <h2>
-          5. Quantifique as situações abaixo com os dados do mês de referência:
-        </h2>
-        <TableTwoColumns headers={['', 'Quantidade']} body={infos} />
-        <br />
-        <h2>
-          6. Encaminhamentos realizados pelo serviço no mês de referência:
-        </h2>
+            <h2>
+              5. Quantifique as situações abaixo com os dados do mês de referência:
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={infos} />
+            <br />
+            <h2>
+              6. Encaminhamentos realizados pelo serviço no mês de referência:
+            </h2>
 
-        <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
+            <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
 
-      </Section>
-    </>
+          </Section>
+        </>
+      )
   );
 };
 

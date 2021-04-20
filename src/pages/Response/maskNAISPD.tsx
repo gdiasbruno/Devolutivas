@@ -11,9 +11,10 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section,
+  FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
 
 import TableEigthColumns from '../../components/TableEightColumns';
@@ -111,16 +112,16 @@ const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 const Response:any = () => {
   const [services, setServices]:any = useState([]);
   const { context, setContext }:any = useContext(infoContext);
-  // const {
-  //  nomeSAS, mes, serviceName, token,
-  // } = context;
+  const {
+    nomeSAS, mes, serviceName, token, tipologia,
+  } = context;
   const history = useHistory();
-  // eslint-disable-next-line new-cap
-
+  const [loading, setLoading] = useState(true);
   const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/SE/0121/12112323/NAISPD').then((res) => {
+    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
       setServices(res.data);
       console.log(res.data);
+      setLoading(false);
     });
   };
 
@@ -476,8 +477,28 @@ const Response:any = () => {
       services['ncisaidaconvivencia[mudancaendereco_quantidade]'],
       1,
       1, 1, 1, 1, 1, 1, 1),
-    createData('Transferência para outro serviço',
-      services['ncisaidaconvivencia[transferencia_quantidade]'],
+    createData('Problemas de saúde',
+      services['ncisaidaconvivencia[ofertadom_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Abandono',
+      services['ncisaidaconvivencia[ofertadom_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Conclusão do Programa',
+      services['ncisaidaconvivencia[ofertadom_quantidade]'],
       1,
       1,
       1,
@@ -496,8 +517,18 @@ const Response:any = () => {
       1,
       1,
       1),
-    createData('Oferta do Serviço em Domicílio',
-      services['ncisaidaconvivencia[ofertadom_quantidade]'],
+    createData('Transferência para outro serviço',
+      services['ncisaidaconvivencia[transferencia_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Inserção no mercado de trabalho',
+      services['ncisaidaconvivencia[transferencia_quantidade]'],
       1,
       1,
       1,
@@ -519,7 +550,59 @@ const Response:any = () => {
       1,
       1,
       1),
+  ];
 
+  const territorioMoradia = [
+    createData('No mesmo distrito onde o serviço está localizado',
+      services['naismoradia[naisdistrito]'],
+      1,
+      1, 1, 1, 1, 1, 1, 1),
+    createData('Na mesma subprefeitura (SAS) onde o serviço está localizado',
+      services['naismoradia[naissubpr]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Em outra subprefeitura (SAS) onde o serviço está localizado',
+      services['naismoradia[naisoutra]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Total',
+      parseInt(services['naismoradia[naissubpr]'], 10)
+    + parseInt(services['naismoradia[naisoutra]'], 10)
+    + parseInt(services['naismoradia[naisdistrito]'], 10),
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+  ];
+
+  const situacaoEscolar = [
+    createData('Nº de pessoas atendidas pelo serviço que frequentam o ensino formal',
+      services['naissitescolar[freqescolar]'],
+      1,
+      1, 1, 1, 1, 1, 1, 1),
+  ];
+
+  const beneficariosBPC = [
+    createData('Nº de pessoas ',
+      services.naisprogbpc,
+      1,
+      1, 1, 1, 1, 1, 1, 1),
   ];
 
   const motivosSaidaDomicilio = [
@@ -722,37 +805,42 @@ const Response:any = () => {
     ['Envelhecimento saudável', services['ncitema[temaenvelhsaudavel]']],
   ];
   const demandaReprimida = [
-    createData('60 a 64 anos', services['ncilistaespera[60a64_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('65 a 69 anos', services['ncilistaespera[65a69_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('70 a 74 anos', services['ncilistaespera[70a74_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('75 anos ou mais', services['ncilistaespera[75mais_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('0 a 5 anos', services['naislistaespera[0a5_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('6 a 11 anos', services['naislistaespera[6a11_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('12 a 14 anos', services['naislistaespera[12a14_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('15 a 17 anos', services['naislistaespera[15a17_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('18 a 29 anos', services['naislistaespera[18a29_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('30 a 59 anos', services['naislistaespera[30a59_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('60 anos ou mais', services['naislistaespera[60mais_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
 
     createData('Total',
-      parseInt(services['ncilistaespera[60a64_qtdade]'], 10)
-      + parseInt(services['ncilistaespera[65a69_qtdade]'], 10)
-      + parseInt(services['ncilistaespera[70a74_qtdade]'], 10)
-      + parseInt(services['ncilistaespera[75mais_qtdade]'], 10),
+      parseInt(services['naislistaespera[0a5_qtd]'], 10)
+      + parseInt(services['naislistaespera[6a11_qtd]'], 10)
+      + parseInt(services['naislistaespera[12a14_qtd]'], 10)
+      + parseInt(services['naislistaespera[15a17_qtd]'], 10)
+      + parseInt(services['naislistaespera[18a29_qtd]'], 10)
+      + parseInt(services['naislistaespera[30a59_qtd]'], 10)
+      + parseInt(services['naislistaespera[60mais_qtd]'], 10),
       1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const encaminhamentos = [
-    createData('CRAS', services['nciencaminhamento[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['nciencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['nciencaminhamento[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['nciencaminhamento[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Habitação', services['nciencaminhamento[hab]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Previdêncial Social', services['nciencaminhamento[prev]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['nciencaminhamento[direito]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['nciencaminhamento[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('CRAS', services['naisencaminhamentos[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('CREAS', services['naisencaminhamentos[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outro serviço da rede socioassistencial', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Saúde', services['naisencaminhamentos[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Educação', services['naisencaminhamentos[educacao]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Conselhos de direito', services['naisencaminhamentos[direito]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outras políticas públicas', services['naisencaminhamentos[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotos = [
-    createData('Semana 1', services['nciconvivatendrempes[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['nciconvivatendrempes[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['nciconvivatendrempes[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['nciconvivatendrempes[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['nciconvivatendrempes[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['nciconvivatendrempes[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 1', services['naisatendremotoperio[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 2', services['naisatendremotoperio[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 3', services['naisatendremotoperio[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 4', services['naisatendremotoperio[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 5', services['naisatendremotoperio[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 6', services['naisatendremotoperio[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotosDomicilio = [
@@ -775,22 +863,22 @@ const Response:any = () => {
   ];
 
   const atendimentosRemotosTiposDomicilio = [
-    createData('Telefone / Celular / Whatsapp', services['ncidomremdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Email', services['ncidomremdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['ncidomremdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['ncidomremdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['ncidomremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['ncidomremdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['ncidomremdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Telefone / Celular / Whatsapp', services['naisdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Email', services['naisdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Facebook', services['naisdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('YouTube', services['naisdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outras redes sociais', services['naisdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Entrega de kits de atividades', services['naisdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outros', services['naisdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['nciconvivatendremfam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['nciconvivatendremfam[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['nciconvivatendremfam[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['nciconvivatendremfam[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['nciconvivatendremfam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['nciconvivatendremfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 1', services['naisperiofam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 2', services['naisperiofam[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 3', services['naisperiofam[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 4', services['naisperiofam[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 5', services['naisperiofam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Semana 6', services['naisperiofam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotosFamiliaSemanaDomicilio = [
@@ -802,262 +890,171 @@ const Response:any = () => {
     createData('Semana 6', services['ncidomatendremfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
+  let monthString = '';
+
+  if (mes === '0121') {
+    monthString = 'Janeiro 2021';
+  } else if (mes === '0221') {
+    monthString = 'Fevereiro 2021';
+  } else if (mes === '0321') {
+    monthString = 'Março 2021';
+  }
+
   return (
-    <>
-      <FirstSection>
-        <Breadcrumbs aria-label="breadcrumb">
-          <StyledBreadcrumb
-            component="a"
-          //  onClick={() => {
-          //    history.push('/');
-          //  }}
-            label="{nomeSAS}"
-            icon={<HomeIcon fontSize="small" />}
-          />
-          <StyledBreadcrumb
-            component="a"
-          //  onClick={() => {
-          //    setContext({
-          //      nomeSAS,
-          //      mes,
-          //    });
-          //    history.push('months');
-          //  }}
-            label="{mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}"
-          />
-          <StyledBreadcrumb
-            component="a"
-          //  onClick={() => {
-          //    setContext({
-          //      nomeSAS,
-          //      mes,
-          //    });
-          //    history.push('/reports');
-          //  }}
-            label="{serviceName}"
-          />
-          <Typography color="textPrimary">Respostas</Typography>
-        </Breadcrumbs>
-        <div>
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <FirstSection>
+            <Breadcrumbs aria-label="breadcrumb">
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  history.push('/');
+                }}
+                label={nomeSAS}
+                icon={<HomeIcon fontSize="small" />}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('months');
+                }}
+                label={monthString}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+                label={serviceName}
+              />
+              <Typography color="textPrimary">Respostas</Typography>
+            </Breadcrumbs>
+            <div>
 
-          <MyButton
-            variant="contained"
-            onClick={() => {
-              window.print();
-            }}
-            color="primary"
-          >
-            Imprimir
+              <MyButton
+                variant="contained"
+                onClick={() => {
+                  window.print();
+                }}
+                color="primary"
+              >
+                Imprimir
 
-          </MyButton>
-          <MyButton
-            variant="contained"
-            color="primary"
-          //  onClick={() => {
-          //    setContext({
-          //      nomeSAS,
-          //      mes,
-          //    });
-          //    history.push('/reports');
-          //  }}
-          >
-            Voltar
+              </MyButton>
+              <MyButton
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+              >
+                Voltar
 
-          </MyButton>
-        </div>
+              </MyButton>
+            </div>
 
-      </FirstSection>
+          </FirstSection>
 
-      <Section>
-        <h2>
-          Quantidade de pessoas do sexo feminino atendidas pelo serviço no mês, por faixa etária:
-        </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesFem} />
+          <Section>
+            <h2>
+              1. Quantidade de pessoas do sexo feminino
+              atendidas pelo serviço no mês, por faixa etária:
+            </h2>
+            <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesFem} />
 
-        <h2>
-          Quantidade de pessoas do sexo masculino atendidos pelo serviço no mês, por faixa etária
-        </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesMasc} />
+            <h2>
+              2. Quantidade de pessoas do sexo masculino
+              atendidos pelo serviço no mês, por faixa etária
+            </h2>
+            <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesMasc} />
 
-        <br />
+            <br />
 
-        <h2>
-          Quantidade pessoas atendidas por sexo e raça/cor no mês
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
+            <h2>
+              3. Quantidade pessoas atendidas por sexo e raça/cor no mês
+            </h2>
+            <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
 
-        <br />
+            <br />
 
-        <h2>
-          Quantidade de pessoas atendidas pelo serviço no mês, por tipo de deficiência
-        </h2>
-        <TableTwoColumns headers={['', '']} body={atendidosMesTipoDef} />
-        <br />
-        <h2>
-          4. N° de idosos atendidos no serviço de convivência que moram sozinhos
-          e caso morem sozinhos, quantos contam com alguém se precisarem de ajuda:
-        </h2>
-        <TableTwoColumns headers={idososMoramSozinhoHeaders} body={idososMoramSozinho} />
+            <h2>
+              4. Quantidade de pessoas atendidas pelo serviço no mês, por tipo de deficiência
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={atendidosMesTipoDef} />
+            <br />
+            <h2>
+              5. Território de moradia das pessoas atendidas pelo serviço no mês
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={territorioMoradia} />
+            <br />
+            <h2>
+              6. Situação escolar das pessoas que foram atendidas pelo serviço no mês
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={situacaoEscolar} />
+            <h2>
+              7. Quantidade de pessoas atendidas pelo
+              serviço no mês que são beneficiárias do BPC - Benefício de Prestação Continuada
+            </h2>
 
-        <br />
-        <h2>
-          5. Os valores das seguites questões sobre atendimento
-          às familías dos idosos do serviço de convivência no mês de referência::
-        </h2>
-        <TableTwoColumns headers={idososFamiliasHeaders} body={idososFamilias} />
-        <h2>
-          6. O número de famílias ou pessoas que buscaram atendimento presencial
-          no mês de referência devido a alguma vulnerabilidade relacional:
-        </h2>
-        <TableTwoColumns headers={familiasVulnerabilidadeHeaders} body={familiasVulnerabilidade} />
-        <br />
+            <TableTwoColumns headers={['', 'Quantidade']} body={beneficariosBPC} />
 
-        <h2>
-          7. As atividades realizadas com as pessoas atendidas pelo
-          serviço na modalidade convivência no mês de referência:
-        </h2>
+            <h2>
+              8. Encaminhamentos realizados pelo serviço no mês
+            </h2>
+            <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
 
-        <ListComponent items={atividadesItems} />
+            <h2>
+              9. Quantidade de pessoas incluídas na lista de espera
+              (demanda reprimida) do serviço no mês
+            </h2>
 
-        <h2>
-          8. Os temas discutidos com as pessoas atendidas
-          pelo serviço na modalidade convivência no mês de referência:
-        </h2>
-        <ListComponent items={temasItems} />
-        <br />
-        <h2>
-          9. Quantidade de atendimentos remotos de usuários
-          do serviço de convivência por semana no mês:
-        </h2>
-        <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
-        <br />
-        <h2>
-          10. Quantidade de atividades remotas realizadas pelo serviço de
-          convivência no mês, pelos meios em que foram disponibilizadas:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosTiposHeaders}
-          body={atendimentosRemotosTipos}
-        />
-        <br />
-        <h2>
-          11. Quantidade de atendimentos remotos de familiares
-          no serviço de convivência por semana no mês:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosFamiliaSemanaHeaders}
-          body={atendimentosRemotosFamiliaSemana}
-        />
-        <br />
-        <h2>
-          Informações sobre o acompanhamento social em domicílio
-        </h2>
-        <br />
-        <br />
-        <h2>
-          1. Quantidade de pessoas atendidas do serviço em domicílio no mês de referência:
-        </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesDomicilio} />
+            <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
 
-        <h2>
-          2. Quantidade de pessoas atendidas por sexo e raça/cor
-          no serviço em domicílio no mês de referência:
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCorDomicilio} />
+            <h2>
+              10. Quantidade de atendimentos remotos de usuários por semana no mês
+            </h2>
+            <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
 
-        <br />
-        <h2>
-          3. Nº de pessoas por motivo de saída do serviço em domicílio  no mês de referência:
-        </h2>
-        <TableTwoColumns headers={motivosSaidaHeaders} body={motivosSaidaDomicilio} />
-        <br />
-        <h2>
-          4.N° de idosos atendidos no serviço em domicílio que moram sozinhos e
-          caso morem sozinhos, quantos contam com alguém se precisarem de ajuda:
-        </h2>
-        <TableTwoColumns headers={idososMoramSozinhoHeaders} body={idososMoramSozinhoDomicilio} />
+            <br />
+            <h2>
+              11. Quantidade de atividades remotas
+              realizadas no mês, pelo meio em que foram disponibilizadas
+            </h2>
 
-        <br />
-        <h2>
-          5. Os valores das seguintes questões sobre atendimento
-          às famílias dos idosos do serviço em domicílio no mês de referência:
-        </h2>
-        <TableTwoColumns headers={idososFamiliasHeaders} body={idososFamiliasDomicilio} />
-        <h2>
-          6. O número de famílias ou pessoas que buscaram atendimento
-          presencial do serviço em domicílio no mês de referência devido
-          a alguma vulnerabilidade relacional:
-        </h2>
-        <TableTwoColumns
-          headers={familiasVulnerabilidadeHeaders}
-          body={familiasVulnerabilidadeDomicilio}
-        />
-        <br />
+            <TableTwoColumns
+              headers={atendimentosRemotosTiposHeaders}
+              body={atendimentosRemotosTiposDomicilio}
+            />
 
-        <h2>
-          7. Quantidade de atendimentos remotos de usuários
-          do serviço em domicílio por semana no mês:
-        </h2>
+            <h2>
+              12. Quantidade de atendimentos remotos de familiares por semana no mês
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosFamiliaSemanaHeaders}
+              body={atendimentosRemotosFamiliaSemana}
+            />
 
-        <TableTwoColumns
-          headers={atendimentosRemotosHeaders}
-          body={atendimentosRemotosDomicilio}
-        />
-        <br />
-        <h2>
-          8. Quantidade de atividades remotas realizadas pelo
-          serviço em em domicílio no mês, pelos meios em que foram disponibilizadas:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosTiposHeaders}
-          body={atendimentosRemotosTiposDomicilio}
-        />
-        <br />
-        <h2>
-          11. Quantidade de atendimentos remotos de
-          familiares do serviço em domicílio por semana no mês:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosFamiliaSemanaHeaders}
-          body={atendimentosRemotosFamiliaSemanaDomicilio}
-        />
-        <br />
-
-        <h2>
-          Informações sobre o serviço de convivência e sobre o acompanhamento social em domicílio
-        </h2>
-
-        <br />
-        <br />
-        <Typography variant="h5" gutterBottom>
-          1. Quantidade de pessoas com deficiência atendidas no mês é de
-          {' '}
-          {services.nciusuariospcd}
-          {' '}
-          pessoa(s)
-        </Typography>
-        <br />
-        <h2>
-          2. Quantidade de pessoas incluídas em lista de
-          espera (demanda reprimida) no mês, por faixa etária:
-        </h2>
-        <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
-        <h2>
-          3. Quantidade de encaminhamentos realizados pelo serviço no mês:
-        </h2>
-        <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
-        <br />
-        <h2>
-          4. Quantifique as informações abaixo com os dados do mês de referência
-        </h2>
-        <TableTwoColumns headers={infoIdososHeaders} body={infoIdosos} />
-        <h2>
-          5. Nº de idosos que receberam insumos no mês de referência:
-        </h2>
-        <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
-
-      </Section>
-    </>
+          </Section>
+        </>
+      )
   );
 };
 

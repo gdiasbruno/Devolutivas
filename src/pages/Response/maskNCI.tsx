@@ -11,9 +11,10 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section,
+  FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
 
 import TableEigthColumns from '../../components/TableEightColumns';
@@ -115,12 +116,13 @@ const Response:any = () => {
     nomeSAS, mes, serviceName, token, tipologia,
   } = context;
   const history = useHistory();
-  // eslint-disable-next-line new-cap
+  const [loading, setLoading] = useState(true);
 
   const fetchUserProfiles = () => {
     axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
       setServices(res.data);
       console.log(res.data);
+      setLoading(false);
     });
   };
 
@@ -706,259 +708,270 @@ const Response:any = () => {
     createData('Semana 6', services['ncidomatendremfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
+  let monthString = '';
+
+  if (mes === '0121') {
+    monthString = 'Janeiro 2021';
+  } else if (mes === '0221') {
+    monthString = 'Fevereiro 2021';
+  } else if (mes === '0321') {
+    monthString = 'Março 2021';
+  }
+
   return (
-    <>
-      <FirstSection>
-        <Breadcrumbs aria-label="breadcrumb">
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              history.push('/');
-            }}
-            label={nomeSAS}
-            icon={<HomeIcon fontSize="small" />}
-          />
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('months');
-            }}
-            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
-          />
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('/reports');
-            }}
-            label={serviceName}
-          />
-          <Typography color="textPrimary">Respostas</Typography>
-        </Breadcrumbs>
-        <div>
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <FirstSection>
+            <Breadcrumbs aria-label="breadcrumb">
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  history.push('/');
+                }}
+                label={nomeSAS}
+                icon={<HomeIcon fontSize="small" />}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('months');
+                }}
+                label={monthString}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+                label={serviceName}
+              />
+              <Typography color="textPrimary">Respostas</Typography>
+            </Breadcrumbs>
+            <div>
 
-          <MyButton
-            variant="contained"
-            onClick={() => {
-              window.print();
-            }}
-            color="primary"
-          >
-            Imprimir
+              <MyButton
+                variant="contained"
+                onClick={() => {
+                  window.print();
+                }}
+                color="primary"
+              >
+                Imprimir
 
-          </MyButton>
-          <MyButton
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.push('/reports');
-            }}
-          >
-            Voltar
+              </MyButton>
+              <MyButton
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                  });
+                  history.push('/reports');
+                }}
+              >
+                Voltar
 
-          </MyButton>
-        </div>
+              </MyButton>
+            </div>
 
-      </FirstSection>
+          </FirstSection>
 
-      <Section>
-        <h2>
-          Informações sobre o serviço de convivência
-        </h2>
-        <br />
-        <br />
-        <h2>
-          1. Quantidade de pessoas atendidas do serviço de convivência no mês de referência:
-        </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
+          <Section>
+            <h1>
+              Informações sobre o serviço de convivência
+            </h1>
+            <br />
 
-        <h2>
-          2. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência:
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
+            <h2>
+              1. Quantidade de pessoas atendidas do serviço de convivência no mês de referência:
+            </h2>
+            <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
 
-        <br />
-        <h2>
-          3. Quantidade de usuários por motivo de saída do serviço no mês:
-        </h2>
-        <TableTwoColumns headers={motivosSaidaHeaders} body={motivosSaida} />
-        <br />
-        <h2>
-          4. N° de idosos atendidos no serviço de convivência que moram sozinhos
-          e caso morem sozinhos, quantos contam com alguém se precisarem de ajuda:
-        </h2>
-        <TableTwoColumns headers={idososMoramSozinhoHeaders} body={idososMoramSozinho} />
+            <h2>
+              2. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência:
+            </h2>
+            <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
 
-        <br />
-        <h2>
-          5. Os valores das seguites questões sobre atendimento
-          às familías dos idosos do serviço de convivência no mês de referência::
-        </h2>
-        <TableTwoColumns headers={idososFamiliasHeaders} body={idososFamilias} />
-        <h2>
-          6. O número de famílias ou pessoas que buscaram atendimento presencial
-          no mês de referência devido a alguma vulnerabilidade relacional:
-        </h2>
-        <TableTwoColumns headers={familiasVulnerabilidadeHeaders} body={familiasVulnerabilidade} />
-        <br />
+            <h2>
+              3. Quantidade de usuários por motivo de saída do serviço no mês:
+            </h2>
+            <TableTwoColumns headers={motivosSaidaHeaders} body={motivosSaida} />
 
-        <h2>
-          7. As atividades realizadas com as pessoas atendidas pelo
-          serviço na modalidade convivência no mês de referência:
-        </h2>
+            <h2>
+              4. N° de idosos atendidos no serviço de convivência que moram sozinhos
+              e caso morem sozinhos, quantos contam com alguém se precisarem de ajuda:
+            </h2>
+            <TableTwoColumns headers={idososMoramSozinhoHeaders} body={idososMoramSozinho} />
 
-        <ListComponent items={atividadesItems} />
+            <h2>
+              5. Os valores das seguites questões sobre atendimento
+              às familías dos idosos do serviço de convivência no mês de referência::
+            </h2>
+            <TableTwoColumns headers={idososFamiliasHeaders} body={idososFamilias} />
+            <h2>
+              6. O número de famílias ou pessoas que buscaram atendimento presencial
+              no mês de referência devido a alguma vulnerabilidade relacional:
+            </h2>
+            <TableTwoColumns
+              headers={familiasVulnerabilidadeHeaders}
+              body={familiasVulnerabilidade}
+            />
 
-        <h2>
-          8. Os temas discutidos com as pessoas atendidas
-          pelo serviço na modalidade convivência no mês de referência:
-        </h2>
-        <ListComponent items={temasItems} />
-        <br />
-        <h2>
-          9. Quantidade de atendimentos remotos de usuários
-          do serviço de convivência por semana no mês:
-        </h2>
-        <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
-        <br />
-        <h2>
-          10. Quantidade de atividades remotas realizadas pelo serviço de
-          convivência no mês, pelos meios em que foram disponibilizadas:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosTiposHeaders}
-          body={atendimentosRemotosTipos}
-        />
-        <br />
-        <h2>
-          11. Quantidade de atendimentos remotos de familiares
-          no serviço de convivência por semana no mês:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosFamiliaSemanaHeaders}
-          body={atendimentosRemotosFamiliaSemana}
-        />
-        <br />
-        <h2>
-          Informações sobre o acompanhamento social em domicílio
-        </h2>
-        <br />
-        <br />
-        <h2>
-          1. Quantidade de pessoas atendidas do serviço em domicílio no mês de referência:
-        </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesDomicilio} />
+            <h2>
+              7. As atividades realizadas com as pessoas atendidas pelo
+              serviço na modalidade convivência no mês de referência:
+            </h2>
 
-        <h2>
-          2. Quantidade de pessoas atendidas por sexo e raça/cor
-          no serviço em domicílio no mês de referência:
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCorDomicilio} />
+            <ListComponent items={atividadesItems} />
 
-        <br />
-        <h2>
-          3. Nº de pessoas por motivo de saída do serviço em domicílio  no mês de referência:
-        </h2>
-        <TableTwoColumns headers={motivosSaidaHeaders} body={motivosSaidaDomicilio} />
-        <br />
-        <h2>
-          4.N° de idosos atendidos no serviço em domicílio que moram sozinhos e
-          caso morem sozinhos, quantos contam com alguém se precisarem de ajuda:
-        </h2>
-        <TableTwoColumns headers={idososMoramSozinhoHeaders} body={idososMoramSozinhoDomicilio} />
+            <h2>
+              8. Os temas discutidos com as pessoas atendidas
+              pelo serviço na modalidade convivência no mês de referência:
+            </h2>
+            <ListComponent items={temasItems} />
 
-        <br />
-        <h2>
-          5. Os valores das seguintes questões sobre atendimento
-          às famílias dos idosos do serviço em domicílio no mês de referência:
-        </h2>
-        <TableTwoColumns headers={idososFamiliasHeaders} body={idososFamiliasDomicilio} />
-        <h2>
-          6. O número de famílias ou pessoas que buscaram atendimento
-          presencial do serviço em domicílio no mês de referência devido
-          a alguma vulnerabilidade relacional:
-        </h2>
-        <TableTwoColumns
-          headers={familiasVulnerabilidadeHeaders}
-          body={familiasVulnerabilidadeDomicilio}
-        />
-        <br />
+            <h2>
+              9. Quantidade de atendimentos remotos de usuários
+              do serviço de convivência por semana no mês:
+            </h2>
+            <TableTwoColumns headers={atendimentosRemotosHeaders} body={atendimentosRemotos} />
 
-        <h2>
-          7. Quantidade de atendimentos remotos de usuários
-          do serviço em domicílio por semana no mês:
-        </h2>
+            <h2>
+              10. Quantidade de atividades remotas realizadas pelo serviço de
+              convivência no mês, pelos meios em que foram disponibilizadas:
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosTiposHeaders}
+              body={atendimentosRemotosTipos}
+            />
 
-        <TableTwoColumns
-          headers={atendimentosRemotosHeaders}
-          body={atendimentosRemotosDomicilio}
-        />
-        <br />
-        <h2>
-          8. Quantidade de atividades remotas realizadas pelo
-          serviço em em domicílio no mês, pelos meios em que foram disponibilizadas:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosTiposHeaders}
-          body={atendimentosRemotosTiposDomicilio}
-        />
-        <br />
-        <h2>
-          11. Quantidade de atendimentos remotos de
-          familiares do serviço em domicílio por semana no mês:
-        </h2>
-        <TableTwoColumns
-          headers={atendimentosRemotosFamiliaSemanaHeaders}
-          body={atendimentosRemotosFamiliaSemanaDomicilio}
-        />
-        <br />
+            <h2>
+              11. Quantidade de atendimentos remotos de familiares
+              no serviço de convivência por semana no mês:
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosFamiliaSemanaHeaders}
+              body={atendimentosRemotosFamiliaSemana}
+            />
 
-        <h2>
-          Informações sobre o serviço de convivência e sobre o acompanhamento social em domicílio
-        </h2>
+            <h1>
+              Informações sobre o acompanhamento social em domicílio
+            </h1>
+            <br />
+            <h2>
+              1. Quantidade de pessoas atendidas do serviço em domicílio no mês de referência:
+            </h2>
+            <TableFourColumns headers={atendidosMesHeaders} body={atendidosMesDomicilio} />
 
-        <br />
-        <br />
-        <Typography variant="h5" gutterBottom>
-          1. Quantidade de pessoas com deficiência atendidas no mês é de
-          {' '}
-          {services.nciusuariospcd}
-          {' '}
-          pessoa(s)
-        </Typography>
-        <br />
-        <h2>
-          2. Quantidade de pessoas incluídas em lista de
-          espera (demanda reprimida) no mês, por faixa etária:
-        </h2>
-        <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
-        <h2>
-          3. Quantidade de encaminhamentos realizados pelo serviço no mês:
-        </h2>
-        <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
-        <br />
-        <h2>
-          4. Quantifique as informações abaixo com os dados do mês de referência
-        </h2>
-        <TableTwoColumns headers={infoIdososHeaders} body={infoIdosos} />
-        <h2>
-          5. Nº de idosos que receberam insumos no mês de referência:
-        </h2>
-        <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
+            <h2>
+              2. Quantidade de pessoas atendidas por sexo e raça/cor
+              no serviço em domicílio no mês de referência:
+            </h2>
+            <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCorDomicilio} />
 
-      </Section>
-    </>
+            <h2>
+              3. Nº de pessoas por motivo de saída do serviço em domicílio  no mês de referência:
+            </h2>
+            <TableTwoColumns headers={motivosSaidaHeaders} body={motivosSaidaDomicilio} />
+
+            <h2>
+              4.N° de idosos atendidos no serviço em domicílio que moram sozinhos e
+              caso morem sozinhos, quantos contam com alguém se precisarem de ajuda:
+            </h2>
+            <TableTwoColumns
+              headers={idososMoramSozinhoHeaders}
+              body={idososMoramSozinhoDomicilio}
+            />
+
+            <h2>
+              5. Os valores das seguintes questões sobre atendimento
+              às famílias dos idosos do serviço em domicílio no mês de referência:
+            </h2>
+            <TableTwoColumns headers={idososFamiliasHeaders} body={idososFamiliasDomicilio} />
+            <h2>
+              6. O número de famílias ou pessoas que buscaram atendimento
+              presencial do serviço em domicílio no mês de referência devido
+              a alguma vulnerabilidade relacional:
+            </h2>
+            <TableTwoColumns
+              headers={familiasVulnerabilidadeHeaders}
+              body={familiasVulnerabilidadeDomicilio}
+            />
+
+            <h2>
+              7. Quantidade de atendimentos remotos de usuários
+              do serviço em domicílio por semana no mês:
+            </h2>
+
+            <TableTwoColumns
+              headers={atendimentosRemotosHeaders}
+              body={atendimentosRemotosDomicilio}
+            />
+
+            <h2>
+              8. Quantidade de atividades remotas realizadas pelo
+              serviço em em domicílio no mês, pelos meios em que foram disponibilizadas:
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosTiposHeaders}
+              body={atendimentosRemotosTiposDomicilio}
+            />
+
+            <h2>
+              11. Quantidade de atendimentos remotos de
+              familiares do serviço em domicílio por semana no mês:
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosFamiliaSemanaHeaders}
+              body={atendimentosRemotosFamiliaSemanaDomicilio}
+            />
+
+            <h1>
+              Informações sobre o serviço de convivência
+              e sobre o acompanhamento social em domicílio
+            </h1>
+            <br />
+            <h2>
+              1. Quantidade de pessoas com deficiência atendidas no mês
+            </h2>
+            <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Pessoa(s)', services.nciusuariospcd, 1, 1, 1, 1, 1, 1, 1, 1)]} />
+            <h2>
+              2. Quantidade de pessoas incluídas em lista de
+              espera (demanda reprimida) no mês, por faixa etária:
+            </h2>
+            <TableTwoColumns headers={demandaReprimidaHeaders} body={demandaReprimida} />
+            <h2>
+              3. Quantidade de encaminhamentos realizados pelo serviço no mês:
+            </h2>
+            <TableTwoColumns headers={encaminhamentosHeaders} body={encaminhamentos} />
+
+            <h2>
+              4. Quantifique as informações abaixo com os dados do mês de referência
+            </h2>
+            <TableTwoColumns headers={infoIdososHeaders} body={infoIdosos} />
+            <h2>
+              5. Nº de idosos que receberam insumos no mês de referência:
+            </h2>
+            <TableTwoColumns headers={familiasInsumosHeaders} body={familiasInsumos} />
+
+          </Section>
+        </>
+      )
   );
 };
 
