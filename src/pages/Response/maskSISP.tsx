@@ -4,7 +4,6 @@ import React, {
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-
 import {
   withStyles, Theme,
 } from '@material-ui/core/styles';
@@ -68,7 +67,6 @@ function createData(
   };
 }
 
-
 const sexoRacaCorHeaders = [
   'Branca',
   'Preta',
@@ -96,7 +94,6 @@ const Response:any = () => {
       setServices(res.data);
       console.log(res.data);
       setLoading(false);
-
     });
   };
 

@@ -41,8 +41,11 @@ export const FirstSection = styled.div`
 `;
 
 export const Section = styled.div`
-  max-width: 1080px;
+  max-width: 210mm;
   margin: 0 auto;
+  min-height: '297mm';
+  margin-left: 'auto';
+  margin-right: 'auto';
 `;
 
 export const Chips = styled.div`

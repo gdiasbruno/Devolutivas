@@ -4,7 +4,6 @@ import React, {
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-
 import {
   withStyles, Theme,
 } from '@material-ui/core/styles';
@@ -118,7 +117,6 @@ const atendimentoFamiliaHeaders = ['', 'Nº de famílias'];
 
 const demandaReprimidaHeaders = ['', 'Nº de pessoas'];
 
-
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
 
 const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
@@ -141,7 +139,6 @@ const Response:any = () => {
       setServices(res.data);
       console.log(res.data);
       setLoading(false);
-
     });
   };
 

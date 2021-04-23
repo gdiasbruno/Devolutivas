@@ -4,7 +4,6 @@ import React, {
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-
 import {
   withStyles, Theme,
 } from '@material-ui/core/styles';
@@ -27,7 +26,6 @@ import ListComponent from '../../components/ListComponent';
 
 import { infoContext } from '../../providers/reactContext';
 import TableThreeColumns from '../../components/TableThreeColumns';
-
 
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
@@ -101,7 +99,6 @@ const atendimentoFamiliaHeaders = ['', 'Nº de famílias'];
 
 const demandaReprimidaHeaders = ['', 'Nº de pessoas'];
 
-
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
 
 const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
@@ -124,7 +121,6 @@ const Response:any = () => {
       setServices(res.data);
       console.log(res.data);
       setLoading(false);
-
     });
   };
 

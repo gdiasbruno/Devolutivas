@@ -4,7 +4,6 @@ import React, {
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-
 import {
   withStyles, Theme,
 } from '@material-ui/core/styles';
@@ -22,7 +21,6 @@ import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import TableSevenColumns from '../../components/TableSevenColumns';
-
 
 import { infoContext } from '../../providers/reactContext';
 
@@ -111,7 +109,6 @@ const Response:any = () => {
       setServices(res.data);
       console.log(res.data);
       setLoading(false);
-
     });
   };
 

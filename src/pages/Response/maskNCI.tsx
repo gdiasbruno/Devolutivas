@@ -1,10 +1,8 @@
-
 import React, {
   useState, useEffect, useContext,
 } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-
 
 import {
   withStyles, Theme,
@@ -29,7 +27,6 @@ import ListComponent from '../../components/ListComponent';
 import { infoContext } from '../../providers/reactContext';
 import TableThreeColumns from '../../components/TableThreeColumns';
 
-
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.grey[100],
@@ -53,7 +50,7 @@ function createData(
   attribute6: number,
   attribute7: number,
   attribute8: number,
- attribute9: number,
+  attribute9: number,
 ) {
   return {
     title,
@@ -73,7 +70,6 @@ const idososMoramSozinhoHeaders = ['', 'Quantidade'];
 
 const idososFamiliasHeaders = ['', 'Quantidade'];
 
-
 const atendidosMesHeaders = [
   'N° de usuários atendidos no mês',
   'Nº de usuários que frequentaram presencialmente o serviço',
@@ -90,7 +86,6 @@ const sexoRacaCorHeaders = [
   'Total',
 ];
 
-
 const motivosSaidaHeaders = [
   '',
   'Quantidade',
@@ -105,7 +100,6 @@ const familiasVulnerabilidadeHeaders = ['', 'Nº de famílias'];
 const atendimentoFamiliaHeaders = ['', 'Nº de famílias'];
 
 const demandaReprimidaHeaders = ['', 'Nº de pessoas'];
-
 
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
 
@@ -129,7 +123,6 @@ const Response:any = () => {
       setServices(res.data);
       console.log(res.data);
       setLoading(false);
-
     });
   };
 

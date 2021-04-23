@@ -13,9 +13,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import FilterListIcon from '@material-ui/icons/FilterList';
 
+import { Button } from '@material-ui/core';
 import {
-  FirstSection, MyButton, SecondSection,
+  FirstSection, SecondSection, Filter,
 } from './styles';
 
 import { infoContext } from '../../providers/reactContext';
@@ -65,6 +67,23 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     fontWeight: 'bold',
     maxWidth: '200px',
   },
+  filterButton: {
+    minHeight: '2rem',
+    backgroundColor: theme.palette.grey[100],
+    height: theme.spacing(3),
+    color: theme.palette.grey[900],
+    fontWeight: theme.typography.fontWeightBold,
+    fontSize: 15,
+    '&:hover, &:focus': {
+      backgroundColor: theme.palette.grey[600],
+    },
+  },
+  disclaimeMessage: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '10px 0',
+  },
+
 }));
 
 const Reports: React.FC = () => {
@@ -74,23 +93,14 @@ const Reports: React.FC = () => {
   const { nomeSAS, mes } = context;
 
   const [services, setServices]:any = useState([]);
+  const [servicesFiltered, setServicesFiltered]:any = useState([]);
 
   const fetchUserProfiles = () => {
     axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}`).then((res) => {
       setServices(res.data);
+      setServicesFiltered(res.data);
       console.log(res.data);
     });
-  };
-
-  // eslint-disable-next-line camelcase
-  const tipologias = services.map((service: { attribute_4: any; }):any => service.attribute_4);
-  const uniqueTipologias = [...new Set<any>(tipologias)];
-
-  const [state, setState] = React.useState({ ...uniqueTipologias });
-  const { CCA, CEDESP, CDI }:any = state;
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   useEffect(() => {
@@ -106,6 +116,17 @@ const Reports: React.FC = () => {
   } else if (mes === '0321') {
     monthString = 'Março 2021';
   }
+
+  const handleClickPSB = () => {
+    const result = services.filter((service:any) => service.protection === 'PSB');
+    setServicesFiltered(result);
+    console.log(servicesFiltered);
+  };
+  const handleClickPSE = () => {
+    const result = services.filter((service:any) => service.protection === 'PSE Media');
+    setServicesFiltered(result);
+    console.log(servicesFiltered);
+  };
 
   return (
     <>
@@ -129,7 +150,7 @@ const Reports: React.FC = () => {
           <Typography color="textPrimary">Serviços</Typography>
         </Breadcrumbs>
 
-        <MyButton
+        <Button
           variant="contained"
           color="primary"
           onClick={() => {
@@ -138,57 +159,72 @@ const Reports: React.FC = () => {
         >
           Voltar
 
-        </MyButton>
+        </Button>
 
       </FirstSection>
+      <div className={classes.disclaimeMessage}>
+        <h3>
+          Os nomes dos serviços constam segundo a
+          nomenclatura usada no Formulário de Monitoramento
+        </h3>
+      </div>
       <SecondSection>
-        {/* <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Escolha o(s) Tipo(s) de Serviço</FormLabel>
-          <FormGroup>
-            {uniqueTipologias.map((tipologia:any) => (
-              <FormControlLabel
-                control={(
-                  <Checkbox
-                    checked={tipologia}
-                    onChange={handleChange}
-                    name={tipologia}
-                    color="primary"
-                  />
-)}
-                label={tipologia}
-              />
-            ))}
+        <Filter>
+          <div>
+            <FilterListIcon />
+            <h2>Filter</h2>
+          </div>
+          <Button
+            variant="contained"
+            onClick={handleClickPSB}
+            className={classes.filterButton}
+          >
+            Proteção Básica
 
-          </FormGroup>
-        </FormControl> */}
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleClickPSE}
+            className={classes.filterButton}
+          >
+            Proteção Especial
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => { setServicesFiltered(services); }}
+            className={classes.filterButton}
+          >
+            Todos
+          </Button>
+        </Filter>
         <div className={classes.bodyServicesItems}>
           <List component="nav" aria-label="main mailbox folders">
-            {services.map((service:any) => {
-              console.log(service);
-              return (
+            {servicesFiltered.map((service:any) => (
 
-                <ListItem
-                  button
-                  onClick={() => {
-                    setContext({
-                      nomeSAS,
-                      mes,
-                      serviceName: service.firstname,
-                      token: service.token,
-                      tipologia: service.typology.substring(0, 3),
-                    });
-                    history.push(`/response${service.typology}`);
-                  }}
+              <ListItem
+                button
+                onClick={() => {
+                  setContext({
+                    nomeSAS,
+                    mes,
+                    serviceName: service.firstname,
+                    token: service.token,
+                    tipologia: service.typology.substring(0, 3),
+                    distrito: service.district,
+                    protecao: service.protection,
+                    termo: service.term,
+                  });
+                  history.push(`/response${service.typology}`);
+                }}
+              >
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary={`${service.firstname} `} />
+                <h4>{service.typology}</h4>
+              </ListItem>
 
-                >
-                  <ListItemIcon>
-                    <HomeIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={service.firstname} />
-                </ListItem>
-
-              );
-            })}
+            ))}
 
           </List>
 

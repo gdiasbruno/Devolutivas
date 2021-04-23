@@ -1,4 +1,3 @@
-
 import React, {
   useState, useEffect, useContext,
 } from 'react';
@@ -29,7 +28,6 @@ import ListComponent from '../../components/ListComponent';
 
 import { infoContext } from '../../providers/reactContext';
 import TableThreeColumns from '../../components/TableThreeColumns';
-
 
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
@@ -74,7 +72,6 @@ const idososMoramSozinhoHeaders = ['', 'Quantidade'];
 
 const idososFamiliasHeaders = ['', 'Quantidade'];
 
-
 const atendidosMesHeaders = [
   'N° de usuários atendidos no mês',
   'Nº de usuários que frequentaram presencialmente o serviço',
@@ -106,7 +103,6 @@ const atendimentoFamiliaHeaders = ['', 'Nº de famílias'];
 
 const demandaReprimidaHeaders = ['', 'Nº de pessoas'];
 
-
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
 
 const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
@@ -128,7 +124,6 @@ const Response:any = () => {
       setServices(res.data);
       console.log(res.data);
       setLoading(false);
-
     });
   };
 
@@ -819,7 +814,7 @@ const Response:any = () => {
     createData('15 a 17 anos', services['naislistaespera[15a17_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('18 a 29 anos', services['naislistaespera[18a29_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('30 a 59 anos', services['naislistaespera[30a59_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
-   createData('60 anos ou mais', services['naislistaespera[60mais_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('60 anos ou mais', services['naislistaespera[60mais_qtd]'], 1, 1, 1, 1, 1, 1, 1, 1),
 
     createData('Total',
       parseInt(services['naislistaespera[0a5_qtd]'], 10)
@@ -860,24 +855,24 @@ const Response:any = () => {
     createData('Semana 6', services['ncidomatendremperio[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
- const atendimentosRemotosTipos = [
+  const atendimentosRemotosTipos = [
     createData('Telefone / Celular / Whatsapp', services['nciconvivenciremdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Email', services['nciconvivenciremdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
-   createData('Facebook', services['nciconvivenciremdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Facebook', services['nciconvivenciremdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('YouTube', services['nciconvivenciremdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Outras redes sociais', services['nciconvivenciremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Entrega de kits de atividades', services['nciconvivenciremdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['nciconvivenciremdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),  ];
+    createData('Outros', services['nciconvivenciremdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1)];
 
   const atendimentosRemotosTiposDomicilio = [
     createData('Telefone / Celular / Whatsapp', services['naisdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Email', services['naisdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
-   createData('Facebook', services['naisdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Facebook', services['naisdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('YouTube', services['naisdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Outras redes sociais', services['naisdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Entrega de kits de atividades', services['naisdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Outros', services['naisdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
- ];
+  ];
 
   const atendimentosRemotosFamiliaSemana = [
     createData('Semana 1', services['naisperiofam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
