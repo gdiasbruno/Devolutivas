@@ -1,20 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
 
-import {
-  withStyles, Theme,
-} from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import HomeIcon from '@material-ui/icons/Home';
-import { Typography } from '@material-ui/core';
-
-import { useHistory } from 'react-router-dom';
 import MoonLoader from 'react-spinners/MoonLoader';
+
 import {
-  FirstSection, MyButton, Section, LoaderBody,
+  Section, LoaderBody,
 } from './styles';
 
 import TableFourColumns from '../../components/TableFourColumns';
@@ -22,21 +12,10 @@ import TableEigthColumns from '../../components/TableEightColumns';
 import TableThreeColumns from '../../components/TableThreeColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import ListComponent from '../../components/ListComponent';
+import HeaderInfo from '../../components/HeaderInfo';
+import Navbar from '../../components/Navbar';
 
 import { infoContext } from '../../providers/reactContext';
-
-const StyledBreadcrumb = withStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.grey[100],
-    height: theme.spacing(3),
-    color: theme.palette.grey[900],
-    fontWeight: theme.typography.fontWeightBold,
-    fontSize: 15,
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[300],
-    },
-  },
-}))(Chip) as typeof Chip;
 
 function createData(
   title: string,
@@ -89,11 +68,10 @@ const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 
 const Response: React.FC = () => {
   const [services, setServices]:any = useState([]);
-  const { context, setContext }:any = useContext(infoContext);
+  const { context }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, token, tipologia,
+    nomeSAS, mes, token, tipologia,
   } = context;
-  const history = useHistory();
   const [loading, setLoading] = useState(true);
 
   const fetchUserProfiles = () => {
@@ -319,65 +297,7 @@ const Response: React.FC = () => {
     createData('Semana 6', services['ccaperiodfam[6sem]'], 1, 1, 1, 1, 1, 1),
   ];
 
-  let monthString = '';
-
-  if (mes === '0121') {
-    monthString = 'Janeiro 2021';
-  } else if (mes === '0221') {
-    monthString = 'Fevereiro 2021';
-  } else if (mes === '0321') {
-    monthString = 'Março 2021';
-  }
-
-  const divToPrint = document.getElementById('divToPrint')?.offsetHeight || 0;
-
-  const pxToMm = (px:any) => Math.floor(px / 4);
-
-  const mmToPx = (mm:any) => 4 * mm;
-
-  const range = (start:any, end:any) => Array(end - start).join('0').split('0').map((val, id) => id + start);
-
-  const printDocument = () => {
-    const input:any = document.getElementById('divToPrint');
-
-    const inputHeightMm = pxToMm(input.offsetHeight);
-    const a4WidthMm = 210;
-    const a4HeightMm = 297;
-    const a4HeightPx = mmToPx(a4HeightMm);
-    const numPages = inputHeightMm <= a4HeightMm ? 1 : Math.floor(inputHeightMm / a4HeightMm) + 1;
-
-    console.log({
-      input,
-      inputHeightMm,
-      a4HeightMm,
-      a4HeightPx,
-      numPages,
-      range: range(0, numPages),
-      comp: inputHeightMm <= a4HeightMm,
-      inputHeightPx: input.offsetHeight,
-    });
-
-    html2canvas(input)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL('png');
-        // eslint-disable-next-line new-cap
-        let pdf;
-        if (inputHeightMm > a4HeightMm) {
-          // eslint-disable-next-line new-cap
-          pdf = new jsPDF('p', 'mm', [inputHeightMm + 16, a4WidthMm]);
-        } else {
-          // standard a4
-          // eslint-disable-next-line new-cap
-          pdf = new jsPDF();
-        }
-        pdf.addImage(imgData, 'JPEG', 0, 0, 0, 0);
-        // pdf.output('dataurlnewwindow');
-        pdf.save('download.pdf');
-      });
-  };
-
   return (
-
     loading
       ? (
         <LoaderBody>
@@ -386,71 +306,11 @@ const Response: React.FC = () => {
       )
       : (
         <>
-          <FirstSection>
-            <Breadcrumbs aria-label="breadcrumb">
-              <StyledBreadcrumb
-                component="a"
-                onClick={() => {
-                  history.push('/');
-                }}
-                label={nomeSAS}
-                icon={<HomeIcon fontSize="small" />}
-              />
-              <StyledBreadcrumb
-                component="a"
-                onClick={() => {
-                  setContext({
-                    nomeSAS,
-                    mes,
-                  });
-                  history.push('/months');
-                }}
-                label={monthString}
-              />
-              <StyledBreadcrumb
-                component="a"
-                onClick={() => {
-                  setContext({
-                    nomeSAS,
-                    mes,
-                  });
-                  history.push('/reports');
-                }}
-                label={serviceName}
-              />
-              <Typography color="textPrimary">Respostas</Typography>
-            </Breadcrumbs>
-            <div>
-              <MyButton
-                variant="contained"
-                onClick={printDocument}
-                color="primary"
-              >
-                Imprimir
+          <Navbar />
 
-              </MyButton>
-              <MyButton
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  setContext({
-                    nomeSAS,
-                    mes,
-                  });
-                  history.push('/reports');
-                }}
-              >
-                Voltar
+          <Section>
+            <HeaderInfo />
 
-              </MyButton>
-            </div>
-
-          </FirstSection>
-
-          <Section
-            id="divToPrint"
-
-          >
             <h2>
               1. Quantidade de crianças e adolescentes atendidos no mês, por faixa etária e sexo
             </h2>

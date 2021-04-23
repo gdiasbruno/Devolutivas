@@ -38,3 +38,10 @@ export const FirstSection = styled.div`
 export const MyButton = styled(Button)`
 
 `;
+
+export const LoaderBody = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+`;

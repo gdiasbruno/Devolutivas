@@ -19,6 +19,8 @@ import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import ListComponent from '../../components/ListComponent';
+import HeaderInfo from '../../components/HeaderInfo';
+import Navbar from '../../components/Navbar';
 
 import { infoContext } from '../../providers/reactContext';
 
@@ -304,62 +306,10 @@ const Response: React.FC = () => {
 
   return (
     <>
-      <FirstSection>
-        <Breadcrumbs aria-label="breadcrumb">
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              history.push('/');
-            }}
-            label={nomeSAS}
-            icon={<HomeIcon fontSize="small" />}
-          />
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.goBack();
-            }}
-            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
-          />
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.goBack();
-            }}
-            label={serviceName}
-          />
-          <Typography color="textPrimary">Respostas</Typography>
-        </Breadcrumbs>
-        <div>
-          <MyButton variant="contained" color="primary">PDF</MyButton>
-          <MyButton variant="contained" color="primary">Imprimir</MyButton>
-          <MyButton
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              setContext({
-                nomeSAS,
-                mes,
-              });
-              history.goBack();
-            }}
-          >
-            Voltar
-
-          </MyButton>
-        </div>
-
-      </FirstSection>
+      <Navbar />
 
       <Section>
+        <HeaderInfo />
         <h2>
           1. Quantidade de pessoas do sexo feminino atendidas pelo serviço no mês de referência:
         </h2>

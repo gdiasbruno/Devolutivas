@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
@@ -7,20 +7,87 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import MoonLoader from 'react-spinners/MoonLoader';
+import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
+
+import {
+  makeStyles, Theme, createStyles, withStyles,
+} from '@material-ui/core/styles';
 
 import CustomizedBreadcrumbs from '../../components/customizedBreadcrumbs';
 
 import {
-  Options, FirstSection, MyButton,
+  Options, FirstSection, MyButton, LoaderBody,
 } from './styles';
 
 import { infoContext } from '../../providers/reactContext';
 
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  formControl: {
+    margin: theme.spacing(5),
+  },
+  root: {
+    minWidth: 100,
+
+  },
+  bodyServicesItems: {
+    width: '100%',
+    maxWidth: 1200,
+    flex: 1,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  card: {
+    maxHeight: 250,
+    margin: '5px',
+  },
+  subtitle: {
+    fontWeight: 'bold',
+    maxWidth: '200px',
+  },
+  filterButton: {
+    minHeight: '2rem',
+    backgroundColor: theme.palette.grey[100],
+    height: theme.spacing(3),
+    color: theme.palette.grey[900],
+    fontWeight: theme.typography.fontWeightBold,
+    fontSize: 15,
+    '&:hover, &:focus': {
+      backgroundColor: theme.palette.grey[600],
+    },
+  },
+  disclaimeMessage: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '10px 0',
+  },
+  buttonIcon: {
+    marginRight: '10px',
+  },
+  button: {
+    marginRight: '10px',
+  },
+
+}));
+
 const Months: React.FC = () => {
-  const [value, setValue] = React.useState('female');
+  const classes = useStyles();
+
+  const [value, setValue] = React.useState('0121');
 
   const { context, setContext }:any = React.useContext(infoContext);
   const { nomeSAS } = context;
+
+  const [loading, setLoading] = useState(true);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
@@ -31,6 +98,7 @@ const Months: React.FC = () => {
   const fetchUserProfiles = () => {
     axios.get(`http://localhost:8080/devolutivas/${nomeSAS}`).then((res) => {
       setService(res.data);
+      setLoading(false);
     });
   };
 
@@ -67,31 +135,44 @@ const Months: React.FC = () => {
   };
 
   return (
-    <>
-      <FirstSection>
-        <CustomizedBreadcrumbs label={nomeSAS} />
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <FirstSection>
+            <CustomizedBreadcrumbs label={nomeSAS} />
 
-        <MyButton variant="contained" color="primary" onClick={() => history.push('/')}>Voltar</MyButton>
-
-      </FirstSection>
-      <Options>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Mês da consulta:</FormLabel>
-          <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-            {
+          </FirstSection>
+          <Options>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Mês da consulta:</FormLabel>
+              <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+                {
               monthsFiltered.map((month:any) => (
                 <FormControlLabel value={month.index} control={<Radio color="primary" />} label={month.name} />
               ))
             }
-          </RadioGroup>
-        </FormControl>
-        <br />
-        <br />
-        <MyButton onClick={handleClick} variant="contained" color="primary">Consultar</MyButton>
+              </RadioGroup>
+            </FormControl>
+            <br />
+            <br />
+            <div>
+              <MyButton className={classes.button} variant="outlined" color="primary" onClick={() => history.push('/')}>
+                <ArrowBackOutlinedIcon className={classes.buttonIcon} />
+                Voltar
 
-      </Options>
+              </MyButton>
+              <MyButton onClick={handleClick} variant="contained" color="primary">Consultar</MyButton>
+            </div>
 
-    </>
+          </Options>
+
+        </>
+      )
   );
 };
 

@@ -14,10 +14,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
+
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import { Button } from '@material-ui/core';
 import {
-  FirstSection, SecondSection, Filter,
+  FirstSection, SecondSection, Filter, LoaderBody,
 } from './styles';
 
 import { infoContext } from '../../providers/reactContext';
@@ -83,7 +86,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     justifyContent: 'center',
     padding: '10px 0',
   },
-
+  buttonIcon: {
+    marginRight: '10px',
+  },
 }));
 
 const Reports: React.FC = () => {
@@ -95,11 +100,14 @@ const Reports: React.FC = () => {
   const [services, setServices]:any = useState([]);
   const [servicesFiltered, setServicesFiltered]:any = useState([]);
 
+  const [loading, setLoading] = useState(true);
+
   const fetchUserProfiles = () => {
     axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}`).then((res) => {
       setServices(res.data);
       setServicesFiltered(res.data);
       console.log(res.data);
+      setLoading(false);
     });
   };
 
@@ -129,109 +137,121 @@ const Reports: React.FC = () => {
   };
 
   return (
-    <>
-      <FirstSection>
-        <Breadcrumbs aria-label="breadcrumb">
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              history.push('/');
-            }}
-            label={nomeSAS}
-            icon={<HomeIcon fontSize="small" />}
-          />
-          <StyledBreadcrumb
-            component="a"
-            onClick={() => {
-              history.push('/months');
-            }}
-            label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
-          />
-          <Typography color="textPrimary">Serviços</Typography>
-        </Breadcrumbs>
-
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            history.push('/months');
-          }}
-        >
-          Voltar
-
-        </Button>
-
-      </FirstSection>
-      <div className={classes.disclaimeMessage}>
-        <h3>
-          Os nomes dos serviços constam segundo a
-          nomenclatura usada no Formulário de Monitoramento
-        </h3>
-      </div>
-      <SecondSection>
-        <Filter>
-          <div>
-            <FilterListIcon />
-            <h2>Filter</h2>
-          </div>
-          <Button
-            variant="contained"
-            onClick={handleClickPSB}
-            className={classes.filterButton}
-          >
-            Proteção Básica
-
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleClickPSE}
-            className={classes.filterButton}
-          >
-            Proteção Especial
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => { setServicesFiltered(services); }}
-            className={classes.filterButton}
-          >
-            Todos
-          </Button>
-        </Filter>
-        <div className={classes.bodyServicesItems}>
-          <List component="nav" aria-label="main mailbox folders">
-            {servicesFiltered.map((service:any) => (
-
-              <ListItem
-                button
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <FirstSection>
+            <Breadcrumbs aria-label="breadcrumb">
+              <StyledBreadcrumb
+                component="a"
                 onClick={() => {
-                  setContext({
-                    nomeSAS,
-                    mes,
-                    serviceName: service.firstname,
-                    token: service.token,
-                    tipologia: service.typology.substring(0, 3),
-                    distrito: service.district,
-                    protecao: service.protection,
-                    termo: service.term,
-                  });
-                  history.push(`/response${service.typology}`);
+                  history.push('/');
+                }}
+                label={nomeSAS}
+                icon={<HomeIcon fontSize="small" />}
+              />
+              <StyledBreadcrumb
+                component="a"
+                onClick={() => {
+                  history.push('/months');
+                }}
+                label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
+              />
+              <Typography color="textPrimary">Serviços</Typography>
+            </Breadcrumbs>
+
+          </FirstSection>
+          <div className={classes.disclaimeMessage}>
+            <h3>
+              Os nomes dos serviços constam segundo a
+              nomenclatura usada no Formulário de Monitoramento
+            </h3>
+          </div>
+          <SecondSection>
+            <Filter>
+              <div>
+                <FilterListIcon />
+                <h2>Filter</h2>
+              </div>
+              <Button
+                variant="contained"
+                onClick={handleClickPSB}
+                className={classes.filterButton}
+              >
+                Proteção Básica
+
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handleClickPSE}
+                className={classes.filterButton}
+              >
+                Proteção Especial
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => { setServicesFiltered(services); }}
+                className={classes.filterButton}
+              >
+                Todos
+              </Button>
+              <br />
+              <br />
+              <br />
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => {
+                  history.push('/months');
                 }}
               >
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary={`${service.firstname} `} />
-                <h4>{service.typology}</h4>
-              </ListItem>
+                <ArrowBackOutlinedIcon className={classes.buttonIcon} />
+                Voltar
+              </Button>
+            </Filter>
+            <div className={classes.bodyServicesItems}>
+              <List component="nav" aria-label="main mailbox folders">
+                {servicesFiltered.map((service:any) => (
 
-            ))}
+                  <ListItem
+                    button
+                    onClick={() => {
+                      setContext({
+                        nomeSAS,
+                        mes,
+                        serviceName: service.firstname,
+                        token: service.token,
+                        tipologia: service.typology.substring(0, 3),
+                        tipologiaCompleta: service.typology,
+                        distrito: service.district,
+                        protecao: service.protection,
+                        termo: service.term,
+                      });
+                      history.push(`/response${service.typology}`);
+                    }}
+                  >
+                    <ListItemIcon>
+                      <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={`${service.firstname} `} />
+                    <h4>{service.typology}</h4>
+                  </ListItem>
 
-          </List>
+                ))}
 
-        </div>
-      </SecondSection>
+              </List>
 
-    </>
+            </div>
+
+          </SecondSection>
+
+        </>
+      )
   );
 };
 

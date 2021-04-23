@@ -21,6 +21,8 @@ import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import ListComponent from '../../components/ListComponent';
+import HeaderInfo from '../../components/HeaderInfo';
+import Navbar from '../../components/Navbar';
 
 import { infoContext } from '../../providers/reactContext';
 
@@ -333,71 +335,9 @@ const Response:any = () => {
       )
       : (
         <>
-          <FirstSection>
-            <Breadcrumbs aria-label="breadcrumb">
-              <StyledBreadcrumb
-                component="a"
-                onClick={() => {
-                  history.push('/');
-                }}
-                label={nomeSAS}
-                icon={<HomeIcon fontSize="small" />}
-              />
-              <StyledBreadcrumb
-                component="a"
-                onClick={() => {
-                  setContext({
-                    nomeSAS,
-                    mes,
-                  });
-                  history.push('months');
-                }}
-                label={monthString}
-              />
-              <StyledBreadcrumb
-                component="a"
-                onClick={() => {
-                  setContext({
-                    nomeSAS,
-                    mes,
-                  });
-                  history.push('/reports');
-                }}
-                label={serviceName}
-              />
-              <Typography color="textPrimary">Respostas</Typography>
-            </Breadcrumbs>
-            <div>
-
-              <MyButton
-                variant="contained"
-                onClick={() => {
-                  window.print();
-                }}
-                color="primary"
-              >
-                Imprimir
-
-              </MyButton>
-              <MyButton
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  setContext({
-                    nomeSAS,
-                    mes,
-                  });
-                  history.push('/reports');
-                }}
-              >
-                Voltar
-
-              </MyButton>
-            </div>
-
-          </FirstSection>
-
+          <Navbar />
           <Section>
+            <HeaderInfo />
             <h2>
               1. Informe um valor para cada situação apresentada abaixo:
             </h2>

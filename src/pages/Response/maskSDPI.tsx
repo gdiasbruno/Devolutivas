@@ -18,6 +18,8 @@ import TableEigthColumns from '../../components/TableEightColumns';
 import TableThreeColumns from '../../components/TableThreeColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import ListComponent from '../../components/ListComponent';
+import HeaderInfo from '../../components/HeaderInfo';
+import Navbar from '../../components/Navbar';
 
 import { infoContext } from '../../providers/reactContext';
 
@@ -313,27 +315,10 @@ const Response: React.FC = () => {
 
   return (
     <>
-      <FirstSection>
-        <Breadcrumbs aria-label="breadcrumb">
-          <StyledBreadcrumb
-            component="a"
-            href="/"
-            label={nomeSAS}
-            icon={<HomeIcon fontSize="small" />}
-          />
-          <StyledBreadcrumb component="a" href="/months" label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'} />
-          <StyledBreadcrumb component="a" href="/Reports" label="CCA Jardim das Rosas" />
-          <Typography color="textPrimary">Respostas</Typography>
-        </Breadcrumbs>
-        <div>
-          <MyButton variant="contained" color="primary">PDF</MyButton>
-          <MyButton variant="contained" color="primary">Imprimir</MyButton>
-          <MyButton variant="contained" color="primary" href="/reports">Voltar</MyButton>
-        </div>
-
-      </FirstSection>
+      <Navbar />
 
       <Section>
+        <HeaderInfo />
         <h2>
           1. Quantidade de pessoas atendidas no mês, por sexo e faixa etária
         </h2>

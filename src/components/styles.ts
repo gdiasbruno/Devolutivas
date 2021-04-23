@@ -17,3 +17,16 @@ export const Title = styled.h1`
   line-height:56px;
   margin-left: 50px;
 `;
+
+export const FirstSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  padding: 20px;
+
+  div {
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+  }
+`;

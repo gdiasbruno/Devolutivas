@@ -23,10 +23,12 @@ import TableTenColumns from '../../components/TableTenColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import TableSevenColumns from '../../components/TableSevenColumns';
 import TableFiveColumns from '../../components/TableFiveColumns';
+import Navbar from '../../components/Navbar';
 
 import ListComponent from '../../components/ListComponent';
 
 import { infoContext } from '../../providers/reactContext';
+import HeaderInfo from '../../components/HeaderInfo';
 
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
@@ -245,71 +247,10 @@ const Response:any = () => {
       )
       : (
         <>
-          <FirstSection>
-            <Breadcrumbs aria-label="breadcrumb">
-              <StyledBreadcrumb
-                component="a"
-                onClick={() => {
-                  history.push('/');
-                }}
-                label={nomeSAS}
-                icon={<HomeIcon fontSize="small" />}
-              />
-              <StyledBreadcrumb
-                component="a"
-                onClick={() => {
-                  setContext({
-                    nomeSAS,
-                    mes,
-                  });
-                  history.push('months');
-                }}
-                label={monthString}
-              />
-              <StyledBreadcrumb
-                component="a"
-                onClick={() => {
-                  setContext({
-                    nomeSAS,
-                    mes,
-                  });
-                  history.push('/reports');
-                }}
-                label={serviceName}
-              />
-              <Typography color="textPrimary">Respostas</Typography>
-            </Breadcrumbs>
-            <div>
-
-              <MyButton
-                variant="contained"
-                onClick={() => {
-                  window.print();
-                }}
-                color="primary"
-              >
-                Imprimir
-
-              </MyButton>
-              <MyButton
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  setContext({
-                    nomeSAS,
-                    mes,
-                  });
-                  history.push('/reports');
-                }}
-              >
-                Voltar
-              </MyButton>
-            </div>
-
-          </FirstSection>
+          <Navbar />
 
           <Section>
-
+            <HeaderInfo />
             <h2>
               1. Nº de pessoas do sexo feminino atendidas pelo serviço no mês de referência:
             </h2>
