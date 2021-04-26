@@ -16,6 +16,7 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import {
   FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
+import { fetchServicesAnswers } from './TableLinesValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableNineColumns from '../../components/TableNineColumns';
@@ -118,16 +119,10 @@ const ResponseCRECI:any = () => {
   const [loading, setLoading] = useState(true);
   const tipologia = 'sad';
 
-  const fetchUserProfiles = () => {
-    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
-      setServices(res.data);
-      console.log(res.data);
-      setLoading(false);
-    });
-  };
-
   useEffect(() => {
-    fetchUserProfiles();
+    fetchServicesAnswers({
+      nomeSAS, mes, token, tipologia, setServices, setLoading,
+    });
   }, []);
 
   const atendidosMes = [

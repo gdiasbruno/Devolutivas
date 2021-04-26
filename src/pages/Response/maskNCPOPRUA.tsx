@@ -16,6 +16,7 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import {
   FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
+import { fetchServicesAnswers } from './TableLinesValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';
@@ -111,21 +112,15 @@ const Response:any = () => {
   const [services, setServices]:any = useState([]);
   const { context, setContext }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, token,
+    nomeSAS, mes, token,
   } = context;
   const history = useHistory();
   const [loading, setLoading] = useState(true);
   const tipologia = 'ncp';
-  const fetchUserProfiles = () => {
-    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
-      setServices(res.data);
-      console.log(res.data);
-      setLoading(false);
-    });
-  };
-
   useEffect(() => {
-    fetchUserProfiles();
+    fetchServicesAnswers({
+      nomeSAS, mes, token, tipologia, setServices, setLoading,
+    });
   }, []);
 
   const atendidosMesFeminino = [
@@ -451,9 +446,9 @@ const Response:any = () => {
       : (
         <>
           <Navbar />
-          <HeaderInfo />
 
           <Section>
+            <HeaderInfo />
             <h2>
               1. Quantidade de pessoas do sexo feminino atendidas pelo serviço no mês de referência:
             </h2>

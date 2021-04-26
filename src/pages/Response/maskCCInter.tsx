@@ -16,6 +16,7 @@ import { Typography } from '@material-ui/core';
 import {
   FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
+import { fetchServicesAnswers } from './TableLinesValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';
@@ -119,15 +120,10 @@ const ResponseCRECI:any = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(true);
 
-  const fetchUserProfiles = () => {
-    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
-      setServices(res.data);
-      setLoading(false);
-    });
-  };
-
   useEffect(() => {
-    fetchUserProfiles();
+    fetchServicesAnswers({
+      nomeSAS, mes, token, tipologia, setServices, setLoading,
+    });
   }, []);
 
   const idososMoramSozinho = [

@@ -10,10 +10,12 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section,
+  FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
+import { fetchServicesAnswers } from './TableLinesValues';
 
 import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';
@@ -89,19 +91,16 @@ const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 const Response: React.FC = () => {
   const [services, setServices]:any = useState([]);
   const { context, setContext }:any = useContext(infoContext);
-  const { nomeSAS, mes, serviceName } = context;
+  const {
+    nomeSAS, mes, serviceName, token, tipologia,
+  } = context;
   const history = useHistory();
-
-  const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/SE/0121/12112314').then((res) => {
-      const index = Object.keys(res.data.responses[0])[0];
-      setServices(res.data.responses[0][index]);
-      console.log(res.data.responses[0][index]);
-    });
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchUserProfiles();
+    fetchServicesAnswers({
+      nomeSAS, mes, token, tipologia, setServices, setLoading,
+    });
   }, []);
 
   const atendidosMes = [
@@ -305,40 +304,49 @@ const Response: React.FC = () => {
   ];
 
   return (
-    <>
-      <Navbar />
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <Navbar />
 
-      <Section>
-        <HeaderInfo />
-        <h2>
-          1. Quantidade de pessoas do sexo feminino atendidas pelo serviço no mês de referência:
-        </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
+          <Section>
+            <HeaderInfo />
+            <h2>
+              1. Quantidade de pessoas do sexo feminino atendidas pelo serviço no mês de referência:
+            </h2>
+            <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
 
-        <h2>
-          2. Quantidade de pessoas do sexo masculino atendidos pelo serviço no mês de referência:
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
-        <h2>
-          3. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência.
-        </h2>
-        <TableTwoColumns headers={motivoSaidaHeaders} body={motivoSaida} />
+            <h2>
+              2. Quantidade de pessoas do sexo masculino
+              atendidos pelo serviço no mês de referência:
+            </h2>
+            <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
+            <h2>
+              3. Quantidade de pessoas atendidas por sexo e raça/cor no mês de referência.
+            </h2>
+            <TableTwoColumns headers={motivoSaidaHeaders} body={motivoSaida} />
 
-        <Typography variant="h5" gutterBottom>
-          4. Nº de pessoas que participaram das atividades propostas pelo serviço:
-        </Typography>
-        <br />
-        <h2>
-          5. Quantifique as situações abaixo com os dados do mês de referência:
-        </h2>
-        <TableTwoColumns headers={familiasAtendidasHeaders} body={familiasAtendidas} />
-        <br />
-        <Typography variant="h5" gutterBottom>
-          6. Encaminhamentos realizados pelo serviço no mês de referência:
-        </Typography>
+            <Typography variant="h5" gutterBottom>
+              4. Nº de pessoas que participaram das atividades propostas pelo serviço:
+            </Typography>
+            <br />
+            <h2>
+              5. Quantifique as situações abaixo com os dados do mês de referência:
+            </h2>
+            <TableTwoColumns headers={familiasAtendidasHeaders} body={familiasAtendidas} />
+            <br />
+            <Typography variant="h5" gutterBottom>
+              6. Encaminhamentos realizados pelo serviço no mês de referência:
+            </Typography>
 
-      </Section>
-    </>
+          </Section>
+        </>
+      )
   );
 };
 

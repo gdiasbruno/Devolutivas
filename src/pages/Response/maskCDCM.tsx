@@ -1,7 +1,6 @@
 import React, {
   useState, useEffect, useContext,
 } from 'react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 import {
@@ -16,6 +15,7 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import {
   FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
+import { fetchServicesAnswers } from './TableLinesValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';
@@ -71,8 +71,6 @@ function createData(
   };
 }
 
-const idososMoramSozinhoHeaders = ['', 'Quantidade'];
-
 const atendidosMesHeaders = [
   'N° de mulheres atendidas no mês',
   'Nº de mulheres que frequentaram presencialmente o serviço',
@@ -112,17 +110,7 @@ const motivosSaidaHeaders = [
   'Quantidade',
 ];
 
-const familiasInsumosHeaders = ['', 'N° de famílias'];
-
-const familiasVulnerabilidadeHeaders = ['', 'Nº de famílias'];
-
-const atendimentoFamiliaHeaders = ['', 'Nº de famílias'];
-
-const demandaReprimidaHeaders = ['', 'Nº de pessoas'];
-
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
-
-const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
 
 const atendimentosRemotosTiposHeaders = ['Tipos', ''];
 
@@ -137,16 +125,10 @@ const Response:any = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(true);
 
-  const fetchUserProfiles = () => {
-    axios.get(`http://localhost:8080/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
-      setServices(res.data);
-      console.log(res.data);
-      setLoading(false);
-    });
-  };
-
   useEffect(() => {
-    fetchUserProfiles();
+    fetchServicesAnswers({
+      nomeSAS, mes, token, tipologia, setServices, setLoading,
+    });
   }, []);
 
   const atendidosMes = [

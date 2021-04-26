@@ -8,10 +8,12 @@ import Chip from '@material-ui/core/Chip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section,
+  FirstSection, MyButton, Section, LoaderBody,
 } from './styles';
+import { fetchServicesAnswers } from './TableLinesValues';
 
 import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';
@@ -88,18 +90,14 @@ const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 const Response: React.FC = () => {
   const [services, setServices]:any = useState([]);
   const { context }:any = useContext(infoContext);
-  const { nomeSAS, mes, serviceName } = context;
-
-  const fetchUserProfiles = () => {
-    axios.get('http://localhost:8080/devolutivas/SE/0121/12120019').then((res) => {
-      const index = Object.keys(res.data.responses[0])[0];
-      setServices(res.data.responses[0][index]);
-      console.log(res.data.responses[0][index]);
-    });
-  };
-
+  const {
+    nomeSAS, mes, serviceName, token, tipologia,
+  } = context;
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetchUserProfiles();
+    fetchServicesAnswers({
+      nomeSAS, mes, token, tipologia, setServices, setLoading,
+    });
   }, []);
 
   const atendidosMes = [
@@ -314,46 +312,55 @@ const Response: React.FC = () => {
   ];
 
   return (
-    <>
-      <Navbar />
+    loading
+      ? (
+        <LoaderBody>
+          <MoonLoader color="#3f51b5" size={100} />
+        </LoaderBody>
+      )
+      : (
+        <>
+          <Navbar />
 
-      <Section>
-        <HeaderInfo />
-        <h2>
-          1. Quantidade de pessoas atendidas no mês, por sexo e faixa etária
-        </h2>
-        <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
+          <Section>
+            <HeaderInfo />
+            <h2>
+              1. Quantidade de pessoas atendidas no mês, por sexo e faixa etária
+            </h2>
+            <TableFourColumns headers={atendidosMesHeaders} body={atendidosMes} />
 
-        <h2>
-          2. Quantidade idosos atendidos no mês, por sexo e raça/cor
-        </h2>
-        <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
-        <h2>
-          3. Quantidade de usuários por motivo de saída do serviço no mês
-        </h2>
-        <TableThreeColumns headers={motivoSaidaHeaders} body={motivoSaida} />
+            <h2>
+              2. Quantidade idosos atendidos no mês, por sexo e raça/cor
+            </h2>
+            <TableEigthColumns headers={sexoRacaCorHeaders} body={sexoRacaCor} />
+            <h2>
+              3. Quantidade de usuários por motivo de saída do serviço no mês
+            </h2>
+            <TableThreeColumns headers={motivoSaidaHeaders} body={motivoSaida} />
 
-        <Typography variant="h5" gutterBottom>
-          4. Informe um valor para as situações apresentadas abaixo
-        </Typography>
-        <br />
-        <Typography variant="h5" gutterBottom>
-          5. Indique os temas discutidos com as pessoas atendidas pelo serviço no mês de referência
-        </Typography>
-        <br />
-        <h2>
-          6. Indique o número de famílias ou pessoas
-          que buscaram atendimento presencial no mês
-          de referência devido a alguma vulnerabilidade
-          relacional listada abaixo
-        </h2>
-        <TableTwoColumns headers={familiasAtendidasHeaders} body={familiasAtendidas} />
+            <Typography variant="h5" gutterBottom>
+              4. Informe um valor para as situações apresentadas abaixo
+            </Typography>
+            <br />
+            <Typography variant="h5" gutterBottom>
+              5. Indique os temas discutidos com as pessoas
+              atendidas pelo serviço no mês de referência
+            </Typography>
+            <br />
+            <h2>
+              6. Indique o número de famílias ou pessoas
+              que buscaram atendimento presencial no mês
+              de referência devido a alguma vulnerabilidade
+              relacional listada abaixo
+            </h2>
+            <TableTwoColumns headers={familiasAtendidasHeaders} body={familiasAtendidas} />
 
-        <Typography variant="h6" gutterBottom>
-          7. Quantifique as situações abaixo com os dados do mês de referência:
-        </Typography>
-      </Section>
-    </>
+            <Typography variant="h6" gutterBottom>
+              7. Quantifique as situações abaixo com os dados do mês de referência:
+            </Typography>
+          </Section>
+        </>
+      )
   );
 };
 
