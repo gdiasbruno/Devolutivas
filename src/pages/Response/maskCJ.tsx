@@ -1,20 +1,12 @@
 import React, {
   useState, useEffect, useContext,
 } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
-import {
-  withStyles, Theme,
-} from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import HomeIcon from '@material-ui/icons/Home';
-import { Typography } from '@material-ui/core';
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section, LoaderBody,
+  Section, LoaderBody,
 } from './styles';
 import { fetchServicesAnswers } from './TableLinesValues';
 
@@ -26,19 +18,6 @@ import HeaderInfo from '../../components/HeaderInfo';
 import Navbar from '../../components/Navbar';
 
 import { infoContext } from '../../providers/reactContext';
-
-const StyledBreadcrumb = withStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.grey[100],
-    height: theme.spacing(3),
-    color: theme.palette.grey[900],
-    fontWeight: theme.typography.fontWeightBold,
-    fontSize: 15,
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[300],
-    },
-  },
-}))(Chip) as typeof Chip;
 
 function createData(
   title: string,
@@ -91,11 +70,10 @@ const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 
 const Response:any = () => {
   const [services, setServices]:any = useState([]);
-  const { context, setContext }:any = useContext(infoContext);
+  const { context }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, token, tipologia,
+    nomeSAS, mes, token, tipologia,
   } = context;
-  const history = useHistory();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -303,16 +281,6 @@ const Response:any = () => {
     createData('Semana 5', services['cjperiodfam[5sem]'], 1, 1, 1, 1, 1, 1),
     createData('Semana 6', services['cjperiodfam[6sem]'], 1, 1, 1, 1, 1, 1),
   ];
-
-  let monthString = '';
-
-  if (mes === '0121') {
-    monthString = 'Janeiro 2021';
-  } else if (mes === '0221') {
-    monthString = 'Fevereiro 2021';
-  } else if (mes === '0321') {
-    monthString = 'Março 2021';
-  }
 
   return (
     loading

@@ -1,19 +1,11 @@
 import React, {
   useState, useEffect, useContext,
 } from 'react';
-import { useHistory } from 'react-router-dom';
 
-import {
-  withStyles, Theme,
-} from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import HomeIcon from '@material-ui/icons/Home';
-import { Typography } from '@material-ui/core';
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section, LoaderBody,
+  Section, LoaderBody,
 } from './styles';
 import { fetchServicesAnswers } from './TableLinesValues';
 
@@ -21,28 +13,11 @@ import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';
 import TableThreeColumns from '../../components/TableThreeColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
-import TableFiveColumns from '../../components/TableFiveColumns';
 import TableTenColumns from '../../components/TableTenColumns';
 import HeaderInfo from '../../components/HeaderInfo';
 import Navbar from '../../components/Navbar';
 
-import ListComponent from '../../components/ListComponent';
-
 import { infoContext } from '../../providers/reactContext';
-import { Header } from '../Index/styles';
-
-const StyledBreadcrumb = withStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.grey[100],
-    height: theme.spacing(3),
-    color: theme.palette.grey[900],
-    fontWeight: theme.typography.fontWeightBold,
-    fontSize: 15,
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[300],
-    },
-  },
-}))(Chip) as typeof Chip;
 
 function createData(
   title: string,
@@ -118,11 +93,10 @@ const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 
 const Response:any = () => {
   const [services, setServices]:any = useState([]);
-  const { context, setContext }:any = useContext(infoContext);
+  const { context }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, token, tipologia,
+    nomeSAS, mes, token, tipologia,
   } = context;
-  const history = useHistory();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -470,65 +444,6 @@ const Response:any = () => {
 
   ];
 
-  const familiasInsumos = [
-    createData('Cesta de alimentos', services['cedesinsumos[cestasaliment_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Kit de material de higiene', services['cedesinsumos[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const familiasVulnerabilidade = [
-    createData('Conflitos', services['cedesvulnerab[conflit]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Preconceitos/discriminação', services['cedesvulnerab[Precon]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Abandono', services['cedesvulnerab[aband]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Apartação', services['cedesvulnerab[apart]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Confinamento', services['cedesvulnerab[confinamet]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Isolamento', services['cedesvulnerab[isolament]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Violência', services['cedesvulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentoFamilia = [
-    createData('Nº de famílias atendidas presencialmente', services['cedesatenfam[ccafampres]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de famílias acompanhadas de forma remota', services['cedesatenfam[ccafamrem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº total de famílias atendidas no mês', services['cedesatenfam[ccafamtotal]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atividadesItems = [
-    ['Atividades esportivas', services['cedespatividades[atvesporte]']],
-    ['Musicalidade (cantar, tocar instrumentos etc.)', services['ccintatividades[atvmusica]']],
-    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['ccintatividades[atvcultura]']],
-    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['ccintatividades[atvarte]']],
-    ['Atividades de inclusão digital', services['ccintatividades[atvincdigital]']],
-    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['ccintatividades[atvlinguagem]']],
-    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['ccintatividades[atvculinaria]']],
-    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['ccintatividades[atvrecreacao]']],
-
-  ];
-
-  const temasItems = [
-    ['Garantia de direitos sociais (saúde, educação, previdência, moradia, envelhecimento, saúde mental, etc.)', services['cedesptemas[temadireitossociais]']],
-    ['Relacionamento familiar (gravidez na adolescência, álcool e drogas, orientação sexual, aborto, etc.)', services['cedesptemas[temafamiliar]']],
-    ['Direitos e programas sociais', services['cedesptemas[temadireitos]']],
-    ['Igualdade entre homens e mulheres', services['cedesptemas[temaigualdade]']],
-    ['Relações étnico-raciais', services['cedesptemas[temaetnico]']],
-    ['Prevenção à violência', services['cedesptemas[temaprevencaovio]']],
-    ['Parentalidade', services['cedesptemas[temaparental]']],
-    ['Deficiência e acessibilidade', services['cedesptemas[temapcd]']],
-    ['Mundo do trabalho', services['cedesptemas[tematrabalho]']],
-  ];
-
-  const demandaReprimida = [
-    createData('6 a 11 anos', services['cedeslistaespera[6a11_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('12 a 17 anos', services['cedeslistaespera[12a14_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('18 a 29 anos', services['cedeslistaespera[18a29_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('30 a 59 anos', services['cedeslistaespera[30a59_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-
-    createData('Total',
-      parseInt(services['cedeslistaespera[6a11_quantidade]'], 10)
-      + parseInt(services['cedeslistaespera[12a14_quantidade]'], 10)
-      + parseInt(services['cedeslistaespera[18a29_quantidade]'], 10)
-      + parseInt(services['cedeslistaespera[30a59_quantidade]'], 10),
-      1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
   const encaminhamentos = [
     createData('CRAS', services['cdcmencaminhamento[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('CREAS', services['cdcmencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
@@ -542,15 +457,6 @@ const Response:any = () => {
     createData('Judiciário', services['cdcmencaminhamento[judiciario]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Trabalho e renda', services['cdcmencaminhamento[trabalhorenda]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Outras políticas públicas', services['cdcmencaminhamento[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotos = [
-    createData('Semana 1', services['cedespesremperiod[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['cedespesremperiod[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['cedespesremperiod[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['cedespesremperiod[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['cedespesremperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['cedespesremperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const atendimentosRemotosTipos = [
@@ -571,16 +477,6 @@ const Response:any = () => {
     createData('Semana 5', services['cdcmatendremfam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Semana 6', services['cdcmatendremfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
-
-  let monthString = '';
-
-  if (mes === '0121') {
-    monthString = 'Janeiro 2021';
-  } else if (mes === '0221') {
-    monthString = 'Fevereiro 2021';
-  } else if (mes === '0321') {
-    monthString = 'Março 2021';
-  }
 
   return (
     loading

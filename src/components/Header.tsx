@@ -8,7 +8,7 @@ function HeaderComponent(): JSX.Element {
   return (
     <Header>
       <img src={logoImg} alt="Prefeitura Logo" />
-      <Title>Relatório de Informações dos Serviços da Rede de Assistência Social</Title>
+      <Title>Relatório de Monitoramento dos Serviços da Rede de Assistência Social</Title>
     </Header>
   );
 }

@@ -1,43 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 
-import { useHistory } from 'react-router-dom';
-
-import {
-  withStyles, Theme,
-} from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section, LoaderBody,
+  Section, LoaderBody,
 } from './styles';
 import { fetchServicesAnswers } from './TableLinesValues';
 
 import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
-import ListComponent from '../../components/ListComponent';
 import HeaderInfo from '../../components/HeaderInfo';
 import Navbar from '../../components/Navbar';
 
 import { infoContext } from '../../providers/reactContext';
-
-const StyledBreadcrumb = withStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.grey[100],
-    height: theme.spacing(3),
-    color: theme.palette.grey[900],
-    fontWeight: theme.typography.fontWeightBold,
-    fontSize: 15,
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[300],
-    },
-  },
-}))(Chip) as typeof Chip;
 
 function createData(
   title: string,
@@ -74,27 +51,12 @@ const motivoSaidaHeaders = ['', 'Quantidade'];
 
 const familiasAtendidasHeaders = ['', 'Nº de famílias'];
 
-const familiasVulnerabilidadeHeaders = ['', 'Nº de famílias'];
-
-const demandaReprimidaHeaders = ['', 'Nº de adolescentes'];
-
-const familiasInsumosHeaders = ['', 'N° de famílias'];
-
-const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
-
-const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
-
-const atendimentosRemotosTiposHeaders = ['Tipos', ''];
-
-const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
-
 const Response: React.FC = () => {
   const [services, setServices]:any = useState([]);
-  const { context, setContext }:any = useContext(infoContext);
+  const { context }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, token, tipologia,
+    nomeSAS, mes, token, tipologia,
   } = context;
-  const history = useHistory();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -216,91 +178,6 @@ const Response: React.FC = () => {
     createData('Nº de famílias atendidas presencialmente no mês', services['cjatendfam[cjfampres]'], 1, 1, 1, 1, 1, 1),
     createData('Nº de famílias acompanhadas de forma remota no mês', services['cjatendfam[cjfamrem]'], 1, 1, 1, 1, 1, 1),
     createData('Nº total de famílias atendidas no mês', services['cjatendfam[cjfamtotal]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const familiasVulnerabilidade = [
-    createData('Conflitos', services['cjvulnerab[conflit]'], 1, 1, 1, 1, 1, 1),
-    createData('Preconceitos/discriminação', services['cjvulnerab[Precon]'], 1, 1, 1, 1, 1, 1),
-    createData('Abandono', services['cjvulnerab[aband]'], 1, 1, 1, 1, 1, 1),
-    createData('Apartação', services['cjvulnerab[apart]'], 1, 1, 1, 1, 1, 1),
-    createData('Confinamento', services['cjvulnerab[confinamet]'], 1, 1, 1, 1, 1, 1),
-    createData('Isolamento', services['cjvulnerab[isolament]'], 1, 1, 1, 1, 1, 1),
-    createData('Violência', services['cjvulnerab[violen]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atividadesItems = [
-    ['Atividades esportivas', services['cjatividades[atvesporte]']],
-    ['Musicalidade (cantar, tocar instrumentos etc.)', services['cjatividades[atvmusica]']],
-    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['cjatividades[atvcultura]']],
-    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['cjatividades[atvarte]']],
-    ['Atividades de inclusão digital', services['cjatividades[atvincdigital]']],
-    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['cjatividades[atvlinguagem]']],
-    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['cjatividades[atvculinaria]']],
-    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['cjatividades[atvrecreacao]']],
-    ['Atividades de orientação para o mundo do trabalho', services['cjatividades[atvtrabalho]']],
-  ];
-
-  const temasItems = [
-    ['Garantia de direitos sociais (saúde, educação, previdência, moradia, envelhecimento, saúde mental, etc.)', services['cjtema[temadireitos]']],
-    ['Relacionamento familiar (gravidez na adolescência, álcool e drogas, orientação sexual, aborto, etc.)', services['cjtema[temafamiliar]']],
-    ['Direitos e programas sociais', services['cjtema[temadireitossociais]']],
-    ['Igualdade entre homens e mulheres', services['cjtema[temaigualdade]']],
-    ['Relações étnico-raciais', services['cjtema[temaetnico]']],
-    ['Prevenção à violência', services['cjtema[temaprevencaovio]']],
-    ['Parentalidade', services['cjtema[temaparental]']],
-    ['Deficiência e acessibilidade', services['cjtema[temapcd]']],
-    ['Mundo do trabalho', services['cjtema[tematrabalho]']],
-  ];
-
-  const demandaReprimida = [
-    createData('15 a 17 anos', services['cjlistaespera[15a17_quantidade]'], 1, 1, 1, 1, 1, 1),
-
-    createData('Total',
-      parseInt(services['cjlistaespera[15a17_quantidade]'], 10),
-      1, 1, 1, 1, 1, 1),
-  ];
-
-  const familiasInsumos = [
-    createData('Cesta de alimentos', services['cjinsumos[cestasaliment_numero]'], 1, 1, 1, 1, 1, 1),
-    createData('Kit de material de higiene', services['cjinsumos[kithiginene_numero]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const encaminhamentos = [
-    createData('CRAS', services['cjencaminhamentos[cras]'], 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['cjencaminhamentos[creas]'], 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['cjencaminhamentos[servicosrede]'], 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['cjencaminhamentos[saude]'], 1, 1, 1, 1, 1, 1),
-    createData('Educação', services['cjencaminhamentos[educacao]'], 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['cjencaminhamentos[direito]'], 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['cjencaminhamentos[outraspoliticas]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotos = [
-    createData('Semana 1', services['cjatendremperiod[1sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['cjatendremperiod[2sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['cjatendremperiod[3sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['cjatendremperiod[4sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['cjatendremperiod[5sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['cjatendremperiod[6sem]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['cjatendremdisp[telef]'], 1, 1, 1, 1, 1, 1),
-    createData('Email', services['cjatendremdisp[email]'], 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['cjatendremdisp[face]'], 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['cjatendremdisp[youtu]'], 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['cjatendremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['cjatendremdisp[entreg]'], 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['cjatendremdisp[outros]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['cjperiodfam[1sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['cjperiodfam[2sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['cjperiodfam[3sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['cjperiodfam[4sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['cjperiodfam[5sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['cjperiodfam[6sem]'], 1, 1, 1, 1, 1, 1),
   ];
 
   return (

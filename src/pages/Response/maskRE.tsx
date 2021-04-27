@@ -1,47 +1,23 @@
 import React, {
   useState, useEffect, useContext,
 } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
-import {
-  withStyles, Theme,
-} from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import HomeIcon from '@material-ui/icons/Home';
-import { Typography } from '@material-ui/core';
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section, LoaderBody,
+  Section, LoaderBody,
 } from './styles';
 import { fetchServicesAnswers } from './TableLinesValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';
-import TableTenColumns from '../../components/TableTenColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
-import TableFiveColumns from '../../components/TableFiveColumns';
 import ListComponent from '../../components/ListComponent';
 import HeaderInfo from '../../components/HeaderInfo';
 import Navbar from '../../components/Navbar';
 
 import { infoContext } from '../../providers/reactContext';
 import TableThreeColumns from '../../components/TableThreeColumns';
-
-const StyledBreadcrumb = withStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.grey[100],
-    height: theme.spacing(3),
-    color: theme.palette.grey[900],
-    fontWeight: theme.typography.fontWeightBold,
-    fontSize: 15,
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[300],
-    },
-  },
-}))(Chip) as typeof Chip;
 
 function createData(
   title: string,
@@ -68,8 +44,6 @@ function createData(
     attribute9,
   };
 }
-
-const idososMoramSozinhoHeaders = ['', 'Quantidade'];
 
 const atendidosMesHeaders = [
   'N° de usuários atendidos no mês',
@@ -104,17 +78,14 @@ const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
 
 const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
 
-const atendimentosRemotosTiposHeaders = ['Tipos', ''];
-
 const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 
 const Response:any = () => {
   const [services, setServices]:any = useState([]);
-  const { context, setContext }:any = useContext(infoContext);
+  const { context }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, token, tipologia,
+    nomeSAS, mes, token, tipologia,
   } = context;
-  const history = useHistory();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -326,18 +297,6 @@ const Response:any = () => {
     createData('Nº de visitas domiciliares realizadas pelo serviço no mês', services['restafamiliaatend[visitasdomiciliares_SQ001]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
-  const atividadesItems = [
-    ['Atividades esportivas', services['circosocialatividade[atvesporte]']],
-    ['Musicalidade (cantar, tocar instrumentos etc.)', services['circosocialatividade[atvmusica]']],
-    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['circosocialatividade[atvcultura]']],
-    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['circosocialatividade[atvarte]']],
-    ['Atividades de inclusão digital', services['circosocialatividade[atvincdigital]']],
-    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['circosocialatividade[atvlinguagem]']],
-    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['circosocialatividade[atvculinaria]']],
-    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['circosocialatividade[atvrecreacao]']],
-
-  ];
-
   const temasItems = [
     ['Garantia de direitos sociais (saúde, educação, previdência, moradia, envelhecimento, saúde mental, etc.)', services['restaurantetemas[temadireitossociais]']],
     ['Relacionamento familiar (gravidez na adolescência, álcool e drogas, orientação sexual, aborto, etc.)', services['restaurantetemas[temanutricao]']],
@@ -377,17 +336,6 @@ const Response:any = () => {
     createData('Semana 5', services['restaatendrempperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Semana 6', services['restaatendrempperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
-
-  const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['circoremadisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Email', services['circoremadisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['circoremadisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['circoremadisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['circoremadisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['circoremadisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['circoremadisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
   const atendimentosRemotosFamiliaSemana = [
     createData('Semana 1', services['restaatendremfamperi[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Semana 2', services['restaatendremfamperi[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
@@ -396,17 +344,6 @@ const Response:any = () => {
     createData('Semana 5', services['restaatendremfamperi[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Semana 6', services['restaatendremfamperi[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
-
-  let monthString = '';
-
-  if (mes === '0121') {
-    monthString = 'Janeiro 2021';
-  } else if (mes === '0221') {
-    monthString = 'Fevereiro 2021';
-  } else if (mes === '0321') {
-    monthString = 'Março 2021';
-  }
-
   return (
     loading
       ? (

@@ -231,6 +231,7 @@ const Reports: React.FC = () => {
                         distrito: service.district,
                         protecao: service.protection,
                         termo: service.term,
+                        capacidade: service.position,
                       });
                       history.push(`/response${service.typology}`);
                     }}

@@ -1,25 +1,15 @@
 import React, {
   useState, useEffect, useContext,
 } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
-import {
-  withStyles, Theme,
-} from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import HomeIcon from '@material-ui/icons/Home';
-import { Typography } from '@material-ui/core';
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section, LoaderBody,
+  Section, LoaderBody,
 } from './styles';
 import { fetchServicesAnswers } from './TableLinesValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
-import TableNineColumns from '../../components/TableNineColumns';
 import TableTenColumns from '../../components/TableTenColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import ListComponent from '../../components/ListComponent';
@@ -27,19 +17,6 @@ import HeaderInfo from '../../components/HeaderInfo';
 import Navbar from '../../components/Navbar';
 
 import { infoContext } from '../../providers/reactContext';
-
-const StyledBreadcrumb = withStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.grey[100],
-    height: theme.spacing(3),
-    color: theme.palette.grey[900],
-    fontWeight: theme.typography.fontWeightBold,
-    fontSize: 15,
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[300],
-    },
-  },
-}))(Chip) as typeof Chip;
 
 function createData(
   title: string,
@@ -94,28 +71,14 @@ const idososMoramSozinhoHeaders = ['', 'Quantidade'];
 const infoSobreIdososHeaders = ['', 'Nº de idosos'];
 
 const familiasVulnerabilidadeHeaders = ['', 'Nº de famílias'];
-
-const demandaReprimidaHeaders = ['', 'Nº de adolescentes'];
-
-const idososInsumosHeaders = ['', 'N° de idosos'];
-
-const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
-
-const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
-
-const atendimentosRemotosTiposHeaders = ['Tipos', ''];
-
-const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
-
 const motivoSaidaHeaders = ['', 'Quantidade'];
 
 const ResponseCRECI:any = () => {
   const [services, setServices]:any = useState([]);
-  const { context, setContext }:any = useContext(infoContext);
+  const { context }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, token,
+    nomeSAS, mes, token,
   } = context;
-  const history = useHistory();
   const [loading, setLoading] = useState(true);
   const tipologia = 'sad';
 
@@ -258,91 +221,11 @@ const ResponseCRECI:any = () => {
     createData('Violência', services['sadpivulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
 
-  const atividadesItems = [
-    ['Atividades esportivas', services['creciatv[atvesporte]']],
-    ['Musicalidade (cantar, tocar instrumentos etc.)', services['creciatv[atvmusica]']],
-    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['creciatv[atvcultura]']],
-    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['creciatv[atvarte]']],
-    ['Atividades de inclusão digital', services['creciatv[atvincdigital]']],
-    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['creciatv[atvlinguagem]']],
-    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['creciatv[atvculinaria]']],
-    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['creciatv[atvrecreacao]']],
-
-  ];
-
   const temasItems = [
     ['Direitos e programas sociais', services['sadpitema[temadireitos]']],
     ['Segurança alimentar e nutricional', services['sadpitema[temanutricao]']],
     ['Orientações sobre higiene e cuidados pessoais', services['sadpitema[temahigiene]']],
   ];
-
-  const demandaReprimida = [
-    createData('60 a 64 anos', services['crescilistaespera[60a64_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('65 a 69 anos', services['crescilistaespera[65a69_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('70 a 74 anos', services['crescilistaespera[70a74_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('75 anos ou mais', services['crescilistaespera[75mais_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-
-    createData('Total',
-      parseInt(services['crescilistaespera[60a64_qtdade]'], 10)
-      + parseInt(services['crescilistaespera[65a69_qtdade]'], 10)
-      + parseInt(services['crescilistaespera[70a74_qtdade]'], 10)
-      + parseInt(services['crescilistaespera[75mais_qtdade]'], 10),
-      1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const idososInsumos = [
-    createData('Cesta de alimentos', services['creciinsumos[alimentos]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Kit de material de higiene', services['creciinsumos[higiene]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const encaminhamentos = [
-    createData('CRAS', services['creciencaminha[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['creciencaminha[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['creciencaminha[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['creciencaminha[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Habitação', services['creciencaminha[hab]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Previdência Social', services['creciencaminha[prev]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['creciencaminha[direito]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['creciencaminha[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotos = [
-    createData('Semana 1', services['crecirempesperiod[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['crecirempesperiod[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['crecirempesperiod[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['crecirempesperiod[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['crecirempesperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['crecirempesperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['creciremdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Email', services['creciremdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['creciremdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['creciremdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['creciremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['creciremdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['creciremdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['creciremfamperiod[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['creciremfamperiod[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['creciremfamperiod[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['creciremfamperiod[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['creciremfamperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['creciremfamperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  let monthString = '';
-
-  if (mes === '0121') {
-    monthString = 'Janeiro 2021';
-  } else if (mes === '0221') {
-    monthString = 'Fevereiro 2021';
-  } else if (mes === '0321') {
-    monthString = 'Março 2021';
-  }
 
   return (
     loading

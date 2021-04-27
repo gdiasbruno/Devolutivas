@@ -1,17 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 
-import {
-  withStyles, Theme,
-} from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import HomeIcon from '@material-ui/icons/Home';
 import { Typography } from '@material-ui/core';
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section, LoaderBody,
+  Section, LoaderBody,
 } from './styles';
 import { fetchServicesAnswers } from './TableLinesValues';
 
@@ -19,24 +12,10 @@ import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableThreeColumns from '../../components/TableThreeColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
-import ListComponent from '../../components/ListComponent';
 import HeaderInfo from '../../components/HeaderInfo';
 import Navbar from '../../components/Navbar';
 
 import { infoContext } from '../../providers/reactContext';
-
-const StyledBreadcrumb = withStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.grey[100],
-    height: theme.spacing(3),
-    color: theme.palette.grey[900],
-    fontWeight: theme.typography.fontWeightBold,
-    fontSize: 15,
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[300],
-    },
-  },
-}))(Chip) as typeof Chip;
 
 function createData(
   title: string,
@@ -73,25 +52,11 @@ const motivoSaidaHeaders = ['6 a 11 anos', '12 a 14 anos'];
 
 const familiasAtendidasHeaders = ['', 'Nº de famílias'];
 
-const familiasVulnerabilidadeHeaders = ['', 'Nº de famílias'];
-
-const demandaReprimidaHeaders = ['', 'Nº de crianças e/ou adolescentes'];
-
-const familiasInsumosHeaders = ['', 'N° de famílias'];
-
-const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
-
-const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
-
-const atendimentosRemotosTiposHeaders = ['Tipos', ''];
-
-const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
-
 const Response: React.FC = () => {
   const [services, setServices]:any = useState([]);
   const { context }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, token, tipologia,
+    nomeSAS, mes, token, tipologia,
   } = context;
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -222,93 +187,6 @@ const Response: React.FC = () => {
     createData('Nº de famílias atendidas presencialmente no mês', services['ccaatendfam[ccafampres]'], 1, 1, 1, 1, 1, 1),
     createData('Nº de famílias acompanhadas de forma remota no mês', services['ccaatendfam[ccafamrem]'], 1, 1, 1, 1, 1, 1),
     createData('Nº total de famílias atendidas no mês', services['ccaatendfam[ccafamtotal]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const familiasVulnerabilidade = [
-    createData('Conflitos', services['ccavulnerab[conflit]'], 1, 1, 1, 1, 1, 1),
-    createData('Preconceitos/discriminação', services['ccavulnerab[Precon]'], 1, 1, 1, 1, 1, 1),
-    createData('Abandono', services['ccavulnerab[aband]'], 1, 1, 1, 1, 1, 1),
-    createData('Apartação', services['ccavulnerab[apart]'], 1, 1, 1, 1, 1, 1),
-    createData('Confinamento', services['ccavulnerab[confinamet]'], 1, 1, 1, 1, 1, 1),
-    createData('Isolamento', services['ccavulnerab[isolament]'], 1, 1, 1, 1, 1, 1),
-    createData('Violência', services['ccavulnerab[violen]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atividadesItems = [
-    ['Atividades esportivas', services['ccaatividades[atvesporte]']],
-    ['Musicalidade (cantar, tocar instrumentos etc.)', services['ccaatividades[atvmusica]']],
-    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['ccaatividades[atvcultura]']],
-    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['ccaatividades[atvarte]']],
-    ['Atividades de inclusão digital', services['ccaatividades[atvincdigital]']],
-    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['ccaatividades[atvlinguagem]']],
-    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['ccaatividades[atvculinaria]']],
-    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['ccaatividades[atvrecreacao]']],
-  ];
-
-  const temasItems = [
-    ['Temas transversais (saúde, meio ambiente, cultura, esporte etc.)', services['ccatema[tematransversal]']],
-    ['Direitos e programas sociais', services['ccatema[temadireitos]']],
-    ['Segurança alimentar e nutricional', services['ccatema[temanutricao]']],
-    ['Igualdade entre homens e mulheres', services['ccatema[temaigualdade]']],
-    ['Orientação sexual e de identidade de gênero', services['ccatema[temaorientsexual]']],
-    ['Relações étnico-raciais', services['ccatema[temaetnico]']],
-    ['Prevenção ao uso de álcool e drogas', services['ccatema[temaalccoldrogas]']],
-    ['Prevenção à violência', services['ccatema[temaprevencaovio]']],
-    ['Parentalidade', services['ccatema[temaparental]']],
-    ['Deficiência e acessibilidade', services['ccatema[temapcd]']],
-    ['Mundo do trabalho', services['ccatema[temamundotrabalho]']],
-  ];
-
-  const demandaReprimida = [
-    createData('6 a 11 anos', services['ccalistaespera[6a11_quantidade]'], 1, 1, 1, 1, 1, 1),
-    createData('12 a 14 anos', services['ccalistaespera[12a14_quantidade]'], 1, 1, 1, 1, 1, 1),
-    createData('Total',
-      parseInt(services['ccalistaespera[6a11_quantidade]'], 10)
-      + parseInt(services['ccalistaespera[12a14_quantidade]'], 10),
-      1, 1, 1, 1, 1, 1),
-  ];
-
-  const familiasInsumos = [
-    createData('Cesta de alimentos', services['ccainsumos[cestasaliment_numero]'], 1, 1, 1, 1, 1, 1),
-    createData('Kit de material de higiene', services['ccainsumos[kithiginene_numero]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const encaminhamentos = [
-    createData('CRAS', services['ccaencaminhamentos[cras]'], 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['ccaencaminhamentos[creas]'], 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['ccaencaminhamentos[servicosrede]'], 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['ccaencaminhamentos[saude]'], 1, 1, 1, 1, 1, 1),
-    createData('Educação', services['ccaencaminhamentos[educacao]'], 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['ccaencaminhamentos[direito]'], 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['ccaencaminhamentos[outraspoliticas]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotos = [
-    createData('Semana 1', services['ccaatendremotoperiod[1sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['ccaatendremotoperiod[2sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['ccaatendremotoperiod[3sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['ccaatendremotoperiod[4sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['ccaatendremotoperiod[5sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['ccaatendremotoperiod[6sem]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['ccaatendremotodisp[telef]'], 1, 1, 1, 1, 1, 1),
-    createData('Email', services['ccaatendremotodisp[email]'], 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['ccaatendremotodisp[face]'], 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['ccaatendremotodisp[youtu]'], 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['ccaatendremotodisp[outrasredes]'], 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['ccaatendremotodisp[entreg]'], 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['ccaatendremotodisp[outros]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['ccaperiodfam[1sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['ccaperiodfam[2sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['ccaperiodfam[3sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['ccaperiodfam[4sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['ccaperiodfam[5sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['ccaperiodfam[6sem]'], 1, 1, 1, 1, 1, 1),
   ];
 
   return (

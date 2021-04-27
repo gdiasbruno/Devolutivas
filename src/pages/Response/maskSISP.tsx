@@ -1,48 +1,20 @@
 import React, {
   useState, useEffect, useContext,
 } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
-import {
-  withStyles, Theme,
-} from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import HomeIcon from '@material-ui/icons/Home';
-import { Typography } from '@material-ui/core';
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section, LoaderBody,
+  Section, LoaderBody,
 } from './styles';
 import { fetchServicesAnswers } from './TableLinesValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
-import TableFourColumns from '../../components/TableFourColumns';
-import TableTenColumns from '../../components/TableTenColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
-import TableSevenColumns from '../../components/TableSevenColumns';
-import TableFiveColumns from '../../components/TableFiveColumns';
 import Navbar from '../../components/Navbar';
-
-import ListComponent from '../../components/ListComponent';
 
 import { infoContext } from '../../providers/reactContext';
 import HeaderInfo from '../../components/HeaderInfo';
-
-const StyledBreadcrumb = withStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.grey[100],
-    height: theme.spacing(3),
-    color: theme.palette.grey[900],
-    fontWeight: theme.typography.fontWeightBold,
-    fontSize: 15,
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[300],
-    },
-  },
-}))(Chip) as typeof Chip;
 
 function createData(
   title: string,
@@ -85,11 +57,10 @@ const genericTotalTecHeader = ['', 'Total'];
 
 const Response:any = () => {
   const [services, setServices]:any = useState([]);
-  const { context, setContext }:any = useContext(infoContext);
+  const { context }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, token, tipologia,
+    nomeSAS, mes, token, tipologia,
   } = context;
-  const history = useHistory();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchServicesAnswers({
@@ -220,16 +191,6 @@ const Response:any = () => {
     createData('Outro serviço da rede socioassistencial', services['sispencaminhamentos[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Outras políticas públicas', services['sispencaminhamentos[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
   ];
-
-  let monthString = '';
-
-  if (mes === '0121') {
-    monthString = 'Janeiro 2021';
-  } else if (mes === '0221') {
-    monthString = 'Fevereiro 2021';
-  } else if (mes === '0321') {
-    monthString = 'Março 2021';
-  }
 
   return (
     loading

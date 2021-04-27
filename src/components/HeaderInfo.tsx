@@ -5,13 +5,13 @@ import TableTwoColumns from './TableTwoColumns';
 
 function createData(
   title: string,
-  attribute1: number,
-  attribute2: number,
-  attribute3: number,
-  attribute4: number,
-  attribute5: number,
-  attribute6: number,
-  attribute7: number,
+  attribute1: number | string,
+  attribute2: number | string,
+  attribute3: number | string,
+  attribute4: number | string,
+  attribute5: number | string,
+  attribute6: number | string,
+  attribute7: number | string,
 ) {
   return {
     title, attribute1, attribute2, attribute3, attribute4, attribute5, attribute6, attribute7,
@@ -19,11 +19,9 @@ function createData(
 }
 
 function HeaderInfo(props:any):JSX.Element {
-  const { items } = props;
-
-  const { context, setContext }:any = useContext(infoContext);
+  const { context }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, tipologiaCompleta, distrito, protecao, termo,
+    nomeSAS, serviceName, tipologiaCompleta, distrito, protecao, termo, capacidade,
   } = context;
 
   const headerInfo = [
@@ -33,6 +31,7 @@ function HeaderInfo(props:any):JSX.Element {
     createData('Distrito', distrito, 1, 1, 1, 1, 1, 1),
     createData('Proteção', protecao, 1, 1, 1, 1, 1, 1),
     createData('Termo', termo, 1, 1, 1, 1, 1, 1),
+    createData('Capacidade', `${capacidade} pessoas`, 1, 1, 1, 1, 1, 1),
   ];
 
   return (

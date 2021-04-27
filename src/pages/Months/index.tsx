@@ -11,7 +11,7 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
 
 import {
-  makeStyles, Theme, createStyles, withStyles,
+  makeStyles, Theme, createStyles,
 } from '@material-ui/core/styles';
 
 import CustomizedBreadcrumbs from '../../components/customizedBreadcrumbs';

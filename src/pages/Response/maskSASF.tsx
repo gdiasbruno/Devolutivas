@@ -1,24 +1,14 @@
 import React, {
   useState, useEffect, useContext,
 } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
-import {
-  withStyles, Theme,
-} from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import HomeIcon from '@material-ui/icons/Home';
-import { Typography } from '@material-ui/core';
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
-  FirstSection, MyButton, Section, LoaderBody,
+  Section, LoaderBody,
 } from './styles';
 import { fetchServicesAnswers } from './TableLinesValues';
 
-import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
 import ListComponent from '../../components/ListComponent';
@@ -26,19 +16,6 @@ import HeaderInfo from '../../components/HeaderInfo';
 import Navbar from '../../components/Navbar';
 
 import { infoContext } from '../../providers/reactContext';
-
-const StyledBreadcrumb = withStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.grey[100],
-    height: theme.spacing(3),
-    color: theme.palette.grey[900],
-    fontWeight: theme.typography.fontWeightBold,
-    fontSize: 15,
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.grey[300],
-    },
-  },
-}))(Chip) as typeof Chip;
 
 function createData(
   title: string,
@@ -72,17 +49,11 @@ const sexoRacaCorHeaders = [
 
 const motivoSaidaHeaders = ['', 'Quantidade'];
 
-const familiasAtendidasHeaders = ['', 'Nº de famílias'];
-
 const familiasVulnerabilidadeHeaders = ['', 'Nº de famílias'];
-
-const demandaReprimidaHeaders = ['', 'Nº de adolescentes'];
 
 const familiasInsumosHeaders = ['', 'N° de famílias'];
 
 const encaminhamentosHeaders = ['Serviços', 'Encaminhamentos'];
-
-const atendimentosRemotosHeaders = ['', 'Atendimentos Remotos'];
 
 const atendimentosRemotosTiposHeaders = ['Tipos', ''];
 
@@ -90,11 +61,10 @@ const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 
 const Response:any = () => {
   const [services, setServices]:any = useState([]);
-  const { context, setContext }:any = useContext(infoContext);
+  const { context }:any = useContext(infoContext);
   const {
-    nomeSAS, mes, serviceName, token, tipologia,
+    nomeSAS, mes, token, tipologia,
   } = context;
-  const history = useHistory();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchServicesAnswers({
@@ -195,12 +165,6 @@ const Response:any = () => {
       1, 1, 1, 1, 1),
   ];
 
-  const familiasAtendidas = [
-    createData('Nº de famílias atendidas presencialmente no mês', services['cjatendfam[cjfampres]'], 1, 1, 1, 1, 1, 1),
-    createData('Nº de famílias acompanhadas de forma remota no mês', services['cjatendfam[cjfamrem]'], 1, 1, 1, 1, 1, 1),
-    createData('Nº total de famílias atendidas no mês', services['cjatendfam[cjfamtotal]'], 1, 1, 1, 1, 1, 1),
-  ];
-
   const familiasVulnerabilidade = [
     createData('Conflitos', services['sasfvulnerab[conflit]'], 1, 1, 1, 1, 1, 1),
     createData('Preconceitos/discriminação', services['sasfvulnerab[Precon]'], 1, 1, 1, 1, 1, 1),
@@ -239,14 +203,6 @@ const Response:any = () => {
     ['Mundo do trabalho', services['sasftemas[tematrabalho]']],
   ];
 
-  const demandaReprimida = [
-    createData('15 a 17 anos', services['cjlistaespera[15a17_quantidade]'], 1, 1, 1, 1, 1, 1),
-
-    createData('Total',
-      parseInt(services['cjlistaespera[15a17_quantidade]'], 10),
-      1, 1, 1, 1, 1, 1),
-  ];
-
   const numeroBPC = [
     createData('Nº de famílias beneficiárias do Programa Bolsa Família acompanhadas pelo serviço', services['sasfbeneficio[familiabolsafam]'], 1, 1, 1, 1, 1, 1),
     createData('Nº de idosos beneficiários do BPC acompanhados pelo serviço', services['sasfbeneficio[idososbpc]'], 1, 1, 1, 1, 1, 1),
@@ -283,15 +239,6 @@ const Response:any = () => {
     createData('Outras políticas públicas', services['sasfencaminhamentos[outraspoliticas]'], 1, 1, 1, 1, 1, 1),
   ];
 
-  const atendimentosRemotos = [
-    createData('Semana 1', services['cjatendremperiod[1sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['cjatendremperiod[2sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['cjatendremperiod[3sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['cjatendremperiod[4sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['cjatendremperiod[5sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['cjatendremperiod[6sem]'], 1, 1, 1, 1, 1, 1),
-  ];
-
   const atendimentosRemotosTipos = [
     createData('Telefone / Celular / Whatsapp', services['sasfremdisp[telef]'], 1, 1, 1, 1, 1, 1),
     createData('Email', services['sasfremdisp[email]'], 1, 1, 1, 1, 1, 1),
@@ -310,16 +257,6 @@ const Response:any = () => {
     createData('Semana 5', services['sasfremfamperiod[5sem]'], 1, 1, 1, 1, 1, 1),
     createData('Semana 6', services['sasfremfamperiod[6sem]'], 1, 1, 1, 1, 1, 1),
   ];
-
-  let monthString = '';
-
-  if (mes === '0121') {
-    monthString = 'Janeiro 2021';
-  } else if (mes === '0221') {
-    monthString = 'Fevereiro 2021';
-  } else if (mes === '0321') {
-    monthString = 'Março 2021';
-  }
 
   return (
     loading
