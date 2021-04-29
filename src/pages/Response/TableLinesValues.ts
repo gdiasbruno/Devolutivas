@@ -1,14 +1,14 @@
-import styled from 'styled-components';
-
 import axios from 'axios';
 
 export const fetchServicesAnswers = ({
-  nomeSAS, mes, token, tipologia, setServices, setLoading,
+  nomeSAS, mes, token, tipologia, setServices, setLoading, history,
 }:any) => {
-  axios.get(`http://localhost:9090/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
+  axios.get(`http://10.13.25.51:9090/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
     setServices(res.data);
     console.log(res.data);
     setLoading(false);
+  }).catch((err) => {
+    history.push('/Erro');
   });
 };
 
@@ -283,4 +283,817 @@ export const atendimentosRemotosFamiliaSemanaCCA = ({ services, createData }:any
   createData('Semana 4', services['ccaperiodfam[4sem]'], 1, 1, 1, 1, 1, 1),
   createData('Semana 5', services['ccaperiodfam[5sem]'], 1, 1, 1, 1, 1, 1),
   createData('Semana 6', services['ccaperiodfam[6sem]'], 1, 1, 1, 1, 1, 1),
+];
+
+export const idososMoramSozinhoCCINTER = ({ services, createData }:any) => [
+  createData('Quantidade de idosos que moram sozinhos',
+    services['ccintidoso[idososo]'],
+    1,
+    1, 1, 1, 1, 1, 1, 1),
+  createData('Destes, quantos contam com apoio da família / comunidade',
+    services['ccintidoso[contamcajuda]'],
+    1,
+    1, 1, 1, 1, 1, 1, 1),
+];
+
+export const atendidosMesFemininoCCINTER = ({ services, createData }:any) => [
+  createData('6 a 11 anos (F)',
+    services['ccinteratendfem[6a11f_atendmesatual]'],
+    services['ccinteratendfem[6a11f_presmesatual]'],
+    services['ccinteratendfem[6a11f_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('12 a 14 anos (F)',
+    services['ccinteratendfem[12a14f_atendmesatual]'],
+    services['ccinteratendfem[12a14f_presmesatual]'],
+    services['ccinteratendfem[12a14f_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('15 a 17 anos (F)',
+    services['ccinteratendfem[15a17f_atendmesatual]'],
+    services['ccinteratendfem[15a17f_presmesatual]'],
+    services['ccinteratendfem[15a17f_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('18 a 29 anos (F)',
+    services['ccinteratendfem[18a29f_atendmesatual]'],
+    services['ccinteratendfem[18a29f_presmesatual]'],
+    services['ccinteratendfem[18a29f_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('30 a 59 anos (F)',
+    services['ccinteratendfem[30a59f_atendmesatual]'],
+    services['ccinteratendfem[30a59f_presmesatual]'],
+    services['ccinteratendfem[30a59f_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('60 a 64 anos (F)',
+    services['ccinteratendfem[60a64f_atendmesatual]'],
+    services['ccinteratendfem[60a64f_presmesatual]'],
+    services['ccinteratendfem[60a64f_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('65 a 69 anos (F)',
+    services['ccinteratendfem[65a69f_atendmesatual]'],
+    services['ccinteratendfem[65a69f_presmesatual]'],
+    services['ccinteratendfem[65a69f_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('70 a 74 anos (F)',
+    services['ccinteratendfem[70a74f_atendmesatual]'],
+    services['ccinteratendfem[70a74f_presmesatual]'],
+    services['ccinteratendfem[70a74f_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('75 anos ou mais (F)',
+    services['ccinteratendfem[75maisf_atendmesatual]'],
+    services['ccinteratendfem[75maisf_presmesatual]'],
+    services['ccinteratendfem[75maisf_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+
+  createData('Total',
+    parseInt(services['ccinteratendfem[6a11f_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[12a14f_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[15a17f_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[18a29f_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[30a59f_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[60a64f_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[65a69f_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[70a74f_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[75maisf_atendmesatual]'], 10),
+    parseInt(services['ccinteratendfem[6a11f_presmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[12a14f_presmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[15a17f_presmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[18a29f_presmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[30a59f_presmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[60a64f_presmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[65a69f_presmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[70a74f_presmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[75maisf_presmesatual]'], 10),
+    parseInt(services['ccinteratendfem[6a11f_remmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[12a14f_remmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[15a17f_remmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[18a29f_remmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[30a59f_remmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[60a64f_remmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[65a69f_remmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[70a74f_remmesatual]'], 10)
+    + parseInt(services['ccinteratendfem[75maisf_remmesatual]'], 10),
+    1, 1, 1, 1, 1, 1),
+];
+
+export const atendidosMesMasculinoCCINTER = ({ services, createData }:any) => [
+  createData('6 a 11 anos (M)',
+    services['ccinteratendmasc[6a11m_atendmesatual]'],
+    services['ccinteratendmasc[6a11m_presmesatual]'],
+    services['ccinteratendmasc[6a11m_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('12 a 14 anos (M)',
+    services['ccinteratendmasc[12a14m_atendmesatual]'],
+    services['ccinteratendmasc[12a14m_presmesatual]'],
+    services['ccinteratendmasc[12a14m_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('15 a 17 anos (M)',
+    services['ccinteratendmasc[15a17m_atendmesatual]'],
+    services['ccinteratendmasc[15a17m_presmesatual]'],
+    services['ccinteratendmasc[15a17m_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('18 a 29 anos (M)',
+    services['ccinteratendmasc[18a29m_atendmesatual]'],
+    services['ccinteratendmasc[18a29m_presmesatual]'],
+    services['ccinteratendmasc[18a29m_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('30 a 59 anos (M)',
+    services['ccinteratendmasc[30a59m_atendmesatual]'],
+    services['ccinteratendmasc[30a59m_presmesatual]'],
+    services['ccinteratendmasc[30a59m_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('60 a 64 anos (M)',
+    services['ccinteratendmasc[60a64m_atendmesatual]'],
+    services['ccinteratendmasc[60a64m_presmesatual]'],
+    services['ccinteratendmasc[60a64m_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('65 a 69 anos (M)',
+    services['ccinteratendmasc[65a69m_atendmesatual]'],
+    services['ccinteratendmasc[65a69m_presmesatual]'],
+    services['ccinteratendmasc[65a69m_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('70 a 74 anos (M)',
+    services['ccinteratendmasc[70a74m_atendmesatual]'],
+    services['ccinteratendmasc[70a74m_presmesatual]'],
+    services['ccinteratendmasc[70a74m_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('75 anos ou mais (M)',
+    services['ccinteratendmasc[75maism_atendmesatual]'],
+    services['ccinteratendmasc[75maism_presmesatual]'],
+    services['ccinteratendmasc[75maism_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('Total',
+    parseInt(services['ccinteratendmasc[6a11m_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[12a14m_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[15a17m_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[18a29m_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[30a59m_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[60a64m_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[65a69m_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[70a74m_atendmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[75maism_atendmesatual]'], 10),
+    parseInt(services['ccinteratendmasc[6a11m_presmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[12a14m_presmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[15a17m_presmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[18a29m_presmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[30a59m_presmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[60a64m_presmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[65a69m_presmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[70a74m_presmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[75maism_presmesatual]'], 10),
+    parseInt(services['ccinteratendmasc[6a11m_remmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[12a14m_remmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[15a17m_remmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[18a29m_remmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[30a59m_remmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[60a64m_remmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[65a69m_remmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[70a74m_remmesatual]'], 10)
+    + parseInt(services['ccinteratendmasc[75maism_remmesatual]'], 10),
+    1, 1, 1, 1, 1, 1),
+];
+
+export const sexoRacaCorCCINTER = ({ services, createData }:any) => [
+  createData('Feminino',
+    services['ccintracasexo[fem_branca]'],
+    services['ccintracasexo[fem_preta]'],
+    services['ccintracasexo[fem_parda]'],
+    services['ccintracasexo[fem_amarela]'],
+    services['ccintracasexo[fem_indigena]'],
+    services['ccintracasexo[fem_naoinf]'],
+    parseInt(services['ccintracasexo[fem_branca]'], 10)
+    + parseInt(services['ccintracasexo[fem_preta]'], 10)
+    + parseInt(services['ccintracasexo[fem_parda]'], 10)
+    + parseInt(services['ccintracasexo[fem_amarela]'], 10)
+    + parseInt(services['ccintracasexo[fem_indigena]'], 10)
+    + parseInt(services['ccintracasexo[fem_naoinf]'], 10), 1, 1),
+  createData('Masculino',
+    services['ccintracasexo[masc_branca]'],
+    services['ccintracasexo[masc_preta]'],
+    services['ccintracasexo[masc_parda]'],
+    services['ccintracasexo[masc_amarela]'],
+    services['ccintracasexo[masc_indigena]'],
+    services['ccintracasexo[masc_naoinf]'],
+    parseInt(services['ccintracasexo[masc_branca]'], 10)
+    + parseInt(services['ccintracasexo[masc_preta]'], 10)
+    + parseInt(services['ccintracasexo[masc_parda]'], 10)
+    + parseInt(services['ccintracasexo[masc_amarela]'], 10)
+    + parseInt(services['ccintracasexo[masc_indigena]'], 10)
+    + parseInt(services['ccintracasexo[masc_naoinf]'], 10), 1, 1),
+  createData('Total Geral',
+    parseInt(services['ccintracasexo[masc_branca]'], 10)
+    + parseInt(services['ccintracasexo[fem_branca]'], 10),
+    parseInt(services['ccintracasexo[masc_preta]'], 10)
+    + parseInt(services['ccintracasexo[fem_preta]'], 10),
+    parseInt(services['ccintracasexo[masc_parda]'], 10)
+    + parseInt(services['ccintracasexo[fem_parda]'], 10),
+    parseInt(services['ccintracasexo[masc_amarela]'], 10)
+    + parseInt(services['ccintracasexo[fem_amarela]'], 10),
+    parseInt(services['ccintracasexo[masc_indigena]'], 10)
+    + parseInt(services['ccintracasexo[fem_indigena]'], 10),
+    parseInt(services['ccintracasexo[masc_naoinf]'], 10)
+    + parseInt(services['ccintracasexo[fem_naoinf]'], 10),
+    parseInt(services['ccintracasexo[masc_branca]'], 10)
+    + parseInt(services['ccintracasexo[fem_branca]'], 10)
+    + parseInt(services['ccintracasexo[masc_preta]'], 10)
+    + parseInt(services['ccintracasexo[fem_preta]'], 10)
+    + parseInt(services['ccintracasexo[masc_parda]'], 10)
+    + parseInt(services['ccintracasexo[fem_parda]'], 10)
+    + parseInt(services['ccintracasexo[masc_amarela]'], 10)
+    + parseInt(services['ccintracasexo[fem_amarela]'], 10)
+    + parseInt(services['ccintracasexo[masc_indigena]'], 10)
+    + parseInt(services['ccintracasexo[fem_indigena]'], 10)
+    + parseInt(services['ccintracasexo[masc_naoinf]'], 10)
+    + parseInt(services['ccintracasexo[fem_naoinf]'], 10), 1, 1),
+];
+
+export const motivosSaidaCCINTER = ({ services, createData }:any) => [
+  createData('Mudança de endereço',
+    services['ccintersaidas[endereco_6a14]'],
+    services['ccintersaidas[endereco_15a17]'],
+    services['ccintersaidas[endereco_18a29]'],
+    services['ccintersaidas[endereco_30a59]'],
+    services['ccintersaidas[endereco_60a64]'],
+    services['ccintersaidas[endereco_65a69]'],
+    services['ccintersaidas[endereco_70a74]'],
+    services['ccintersaidas[endereco_75mais]'],
+    parseInt(services['ccintersaidas[endereco_6a14]'], 10)
+    + parseInt(services['ccintersaidas[endereco_15a17]'], 10)
+    + parseInt(services['ccintersaidas[endereco_18a29]'], 10)
+    + parseInt(services['ccintersaidas[endereco_30a59]'], 10)
+    + parseInt(services['ccintersaidas[endereco_60a64]'], 10)
+    + parseInt(services['ccintersaidas[endereco_65a69]'], 10)
+    + parseInt(services['ccintersaidas[endereco_70a74]'], 10)
+    + parseInt(services['ccintersaidas[endereco_75mais]'], 10)),
+  createData('Transferência para outro serviço',
+    services['ccintersaidas[transferencia_6a14]'],
+    services['ccintersaidas[transferencia_15a17]'],
+    services['ccintersaidas[transferencia_18a29]'],
+    services['ccintersaidas[transferencia_30a59]'],
+    services['ccintersaidas[transferencia_60a64]'],
+    services['ccintersaidas[transferencia_65a69]'],
+    services['ccintersaidas[transferencia_70a74]'],
+    services['ccintersaidas[transferencia_75mais]'],
+    parseInt(services['ccintersaidas[transferencia_6a14]'], 10)
+    + parseInt(services['ccintersaidas[transferencia_15a17]'], 10)
+    + parseInt(services['ccintersaidas[transferencia_18a29]'], 10)
+    + parseInt(services['ccintersaidas[transferencia_30a59]'], 10)
+    + parseInt(services['ccintersaidas[transferencia_60a64]'], 10)
+    + parseInt(services['ccintersaidas[transferencia_65a69]'], 10)
+    + parseInt(services['ccintersaidas[transferencia_70a74]'], 10)
+    + parseInt(services['ccintersaidas[transferencia_75mais]'], 10)),
+  createData('Abandono',
+    services['ccintersaidas[aband_6a14]'],
+    services['ccintersaidas[aband_15a17]'],
+    services['ccintersaidas[aband_18a29]'],
+    services['ccintersaidas[aband_30a59]'],
+    services['ccintersaidas[aband_60a64]'],
+    services['ccintersaidas[aband_65a69]'],
+    services['ccintersaidas[aband_70a74]'],
+    services['ccintersaidas[aband_75mais]'],
+    parseInt(services['ccintersaidas[aband_6a14]'], 10)
+    + parseInt(services['ccintersaidas[aband_15a17]'], 10)
+    + parseInt(services['ccintersaidas[aband_18a29]'], 10)
+    + parseInt(services['ccintersaidas[aband_30a59]'], 10)
+    + parseInt(services['ccintersaidas[aband_60a64]'], 10)
+    + parseInt(services['ccintersaidas[aband_65a69]'], 10)
+    + parseInt(services['ccintersaidas[aband_70a74]'], 10)
+    + parseInt(services['ccintersaidas[aband_75mais]'], 10)),
+  createData('Óbito',
+    services['ccintersaidas[obito_6a14]'],
+    services['ccintersaidas[obito_15a17]'],
+    services['ccintersaidas[obito_18a29]'],
+    services['ccintersaidas[obito_30a59]'],
+    services['ccintersaidas[obito_60a64]'],
+    services['ccintersaidas[obito_65a69]'],
+    services['ccintersaidas[obito_70a74]'],
+    services['ccintersaidas[obito_75mais]'],
+    1),
+  createData('Inserção no Programa Jovem Aprendiz',
+    services['ccintersaidas[programajaprendiz_6a14]'],
+    services['ccintersaidas[programajaprendiz_15a17]'],
+    services['ccintersaidas[programajaprendiz_18a29]'],
+    services['ccintersaidas[programajaprendiz_30a59]'],
+    services['ccintersaidas[programajaprendiz_60a64]'],
+    services['ccintersaidas[programajaprendiz_65a69]'],
+    services['ccintersaidas[programajaprendiz_70a74]'],
+    services['ccintersaidas[programajaprendiz_75mais]'],
+    parseInt(services['ccintersaidas[programajaprendiz_6a14]'], 10)
+    + parseInt(services['ccintersaidas[programajaprendiz_15a17]'], 10)
+    + parseInt(services['ccintersaidas[programajaprendiz_18a29]'], 10)
+    + parseInt(services['ccintersaidas[programajaprendiz_30a59]'], 10)
+    + parseInt(services['ccintersaidas[programajaprendiz_60a64]'], 10)
+    + parseInt(services['ccintersaidas[programajaprendiz_65a69]'], 10)
+    + parseInt(services['ccintersaidas[programajaprendiz_70a74]'], 10)
+    + parseInt(services['ccintersaidas[programajaprendiz_75mais]'], 10)),
+  createData('Inserção no mercado de trabalho',
+    services['ccintersaidas[insertrabalho_6a14]'],
+    services['ccintersaidas[insertrabalho_15a17]'],
+    services['ccintersaidas[insertrabalho_18a29]'],
+    services['ccintersaidas[insertrabalho_30a59]'],
+    services['ccintersaidas[insertrabalho_60a64]'],
+    services['ccintersaidas[insertrabalho_65a69]'],
+    services['ccintersaidas[insertrabalho_70a74]'],
+    services['ccintersaidas[insertrabalho_75mais]'],
+    parseInt(services['ccintersaidas[insertrabalho_6a14]'], 10)
+    + parseInt(services['ccintersaidas[insertrabalho_15a17]'], 10)
+    + parseInt(services['ccintersaidas[insertrabalho_18a29]'], 10)
+    + parseInt(services['ccintersaidas[insertrabalho_30a59]'], 10)
+    + parseInt(services['ccintersaidas[insertrabalho_60a64]'], 10)
+    + parseInt(services['ccintersaidas[insertrabalho_65a69]'], 10)
+    + parseInt(services['ccintersaidas[insertrabalho_70a74]'], 10)
+    + parseInt(services['ccintersaidas[insertrabalho_75mais]'], 10)),
+  createData('Aplicação de medida restritiva de liberdade',
+    services['ccintersaidas[medrestritiva_6a14]'],
+    services['ccintersaidas[medrestritiva_15a17]'],
+    services['ccintersaidas[medrestritiva_18a29]'],
+    services['ccintersaidas[medrestritiva_30a59]'],
+    services['ccintersaidas[medrestritiva_60a64]'],
+    services['ccintersaidas[medrestritiva_65a69]'],
+    services['ccintersaidas[medrestritiva_70a74]'],
+    services['ccintersaidas[medrestritiva_75mais]'],
+    parseInt(services['ccintersaidas[medrestritiva_6a14]'], 10)
+    + parseInt(services['ccintersaidas[medrestritiva_15a17]'], 10)
+    + parseInt(services['ccintersaidas[medrestritiva_18a29]'], 10)
+    + parseInt(services['ccintersaidas[medrestritiva_30a59]'], 10)
+    + parseInt(services['ccintersaidas[medrestritiva_60a64]'], 10)
+    + parseInt(services['ccintersaidas[medrestritiva_65a69]'], 10)
+    + parseInt(services['ccintersaidas[medrestritiva_70a74]'], 10)
+    + parseInt(services['ccintersaidas[medrestritiva_75mais]'], 10)),
+];
+
+export const familiasVulnerabilidadeCCINTER = ({ services, createData }:any) => [
+  createData('Conflitos', services['ccintvulnerab[conflit]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Preconceitos/discriminação', services['ccintvulnerab[Precon]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Abandono', services['ccintvulnerab[aband]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Apartação', services['ccintvulnerab[apart]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Confinamento', services['ccintvulnerab[confinamet]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Isolamento', services['ccintvulnerab[isolament]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Violência', services['ccintvulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const atendimentoFamiliaCCINTER = ({ services, createData }:any) => [
+  createData('Nº de famílias atendidas presencialmente', services['ccintfam[ccafampres]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Nº de famílias acompanhadas de forma remota', services['ccintfam[ccafamrem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const atividadesItemsCCINTER = ({ services, createData }:any) => [
+  ['Atividades esportivas', services['ccintatividades[atvesporte]']],
+  ['Musicalidade (cantar, tocar instrumentos etc.)', services['ccintatividades[atvmusica]']],
+  ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['ccintatividades[atvcultura]']],
+  ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['ccintatividades[atvarte]']],
+  ['Atividades de inclusão digital', services['ccintatividades[atvincdigital]']],
+  ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['ccintatividades[atvlinguagem]']],
+  ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['ccintatividades[atvculinaria]']],
+  ['Atividades recreativas (jogos, brincadeiras, etc.)', services['ccintatividades[atvrecreacao]']],
+
+];
+export const temasItemsCCINTER = ({ services, createData }:any) => [
+
+  ['Temas transversais (saúde, meio ambiente, cultura, esporte etc.)', services['ccinttema[tematransversal]']],
+  ['Direitos e programas sociais', services['ccinttema[temadireitos]']],
+  ['Segurança alimentar e nutricional', services['ccinttema[temanutricao]']],
+  ['Igualdade entre homens e mulheres', services['ccinttema[temaigualdade]']],
+  ['Orientação sexual e de identidade de gênero', services['ccinttema[temaorientsexual]']],
+  ['Relações étnico-raciais', services['ccinttema[temaetnico]']],
+  ['Prevenção ao uso de álcool e drogas', services['ccinttema[temaalccoldrogas]']],
+  ['Prevenção à violência', services['ccinttema[temaprevencaovio]']],
+  ['Parentalidade', services['ccinttema[temaparental]']],
+  ['Deficiência e acessibilidade', services['ccinttema[temapcd]']],
+  ['Mundo do trabalho', services['ccinttema[tematrabalho]']],
+];
+export const demandaReprimidaCCINTER = ({ services, createData }:any) => [
+
+  createData('6 a 11 anos', services['ccinterlistaespera[6a11_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('12 a 17 anos', services['ccinterlistaespera[12a14_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('18 a 29 anos', services['ccinterlistaespera[18a29_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('30 a 59 anos', services['ccinterlistaespera[30a59_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('60 a 64 anos', services['ccinterlistaespera[60a64_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('65 a 69 anos', services['ccinterlistaespera[65a69_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('70 a 74 anos', services['ccinterlistaespera[70a74_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('75 anos ou mais', services['ccinterlistaespera[75mais_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+
+  createData('Total',
+    parseInt(services['ccinterlistaespera[6a11_quantidade]'], 10)
+    + parseInt(services['ccinterlistaespera[12a14_quantidade]'], 10)
+    + parseInt(services['ccinterlistaespera[18a29_quantidade]'], 10)
+    + parseInt(services['ccinterlistaespera[30a59_quantidade]'], 10)
+    + parseInt(services['ccinterlistaespera[60a64_quantidade]'], 10)
+    + parseInt(services['ccinterlistaespera[65a69_quantidade]'], 10)
+    + parseInt(services['ccinterlistaespera[70a74_quantidade]'], 10)
+    + parseInt(services['ccinterlistaespera[75mais_quantidade]'], 10),
+    1, 1, 1, 1, 1, 1, 1, 1),
+];
+export const encaminhamentosCCINTER = ({ services, createData }:any) => [
+
+  createData('CRAS', services['ccinterencaminha[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('CREAS', services['ccinterencaminha[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outro serviço da rede socioassistencial', services['ccinterencaminha[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Saúde', services['ccinterencaminha[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Educação', services['ccinterencaminha[educacao]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Conselhos de direito', services['ccinterencaminha[direito]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Trabalho e renda', services['ccinterencaminha[trab]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outras políticas públicas', services['ccinterencaminha[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+export const atendimentosRemotosCCINTER = ({ services, createData }:any) => [
+
+  createData('Semana 1', services['ccinteratendremperio[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 2', services['ccinteratendremperio[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 3', services['ccinteratendremperio[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 4', services['ccinteratendremperio[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 5', services['ccinteratendremperio[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 6', services['ccinteratendremperio[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+export const atendimentosRemotosTiposCCINTER = ({ services, createData }:any) => [
+
+  createData('Telefone / Celular / Whatsapp', services['ccintatendremdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Email', services['ccintatendremdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Facebook', services['ccintatendremdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('YouTube', services['ccintatendremdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outras redes sociais', services['ccintatendremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Entrega de kits de atividades', services['ccintatendremdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outros', services['ccintatendremdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const atendimentosRemotosFamiliaSemanaCCINTER = ({ services, createData }:any) => [
+
+  createData('Semana 1', services['ccinterperiodfam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 2', services['ccinterperiodfam[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 3', services['ccinterperiodfam[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 4', services['ccinterperiodfam[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 5', services['ccinterperiodfam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 6', services['ccinterperiodfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const atendidosMesCDCM = ({ services, createData }:any) => [
+
+  createData('18 a 29 anos',
+    services['cdcmatendfxetaria[18a29_atendmesatual]'],
+    services['cdcmatendfxetaria[18a29_atendpresencial]'],
+    services['cdcmatendfxetaria[18a29_atendremoto]'],
+    1, 1, 1, 1, 1, 1),
+  createData('30 a 59 anos',
+    services['cdcmatendfxetaria[30a59_atendmesatual]'],
+    services['cdcmatendfxetaria[30a59_atendpresencial]'],
+    services['cdcmatendfxetaria[30a59_atendremoto]'],
+    1, 1, 1, 1, 1, 1),
+  createData('60 anos ou mais',
+    services['cdcmatendfxetaria[60oumais_atendmesatual]'],
+    services['cdcmatendfxetaria[60oumais_atendpresencial]'],
+    services['cdcmatendfxetaria[60oumais_atendremoto]'],
+    1, 1, 1, 1, 1, 1),
+
+  createData('Total',
+    parseInt(services['cdcmatendfxetaria[18a29_atendmesatual]'], 10)
+    + parseInt(services['cdcmatendfxetaria[30a59_atendmesatual]'], 10)
+    + parseInt(services['cdcmatendfxetaria[60oumais_atendmesatual]'], 10),
+    parseInt(services['cdcmatendfxetaria[18a29_atendpresencial]'], 10)
+    + parseInt(services['cdcmatendfxetaria[30a59_atendpresencial]'], 10)
+    + parseInt(services['cdcmatendfxetaria[60oumais_atendpresencial]'], 10),
+    parseInt(services['cdcmatendfxetaria[18a29_atendremoto]'], 10)
+    + parseInt(services['cdcmatendfxetaria[30a59_atendremoto]'], 10)
+    + parseInt(services['cdcmatendfxetaria[60oumais_atendremoto]'], 10),
+    1, 1, 1, 1, 1, 1),
+];
+export const sexoRacaCorCDCM = ({ services, createData }:any) => [
+
+  createData('Mulher Cisgênero',
+    services['cdcmracagenero[mcis_branca]'],
+    services['cdcmracagenero[mcis_preta]'],
+    services['cdcmracagenero[mcis_parda]'],
+    services['cdcmracagenero[mcis_amarela]'],
+    services['cdcmracagenero[mcis_indigena]'],
+    services['cdcmracagenero[mcis_naoinf]'],
+    parseInt(services['cdcmracagenero[mcis_branca]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_preta]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_parda]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_amarela]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_indigena]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_naoinf]'], 10), 1, 1),
+  createData('Mulher Transgênero',
+    services['cdcmracagenero[mtrans_branca]'],
+    services['cdcmracagenero[mtrans_preta]'],
+    services['cdcmracagenero[mtrans_parda]'],
+    services['cdcmracagenero[mtrans_amarela]'],
+    services['cdcmracagenero[mtrans_indigena]'],
+    services['cdcmracagenero[mtrans_naoinf]'],
+    parseInt(services['cdcmracagenero[mtrans_branca]'], 10)
+    + parseInt(services['cdcmracagenero[mtrans_preta]'], 10)
+    + parseInt(services['cdcmracagenero[mtrans_parda]'], 10)
+    + parseInt(services['cdcmracagenero[mtrans_amarela]'], 10)
+    + parseInt(services['cdcmracagenero[mtrans_indigena]'], 10)
+    + parseInt(services['cdcmracagenero[mtrans_naoinf]'], 10), 1, 1),
+  createData('Total Geral',
+    parseInt(services['cdcmracagenero[mtrans_branca]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_branca]'], 10),
+    parseInt(services['cdcmracagenero[mtrans_preta]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_preta]'], 10),
+    parseInt(services['cdcmracagenero[mtrans_parda]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_parda]'], 10),
+    parseInt(services['cdcmracagenero[mtrans_amarela]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_amarela]'], 10),
+    parseInt(services['cdcmracagenero[mtrans_indigena]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_indigena]'], 10),
+    parseInt(services['cdcmracagenero[mtrans_naoinf]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_naoinf]'], 10),
+    parseInt(services['cdcmracagenero[mtrans_branca]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_branca]'], 10)
+    + parseInt(services['cdcmracagenero[mtrans_preta]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_preta]'], 10)
+    + parseInt(services['cdcmracagenero[mtrans_parda]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_parda]'], 10)
+    + parseInt(services['cdcmracagenero[mtrans_amarela]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_amarela]'], 10)
+    + parseInt(services['cdcmracagenero[mtrans_indigena]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_indigena]'], 10)
+    + parseInt(services['cdcmracagenero[mtrans_naoinf]'], 10)
+    + parseInt(services['cdcmracagenero[mcis_naoinf]'], 10), 1, 1),
+];
+
+export const violenciaAgressorCDCM = ({ services, createData }:any) => [
+
+  createData('Violência Física',
+    services['cdcmagressorvio[viofisica_agressorpai]'],
+    services['cdcmagressorvio[viofisica_padrasto]'],
+    services['cdcmagressorvio[viofisica_agressoresposo]'],
+    services['cdcmagressorvio[viofisica_agressorexesposo]'],
+    services['cdcmagressorvio[viofisica_agressorirmao]'],
+    services['cdcmagressorvio[viofisica_agressorempre]'],
+    services['cdcmagressorvio[viofisica_agressoroutrosfam]'],
+    services['cdcmagressorvio[viofisica_agressoroutraspessoa]'],
+    parseInt(services['cdcmagressorvio[viofisica_agressorpai]'], 10)
+    + parseInt(services['cdcmagressorvio[viofisica_padrasto]'], 10)
+    + parseInt(services['cdcmagressorvio[viofisica_agressoresposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viofisica_agressorexesposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viofisica_agressorirmao]'], 10)
+    + parseInt(services['cdcmagressorvio[viofisica_agressorempre]'], 10)
+    + parseInt(services['cdcmagressorvio[viofisica_agressoroutrosfam]'], 10)
+    + parseInt(services['cdcmagressorvio[viofisica_agressoroutraspessoa]'], 10)),
+  createData('Violência Psicológica',
+    services['cdcmagressorvio[viopsico_agressorpai]'],
+    services['cdcmagressorvio[viopsico_padrasto]'],
+    services['cdcmagressorvio[viopsico_agressoresposo]'],
+    services['cdcmagressorvio[viopsico_agressorexesposo]'],
+    services['cdcmagressorvio[viopsico_agressorirmao]'],
+    services['cdcmagressorvio[viopsico_agressorempre]'],
+    services['cdcmagressorvio[viopsico_agressoroutrosfam]'],
+    services['cdcmagressorvio[viopsico_agressoroutraspessoa]'],
+
+    parseInt(services['cdcmagressorvio[viopsico_agressorpai]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_padrasto]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressoresposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressorexesposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressorirmao]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressorempre]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressoroutrosfam]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressoroutraspessoa]'], 10)),
+  createData('Exploração Sexual',
+    services['cdcmagressorvio[vioexplo_agressorpai]'],
+    services['cdcmagressorvio[vioexplo_padrasto]'],
+    services['cdcmagressorvio[vioexplo_agressoresposo]'],
+    services['cdcmagressorvio[vioexplo_agressorexesposo]'],
+    services['cdcmagressorvio[vioexplo_agressorirmao]'],
+    services['cdcmagressorvio[vioexplo_agressorempre]'],
+    services['cdcmagressorvio[vioexplo_agressoroutrosfam]'],
+    services['cdcmagressorvio[vioexplo_agressoroutraspessoa]'],
+
+    parseInt(services['cdcmagressorvio[vioexplo_agressorpai]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_padrasto]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressoresposo]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressorexesposo]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressorirmao]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressorempre]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressoroutrosfam]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressoroutraspessoa]'], 10)),
+  createData('Abuso Sexual',
+    services['cdcmagressorvio[vioabuso_agressorpai]'],
+    services['cdcmagressorvio[vioabuso_padrasto]'],
+    services['cdcmagressorvio[vioabuso_agressoresposo]'],
+    services['cdcmagressorvio[vioabuso_agressorexesposo]'],
+    services['cdcmagressorvio[vioabuso_agressorirmao]'],
+    services['cdcmagressorvio[vioabuso_agressorempre]'],
+    services['cdcmagressorvio[vioabuso_agressoroutrosfam]'],
+    services['cdcmagressorvio[vioabuso_agressoroutraspessoa]'],
+
+    parseInt(services['cdcmagressorvio[vioabuso_agressorpai]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_padrasto]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressoresposo]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressorexesposo]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressorirmao]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressorempre]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressoroutrosfam]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressoroutraspessoa]'], 10)),
+  createData('Violência Moral',
+    services['cdcmagressorvio[viomoral_agressorpai]'],
+    services['cdcmagressorvio[viomoral_padrasto]'],
+    services['cdcmagressorvio[viomoral_agressoresposo]'],
+    services['cdcmagressorvio[viomoral_agressorexesposo]'],
+    services['cdcmagressorvio[viomoral_agressorirmao]'],
+    services['cdcmagressorvio[viomoral_agressorempre]'],
+    services['cdcmagressorvio[viomoral_agressoroutrosfam]'],
+    services['cdcmagressorvio[viomoral_agressoroutraspessoa]'],
+
+    parseInt(services['cdcmagressorvio[viomoral_agressorpai]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_padrasto]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressoresposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressorexesposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressorirmao]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressorempre]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressoroutrosfam]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressoroutraspessoa]'], 10)),
+  createData('Violência Patrimonial',
+    services['cdcmagressorvio[viopatrim_agressorpai]'],
+    services['cdcmagressorvio[viopatrim_padrasto]'],
+    services['cdcmagressorvio[viopatrim_agressoresposo]'],
+    services['cdcmagressorvio[viopatrim_agressorexesposo]'],
+    services['cdcmagressorvio[viopatrim_agressorirmao]'],
+    services['cdcmagressorvio[viopatrim_agressorempre]'],
+    services['cdcmagressorvio[viopatrim_agressoroutrosfam]'],
+    services['cdcmagressorvio[viopatrim_agressoroutraspessoa]'],
+
+    parseInt(services['cdcmagressorvio[viopatrim_agressorpai]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_padrasto]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressoresposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressorexesposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressorirmao]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressorempre]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressoroutrosfam]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressoroutraspessoa]'], 10)),
+  createData('Total',
+    parseInt(services['cdcmagressorvio[viofisica_agressorpai]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressorpai]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressorpai]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressorpai]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressorpai]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressorpai]'], 10),
+    parseInt(services['cdcmagressorvio[viofisica_padrasto]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_padrasto]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_padrasto]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_padrasto]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_padrasto]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_padrasto]'], 10),
+    parseInt(services['cdcmagressorvio[viofisica_agressoresposo]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressoresposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressoresposo]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressoresposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressoresposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressoresposo]'], 10),
+    parseInt(services['cdcmagressorvio[viofisica_agressorexesposo]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressorexesposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressorexesposo]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressorexesposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressorexesposo]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressorexesposo]'], 10),
+    parseInt(services['cdcmagressorvio[viofisica_agressorirmao]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressorirmao]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressorirmao]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressorirmao]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressorirmao]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressorirmao]'], 10),
+    parseInt(services['cdcmagressorvio[viofisica_agressorempre]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressorempre]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressorempre]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressorempre]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressorempre]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressorempre]'], 10),
+    parseInt(services['cdcmagressorvio[viofisica_agressoroutrosfam]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressoroutrosfam]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressoroutrosfam]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressoroutrosfam]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressoroutrosfam]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressoroutrosfam]'], 10),
+    parseInt(services['cdcmagressorvio[viofisica_agressoroutraspessoa]'], 10)
+    + parseInt(services['cdcmagressorvio[vioexplo_agressoroutraspessoa]'], 10)
+    + parseInt(services['cdcmagressorvio[viopsico_agressoroutraspessoa]'], 10)
+    + parseInt(services['cdcmagressorvio[vioabuso_agressoroutraspessoa]'], 10)
+    + parseInt(services['cdcmagressorvio[viomoral_agressoroutraspessoa]'], 10)
+    + parseInt(services['cdcmagressorvio[viopatrim_agressoroutraspessoa]'], 10),
+    0),
+];
+export const atendimentoTecnicoCDCM = ({ services, createData }:any) => [
+
+  createData('Nº de mulheres que receberam atendimento jurídico',
+    services['cdcmatendtecnico[atendjur_atendpres]'],
+    services['cdcmatendtecnico[atendjur_atendrem]'],
+    services['cdcmatendtecnico[atendjur_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('Nº de mulheres que receberam atendimento psicossocial',
+    services['cdcmatendtecnico[atendpsico_atendpres]'],
+    services['cdcmatendtecnico[atendpsico_atendrem]'],
+    services['cdcmatendtecnico[atendpsico_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('N° de mulheres que receberam atendimento social',
+    services['cdcmatendtecnico[atendrompvio_atendpres]'],
+    services['cdcmatendtecnico[atendrompvio_atendrem]'],
+    services['cdcmatendtecnico[atendrompvio_remmesatual]'],
+    1, 1, 1, 1, 1, 1),
+  createData('Total',
+    parseInt(services['cdcmatendtecnico[atendrompvio_atendpres]'], 10)
+    + parseInt(services['cdcmatendtecnico[atendpsico_atendpres]'], 10)
+    + parseInt(services['cdcmatendtecnico[atendjur_atendpres]'], 10),
+    parseInt(services['cdcmatendtecnico[atendrompvio_atendrem]'], 10)
+    + parseInt(services['cdcmatendtecnico[atendpsico_atendrem]'], 10)
+    + parseInt(services['cdcmatendtecnico[atendjur_atendrem]'], 10),
+    1,
+    1, 1, 1, 1, 1, 1),
+
+];
+export const motivosSaidaCDCM = ({ services, createData }:any) => [
+
+  createData('Rompimento da situação de violência',
+    services['cdcmmotivosaid[saidaromviolencia]'],
+    1,
+    1,
+    1, 1, 1, 1, 1, 1),
+
+  createData('Mudança de Endereço',
+    services['cdcmmotivosaid[saidamudancaend]'],
+    services['cdcmmotivosaid[aband_18a29]'],
+    services['cdcmmotivosaid[aband_30a59]'],
+    parseInt(services['cdcmmotivosaid[aband_15a17]'], 10)
+    + parseInt(services['cdcmmotivosaid[aband_18a29]'], 10)
+    + parseInt(services['cdcmmotivosaid[aband_30a59]'], 10),
+    1,
+    1,
+    1,
+    1,
+    1),
+  createData('Desistência',
+    services['cdcmmotivosaid[saidadesistencia]'],
+    services['cdcmmotivosaid[obito_18a29]'],
+    services['cdcmmotivosaid[obito_30a59]'],
+    parseInt(services['cdcmmotivosaid[obito_15a17]'], 10)
+    + parseInt(services['cdcmmotivosaid[obito_18a29]'], 10)
+    + parseInt(services['cdcmmotivosaid[obito_30a59]'], 10),
+    1,
+    1,
+    1,
+    1,
+    1),
+  createData('Transferência de Serviço',
+    services['cdcmmotivosaid[saidatransf]'],
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1),
+];
+export const territorioMoradiaCDCM = ({ services, createData }:any) => [
+
+  createData('No mesmo distrito onde o serviço está localizado', services['cdcmtempopermanen[spvvdistrito]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Na mesma subprefeitura (SAS) onde o serviço está localizado', services['cdcmtempopermanen[spvvsubpr]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Em outra subprefeitura (SAS) onde o serviço está localizado', services['cdcmtempopermanen[spvvservi]'], 1, 1, 1, 1, 1, 1, 1, 1),
+
+];
+export const usuariosOficinasCDCM = ({ services, createData }:any) => [
+
+  createData('N° de mulheres que participaram de oficinas de convivência', services['cdcmoficina[convivencia]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('N° de mulheres que participaram de oficinas de defesa', services['cdcmoficina[defesa]'], 1, 1, 1, 1, 1, 1, 1, 1),
+
+];
+export const testeCDCM = ({ services, createData }:any) => [
+
+  createData('N° de mulheres que participaram de oficinas de convivência', services.cdcmacolhidas, 1, 1, 1, 1, 1, 1, 1, 1),
+
+];
+export const visitasReunioesCDCM = ({ services, createData }:any) => [
+
+  createData('N° de visitas domiciliares', services['cdcmvisitas[visdom]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('N° de reuniões de articulação com a rede', services['cdcmvisitas[visinst]'], 1, 1, 1, 1, 1, 1, 1, 1),
+
+];
+export const encaminhamentosCDCM = ({ services, createData }:any) => [
+
+  createData('CRAS', services['cdcmencaminhamento[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('CREAS', services['cdcmencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Centro de Acolhida para Mulheres em Situação de Violência (sigiloso)', services['cdcmencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Centro de Acolhida Especial para Mulheres', services['cdcmencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Casa de Passagem', services['cdcmencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Hotel', services['cdcmencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outro serviço da rede socioassistencial', services['cdcmencaminhamento[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Saúde', services['cdcmencaminhamento[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Educação', services['cdcmencaminhamento[educacao]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Judiciário', services['cdcmencaminhamento[judiciario]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Trabalho e renda', services['cdcmencaminhamento[trabalhorenda]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outras políticas públicas', services['cdcmencaminhamento[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+export const atendimentosRemotosTiposCDCM = ({ services, createData }:any) => [
+
+  createData('Telefone / Celular / Whatsapp', services['cdcmdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Email', services['cdcmdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Facebook', services['cdcmdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('YouTube', services['cdcmdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outras redes sociais', services['cdcmdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Entrega de kits de atividades', services['cdcmdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outros', services['cdcmdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+export const atendimentosRemotosFamiliaSemanaCDCM = ({ services, createData }:any) => [
+
+  createData('Semana 1', services['cdcmatendremfam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 2', services['cdcmatendremfam[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 3', services['cdcmatendremfam[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 4', services['cdcmatendremfam[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 5', services['cdcmatendremfam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 6', services['cdcmatendremfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
 ];

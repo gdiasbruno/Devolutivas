@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { Typography } from '@material-ui/core';
 import MoonLoader from 'react-spinners/MoonLoader';
@@ -208,10 +209,9 @@ const Response: React.FC = () => {
             </h2>
             <TableTwoColumns headers={motivoSaidaHeaders} body={motivoSaida} />
 
-            <Typography variant="h5" gutterBottom>
+            <h2>
               4. Nº de pessoas que participaram das atividades propostas pelo serviço:
-            </Typography>
-            <br />
+            </h2>
             <h2>
               5. Quantifique as situações abaixo com os dados do mês de referência:
             </h2>

@@ -4,6 +4,7 @@ import React, {
 
 import MoonLoader from 'react-spinners/MoonLoader';
 
+import { useHistory } from 'react-router-dom';
 import {
   Section, LoaderBody,
 } from './styles';
@@ -74,11 +75,12 @@ const Response:any = () => {
   const {
     nomeSAS, mes, token, tipologia,
   } = context;
+  const history = useHistory();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchServicesAnswers({
-      nomeSAS, mes, token, tipologia, setServices, setLoading,
+      nomeSAS, mes, token, tipologia, setServices, setLoading, history,
     });
   }, []);
 

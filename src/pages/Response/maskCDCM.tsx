@@ -1,13 +1,28 @@
 import React, {
   useState, useEffect, useContext,
 } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import {
   Section, LoaderBody,
 } from './styles';
-import { fetchServicesAnswers } from './TableLinesValues';
+import {
+  fetchServicesAnswers,
+  testeCDCM,
+  sexoRacaCorCDCM,
+  atendidosMesCDCM,
+  motivosSaidaCDCM,
+  encaminhamentosCDCM,
+  visitasReunioesCDCM,
+  usuariosOficinasCDCM,
+  territorioMoradiaCDCM,
+  violenciaAgressorCDCM,
+  atendimentoTecnicoCDCM,
+  atendimentosRemotosTiposCDCM,
+  atendimentosRemotosFamiliaSemanaCDCM,
+} from './TableLinesValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';
@@ -97,6 +112,8 @@ const Response:any = () => {
   const {
     nomeSAS, mes, token, tipologia,
   } = context;
+  const history = useHistory();
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -105,378 +122,32 @@ const Response:any = () => {
     });
   }, []);
 
-  const atendidosMes = [
-    createData('18 a 29 anos',
-      services['cdcmatendfxetaria[18a29_atendmesatual]'],
-      services['cdcmatendfxetaria[18a29_atendpresencial]'],
-      services['cdcmatendfxetaria[18a29_atendremoto]'],
-      1, 1, 1, 1, 1, 1),
-    createData('30 a 59 anos',
-      services['cdcmatendfxetaria[30a59_atendmesatual]'],
-      services['cdcmatendfxetaria[30a59_atendpresencial]'],
-      services['cdcmatendfxetaria[30a59_atendremoto]'],
-      1, 1, 1, 1, 1, 1),
-    createData('60 anos ou mais',
-      services['cdcmatendfxetaria[60oumais_atendmesatual]'],
-      services['cdcmatendfxetaria[60oumais_atendpresencial]'],
-      services['cdcmatendfxetaria[60oumais_atendremoto]'],
-      1, 1, 1, 1, 1, 1),
+  const atendidosMes = atendidosMesCDCM({ services, createData });
 
-    createData('Total',
-      parseInt(services['cdcmatendfxetaria[18a29_atendmesatual]'], 10)
-      + parseInt(services['cdcmatendfxetaria[30a59_atendmesatual]'], 10)
-      + parseInt(services['cdcmatendfxetaria[60oumais_atendmesatual]'], 10),
-      parseInt(services['cdcmatendfxetaria[18a29_atendpresencial]'], 10)
-      + parseInt(services['cdcmatendfxetaria[30a59_atendpresencial]'], 10)
-      + parseInt(services['cdcmatendfxetaria[60oumais_atendpresencial]'], 10),
-      parseInt(services['cdcmatendfxetaria[18a29_atendremoto]'], 10)
-      + parseInt(services['cdcmatendfxetaria[30a59_atendremoto]'], 10)
-      + parseInt(services['cdcmatendfxetaria[60oumais_atendremoto]'], 10),
-      1, 1, 1, 1, 1, 1),
-  ];
+  const sexoRacaCor = sexoRacaCorCDCM({ services, createData });
 
-  const sexoRacaCor = [
-    createData('Mulher Cisgênero',
-      services['cdcmracagenero[mcis_branca]'],
-      services['cdcmracagenero[mcis_preta]'],
-      services['cdcmracagenero[mcis_parda]'],
-      services['cdcmracagenero[mcis_amarela]'],
-      services['cdcmracagenero[mcis_indigena]'],
-      services['cdcmracagenero[mcis_naoinf]'],
-      parseInt(services['cdcmracagenero[mcis_branca]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_preta]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_parda]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_amarela]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_indigena]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_naoinf]'], 10), 1, 1),
-    createData('Mulher Transgênero',
-      services['cdcmracagenero[mtrans_branca]'],
-      services['cdcmracagenero[mtrans_preta]'],
-      services['cdcmracagenero[mtrans_parda]'],
-      services['cdcmracagenero[mtrans_amarela]'],
-      services['cdcmracagenero[mtrans_indigena]'],
-      services['cdcmracagenero[mtrans_naoinf]'],
-      parseInt(services['cdcmracagenero[mtrans_branca]'], 10)
-      + parseInt(services['cdcmracagenero[mtrans_preta]'], 10)
-      + parseInt(services['cdcmracagenero[mtrans_parda]'], 10)
-      + parseInt(services['cdcmracagenero[mtrans_amarela]'], 10)
-      + parseInt(services['cdcmracagenero[mtrans_indigena]'], 10)
-      + parseInt(services['cdcmracagenero[mtrans_naoinf]'], 10), 1, 1),
-    createData('Total Geral',
-      parseInt(services['cdcmracagenero[mtrans_branca]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_branca]'], 10),
-      parseInt(services['cdcmracagenero[mtrans_preta]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_preta]'], 10),
-      parseInt(services['cdcmracagenero[mtrans_parda]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_parda]'], 10),
-      parseInt(services['cdcmracagenero[mtrans_amarela]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_amarela]'], 10),
-      parseInt(services['cdcmracagenero[mtrans_indigena]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_indigena]'], 10),
-      parseInt(services['cdcmracagenero[mtrans_naoinf]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_naoinf]'], 10),
-      parseInt(services['cdcmracagenero[mtrans_branca]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_branca]'], 10)
-      + parseInt(services['cdcmracagenero[mtrans_preta]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_preta]'], 10)
-      + parseInt(services['cdcmracagenero[mtrans_parda]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_parda]'], 10)
-      + parseInt(services['cdcmracagenero[mtrans_amarela]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_amarela]'], 10)
-      + parseInt(services['cdcmracagenero[mtrans_indigena]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_indigena]'], 10)
-      + parseInt(services['cdcmracagenero[mtrans_naoinf]'], 10)
-      + parseInt(services['cdcmracagenero[mcis_naoinf]'], 10), 1, 1),
-  ];
+  const violenciaAgressor = violenciaAgressorCDCM({ services, createData });
 
-  const violenciaAgressor = [
-    createData('Violência Física',
-      services['cdcmagressorvio[viofisica_agressorpai]'],
-      services['cdcmagressorvio[viofisica_padrasto]'],
-      services['cdcmagressorvio[viofisica_agressoresposo]'],
-      services['cdcmagressorvio[viofisica_agressorexesposo]'],
-      services['cdcmagressorvio[viofisica_agressorirmao]'],
-      services['cdcmagressorvio[viofisica_agressorempre]'],
-      services['cdcmagressorvio[viofisica_agressoroutrosfam]'],
-      services['cdcmagressorvio[viofisica_agressoroutraspessoa]'],
-      parseInt(services['cdcmagressorvio[viofisica_agressorpai]'], 10)
-      + parseInt(services['cdcmagressorvio[viofisica_padrasto]'], 10)
-      + parseInt(services['cdcmagressorvio[viofisica_agressoresposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viofisica_agressorexesposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viofisica_agressorirmao]'], 10)
-      + parseInt(services['cdcmagressorvio[viofisica_agressorempre]'], 10)
-      + parseInt(services['cdcmagressorvio[viofisica_agressoroutrosfam]'], 10)
-      + parseInt(services['cdcmagressorvio[viofisica_agressoroutraspessoa]'], 10)),
-    createData('Violência Psicológica',
-      services['cdcmagressorvio[viopsico_agressorpai]'],
-      services['cdcmagressorvio[viopsico_padrasto]'],
-      services['cdcmagressorvio[viopsico_agressoresposo]'],
-      services['cdcmagressorvio[viopsico_agressorexesposo]'],
-      services['cdcmagressorvio[viopsico_agressorirmao]'],
-      services['cdcmagressorvio[viopsico_agressorempre]'],
-      services['cdcmagressorvio[viopsico_agressoroutrosfam]'],
-      services['cdcmagressorvio[viopsico_agressoroutraspessoa]'],
+  const atendimentoTecnico = atendimentoTecnicoCDCM({ services, createData });
 
-      parseInt(services['cdcmagressorvio[viopsico_agressorpai]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_padrasto]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressoresposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressorexesposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressorirmao]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressorempre]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressoroutrosfam]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressoroutraspessoa]'], 10)),
-    createData('Exploração Sexual',
-      services['cdcmagressorvio[vioexplo_agressorpai]'],
-      services['cdcmagressorvio[vioexplo_padrasto]'],
-      services['cdcmagressorvio[vioexplo_agressoresposo]'],
-      services['cdcmagressorvio[vioexplo_agressorexesposo]'],
-      services['cdcmagressorvio[vioexplo_agressorirmao]'],
-      services['cdcmagressorvio[vioexplo_agressorempre]'],
-      services['cdcmagressorvio[vioexplo_agressoroutrosfam]'],
-      services['cdcmagressorvio[vioexplo_agressoroutraspessoa]'],
+  const motivosSaida = motivosSaidaCDCM({ services, createData });
 
-      parseInt(services['cdcmagressorvio[vioexplo_agressorpai]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_padrasto]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressoresposo]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressorexesposo]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressorirmao]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressorempre]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressoroutrosfam]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressoroutraspessoa]'], 10)),
-    createData('Abuso Sexual',
-      services['cdcmagressorvio[vioabuso_agressorpai]'],
-      services['cdcmagressorvio[vioabuso_padrasto]'],
-      services['cdcmagressorvio[vioabuso_agressoresposo]'],
-      services['cdcmagressorvio[vioabuso_agressorexesposo]'],
-      services['cdcmagressorvio[vioabuso_agressorirmao]'],
-      services['cdcmagressorvio[vioabuso_agressorempre]'],
-      services['cdcmagressorvio[vioabuso_agressoroutrosfam]'],
-      services['cdcmagressorvio[vioabuso_agressoroutraspessoa]'],
+  const territorioMoradia = territorioMoradiaCDCM({ services, createData });
 
-      parseInt(services['cdcmagressorvio[vioabuso_agressorpai]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_padrasto]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressoresposo]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressorexesposo]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressorirmao]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressorempre]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressoroutrosfam]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressoroutraspessoa]'], 10)),
-    createData('Violência Moral',
-      services['cdcmagressorvio[viomoral_agressorpai]'],
-      services['cdcmagressorvio[viomoral_padrasto]'],
-      services['cdcmagressorvio[viomoral_agressoresposo]'],
-      services['cdcmagressorvio[viomoral_agressorexesposo]'],
-      services['cdcmagressorvio[viomoral_agressorirmao]'],
-      services['cdcmagressorvio[viomoral_agressorempre]'],
-      services['cdcmagressorvio[viomoral_agressoroutrosfam]'],
-      services['cdcmagressorvio[viomoral_agressoroutraspessoa]'],
+  const usuariosOficinas = usuariosOficinasCDCM({ services, createData });
 
-      parseInt(services['cdcmagressorvio[viomoral_agressorpai]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_padrasto]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressoresposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressorexesposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressorirmao]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressorempre]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressoroutrosfam]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressoroutraspessoa]'], 10)),
-    createData('Violência Patrimonial',
-      services['cdcmagressorvio[viopatrim_agressorpai]'],
-      services['cdcmagressorvio[viopatrim_padrasto]'],
-      services['cdcmagressorvio[viopatrim_agressoresposo]'],
-      services['cdcmagressorvio[viopatrim_agressorexesposo]'],
-      services['cdcmagressorvio[viopatrim_agressorirmao]'],
-      services['cdcmagressorvio[viopatrim_agressorempre]'],
-      services['cdcmagressorvio[viopatrim_agressoroutrosfam]'],
-      services['cdcmagressorvio[viopatrim_agressoroutraspessoa]'],
+  const teste = testeCDCM({ services, createData });
 
-      parseInt(services['cdcmagressorvio[viopatrim_agressorpai]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_padrasto]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressoresposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressorexesposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressorirmao]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressorempre]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressoroutrosfam]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressoroutraspessoa]'], 10)),
-    createData('Total',
-      parseInt(services['cdcmagressorvio[viofisica_agressorpai]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressorpai]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressorpai]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressorpai]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressorpai]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressorpai]'], 10),
-      parseInt(services['cdcmagressorvio[viofisica_padrasto]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_padrasto]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_padrasto]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_padrasto]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_padrasto]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_padrasto]'], 10),
-      parseInt(services['cdcmagressorvio[viofisica_agressoresposo]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressoresposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressoresposo]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressoresposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressoresposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressoresposo]'], 10),
-      parseInt(services['cdcmagressorvio[viofisica_agressorexesposo]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressorexesposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressorexesposo]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressorexesposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressorexesposo]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressorexesposo]'], 10),
-      parseInt(services['cdcmagressorvio[viofisica_agressorirmao]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressorirmao]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressorirmao]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressorirmao]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressorirmao]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressorirmao]'], 10),
-      parseInt(services['cdcmagressorvio[viofisica_agressorempre]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressorempre]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressorempre]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressorempre]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressorempre]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressorempre]'], 10),
-      parseInt(services['cdcmagressorvio[viofisica_agressoroutrosfam]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressoroutrosfam]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressoroutrosfam]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressoroutrosfam]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressoroutrosfam]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressoroutrosfam]'], 10),
-      parseInt(services['cdcmagressorvio[viofisica_agressoroutraspessoa]'], 10)
-      + parseInt(services['cdcmagressorvio[vioexplo_agressoroutraspessoa]'], 10)
-      + parseInt(services['cdcmagressorvio[viopsico_agressoroutraspessoa]'], 10)
-      + parseInt(services['cdcmagressorvio[vioabuso_agressoroutraspessoa]'], 10)
-      + parseInt(services['cdcmagressorvio[viomoral_agressoroutraspessoa]'], 10)
-      + parseInt(services['cdcmagressorvio[viopatrim_agressoroutraspessoa]'], 10),
-      0),
-  ];
+  const visitasReunioes = visitasReunioesCDCM({ services, createData });
 
-  const atendimentoTecnico = [
-    createData('Nº de mulheres que receberam atendimento jurídico',
-      services['cdcmatendtecnico[atendjur_atendpres]'],
-      services['cdcmatendtecnico[atendjur_atendrem]'],
-      services['cdcmatendtecnico[atendjur_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('Nº de mulheres que receberam atendimento psicossocial',
-      services['cdcmatendtecnico[atendpsico_atendpres]'],
-      services['cdcmatendtecnico[atendpsico_atendrem]'],
-      services['cdcmatendtecnico[atendpsico_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('N° de mulheres que receberam atendimento social',
-      services['cdcmatendtecnico[atendrompvio_atendpres]'],
-      services['cdcmatendtecnico[atendrompvio_atendrem]'],
-      services['cdcmatendtecnico[atendrompvio_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('Total',
-      parseInt(services['cdcmatendtecnico[atendrompvio_atendpres]'], 10)
-      + parseInt(services['cdcmatendtecnico[atendpsico_atendpres]'], 10)
-      + parseInt(services['cdcmatendtecnico[atendjur_atendpres]'], 10),
-      parseInt(services['cdcmatendtecnico[atendrompvio_atendrem]'], 10)
-      + parseInt(services['cdcmatendtecnico[atendpsico_atendrem]'], 10)
-      + parseInt(services['cdcmatendtecnico[atendjur_atendrem]'], 10),
-      1,
-      1, 1, 1, 1, 1, 1),
+  const encaminhamentos = encaminhamentosCDCM({ services, createData });
 
-  ];
+  const atendimentosRemotosTipos = atendimentosRemotosTiposCDCM({ services, createData });
 
-  const motivosSaida = [
-    createData('Rompimento da situação de violência',
-      services['cdcmmotivosaid[saidaromviolencia]'],
-      1,
-      1,
-      1, 1, 1, 1, 1, 1),
-
-    createData('Mudança de Endereço',
-      services['cdcmmotivosaid[saidamudancaend]'],
-      services['cdcmmotivosaid[aband_18a29]'],
-      services['cdcmmotivosaid[aband_30a59]'],
-      parseInt(services['cdcmmotivosaid[aband_15a17]'], 10)
-      + parseInt(services['cdcmmotivosaid[aband_18a29]'], 10)
-      + parseInt(services['cdcmmotivosaid[aband_30a59]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Desistência',
-      services['cdcmmotivosaid[saidadesistencia]'],
-      services['cdcmmotivosaid[obito_18a29]'],
-      services['cdcmmotivosaid[obito_30a59]'],
-      parseInt(services['cdcmmotivosaid[obito_15a17]'], 10)
-      + parseInt(services['cdcmmotivosaid[obito_18a29]'], 10)
-      + parseInt(services['cdcmmotivosaid[obito_30a59]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Transferência de Serviço',
-      services['cdcmmotivosaid[saidatransf]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-  ];
-
-  const territorioMoradia = [
-    createData('No mesmo distrito onde o serviço está localizado', services['cdcmtempopermanen[spvvdistrito]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Na mesma subprefeitura (SAS) onde o serviço está localizado', services['cdcmtempopermanen[spvvsubpr]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Em outra subprefeitura (SAS) onde o serviço está localizado', services['cdcmtempopermanen[spvvservi]'], 1, 1, 1, 1, 1, 1, 1, 1),
-
-  ];
-
-  const usuariosOficinas = [
-    createData('N° de mulheres que participaram de oficinas de convivência', services['cdcmoficina[convivencia]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('N° de mulheres que participaram de oficinas de defesa', services['cdcmoficina[defesa]'], 1, 1, 1, 1, 1, 1, 1, 1),
-
-  ];
-
-  const teste = [
-    createData('N° de mulheres que participaram de oficinas de convivência', services.cdcmacolhidas, 1, 1, 1, 1, 1, 1, 1, 1),
-
-  ];
-
-  const visitasReunioes = [
-    createData('N° de visitas domiciliares', services['cdcmvisitas[visdom]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('N° de reuniões de articulação com a rede', services['cdcmvisitas[visinst]'], 1, 1, 1, 1, 1, 1, 1, 1),
-
-  ];
-
-  const encaminhamentos = [
-    createData('CRAS', services['cdcmencaminhamento[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['cdcmencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Centro de Acolhida para Mulheres em Situação de Violência (sigiloso)', services['cdcmencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Centro de Acolhida Especial para Mulheres', services['cdcmencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Casa de Passagem', services['cdcmencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Hotel', services['cdcmencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['cdcmencaminhamento[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['cdcmencaminhamento[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Educação', services['cdcmencaminhamento[educacao]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Judiciário', services['cdcmencaminhamento[judiciario]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Trabalho e renda', services['cdcmencaminhamento[trabalhorenda]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['cdcmencaminhamento[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['cdcmdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Email', services['cdcmdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['cdcmdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['cdcmdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['cdcmdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['cdcmdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['cdcmdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['cdcmatendremfam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['cdcmatendremfam[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['cdcmatendremfam[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['cdcmatendremfam[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['cdcmatendremfam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['cdcmatendremfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotosFamiliaSemana = atendimentosRemotosFamiliaSemanaCDCM({
+    services,
+    createData,
+  });
 
   return (
     loading

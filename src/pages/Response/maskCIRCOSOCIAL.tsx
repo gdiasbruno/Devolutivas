@@ -89,6 +89,8 @@ const Response:any = () => {
   const {
     nomeSAS, mes, token, tipologia,
   } = context;
+  const history = useHistory();
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

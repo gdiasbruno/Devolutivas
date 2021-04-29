@@ -1,6 +1,7 @@
 import React, {
   useState, useEffect, useContext,
 } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import MoonLoader from 'react-spinners/MoonLoader';
 
@@ -90,6 +91,8 @@ const Response:any = () => {
   const {
     nomeSAS, mes, token, tipologia,
   } = context;
+  const history = useHistory();
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

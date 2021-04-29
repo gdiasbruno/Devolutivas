@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { Typography } from '@material-ui/core';
 import MoonLoader from 'react-spinners/MoonLoader';
