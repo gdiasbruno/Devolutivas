@@ -3,7 +3,7 @@ import axios from 'axios';
 export const fetchServicesAnswers = ({
   nomeSAS, mes, token, tipologia, setServices, setLoading, history,
 }:any) => {
-  axios.get(`hhttp://10.13.24.137:9090/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
+  axios.get(`http://10.13.24.137:9090/devolutivas/${nomeSAS}/${mes}/${token}/${tipologia}`).then((res) => {
     setServices(res.data);
     console.log(res.data);
     setLoading(false);
