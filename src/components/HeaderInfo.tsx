@@ -31,7 +31,7 @@ function HeaderInfo(props:any):JSX.Element {
     createData('Distrito', distrito, 1, 1, 1, 1, 1, 1),
     createData('Proteção', protecao, 1, 1, 1, 1, 1, 1),
     createData('Termo', termo, 1, 1, 1, 1, 1, 1),
-    createData('Capacidade', `${capacidade} pessoas`, 1, 1, 1, 1, 1, 1),
+    createData('Capacidade', capacidade, 1, 1, 1, 1, 1, 1),
   ];
 
   return (
