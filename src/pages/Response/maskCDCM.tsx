@@ -22,7 +22,7 @@ import {
   atendimentoTecnicoCDCM,
   atendimentosRemotosTiposCDCM,
   atendimentosRemotosFamiliaSemanaCDCM,
-} from './TableLinesValues';
+} from './ServiceValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';

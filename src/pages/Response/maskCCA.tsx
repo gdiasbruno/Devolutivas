@@ -21,7 +21,7 @@ import {
   atendimentosRemotosCCA,
   atendimentosRemotosTiposCCA,
   atendimentosRemotosFamiliaSemanaCCA,
-} from './TableLinesValues';
+} from './ServiceValues';
 
 import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';

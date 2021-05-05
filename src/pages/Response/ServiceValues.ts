@@ -1097,3 +1097,257 @@ export const atendimentosRemotosFamiliaSemanaCDCM = ({ services, createData }:an
   createData('Semana 5', services['cdcmatendremfam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
   createData('Semana 6', services['cdcmatendremfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
 ];
+
+export const atendidosMesFemininoCDI = ({ services, createData }:any) => [
+
+  createData('60 a 64 anos (F)',
+    services['cdiatenfxetariafem[60a64f_atendmesatual]'],
+    services['cdiatenfxetariafem[60a64f_freqpres]'],
+    services['cdiatenfxetariafem[60a64f_freqrem]'],
+    1, 1, 1, 1, 1, 1),
+  createData('65 a 69 anos (F)',
+    services['cdiatenfxetariafem[65a69f_atendmesatual]'],
+    services['cdiatenfxetariafem[65a69f_freqpres]'],
+    services['cdiatenfxetariafem[65a69f_freqrem]'],
+    1, 1, 1, 1, 1, 1),
+  createData('70 a 74 anos (F)',
+    services['cdiatenfxetariafem[70a74f_atendmesatual]'],
+    services['cdiatenfxetariafem[70a74f_freqpres]'],
+    services['cdiatenfxetariafem[70a74f_freqrem]'],
+    1, 1, 1, 1, 1, 1),
+  createData('75 anos ou mais (F)',
+    services['cdiatenfxetariafem[75oumaisf_atendmesatual]'],
+    services['cdiatenfxetariafem[75oumaisf_freqpres]'],
+    services['cdiatenfxetariafem[75oumaisf_freqrem]'],
+    1, 1, 1, 1, 1, 1),
+
+  createData('Total',
+    parseInt(services['cdiatenfxetariafem[60a64f_atendmesatual]'], 10)
+    + parseInt(services['cdiatenfxetariafem[65a69f_atendmesatual]'], 10)
+    + parseInt(services['cdiatenfxetariafem[70a74f_atendmesatual]'], 10)
+    + parseInt(services['cdiatenfxetariafem[75oumaisf_atendmesatual]'], 10),
+    parseInt(services['cdiatenfxetariafem[60a64f_freqpres]'], 10)
+    + parseInt(services['cdiatenfxetariafem[65a69f_freqpres]'], 10)
+    + parseInt(services['cdiatenfxetariafem[70a74f_freqpres]'], 10)
+    + parseInt(services['cdiatenfxetariafem[75oumaisf_freqpres]'], 10),
+    parseInt(services['cdiatenfxetariafem[60a64f_freqrem]'], 10)
+    + parseInt(services['cdiatenfxetariafem[65a69f_freqrem]'], 10)
+    + parseInt(services['cdiatenfxetariafem[70a74f_freqrem]'], 10)
+    + parseInt(services['cdiatenfxetariafem[75oumaisf_freqrem]'], 10), 1, 1, 1, 1, 1, 1),
+];
+
+export const atendidosMesMasculinoCDI = ({ services, createData }:any) => [
+
+  createData('60 a 64 anos (M)',
+    services['cdiatenfxetariamasc[60a64m_atendmesatual]'],
+    services['cdiatenfxetariamasc[60a64m_freqpres]'],
+    services['cdiatenfxetariamasc[60a64m_freqrem]'],
+    1, 1, 1, 1, 1, 1),
+  createData('65 a 69 anos (M)',
+    services['cdiatenfxetariamasc[65a69m_atendmesatual]'],
+    services['cdiatenfxetariamasc[65a69m_freqpres]'],
+    services['cdiatenfxetariamasc[65a69m_freqrem]'],
+    1, 1, 1, 1, 1, 1),
+  createData('70 a 74 anos (M)',
+    services['cdiatenfxetariamasc[70a74m_atendmesatual]'],
+    services['cdiatenfxetariamasc[70a74m_freqpres]'],
+    services['cdiatenfxetariamasc[70a74m_freqrem]'],
+    1, 1, 1, 1, 1, 1),
+  createData('75 anos ou mais (M)',
+    services['cdiatenfxetariamasc[75oumaism_atendmesatual]'],
+    services['cdiatenfxetariamasc[75oumaism_freqpres]'],
+    services['cdiatenfxetariamasc[75oumaism_freqrem]'],
+    1, 1, 1, 1, 1, 1),
+
+  createData('Total',
+    parseInt(services['cdiatenfxetariamasc[60a64m_atendmesatual]'], 10)
+    + parseInt(services['cdiatenfxetariamasc[65a69m_atendmesatual]'], 10)
+    + parseInt(services['cdiatenfxetariamasc[70a74m_atendmesatual]'], 10)
+    + parseInt(services['cdiatenfxetariamasc[75oumaism_atendmesatual]'], 10),
+    parseInt(services['cdiatenfxetariamasc[60a64m_freqpres]'], 10)
+    + parseInt(services['cdiatenfxetariamasc[65a69m_freqpres]'], 10)
+    + parseInt(services['cdiatenfxetariamasc[70a74m_freqpres]'], 10)
+    + parseInt(services['cdiatenfxetariamasc[75oumaism_freqpres]'], 10),
+    parseInt(services['cdiatenfxetariamasc[60a64m_freqrem]'], 10)
+    + parseInt(services['cdiatenfxetariamasc[65a69m_freqrem]'], 10)
+    + parseInt(services['cdiatenfxetariamasc[70a74m_freqrem]'], 10)
+    + parseInt(services['cdiatenfxetariamasc[75oumaism_freqrem]'], 10), 1, 1, 1, 1, 1, 1),
+
+];
+export const sexoRacaCorCDI = ({ services, createData }:any) => [
+
+  createData('Feminino',
+    services['cdiracasexo[fem_branca]'],
+    services['cdiracasexo[fem_preta]'],
+    services['cdiracasexo[fem_parda]'],
+    services['cdiracasexo[fem_amarela]'],
+    services['cdiracasexo[fem_indigena]'],
+    services['cdiracasexo[fem_naoinf]'],
+    parseInt(services['cdiracasexo[fem_branca]'], 10)
+    + parseInt(services['cdiracasexo[fem_preta]'], 10)
+    + parseInt(services['cdiracasexo[fem_parda]'], 10)
+    + parseInt(services['cdiracasexo[fem_amarela]'], 10)
+    + parseInt(services['cdiracasexo[fem_indigena]'], 10)
+    + parseInt(services['cdiracasexo[fem_naoinf]'], 10), 1, 1),
+  createData('Masculino',
+    services['cdiracasexo[masc_branca]'],
+    services['cdiracasexo[masc_preta]'],
+    services['cdiracasexo[masc_parda]'],
+    services['cdiracasexo[masc_amarela]'],
+    services['cdiracasexo[masc_indigena]'],
+    services['cdiracasexo[masc_naoinf]'],
+    parseInt(services['cdiracasexo[masc_branca]'], 10)
+    + parseInt(services['cdiracasexo[masc_preta]'], 10)
+    + parseInt(services['cdiracasexo[masc_parda]'], 10)
+    + parseInt(services['cdiracasexo[masc_amarela]'], 10)
+    + parseInt(services['cdiracasexo[masc_indigena]'], 10)
+    + parseInt(services['cdiracasexo[masc_naoinf]'], 10), 1, 1),
+  createData('Total Geral',
+    parseInt(services['cdiracasexo[masc_branca]'], 10)
+    + parseInt(services['cdiracasexo[fem_branca]'], 10),
+    parseInt(services['cdiracasexo[masc_preta]'], 10)
+    + parseInt(services['cdiracasexo[fem_preta]'], 10),
+    parseInt(services['cdiracasexo[masc_parda]'], 10)
+    + parseInt(services['cdiracasexo[fem_parda]'], 10),
+    parseInt(services['cdiracasexo[masc_amarela]'], 10)
+    + parseInt(services['cdiracasexo[fem_amarela]'], 10),
+    parseInt(services['cdiracasexo[masc_indigena]'], 10)
+    + parseInt(services['cdiracasexo[fem_indigena]'], 10),
+    parseInt(services['cdiracasexo[masc_naoinf]'], 10)
+    + parseInt(services['cdiracasexo[fem_naoinf]'], 10),
+    parseInt(services['cdiracasexo[masc_branca]'], 10)
+    + parseInt(services['cdiracasexo[fem_branca]'], 10)
+    + parseInt(services['cdiracasexo[masc_preta]'], 10)
+    + parseInt(services['cdiracasexo[fem_preta]'], 10)
+    + parseInt(services['cdiracasexo[masc_parda]'], 10)
+    + parseInt(services['cdiracasexo[fem_parda]'], 10)
+    + parseInt(services['cdiracasexo[masc_amarela]'], 10)
+    + parseInt(services['cdiracasexo[fem_amarela]'], 10)
+    + parseInt(services['cdiracasexo[masc_indigena]'], 10)
+    + parseInt(services['cdiracasexo[fem_indigena]'], 10)
+    + parseInt(services['cdiracasexo[masc_naoinf]'], 10)
+    + parseInt(services['cdiracasexo[fem_naoinf]'], 10), 1, 1),
+];
+export const motivosSaidaCDI = ({ services, createData }:any) => [
+
+  createData('Dificuldades em frequentar o serviço - transporte',
+    services['cdisaida[saidatransp]'],
+    1,
+    1,
+    1, 1, 1, 1, 1, 1),
+  createData('Dificuldades em frequentar o serviço - participação familiar',
+    services['cdisaida[saidapartfam]'],
+    services['cdisaida[mudancaendereco_18a29]'],
+    services['cdisaida[mudancaendereco_30a59]'],
+    parseInt(services['cdisaida[mudancaendereco_15a17]'], 10)
+    + parseInt(services['cdisaida[mudancaendereco_18a29]'], 10)
+    + parseInt(services['cdisaida[mudancaendereco_30a59]'], 10), 1, 1, 1, 1, 1),
+  createData('Mudança de endereço',
+    services['cdisaida[saidamudend]'],
+    services['cdisaida[mudancaendereco_18a29]'],
+    services['cdisaida[mudancaendereco_30a59]'],
+    parseInt(services['cdisaida[mudancaendereco_15a17]'], 10)
+    + parseInt(services['cdisaida[mudancaendereco_18a29]'], 10)
+    + parseInt(services['cdisaida[mudancaendereco_30a59]'], 10), 1, 1, 1, 1, 1),
+  createData('Problemas de saúde',
+    services['cdisaida[saidaproblsaude]'],
+    services['cdisaida[transferencia_18a29]'],
+    services['cdisaida[transferencia_30a59]'],
+    parseInt(services['cdisaida[transferencia_15a17]'], 10)
+    + parseInt(services['cdisaida[transferencia_18a29]'], 10)
+    + parseInt(services['cdisaida[transferencia_30a59]'], 10),
+    1,
+    1,
+    1,
+    1,
+    1),
+  createData('Acolhimento Institucional',
+    services['cdisaida[saidaacolhimento]'],
+    services['cdisaida[aband_18a29]'],
+    services['cdisaida[aband_30a59]'],
+    parseInt(services['cdisaida[aband_15a17]'], 10)
+    + parseInt(services['cdisaida[aband_18a29]'], 10)
+    + parseInt(services['cdisaida[aband_30a59]'], 10),
+    1,
+    1,
+    1,
+    1,
+    1),
+  createData('Óbito',
+    services['cdisaida[saidaobito]'],
+    services['cdisaida[obito_18a29]'],
+    services['cdisaida[obito_30a59]'],
+    parseInt(services['cdisaida[obito_15a17]'], 10)
+    + parseInt(services['cdisaida[obito_18a29]'], 10)
+    + parseInt(services['cdisaida[obito_30a59]'], 10),
+    1,
+    1,
+    1,
+    1,
+    1),
+
+];
+export const atendimentoTecnicoCDI = ({ services, createData }:any) => [
+
+  createData('Assistente Social', services['cdiatendtecnico[atendas_atendpres]'], services['cdiatendtecnico[atendas_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Psicólogo', services['cdiatendtecnico[atendpsico_atendpres]'], services['cdiatendtecnico[atendpsico_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Nutricionista', services['cdiatendtecnico[atendnutri_atendpres]'], services['cdiatendtecnico[atendnutri_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Enfermeiro', services['cdiatendtecnico[atendenfer_atendpres]'], services['cdiatendtecnico[atendenfer_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Terapeuta Ocupacional', services['cdiatendtecnico[atendto_atendpres]'], services['cdiatendtecnico[atendto_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
+];
+export const atendimentoTecnicoFamiliasCDI = ({ services, createData }:any) => [
+
+  createData('Assistente Social', services['cdifamatendtecnico[atendas_atendpres]'], services['cdifamatendtecnico[atendas_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Psicólogo', services['cdifamatendtecnico[atendpsico_atendpres]'], services['cdifamatendtecnico[atendpsico_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Nutricionista', services['cdifamatendtecnico[atendnutri_atendpres]'], services['cdifamatendtecnico[atendnutri_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Enfermeiro', services['cdifamatendtecnico[atendenfer_atendpres]'], services['cdifamatendtecnico[atendenfer_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Terapeuta Ocupacional', services['cdifamatendtecnico[atendto_atendpres]'], services['cdifamatendtecnico[atendto_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
+];
+export const usuarioGrauDependenciaCDI = ({ services, createData }:any) => [
+
+  createData('Grau de Dependência I', services['cdigraudepend[grau1]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Grau de Dependência II', services['cdigraudepend[grau2]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Grau de Dependência III', services['cdigraudepend[grau3]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const encaminhamentosCDI = ({ services, createData }:any) => [
+
+  createData('CRAS', services['cdiencaminhamentos[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('CREAS', services['cdiencaminhamentos[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outro serviço da rede socioassistencial', services['cdiencaminhamentos[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Saúde', services['cdiencaminhamentos[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Direitos Humanos', services['cdiencaminhamentos[dh]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Documentação', services['cdiencaminhamentos[doc]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Serviços de Garantia de Direitos (MP, Defensoria)', services['cdiencaminhamentos[gdireitos]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outras políticas públicas', services['cdiencaminhamentos[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const atendimentosRemotosCDI = ({ services, createData }:any) => [
+
+  createData('Semana 1', services['cdiatendremperiod[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 2', services['cdiatendremperiod[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 3', services['cdiatendremperiod[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 4', services['cdiatendremperiod[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 5', services['cdiatendremperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 6', services['cdiatendremperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const atendimentosRemotosTiposCDI = ({ services, createData }:any) => [
+
+  createData('Telefone / Celular / Whatsapp', services['cdiatenddisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Email', services['cdiatenddisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Facebook', services['cdiatenddisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('YouTube', services['cdiatenddisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outras redes sociais', services['cdiatenddisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Entrega de kits de atividades', services['cdiatenddisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outros', services['cdiatenddisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+export const atendimentosRemotosFamiliaSemanaCDI = ({ services, createData }:any) => [
+
+  createData('Semana 1', services['cdiatendremfamperiod[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 2', services['cdiatendremfamperiod[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 3', services['cdiatendremfamperiod[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 4', services['cdiatendremfamperiod[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 5', services['cdiatendremfamperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 6', services['cdiatendremfamperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];

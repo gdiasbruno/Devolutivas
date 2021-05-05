@@ -24,7 +24,7 @@ import {
   familiasVulnerabilidadeCCINTER,
   atendimentosRemotosTiposCCINTER,
   atendimentosRemotosFamiliaSemanaCCINTER,
-} from './TableLinesValues';
+} from './ServiceValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';

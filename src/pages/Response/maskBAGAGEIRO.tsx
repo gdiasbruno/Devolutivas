@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import {
   Section, LoaderBody,
 } from './styles';
-import { fetchServicesAnswers, encaminhamentosBAGAGEIRO, sexoRacaCorBAGAGEIRO } from './TableLinesValues';
+import { fetchServicesAnswers, encaminhamentosBAGAGEIRO, sexoRacaCorBAGAGEIRO } from './ServiceValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';

@@ -9,7 +9,7 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import {
   Section, LoaderBody,
 } from './styles';
-import { fetchServicesAnswers } from './TableLinesValues';
+import { fetchServicesAnswers } from './ServiceValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableTwoColumns from '../../components/TableTwoColumns';
