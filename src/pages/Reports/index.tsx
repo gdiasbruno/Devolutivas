@@ -103,7 +103,7 @@ const Reports: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchUserProfiles = () => {
-    axios.get(`http://10.13.25.51:9090/devolutivas/${nomeSAS}/${mes}`).then((res) => {
+    axios.get(`http://10.13.24.137:9090/devolutivas/${nomeSAS}/${mes}`).then((res) => {
       setServices(res.data);
       setServicesFiltered(res.data);
       console.log(res.data);

@@ -9,7 +9,7 @@ const Index: React.FC = () => {
   const [sas, setSas]:any = useState([]);
 
   const fetchUserProfiles = () => {
-    axios.get('http://10.13.25.51:9090/devolutivas').then((res) => {
+    axios.get('http://10.13.24.137/devolutivas').then((res) => {
       setSas(res.data);
     });
   };
