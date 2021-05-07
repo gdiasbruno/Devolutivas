@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 import ControlledOpenSelect from '../../components/ControlledOpenSelect';
 
@@ -7,10 +8,14 @@ import { Options, Text, Text1 } from './styles';
 
 const Index: React.FC = () => {
   const [sas, setSas]:any = useState([]);
+  const history = useHistory();
 
   const fetchUserProfiles = () => {
     axios.get('http://10.13.24.137:9090/devolutivas').then((res) => {
       setSas(res.data);
+    }).catch((err):any => {
+      console.log(err);
+      history.push('/Disabled');
     });
   };
 
@@ -64,6 +69,19 @@ const Index: React.FC = () => {
                 cgpicops@prefeitura.sp.gov.br
               </a>
             </strong>
+            <br />
+            <br />
+            <b>
+              Queremos ouvi-la(o)!
+            </b>
+            {' '}
+            Você está convidada(o) para compartilhar sugestões,
+            críticas e dúvidas. Participe da reunião de feedback com COVS no dia 14 de maio
+            às 11h, no Microsoft Teams
+            {' '}
+            <a href="https://encurtador.com.br/bezKZ"> Clique aqui</a>
+            {' '}
+            para acessar a sala.
           </p>
         </Text1>
       </Options>

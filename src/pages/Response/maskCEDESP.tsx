@@ -8,7 +8,22 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import {
   Section, LoaderBody,
 } from './styles';
-import { fetchServicesAnswers } from './ServiceValues';
+import {
+  fetchServicesAnswers,
+  temasItemsCEDESP,
+  sexoRacaCorCEDESP,
+  motivosSaidaCEDESP,
+  encaminhamentosCEDESP,
+  familiasInsumosCEDESP,
+  demandaReprimidaCEDESP,
+  atendimentoFamiliaCEDESP,
+  atendimentosRemotosCEDESP,
+  atendidosMesFemininoCEDESP,
+  atendidosMesMasculinoCEDESP,
+  familiasVulnerabilidadeCEDESP,
+  atendimentosRemotosTiposCEDESP,
+  atendimentosRemotosFamiliaSemanaCEDESP,
+} from './ServiceValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';
@@ -101,299 +116,34 @@ const Response:any = () => {
     });
   }, []);
 
-  const atendidosMesFeminino = [
-    createData('15 a 17 anos (F)',
-      services['cedesfluxomulheresat[15a17f_atendmesatual]'],
-      services['cedesfluxomulheresat[15a17f_presmesatual]'],
-      services['cedesfluxomulheresat[15a17f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('18 a 29 anos (F)',
-      services['cedesfluxomulheresat[18a29f_atendmesatual]'],
-      services['cedesfluxomulheresat[18a29f_presmesatual]'],
-      services['cedesfluxomulheresat[18a29f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('30 a 59 anos (F)',
-      services['cedesfluxomulheresat[30a59f_atendmesatual]'],
-      services['cedesfluxomulheresat[30a59f_presmesatual]'],
-      services['cedesfluxomulheresat[30a59f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
+  const atendidosMesFeminino = atendidosMesFemininoCEDESP({ services, createData });
 
-    createData('Total',
-      parseInt(services['cedesfluxomulheresat[15a17f_atendmesatual]'], 10)
-      + parseInt(services['cedesfluxomulheresat[18a29f_atendmesatual]'], 10)
-      + parseInt(services['cedesfluxomulheresat[30a59f_atendmesatual]'], 10),
-      parseInt(services['cedesfluxomulheresat[15a17f_presmesatual]'], 10)
-      + parseInt(services['cedesfluxomulheresat[18a29f_presmesatual]'], 10)
-      + parseInt(services['cedesfluxomulheresat[30a59f_presmesatual]'], 10),
-      parseInt(services['cedesfluxomulheresat[15a17f_remmesatual]'], 10)
-      + parseInt(services['cedesfluxomulheresat[18a29f_remmesatual]'], 10)
-      + parseInt(services['cedesfluxomulheresat[30a59f_remmesatual]'], 10),
-      1, 1, 1, 1, 1, 1),
-  ];
+  const atendidosMesMasculino = atendidosMesMasculinoCEDESP({ services, createData });
 
-  const atendidosMesMasculino = [
-    createData('15 a 17 anos (F)',
-      services['cedesfluxohomensaten[15a17m_atendmesatual]'],
-      services['cedesfluxohomensaten[15a17m_presmesatual]'],
-      services['cedesfluxohomensaten[15a17m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('18 a 29 anos (F)',
-      services['cedesfluxohomensaten[18a29m_atendmesatual]'],
-      services['cedesfluxohomensaten[18a29m_presmesatual]'],
-      services['cedesfluxohomensaten[18a29m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('30 a 59 anos (F)',
-      services['cedesfluxohomensaten[30a59m_atendmesatual]'],
-      services['cedesfluxohomensaten[30a59m_presmesatual]'],
-      services['cedesfluxohomensaten[30a59m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
+  const sexoRacaCor = sexoRacaCorCEDESP({ services, createData });
 
-    createData('Total',
-      parseInt(services['cedesfluxohomensaten[15a17m_atendmesatual]'], 10)
-      + parseInt(services['cedesfluxohomensaten[18a29m_atendmesatual]'], 10)
-      + parseInt(services['cedesfluxohomensaten[30a59m_atendmesatual]'], 10),
-      parseInt(services['cedesfluxohomensaten[15a17m_presmesatual]'], 10)
-      + parseInt(services['cedesfluxohomensaten[18a29m_presmesatual]'], 10)
-      + parseInt(services['cedesfluxohomensaten[30a59m_presmesatual]'], 10),
-      parseInt(services['cedesfluxohomensaten[15a17m_remmesatual]'], 10)
-      + parseInt(services['cedesfluxohomensaten[18a29m_remmesatual]'], 10)
-      + parseInt(services['cedesfluxohomensaten[30a59m_remmesatual]'], 10),
-      1, 1, 1, 1, 1, 1),
-  ];
+  const motivosSaida = motivosSaidaCEDESP({ services, createData });
 
-  const sexoRacaCor = [
-    createData('Feminino',
-      services['cedesracasexo[fem_branca]'],
-      services['cedesracasexo[fem_preta]'],
-      services['cedesracasexo[fem_parda]'],
-      services['cedesracasexo[fem_amarela]'],
-      services['cedesracasexo[fem_indigena]'],
-      services['cedesracasexo[fem_naoinf]'],
-      parseInt(services['cedesracasexo[fem_branca]'], 10)
-      + parseInt(services['cedesracasexo[fem_preta]'], 10)
-      + parseInt(services['cedesracasexo[fem_parda]'], 10)
-      + parseInt(services['cedesracasexo[fem_amarela]'], 10)
-      + parseInt(services['cedesracasexo[fem_indigena]'], 10)
-      + parseInt(services['cedesracasexo[fem_naoinf]'], 10), 1, 1),
-    createData('Masculino',
-      services['cedesracasexo[masc_branca]'],
-      services['cedesracasexo[masc_preta]'],
-      services['cedesracasexo[masc_parda]'],
-      services['cedesracasexo[masc_amarela]'],
-      services['cedesracasexo[masc_indigena]'],
-      services['cedesracasexo[masc_naoinf]'],
-      parseInt(services['cedesracasexo[masc_branca]'], 10)
-      + parseInt(services['cedesracasexo[masc_preta]'], 10)
-      + parseInt(services['cedesracasexo[masc_parda]'], 10)
-      + parseInt(services['cedesracasexo[masc_amarela]'], 10)
-      + parseInt(services['cedesracasexo[masc_indigena]'], 10)
-      + parseInt(services['cedesracasexo[masc_naoinf]'], 10), 1, 1),
-    createData('Total Geral',
-      parseInt(services['cedesracasexo[masc_branca]'], 10)
-      + parseInt(services['cedesracasexo[fem_branca]'], 10),
-      parseInt(services['cedesracasexo[masc_preta]'], 10)
-      + parseInt(services['cedesracasexo[fem_preta]'], 10),
-      parseInt(services['cedesracasexo[masc_parda]'], 10)
-      + parseInt(services['cedesracasexo[fem_parda]'], 10),
-      parseInt(services['cedesracasexo[masc_amarela]'], 10)
-      + parseInt(services['cedesracasexo[fem_amarela]'], 10),
-      parseInt(services['cedesracasexo[masc_indigena]'], 10)
-      + parseInt(services['cedesracasexo[fem_indigena]'], 10),
-      parseInt(services['cedesracasexo[masc_naoinf]'], 10)
-      + parseInt(services['cedesracasexo[fem_naoinf]'], 10),
-      parseInt(services['cedesracasexo[masc_branca]'], 10)
-      + parseInt(services['cedesracasexo[fem_branca]'], 10)
-      + parseInt(services['cedesracasexo[masc_preta]'], 10)
-      + parseInt(services['cedesracasexo[fem_preta]'], 10)
-      + parseInt(services['cedesracasexo[masc_parda]'], 10)
-      + parseInt(services['cedesracasexo[fem_parda]'], 10)
-      + parseInt(services['cedesracasexo[masc_amarela]'], 10)
-      + parseInt(services['cedesracasexo[fem_amarela]'], 10)
-      + parseInt(services['cedesracasexo[masc_indigena]'], 10)
-      + parseInt(services['cedesracasexo[fem_indigena]'], 10)
-      + parseInt(services['cedesracasexo[masc_naoinf]'], 10)
-      + parseInt(services['cedesracasexo[fem_naoinf]'], 10), 1, 1),
-  ];
+  const familiasInsumos = familiasInsumosCEDESP({ services, createData });
 
-  const motivosSaida = [
-    createData('Mudança de endereço',
-      services['cedessaida[mudancaendereco_15a17]'],
-      services['cedessaida[mudancaendereco_18a29]'],
-      services['cedessaida[mudancaendereco_30a59]'],
-      parseInt(services['cedessaida[mudancaendereco_15a17]'], 10)
-      + parseInt(services['cedessaida[mudancaendereco_18a29]'], 10)
-      + parseInt(services['cedessaida[mudancaendereco_30a59]'], 10), 1, 1, 1, 1, 1),
-    createData('Transferência para outro serviço',
-      services['cedessaida[transferencia_15a17]'],
-      services['cedessaida[transferencia_18a29]'],
-      services['cedessaida[transferencia_30a59]'],
-      parseInt(services['cedessaida[transferencia_15a17]'], 10)
-      + parseInt(services['cedessaida[transferencia_18a29]'], 10)
-      + parseInt(services['cedessaida[transferencia_30a59]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Abandono',
-      services['cedessaida[aband_15a17]'],
-      services['cedessaida[aband_18a29]'],
-      services['cedessaida[aband_30a59]'],
-      parseInt(services['cedessaida[aband_15a17]'], 10)
-      + parseInt(services['cedessaida[aband_18a29]'], 10)
-      + parseInt(services['cedessaida[aband_30a59]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Óbito',
-      services['cedessaida[obito_15a17]'],
-      services['cedessaida[obito_18a29]'],
-      services['cedessaida[obito_30a59]'],
-      parseInt(services['cedessaida[obito_15a17]'], 10)
-      + parseInt(services['cedessaida[obito_18a29]'], 10)
-      + parseInt(services['cedessaida[obito_30a59]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Inserção no Programa Jovem Aprendiz',
-      services['cedessaida[programajaprendiz_15a17]'],
-      services['cedessaida[programajaprendiz_18a29]'],
-      services['cedessaida[programajaprendiz_30a59]'],
-      parseInt(services['cedessaida[programajaprendiz_15a17]'], 10)
-      + parseInt(services['cedessaida[programajaprendiz_18a29]'], 10)
-      + parseInt(services['cedessaida[programajaprendiz_30a59]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Inserção no mercado de trabalho',
-      services['cedessaida[insertrabalho_15a17]'],
-      services['cedessaida[insertrabalho_18a29]'],
-      services['cedessaida[insertrabalho_30a59]'],
-      parseInt(services['cedessaida[insertrabalho_15a17]'], 10)
-      + parseInt(services['cedessaida[insertrabalho_18a29]'], 10)
-      + parseInt(services['cedessaida[insertrabalho_30a59]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Conclusão de curso',
-      services['cedessaida[conclusaocurso_15a17]'],
-      services['cedessaida[conclusaocurso_18a29]'],
-      services['cedessaida[conclusaocurso_30a59]'],
-      parseInt(services['cedessaida[conclusaocurso_15a17]'], 10)
-      + parseInt(services['cedessaida[conclusaocurso_18a29]'], 10)
-      + parseInt(services['cedessaida[conclusaocurso_30a59]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Aplicação de medida restritiva de liberdade',
-      services['cedessaida[medrestritiva_15a17]'],
-      services['cedessaida[medrestritiva_18a29]'],
-      services['cedessaida[medrestritiva_30a59]'],
-      parseInt(services['cedessaida[medrestritiva_15a17]'], 10)
-      + parseInt(services['cedessaida[medrestritiva_18a29]'], 10)
-      + parseInt(services['cedessaida[medrestritiva_30a59]'], 10),
-      1,
-      1,
-      1,
-      1, 1),
+  const familiasVulnerabilidade = familiasVulnerabilidadeCEDESP({ services, createData });
 
-  ];
+  const atendimentoFamilia = atendimentoFamiliaCEDESP({ services, createData });
 
-  const familiasInsumos = [
-    createData('Cesta de alimentos',
-      services['cedesinsumos[cestasaliment_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Kit de material de higiene',
-      services['cedesinsumos[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const temasItems = temasItemsCEDESP({ services, createData });
 
-  const familiasVulnerabilidade = [
-    createData('Conflitos', services['cedesvulnerab[conflit]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Preconceitos/discriminação', services['cedesvulnerab[Precon]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Abandono', services['cedesvulnerab[aband]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Apartação', services['cedesvulnerab[apart]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Confinamento', services['cedesvulnerab[confinamet]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Isolamento', services['cedesvulnerab[isolament]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Violência', services['cedesvulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const demandaReprimida = demandaReprimidaCEDESP({ services, createData });
 
-  const atendimentoFamilia = [
-    createData('Nº de famílias atendidas presencialmente', services['cedesatenfam[ccafampres]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de famílias acompanhadas de forma remota', services['cedesatenfam[ccafamrem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº total de famílias atendidas no mês', services['cedesatenfam[ccafamtotal]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const encaminhamentos = encaminhamentosCEDESP({ services, createData });
 
-  const temasItems = [
-    ['Garantia de direitos sociais (saúde, educação, previdência, moradia, envelhecimento, saúde mental, etc.)', services['cedesptemas[temadireitossociais]']],
-    ['Relacionamento familiar (gravidez na adolescência, álcool e drogas, orientação sexual, aborto, etc.)', services['cedesptemas[temafamiliar]']],
-    ['Direitos e programas sociais', services['cedesptemas[temadireitos]']],
-    ['Igualdade entre homens e mulheres', services['cedesptemas[temaigualdade]']],
-    ['Relações étnico-raciais', services['cedesptemas[temaetnico]']],
-    ['Prevenção à violência', services['cedesptemas[temaprevencaovio]']],
-    ['Parentalidade', services['cedesptemas[temaparental]']],
-    ['Deficiência e acessibilidade', services['cedesptemas[temapcd]']],
-    ['Mundo do trabalho', services['cedesptemas[tematrabalho]']],
-  ];
+  const atendimentosRemotos = atendimentosRemotosCEDESP({ services, createData });
 
-  const demandaReprimida = [
-    createData('12 a 17 anos', services['cedeslistaespera[6a11_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('18 a 29 anos', services['cedeslistaespera[12a14_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('30 a 59 anos', services['cedeslistaespera[18a29_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  const atendimentosRemotosTipos = atendimentosRemotosTiposCEDESP({ services, createData });
 
-    createData('Total',
-      parseInt(services['cedeslistaespera[6a11_quantidade]'], 10)
-      + parseInt(services['cedeslistaespera[12a14_quantidade]'], 10)
-      + parseInt(services['cedeslistaespera[18a29_quantidade]'], 10),
-      1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const encaminhamentos = [
-    createData('CRAS', services['cedesencaminhamento[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['cedesencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['cedesencaminhamento[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['cedesencaminhamento[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Educação', services['cedesencaminhamento[educa]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['cedesencaminhamento[cdireito]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Trabalho e renda', services['cedesencaminhamento[trabalho]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['cedesencaminhamento[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotos = [
-    createData('Semana 1', services['cedespesremperiod[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['cedespesremperiod[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['cedespesremperiod[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['cedespesremperiod[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['cedespesremperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['cedespesremperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['cedesatendremdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Email', services['cedesatendremdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['cedesatendremdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['cedesatendremdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['cedesatendremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['cedesatendremdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['cedesatendremdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['cedesfamremperiod[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['cedesfamremperiod[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['cedesfamremperiod[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['cedesfamremperiod[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['cedesfamremperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['cedesfamremperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotosFamiliaSemana = atendimentosRemotosFamiliaSemanaCEDESP({
+    services,
+    createData,
+  });
 
   return (
     loading

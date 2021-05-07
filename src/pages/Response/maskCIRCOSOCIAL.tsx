@@ -8,7 +8,22 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import {
   Section, LoaderBody,
 } from './styles';
-import { fetchServicesAnswers } from './ServiceValues';
+import {
+  fetchServicesAnswers,
+  temasItemsCIRCO,
+  sexoRacaCorCIRCO,
+  atendidosMesCIRCO,
+  motivosSaidaCIRCO,
+  atividadesItemsCIRCO,
+  encaminhamentosCIRCO,
+  familiasInsumosCIRCO,
+  demandaReprimidaCIRCO,
+  atendimentoFamiliaCIRCO,
+  atendimentosRemotosCIRCO,
+  familiasVulnerabilidadeCIRCO,
+  atendimentosRemotosTiposCIRCO,
+  atendimentosRemotosFamiliaSemanaCIRCO,
+} from './ServiceValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';
@@ -99,296 +114,34 @@ const Response:any = () => {
     });
   }, []);
 
-  const atendidosMes = [
-    createData('6 a 11 anos (M)',
-      services['circofluxoatend[6a11m_atendmesatual]'],
-      services['circofluxoatend[6a11m_presmesatual]'],
-      services['circofluxoatend[6a11m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('6 a 11 anos (F)',
-      services['circofluxoatend[6a11f_atendmesatual]'],
-      services['circofluxoatend[6a11f_presmesatual]'],
-      services['circofluxoatend[6a11f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('12 a 14 anos (M)',
-      services['circofluxoatend[12a14m_atendmesatual]'],
-      services['circofluxoatend[12a14m_presmesatual]'],
-      services['circofluxoatend[12a14m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('12 a 14 anos (F)',
-      services['circofluxoatend[12a14f_atendmesatual]'],
-      services['circofluxoatend[12a14f_presmesatual]'],
-      services['circofluxoatend[12a14f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('15 a 17 anos (M)',
-      services['circofluxoatend[15a17m_atendmesatual]'],
-      services['circofluxoatend[15a17m_presmesatual]'],
-      services['circofluxoatend[15a17m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('15 a 17 anos (F)',
-      services['circofluxoatend[15a17f_atendmesatual]'],
-      services['circofluxoatend[15a17f_presmesatual]'],
-      services['circofluxoatend[15a17f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
+  const atendidosMes = atendidosMesCIRCO({ services, createData });
 
-    createData('Total',
-      parseInt(services['circofluxoatend[6a11m_atendmesatual]'], 10)
-      + parseInt(services['circofluxoatend[6a11f_atendmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14m_atendmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14f_atendmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17m_atendmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17f_atendmesatual]'], 10),
-      parseInt(services['circofluxoatend[6a11m_presmesatual]'], 10)
-      + parseInt(services['circofluxoatend[6a11f_presmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14m_presmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14f_presmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17m_presmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17f_presmesatual]'], 10),
-      parseInt(services['circofluxoatend[6a11m_remmesatual]'], 10)
-      + parseInt(services['circofluxoatend[6a11f_remmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14m_remmesatual]'], 10)
-      + parseInt(services['circofluxoatend[12a14f_remmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17m_remmesatual]'], 10)
-      + parseInt(services['circofluxoatend[15a17f_remmesatual]'], 10),
-      1, 1, 1, 1, 1, 1),
-  ];
+  const sexoRacaCor = sexoRacaCorCIRCO({ services, createData });
 
-  const sexoRacaCor = [
-    createData('Feminino',
-      services['circoracasexo[fem_branca]'],
-      services['circoracasexo[fem_preta]'],
-      services['circoracasexo[fem_parda]'],
-      services['circoracasexo[fem_amarela]'],
-      services['circoracasexo[fem_indigena]'],
-      services['circoracasexo[fem_naoinf]'],
-      parseInt(services['circoracasexo[fem_branca]'], 10)
-      + parseInt(services['circoracasexo[fem_preta]'], 10)
-      + parseInt(services['circoracasexo[fem_parda]'], 10)
-      + parseInt(services['circoracasexo[fem_amarela]'], 10)
-      + parseInt(services['circoracasexo[fem_indigena]'], 10)
-      + parseInt(services['circoracasexo[fem_naoinf]'], 10), 1, 1),
-    createData('Masculino',
-      services['circoracasexo[masc_branca]'],
-      services['circoracasexo[masc_preta]'],
-      services['circoracasexo[masc_parda]'],
-      services['circoracasexo[masc_amarela]'],
-      services['circoracasexo[masc_indigena]'],
-      services['circoracasexo[masc_naoinf]'],
-      parseInt(services['circoracasexo[masc_branca]'], 10)
-      + parseInt(services['circoracasexo[masc_preta]'], 10)
-      + parseInt(services['circoracasexo[masc_parda]'], 10)
-      + parseInt(services['circoracasexo[masc_amarela]'], 10)
-      + parseInt(services['circoracasexo[masc_indigena]'], 10)
-      + parseInt(services['circoracasexo[masc_naoinf]'], 10), 1, 1),
-    createData('Total Geral',
-      parseInt(services['circoracasexo[masc_branca]'], 10)
-      + parseInt(services['circoracasexo[fem_branca]'], 10),
-      parseInt(services['circoracasexo[masc_preta]'], 10)
-      + parseInt(services['circoracasexo[fem_preta]'], 10),
-      parseInt(services['circoracasexo[masc_parda]'], 10)
-      + parseInt(services['circoracasexo[fem_parda]'], 10),
-      parseInt(services['circoracasexo[masc_amarela]'], 10)
-      + parseInt(services['circoracasexo[fem_amarela]'], 10),
-      parseInt(services['circoracasexo[masc_indigena]'], 10)
-      + parseInt(services['circoracasexo[fem_indigena]'], 10),
-      parseInt(services['circoracasexo[masc_naoinf]'], 10)
-      + parseInt(services['circoracasexo[fem_naoinf]'], 10),
-      parseInt(services['circoracasexo[masc_branca]'], 10)
-      + parseInt(services['circoracasexo[fem_branca]'], 10)
-      + parseInt(services['circoracasexo[masc_preta]'], 10)
-      + parseInt(services['circoracasexo[fem_preta]'], 10)
-      + parseInt(services['circoracasexo[masc_parda]'], 10)
-      + parseInt(services['circoracasexo[fem_parda]'], 10)
-      + parseInt(services['circoracasexo[masc_amarela]'], 10)
-      + parseInt(services['circoracasexo[fem_amarela]'], 10)
-      + parseInt(services['circoracasexo[masc_indigena]'], 10)
-      + parseInt(services['circoracasexo[fem_indigena]'], 10)
-      + parseInt(services['circoracasexo[masc_naoinf]'], 10)
-      + parseInt(services['circoracasexo[fem_naoinf]'], 10), 1, 1),
-  ];
+  const motivosSaida = motivosSaidaCIRCO({ services, createData });
 
-  const motivosSaida = [
-    createData('Mudança de endereço',
-      services['circomotivossaida[mudancaendereco_6a11]'],
-      services['circomotivossaida[mudancaendereco_12a17]'],
-      1, 1, 1, 1, 1, 1, 1),
-    createData('Transferência para outro serviço',
-      services['circomotivossaida[transferencia_6a11]'],
-      services['circomotivossaida[transferencia_12a17]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Óbito',
-      services['circomotivossaida[obito_6a11]'],
-      services['circomotivossaida[obito_12a17]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Abandono',
-      services['circomotivossaida[aband_6a11]'],
-      services['circomotivossaida[aband_12a17]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Aplicação de medida restritiva de liberdade',
-      services['circomotivossaida[aplicacaodemedida_6a11]'],
-      services['circomotivossaida[aplicacaodemedida_12a17]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1, 1),
-    createData('Limite de Idade',
-      services['circomotivossaida[limiteidade_6a11]'],
-      services['circomotivossaida[limiteidade_12a17]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Inserção no Programa Jovem Aprendiz',
-      services['circomotivossaida[jovemaprendiz_6a11]'],
-      services['circomotivossaida[jovemaprendiz_12a17]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Total',
-      parseInt(services['circomotivossaida[aband_6a11]'], 10)
-    + parseInt(services['circomotivossaida[aplicacaodemedida_6a11]'], 10)
-    + parseInt(services['circomotivossaida[jovemaprendiz_6a11]'], 10)
-    + parseInt(services['circomotivossaida[limiteidade_6a11]'], 10)
-    + parseInt(services['circomotivossaida[mudancaendereco_6a11]'], 10)
-    + parseInt(services['circomotivossaida[obito_6a11]'], 10)
-    + parseInt(services['circomotivossaida[transferencia_6a11]'], 10),
-      parseInt(services['circomotivossaida[aband_12a17]'], 10)
-    + parseInt(services['circomotivossaida[aplicacaodemedida_12a17]'], 10)
-    + parseInt(services['circomotivossaida[jovemaprendiz_12a17]'], 10)
-    + parseInt(services['circomotivossaida[limiteidade_12a17]'], 10)
-    + parseInt(services['circomotivossaida[mudancaendereco_12a17]'], 10)
-    + parseInt(services['circomotivossaida[obito_12a17]'], 10)
-    + parseInt(services['circomotivossaida[transferencia_12a17]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
+  const familiasInsumos = familiasInsumosCIRCO({ services, createData });
 
-  ];
+  const familiasVulnerabilidade = familiasVulnerabilidadeCIRCO({ services, createData });
 
-  const familiasInsumos = [
-    createData('Cesta de alimentos', services['circoinsumo[cestasaliment_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Kit de material de higiene', services['circoinsumo[kithiginene_numero]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentoFamilia = atendimentoFamiliaCIRCO({ services, createData });
 
-  const familiasVulnerabilidade = [
-    createData('Conflitos', services['circovulnerab[conflit]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Preconceitos/discriminação', services['circovulnerab[Precon]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Abandono', services['circovulnerab[aband]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Apartação', services['circovulnerab[apart]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Confinamento', services['circovulnerab[confinamet]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Isolamento', services['circovulnerab[isolament]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Violência', services['circovulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atividadesItems = atividadesItemsCIRCO({ services, createData });
 
-  const atendimentoFamilia = [
-    createData('Nº de famílias atendidas presencialmente', services['circofamatend[ccafampres]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de famílias acompanhadas de forma remota', services['circofamatend[ccafamrem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const temasItems = temasItemsCIRCO({ services, createData });
 
-  const atividadesItems = [
-    ['Atividades esportivas', services['circosocialatividade[atvesporte]']],
-    ['Musicalidade (cantar, tocar instrumentos etc.)', services['circosocialatividade[atvmusica]']],
-    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['circosocialatividade[atvcultura]']],
-    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['circosocialatividade[atvarte]']],
-    ['Atividades de inclusão digital', services['circosocialatividade[atvincdigital]']],
-    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['circosocialatividade[atvlinguagem]']],
-    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['circosocialatividade[atvculinaria]']],
-    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['circosocialatividade[atvrecreacao]']],
+  const demandaReprimida = demandaReprimidaCIRCO({ services, createData });
 
-  ];
+  const encaminhamentos = encaminhamentosCIRCO({ services, createData });
 
-  const temasItems = [
-    ['Temas transversais (saúde, meio ambiente, cultura, esporte etc.)', services['circosocialtema[tematransversal]']],
-    ['Direitos e programas sociais', services['circosocialtema[temadireitos]']],
-    ['Segurança alimentar e nutricional', services['circosocialtema[temanutricao]']],
-    ['Igualdade entre homens e mulheres', services['circosocialtema[temaigualdade]']],
-    ['Orientação sexual e de identidade de gênero', services['circosocialtema[temaorientsexual]']],
-    ['Relações étnico-raciais', services['circosocialtema[temaetnico]']],
-    ['Prevenção ao uso de álcool e drogas', services['circosocialtema[temaalccoldrogas]']],
-    ['Prevenção à violência', services['circosocialtema[temaprevencaovio]']],
-    ['Parentalidade', services['circosocialtema[temaparental]']],
-    ['Deficiência e acessibilidade', services['circosocialtema[temapcd]']],
-  ];
-  const demandaReprimida = [
-    createData('6 a 11 anos', services['circolistaespera[6a11_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('12 a 14 anos', services['circolistaespera[12a14_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('15 a 17 anos', services['circolistaespera[15a17_quantidade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  const atendimentosRemotos = atendimentosRemotosCIRCO({ services, createData });
 
-    createData('Total',
-      parseInt(services['circolistaespera[6a11_quantidade]'], 10)
-      + parseInt(services['circolistaespera[12a14_quantidade]'], 10)
-      + parseInt(services['circolistaespera[15a17_quantidade]'], 10),
-      1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotosTipos = atendimentosRemotosTiposCIRCO({ services, createData });
 
-  const encaminhamentos = [
-    createData('CRAS', services['circoencaminha[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['circoencaminha[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['circoencaminha[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['circoencaminha[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Educação', services['circoencaminha[educacao]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['circoencaminha[direito]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['circoencaminha[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotos = [
-    createData('Semana 1', services['circoatendremperi[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['circoatendremperi[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['circoatendremperi[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['circoatendremperi[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['circoatendremperi[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['circoatendremperi[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['circoremadisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Email', services['circoremadisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['circoremadisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['circoremadisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['circoremadisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['circoremadisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['circoremadisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['circofamatendperio[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['circofamatendperio[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['circofamatendperio[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['circofamatendperio[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['circofamatendperio[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['circofamatendperio[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotosFamiliaSemana = atendimentosRemotosFamiliaSemanaCIRCO({
+    services,
+    createData,
+  });
 
   return (
     loading

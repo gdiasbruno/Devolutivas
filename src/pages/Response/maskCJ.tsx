@@ -8,7 +8,22 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import {
   Section, LoaderBody,
 } from './styles';
-import { fetchServicesAnswers } from './ServiceValues';
+import {
+  fetchServicesAnswers,
+  temasItemsCJ,
+  motivoSaidaCJ,
+  sexoRacaCorCJ,
+  atendidosMesCJ,
+  atividadesItemsCJ,
+  encaminhamentosCJ,
+  familiasInsumosCJ,
+  demandaReprimidaCJ,
+  familiasAtendidasCJ,
+  atendimentosRemotosCJ,
+  familiasVulnerabilidadeCJ,
+  atendimentosRemotosTiposCJ,
+  atendimentosRemotosFamiliaSemanaCJ,
+} from './ServiceValues';
 
 import TableFourColumns from '../../components/TableFourColumns';
 import TableEigthColumns from '../../components/TableEightColumns';
@@ -84,205 +99,34 @@ const Response:any = () => {
     });
   }, []);
 
-  const atendidosMes = [
-    createData('15 a 17 anos (M)', services['cjfluxopessoasatend[15a17m_atendmesatual]'], services['cjfluxopessoasatend[15a17m_presmesatual]'], services['cjfluxopessoasatend[15a17m_remmesatual]'], 1, 1, 1, 1),
-    createData('15 a 17 anos (F)', services['cjfluxopessoasatend[15a17f_atendmesatual]'], services['cjfluxopessoasatend[15a17f_presmesatual]'], services['cjfluxopessoasatend[15a17f_remmesatual]'], 1, 1, 1, 1),
-    createData('Total', parseInt(services['cjfluxopessoasatend[15a17m_atendmesatual]'], 10)
-                      + parseInt(services['cjfluxopessoasatend[15a17f_atendmesatual]'], 10),
+  const atendidosMes = atendidosMesCJ({ services, createData });
 
-    parseInt(services['cjfluxopessoasatend[15a17m_presmesatual]'], 10)
-    + parseInt(services['cjfluxopessoasatend[15a17f_presmesatual]'], 10),
+  const sexoRacaCor = sexoRacaCorCJ({ services, createData });
 
-    parseInt(services['cjfluxopessoasatend[15a17m_remmesatual]'], 10)
-    + parseInt(services['cjfluxopessoasatend[15a17f_remmesatual]'], 10),
-    1, 1, 1, 1),
-  ];
+  const motivoSaida = motivoSaidaCJ({ services, createData });
 
-  const sexoRacaCor = [
-    createData('Feminino',
-      services['cjracasexo[fem_branca]'],
-      services['cjracasexo[fem_preta]'],
-      services['cjracasexo[fem_parda]'],
-      services['cjracasexo[fem_amarela]'],
-      services['cjracasexo[fem_indigena]'],
-      services['cjracasexo[fem_naoinf]'],
-      parseInt(services['cjracasexo[fem_branca]'], 10)
-      + parseInt(services['cjracasexo[fem_preta]'], 10)
-      + parseInt(services['cjracasexo[fem_parda]'], 10)
-      + parseInt(services['cjracasexo[fem_amarela]'], 10)
-      + parseInt(services['cjracasexo[fem_indigena]'], 10)
-      + parseInt(services['cjracasexo[fem_naoinf]'], 10)),
-    createData('Masculino',
-      services['cjracasexo[masc_branca]'],
-      services['cjracasexo[masc_preta]'],
-      services['cjracasexo[masc_parda]'],
-      services['cjracasexo[masc_amarela]'],
-      services['cjracasexo[masc_indigena]'],
-      services['cjracasexo[masc_naoinf]'],
-      parseInt(services['cjracasexo[masc_branca]'], 10)
-      + parseInt(services['cjracasexo[masc_preta]'], 10)
-      + parseInt(services['cjracasexo[masc_parda]'], 10)
-      + parseInt(services['cjracasexo[masc_amarela]'], 10)
-      + parseInt(services['cjracasexo[masc_indigena]'], 10)
-      + parseInt(services['cjracasexo[masc_naoinf]'], 10)),
-    createData('Total Geral',
-      parseInt(services['cjracasexo[masc_branca]'], 10)
-      + parseInt(services['cjracasexo[fem_branca]'], 10),
-      parseInt(services['cjracasexo[masc_preta]'], 10)
-      + parseInt(services['cjracasexo[fem_preta]'], 10),
-      parseInt(services['cjracasexo[masc_parda]'], 10)
-      + parseInt(services['cjracasexo[fem_parda]'], 10),
-      parseInt(services['cjracasexo[masc_amarela]'], 10)
-      + parseInt(services['cjracasexo[fem_amarela]'], 10),
-      parseInt(services['cjracasexo[masc_indigena]'], 10)
-      + parseInt(services['cjracasexo[fem_indigena]'], 10),
-      parseInt(services['cjracasexo[masc_naoinf]'], 10)
-      + parseInt(services['cjracasexo[fem_naoinf]'], 10),
-      parseInt(services['cjracasexo[masc_branca]'], 10)
-      + parseInt(services['cjracasexo[fem_branca]'], 10)
-      + parseInt(services['cjracasexo[masc_preta]'], 10)
-      + parseInt(services['cjracasexo[fem_preta]'], 10)
-      + parseInt(services['cjracasexo[masc_parda]'], 10)
-      + parseInt(services['cjracasexo[fem_parda]'], 10)
-      + parseInt(services['cjracasexo[masc_amarela]'], 10)
-      + parseInt(services['cjracasexo[fem_amarela]'], 10)
-      + parseInt(services['cjracasexo[masc_indigena]'], 10)
-      + parseInt(services['cjracasexo[fem_indigena]'], 10)
-      + parseInt(services['cjracasexo[masc_naoinf]'], 10)
-      + parseInt(services['cjracasexo[fem_naoinf]'], 10)),
-  ];
+  const familiasAtendidas = familiasAtendidasCJ({ services, createData });
 
-  const motivoSaida = [
-    createData('Mudança de endereço',
-      services['cjmotivossaida[endereco_qtd]'],
-      1,
-      1, 1, 1, 1, 1),
-    createData('Transferência para outro serviço',
-      services['cjmotivossaida[transferencia_qtd]'],
-      1,
-      1, 1, 1, 1, 1),
-    createData('Óbito',
-      services['cjmotivossaida[obito_qtd]'],
-      1,
-      1, 1, 1, 1, 1),
-    createData('Abandono',
-      services['cjmotivossaida[aband_qtd]'],
-      1,
-      1, 1, 1, 1, 1),
-    createData('Aplicação de medida restritiva de liberdade',
-      services['cjmotivossaida[aplicacaodemedida_qtd]'],
-      1,
-      1, 1, 1, 1, 1),
-    createData('Limite de idade',
-      services['cjmotivossaida[limiteidade_qtd]'],
-      1,
-      1, 1, 1, 1, 1),
-    createData('Inserção no jovem aprendiz',
-      services['cjmotivossaida[jovemaprendiz_qtd]'],
-      1,
-      1, 1, 1, 1, 1),
-    createData('Total',
-      parseInt(services['cjmotivossaida[endereco_qtd]'], 10)
-      + parseInt(services['cjmotivossaida[transferencia_qtd]'], 10)
-      + parseInt(services['cjmotivossaida[obito_qtd]'], 10)
-      + parseInt(services['cjmotivossaida[aband_qtd]'], 10)
-      + parseInt(services['cjmotivossaida[aplicacaodemedida_qtd]'], 10)
-      + parseInt(services['cjmotivossaida[limiteidade_qtd]'], 10)
-      + parseInt(services['cjmotivossaida[jovemaprendiz_qtd]'], 10),
-      1,
-      1, 1, 1, 1, 1),
-  ];
+  const familiasVulnerabilidade = familiasVulnerabilidadeCJ({ services, createData });
 
-  const familiasAtendidas = [
-    createData('Nº de famílias atendidas presencialmente no mês', services['cjatendfam[cjfampres]'], 1, 1, 1, 1, 1, 1),
-    createData('Nº de famílias acompanhadas de forma remota no mês', services['cjatendfam[cjfamrem]'], 1, 1, 1, 1, 1, 1),
-    createData('Nº total de famílias atendidas no mês', services['cjatendfam[cjfamtotal]'], 1, 1, 1, 1, 1, 1),
-  ];
+  const atividadesItems = atividadesItemsCJ({ services, createData });
 
-  const familiasVulnerabilidade = [
-    createData('Conflitos', services['cjvulnerab[conflit]'], 1, 1, 1, 1, 1, 1),
-    createData('Preconceitos/discriminação', services['cjvulnerab[Precon]'], 1, 1, 1, 1, 1, 1),
-    createData('Abandono', services['cjvulnerab[aband]'], 1, 1, 1, 1, 1, 1),
-    createData('Apartação', services['cjvulnerab[apart]'], 1, 1, 1, 1, 1, 1),
-    createData('Confinamento', services['cjvulnerab[confinamet]'], 1, 1, 1, 1, 1, 1),
-    createData('Isolamento', services['cjvulnerab[isolament]'], 1, 1, 1, 1, 1, 1),
-    createData('Violência', services['cjvulnerab[violen]'], 1, 1, 1, 1, 1, 1),
-  ];
+  const temasItems = temasItemsCJ({ services, createData });
 
-  const atividadesItems = [
-    ['Atividades esportivas', services['cjatividades[atvesporte]']],
-    ['Musicalidade (cantar, tocar instrumentos etc.)', services['cjatividades[atvmusica]']],
-    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['cjatividades[atvcultura]']],
-    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['cjatividades[atvarte]']],
-    ['Atividades de inclusão digital', services['cjatividades[atvincdigital]']],
-    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['cjatividades[atvlinguagem]']],
-    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['cjatividades[atvculinaria]']],
-    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['cjatividades[atvrecreacao]']],
-    ['Atividades de orientação para o mundo do trabalho', services['cjatividades[atvtrabalho]']],
-  ];
+  const demandaReprimida = demandaReprimidaCJ({ services, createData });
 
-  const temasItems = [
-    ['Garantia de direitos sociais (saúde, educação, previdência, moradia, envelhecimento, saúde mental, etc.)', services['cjtema[temadireitos]']],
-    ['Relacionamento familiar (gravidez na adolescência, álcool e drogas, orientação sexual, aborto, etc.)', services['cjtema[temafamiliar]']],
-    ['Direitos e programas sociais', services['cjtema[temadireitossociais]']],
-    ['Igualdade entre homens e mulheres', services['cjtema[temaigualdade]']],
-    ['Relações étnico-raciais', services['cjtema[temaetnico]']],
-    ['Prevenção à violência', services['cjtema[temaprevencaovio]']],
-    ['Parentalidade', services['cjtema[temaparental]']],
-    ['Deficiência e acessibilidade', services['cjtema[temapcd]']],
-    ['Mundo do trabalho', services['cjtema[tematrabalho]']],
-  ];
+  const familiasInsumos = familiasInsumosCJ({ services, createData });
 
-  const demandaReprimida = [
-    createData('15 a 17 anos', services['cjlistaespera[15a17_quantidade]'], 1, 1, 1, 1, 1, 1),
+  const encaminhamentos = encaminhamentosCJ({ services, createData });
 
-    createData('Total',
-      parseInt(services['cjlistaespera[15a17_quantidade]'], 10),
-      1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotos = atendimentosRemotosCJ({ services, createData });
 
-  const familiasInsumos = [
-    createData('Cesta de alimentos', services['cjinsumos[cestasaliment_numero]'], 1, 1, 1, 1, 1, 1),
-    createData('Kit de material de higiene', services['cjinsumos[kithiginene_numero]'], 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotosTipos = atendimentosRemotosTiposCJ({ services, createData });
 
-  const encaminhamentos = [
-    createData('CRAS', services['cjencaminhamentos[cras]'], 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['cjencaminhamentos[creas]'], 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['cjencaminhamentos[servicosrede]'], 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['cjencaminhamentos[saude]'], 1, 1, 1, 1, 1, 1),
-    createData('Educação', services['cjencaminhamentos[educacao]'], 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['cjencaminhamentos[direito]'], 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['cjencaminhamentos[outraspoliticas]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotos = [
-    createData('Semana 1', services['cjatendremperiod[1sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['cjatendremperiod[2sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['cjatendremperiod[3sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['cjatendremperiod[4sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['cjatendremperiod[5sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['cjatendremperiod[6sem]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['cjatendremdisp[telef]'], 1, 1, 1, 1, 1, 1),
-    createData('Email', services['cjatendremdisp[email]'], 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['cjatendremdisp[face]'], 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['cjatendremdisp[youtu]'], 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['cjatendremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['cjatendremdisp[entreg]'], 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['cjatendremdisp[outros]'], 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['cjperiodfam[1sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['cjperiodfam[2sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['cjperiodfam[3sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['cjperiodfam[4sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['cjperiodfam[5sem]'], 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['cjperiodfam[6sem]'], 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotosFamiliaSemana = atendimentosRemotosFamiliaSemanaCJ({
+    services,
+    createData,
+  });
 
   return (
     loading
