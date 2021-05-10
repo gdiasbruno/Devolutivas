@@ -252,7 +252,6 @@ const Response:any = () => {
               headers={atendimentosRemotosFamiliaSemanaHeaders}
               body={atendimentosRemotosFamiliaSemana}
             />
-
           </Section>
         </>
       )
