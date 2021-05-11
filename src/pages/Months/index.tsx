@@ -98,6 +98,8 @@ const Months: React.FC = () => {
   const fetchUserProfiles = () => {
     axios.get(`http://10.13.24.137:9090/devolutivas/${nomeSAS}`).then((res) => {
       setService(res.data);
+      console.log(res.data);
+
       setLoading(false);
     });
   };
@@ -113,9 +115,25 @@ const Months: React.FC = () => {
         name: 'Janeiro 2021',
         index: month,
       };
-    } if (monthString === '0221') {
+    }
+
+    if (monthString === '0221') {
       return {
         name: 'Fevereiro 2021',
+        index: month,
+      };
+    }
+
+    if (monthString === '0321') {
+      return {
+        name: 'Março 2021',
+        index: month,
+      };
+    }
+
+    if (monthString === '0421') {
+      return {
+        name: 'Abril 2021',
         index: month,
       };
     }

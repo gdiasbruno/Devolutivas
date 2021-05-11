@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   button: {
     marginRight: '10px',
   },
-
 }));
 
 function Navbar():JSX.Element {
@@ -53,10 +52,15 @@ function Navbar():JSX.Element {
 
   if (mes === '0121') {
     monthString = 'Janeiro 2021';
-  } else if (mes === '0221') {
+  }
+  if (mes === '0221') {
     monthString = 'Fevereiro 2021';
-  } else if (mes === '0321') {
+  }
+  if (mes === '0321') {
     monthString = 'Março 2021';
+  }
+  if (mes === '0421') {
+    monthString = 'Abril 2021';
   }
   return (
     <FirstSection>

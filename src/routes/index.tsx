@@ -24,6 +24,7 @@ import ResponseSISP from '../pages/Response/maskSISP';
 import ResponseNAISPD from '../pages/Response/maskNAISPD';
 import Erro from '../pages/Erro/index';
 import Disabled from '../pages/Disabled/index';
+import Blank from '../pages/Blank/index';
 
 import Header from '../components/Header';
 
@@ -63,6 +64,7 @@ const Routes: React.FC = () => {
               <Route path="/responseNAISPD" component={ResponseNAISPD} />
               <Route path="/Erro" component={Erro} />
               <Route path="/Disabled" component={Disabled} />
+              <Route path="/Blank" component={Blank} />
             </Switch>
           </>
         )
@@ -93,6 +95,7 @@ const Routes: React.FC = () => {
               <Route path="/responseNAISPD" component={Index} />
               <Route path="/Erro" component={Index} />
               <Route path="/Disabled" component={Disabled} />
+              <Route path="/Blank" component={Blank} />
             </Switch>
           </>
         )}

@@ -8,7 +8,22 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import {
   Section, LoaderBody,
 } from './styles';
-import { fetchServicesAnswers } from './ServiceValues';
+import {
+  fetchServicesAnswers,
+  temasItemsCRECI,
+  sexoRacaCorCRECI,
+  atendidosMesCRECI,
+  idososInsumosCRECI,
+  atividadesItemsCRECI,
+  encaminhamentosCRECI,
+  infoSobreIdososCRECI,
+  demandaReprimidaCRECI,
+  idososMoramSozinhoCRECI,
+  atendimentosRemotosCRECI,
+  familiasVulnerabilidadeCRECI,
+  atendimentosRemotosTiposCRECI,
+  atendimentosRemotosFamiliaSemanaCRECI,
+} from './ServiceValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableNineColumns from '../../components/TableNineColumns';
@@ -94,187 +109,38 @@ const ResponseCRECI:any = () => {
 
   useEffect(() => {
     fetchServicesAnswers({
-      nomeSAS, mes, token, tipologia, setServices, setLoading,
+      nomeSAS, mes, token, tipologia, setServices, setLoading, history,
     });
   }, []);
 
-  const atendidosMes = [
-    createData('Nº de pessoas atendidas no mês',
-      services['crecifluxoatend[atendmesatual_60a64m]'],
-      services['crecifluxoatend[atendmesatual_60a64f]'],
-      services['crecifluxoatend[atendmesatual_65a69m]'],
-      services['crecifluxoatend[atendmesatual_65a69f]'],
-      services['crecifluxoatend[atendmesatual_70a74m]'],
-      services['crecifluxoatend[atendmesatual_70a74f]'],
-      services['crecifluxoatend[atendmesatual_75maism]'],
-      services['crecifluxoatend[atendmesatual_75maisf]']),
+  const atendidosMes = atendidosMesCRECI({ services, createData });
 
-  ];
+  const sexoRacaCor = sexoRacaCorCRECI({ services, createData });
 
-  const sexoRacaCor = [
-    createData('Feminino',
-      services['creciracasexo[fem_branca]'],
-      services['creciracasexo[fem_preta]'],
-      services['creciracasexo[fem_parda]'],
-      services['creciracasexo[fem_amarela]'],
-      services['creciracasexo[fem_indigena]'],
-      services['creciracasexo[fem_naoinf]'],
-      parseInt(services['creciracasexo[fem_branca]'], 10)
-      + parseInt(services['creciracasexo[fem_preta]'], 10)
-      + parseInt(services['creciracasexo[fem_parda]'], 10)
-      + parseInt(services['creciracasexo[fem_amarela]'], 10)
-      + parseInt(services['creciracasexo[fem_indigena]'], 10)
-      + parseInt(services['creciracasexo[fem_naoinf]'], 10), 1),
-    createData('Masculino',
-      services['creciracasexo[masc_branca]'],
-      services['creciracasexo[masc_preta]'],
-      services['creciracasexo[masc_parda]'],
-      services['creciracasexo[masc_amarela]'],
-      services['creciracasexo[masc_indigena]'],
-      services['creciracasexo[masc_naoinf]'],
-      parseInt(services['creciracasexo[masc_branca]'], 10)
-      + parseInt(services['creciracasexo[masc_preta]'], 10)
-      + parseInt(services['creciracasexo[masc_parda]'], 10)
-      + parseInt(services['creciracasexo[masc_amarela]'], 10)
-      + parseInt(services['creciracasexo[masc_indigena]'], 10)
-      + parseInt(services['creciracasexo[masc_naoinf]'], 10), 1),
-    createData('Total Geral',
-      parseInt(services['creciracasexo[masc_branca]'], 10)
-      + parseInt(services['creciracasexo[fem_branca]'], 10),
-      parseInt(services['creciracasexo[masc_preta]'], 10)
-      + parseInt(services['creciracasexo[fem_preta]'], 10),
-      parseInt(services['creciracasexo[masc_parda]'], 10)
-      + parseInt(services['creciracasexo[fem_parda]'], 10),
-      parseInt(services['creciracasexo[masc_amarela]'], 10)
-      + parseInt(services['creciracasexo[fem_amarela]'], 10),
-      parseInt(services['creciracasexo[masc_indigena]'], 10)
-      + parseInt(services['creciracasexo[fem_indigena]'], 10),
-      parseInt(services['creciracasexo[masc_naoinf]'], 10)
-      + parseInt(services['creciracasexo[fem_naoinf]'], 10),
-      parseInt(services['creciracasexo[masc_branca]'], 10)
-      + parseInt(services['creciracasexo[fem_branca]'], 10)
-      + parseInt(services['creciracasexo[masc_preta]'], 10)
-      + parseInt(services['creciracasexo[fem_preta]'], 10)
-      + parseInt(services['creciracasexo[masc_parda]'], 10)
-      + parseInt(services['creciracasexo[fem_parda]'], 10)
-      + parseInt(services['creciracasexo[masc_amarela]'], 10)
-      + parseInt(services['creciracasexo[fem_amarela]'], 10)
-      + parseInt(services['creciracasexo[masc_indigena]'], 10)
-      + parseInt(services['creciracasexo[fem_indigena]'], 10)
-      + parseInt(services['creciracasexo[masc_naoinf]'], 10)
-      + parseInt(services['creciracasexo[fem_naoinf]'], 10), 1),
-  ];
+  const idososMoramSozinho = idososMoramSozinhoCRECI({ services, createData });
 
-  const idososMoramSozinho = [
-    createData('Quantidade de idosos que moram sozinhos',
-      services['crecisozinho[idososo]'],
-      1,
-      1, 1, 1, 1, 1, 1),
-    createData('Destes, quantos contam com apoio da família / comunidade',
-      services['crecisozinho[ajudaidosos]'],
-      1,
-      1, 1, 1, 1, 1, 1),
-  ];
+  const infoSobreIdosos = infoSobreIdososCRECI({ services, createData });
 
-  const infoSobreIdosos = [
-    createData('N° de visitas domiciliares realizadas no mês', services['creciinfoimportantes[visdom]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de idosos que recebem BPC', services['creciinfoimportantes[bpc]'], 1, 1, 1, 1, 1, 1, 1),
+  const familiasVulnerabilidade = familiasVulnerabilidadeCRECI({ services, createData });
 
-  ];
+  const atividadesItems = atividadesItemsCRECI({ services, createData });
 
-  const familiasVulnerabilidade = [
-    createData('Conflitos', services['crecivulnerab[conflit]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Preconceitos/discriminação', services['crecivulnerab[Precon]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Abandono', services['crecivulnerab[aband]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Apartação', services['crecivulnerab[apart]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Confinamento', services['crecivulnerab[confinamet]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Isolamento', services['crecivulnerab[isolament]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Violência', services['crecivulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const temasItems = temasItemsCRECI({ services, createData });
 
-  const atividadesItems = [
-    ['Atividades esportivas', services['creciatv[atvesporte]']],
-    ['Musicalidade (cantar, tocar instrumentos etc.)', services['creciatv[atvmusica]']],
-    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['creciatv[atvcultura]']],
-    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['creciatv[atvarte]']],
-    ['Atividades de inclusão digital', services['creciatv[atvincdigital]']],
-    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['creciatv[atvlinguagem]']],
-    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['creciatv[atvculinaria]']],
-    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['creciatv[atvrecreacao]']],
+  const demandaReprimida = demandaReprimidaCRECI({ services, createData });
 
-  ];
+  const idososInsumos = idososInsumosCRECI({ services, createData });
 
-  const temasItems = [
-    ['Temas transversais (saúde, meio ambiente, cultura, esporte etc.)', services['crecitema[tematransversal]']],
-    ['Direitos e programas sociais', services['crecitema[temadireitos]']],
-    ['Segurança alimentar e nutricional', services['crecitema[temanutricao]']],
-    ['Igualdade entre homens e mulheres', services['crecitema[temaigualdade]']],
-    ['Orientação sexual e de identidade de gênero', services['crecitema[temaorientsexual]']],
-    ['Relações étnico-raciais', services['crecitema[temaetnico]']],
-    ['Prevenção ao uso de álcool e drogas', services['crecitema[temaalccoldrogas]']],
-    ['Prevenção à violência', services['crecitema[temaprevencaovio]']],
-    ['Parentalidade', services['crecitema[temaparental]']],
-    ['Deficiência e acessibilidade', services['crecitema[temapcd]']],
-    ['Envelhecimento saudável', services['crecitema[temaenvelhsaudavel]']],
-  ];
+  const encaminhamentos = encaminhamentosCRECI({ services, createData });
 
-  const demandaReprimida = [
-    createData('60 a 64 anos', services['crescilistaespera[60a64_qtdade]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('65 a 69 anos', services['crescilistaespera[65a69_qtdade]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('70 a 74 anos', services['crescilistaespera[70a74_qtdade]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('75 anos ou mais', services['crescilistaespera[75mais_qtdade]'], 1, 1, 1, 1, 1, 1, 1),
+  const atendimentosRemotos = atendimentosRemotosCRECI({ services, createData });
 
-    createData('Total',
-      parseInt(services['crescilistaespera[60a64_qtdade]'], 10)
-      + parseInt(services['crescilistaespera[65a69_qtdade]'], 10)
-      + parseInt(services['crescilistaespera[70a74_qtdade]'], 10)
-      + parseInt(services['crescilistaespera[75mais_qtdade]'], 10),
-      1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotosTipos = atendimentosRemotosTiposCRECI({ services, createData });
 
-  const idososInsumos = [
-    createData('Cesta de alimentos', services['creciinsumos[alimentos]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Kit de material de higiene', services['creciinsumos[higiene]'], 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const encaminhamentos = [
-    createData('CRAS', services['creciencaminha[cras]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['creciencaminha[creas]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['creciencaminha[servicosrede]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['creciencaminha[saude]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Habitação', services['creciencaminha[hab]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Previdência Social', services['creciencaminha[prev]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['creciencaminha[direito]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['creciencaminha[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotos = [
-    createData('Semana 1', services['crecirempesperiod[1sem]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['crecirempesperiod[2sem]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['crecirempesperiod[3sem]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['crecirempesperiod[4sem]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['crecirempesperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['crecirempesperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['creciremdisp[telef]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Email', services['creciremdisp[email]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['creciremdisp[face]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['creciremdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['creciremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['creciremdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['creciremdisp[outros]'], 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['creciremfamperiod[1sem]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['creciremfamperiod[2sem]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['creciremfamperiod[3sem]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['creciremfamperiod[4sem]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['creciremfamperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['creciremfamperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotosFamiliaSemana = atendimentosRemotosFamiliaSemanaCRECI({
+    services,
+    createData,
+  });
 
   return (
     loading

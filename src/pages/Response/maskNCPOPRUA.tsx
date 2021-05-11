@@ -68,9 +68,11 @@ const Response:any = () => {
   } = context;
   const [loading, setLoading] = useState(true);
   const tipologia = 'ncp';
+  const history = useHistory();
+
   useEffect(() => {
     fetchServicesAnswers({
-      nomeSAS, mes, token, tipologia, setServices, setLoading,
+      nomeSAS, mes, token, tipologia, setServices, setLoading, history,
     });
   }, []);
 

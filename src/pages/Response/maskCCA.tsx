@@ -60,7 +60,7 @@ const Response: React.FC = () => {
 
   useEffect(() => {
     fetchServicesAnswers({
-      nomeSAS, mes, token, tipologia, setServices, setLoading,
+      nomeSAS, mes, token, tipologia, setServices, setLoading, history,
     });
   }, []);
 

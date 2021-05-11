@@ -85,10 +85,11 @@ const Response:any = () => {
     nomeSAS, mes, token, tipologia,
   } = context;
   const [loading, setLoading] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     fetchServicesAnswers({
-      nomeSAS, mes, token, tipologia, setServices, setLoading,
+      nomeSAS, mes, token, tipologia, setServices, setLoading, history,
     });
   }, []);
 

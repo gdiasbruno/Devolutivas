@@ -77,10 +77,11 @@ const Response:any = () => {
     nomeSAS, mes, token, tipologia,
   } = context;
   const [loading, setLoading] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     fetchServicesAnswers({
-      nomeSAS, mes, token, tipologia, setServices, setLoading,
+      nomeSAS, mes, token, tipologia, setServices, setLoading, history,
     });
   }, []);
 
@@ -379,7 +380,7 @@ const Response:any = () => {
   const encaminhamentos = [
     createData('CRAS', services['naisencaminhamentos[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('CREAS', services['naisencaminhamentos[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Outro serviço da rede socioassistencial', services['naisencaminhamentos[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Saúde', services['naisencaminhamentos[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Educação', services['naisencaminhamentos[educacao]'], 1, 1, 1, 1, 1, 1, 1, 1),
     createData('Conselhos de direito', services['naisencaminhamentos[direito]'], 1, 1, 1, 1, 1, 1, 1, 1),

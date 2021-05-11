@@ -123,6 +123,8 @@ const Reports: React.FC = () => {
     monthString = 'Fevereiro 2021';
   } else if (mes === '0321') {
     monthString = 'Março 2021';
+  } else if (mes === '0421') {
+    monthString = 'Abril 2021';
   }
 
   const handleClickPSB = () => {
@@ -160,7 +162,7 @@ const Reports: React.FC = () => {
                 onClick={() => {
                   history.push('/months');
                 }}
-                label={mes === '0121' ? 'Janeiro 2021' : 'Fevereiro 2021'}
+                label={monthString}
               />
               <Typography color="textPrimary">Serviços</Typography>
             </Breadcrumbs>

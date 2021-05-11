@@ -82,10 +82,11 @@ const ResponseCRECI:any = () => {
   } = context;
   const [loading, setLoading] = useState(true);
   const tipologia = 'sad';
+  const history = useHistory();
 
   useEffect(() => {
     fetchServicesAnswers({
-      nomeSAS, mes, token, tipologia, setServices, setLoading,
+      nomeSAS, mes, token, tipologia, setServices, setLoading, history,
     });
   }, []);
 
