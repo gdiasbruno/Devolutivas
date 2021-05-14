@@ -2380,3 +2380,353 @@ export const atendimentosRemotosFamiliaSemanaCRECI = ({ services, createData }:a
   createData('Semana 5', services['creciremfamperiod[5sem]'], 1, 1, 1, 1, 1, 1, 1),
   createData('Semana 6', services['creciremfamperiod[6sem]'], 1, 1, 1, 1, 1, 1, 1),
 ];
+
+export const atendidosMesMSE = ({ services, createData }:any) => [
+
+  createData('12 a 14 (F)',
+    services['mseatend[12a14f_atendpsc]'],
+    services['mseatend[12a14f_atendla]'],
+    services['mseatend[12a14f_atendacumulada]'],
+    services['mseatend[12a14f_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+  createData('12 a 14 (M)',
+    services['mseatend[12a14m_atendpsc]'],
+    services['mseatend[12a14m_atendla]'],
+    services['mseatend[12a14m_atendacumulada]'],
+    services['mseatend[12a14m_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+
+  createData('15 a 17 (F)',
+    services['mseatend[15a17f_atendpsc]'],
+    services['mseatend[15a17f_atendla]'],
+    services['mseatend[15a17f_atendacumulada]'],
+    services['mseatend[15a17f_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+  createData('15 a 17 (M)',
+    services['mseatend[15a17m_atendpsc]'],
+    services['mseatend[15a17m_atendla]'],
+    services['mseatend[15a17m_atendacumulada]'],
+    services['mseatend[15a17m_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+  createData('18 anos ou mais (F)',
+    services['mseatend[18oumaisf_atendpsc]'],
+    services['mseatend[18oumaisf_atendla]'],
+    services['mseatend[18oumaisf_atendacumulada]'],
+    services['mseatend[18oumaisf_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+  createData('18 anos ou mais (F)',
+    services['mseatend[18oumaism_atendpsc]'],
+    services['mseatend[18oumaism_atendla]'],
+    services['mseatend[18oumaism_atendacumulada]'],
+    services['mseatend[18oumaism_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+
+  createData('Total',
+    parseInt(services['mseatend[12a14f_atendpsc]'], 10)
+    + parseInt(services['mseatend[12a14m_atendpsc]'], 10)
+    + parseInt(services['mseatend[15a17f_atendpsc]'], 10)
+    + parseInt(services['mseatend[15a17m_atendpsc]'], 10)
+    + parseInt(services['mseatend[18oumaisf_atendpsc]'], 10)
+    + parseInt(services['mseatend[18oumaism_atendpsc]'], 10),
+    parseInt(services['mseatend[12a14f_atendla]'], 10)
+    + parseInt(services['mseatend[12a14m_atendla]'], 10)
+    + parseInt(services['mseatend[15a17f_atendla]'], 10)
+    + parseInt(services['mseatend[15a17m_atendla]'], 10)
+    + parseInt(services['mseatend[18oumaisf_atendla]'], 10)
+    + parseInt(services['mseatend[18oumaism_atendla]'], 10),
+    parseInt(services['mseatend[12a14f_atendacumulada]'], 10)
+    + parseInt(services['mseatend[12a14m_atendacumulada]'], 10)
+    + parseInt(services['mseatend[15a17f_atendacumulada]'], 10)
+    + parseInt(services['mseatend[15a17m_atendacumulada]'], 10)
+    + parseInt(services['mseatend[18oumaisf_atendacumulada]'], 10)
+    + parseInt(services['mseatend[18oumaism_atendacumulada]'], 10),
+    parseInt(services['mseatend[12a14f_atendsegmedida]'], 10)
+    + parseInt(services['mseatend[12a14m_atendsegmedida]'], 10)
+    + parseInt(services['mseatend[15a17f_atendsegmedida]'], 10)
+    + parseInt(services['mseatend[15a17m_atendsegmedida]'], 10)
+    + parseInt(services['mseatend[18oumaisf_atendsegmedida]'], 10)
+    + parseInt(services['mseatend[18oumaism_atendsegmedida]'], 10),
+    1,
+    1,
+    1, 1, 1),
+];
+
+export const entradasMesMSE = ({ services, createData }:any) => [
+  createData('12 a 14 (F)',
+    services['mseentrada[12a14f_atendpsc]'],
+    services['mseentrada[12a14f_atendla]'],
+    services['mseentrada[12a14f_atendacumulada]'],
+    services['mseentrada[12a14f_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+  createData('12 a 14 (M)',
+    services['mseentrada[12a14m_atendpsc]'],
+    services['mseentrada[12a14m_atendla]'],
+    services['mseentrada[12a14m_atendacumulada]'],
+    services['mseentrada[12a14m_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+
+  createData('15 a 17 (F)',
+    services['mseentrada[15a17f_atendpsc]'],
+    services['mseentrada[15a17f_atendla]'],
+    services['mseentrada[15a17f_atendacumulada]'],
+    services['mseentrada[15a17f_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+  createData('15 a 17 (M)',
+    services['mseentrada[15a17m_atendpsc]'],
+    services['mseentrada[15a17m_atendla]'],
+    services['mseentrada[15a17m_atendacumulada]'],
+    services['mseentrada[15a17m_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+  createData('18 anos ou mais (F)',
+    services['mseentrada[18oumaisf_atendpsc]'],
+    services['mseentrada[18oumaisf_atendla]'],
+    services['mseentrada[18oumaisf_atendacumulada]'],
+    services['mseentrada[18oumaisf_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+  createData('18 anos ou mais (F)',
+    services['mseentrada[18oumaism_atendpsc]'],
+    services['mseentrada[18oumaism_atendla]'],
+    services['mseentrada[18oumaism_atendacumulada]'],
+    services['mseentrada[18oumaism_atendsegmedida]'],
+    1, 1, 1, 1, 1),
+
+  createData('Total',
+    parseInt(services['mseentrada[12a14f_atendpsc]'], 10)
+  + parseInt(services['mseentrada[12a14m_atendpsc]'], 10)
+  + parseInt(services['mseentrada[15a17f_atendpsc]'], 10)
+  + parseInt(services['mseentrada[15a17m_atendpsc]'], 10)
+  + parseInt(services['mseentrada[18oumaisf_atendpsc]'], 10)
+  + parseInt(services['mseentrada[18oumaism_atendpsc]'], 10),
+    parseInt(services['mseentrada[12a14f_atendla]'], 10)
+  + parseInt(services['mseentrada[12a14m_atendla]'], 10)
+  + parseInt(services['mseentrada[15a17f_atendla]'], 10)
+  + parseInt(services['mseentrada[15a17m_atendla]'], 10)
+  + parseInt(services['mseentrada[18oumaisf_atendla]'], 10)
+  + parseInt(services['mseentrada[18oumaism_atendla]'], 10),
+    parseInt(services['mseentrada[12a14f_atendacumulada]'], 10)
+  + parseInt(services['mseentrada[12a14m_atendacumulada]'], 10)
+  + parseInt(services['mseentrada[15a17f_atendacumulada]'], 10)
+  + parseInt(services['mseentrada[15a17m_atendacumulada]'], 10)
+  + parseInt(services['mseentrada[18oumaisf_atendacumulada]'], 10)
+  + parseInt(services['mseentrada[18oumaism_atendacumulada]'], 10),
+    parseInt(services['mseentrada[12a14f_atendsegmedida]'], 10)
+  + parseInt(services['mseentrada[12a14m_atendsegmedida]'], 10)
+  + parseInt(services['mseentrada[15a17f_atendsegmedida]'], 10)
+  + parseInt(services['mseentrada[15a17m_atendsegmedida]'], 10)
+  + parseInt(services['mseentrada[18oumaisf_atendsegmedida]'], 10)
+  + parseInt(services['mseentrada[18oumaism_atendsegmedida]'], 10),
+    1,
+    1,
+    1, 1, 1),
+];
+
+export const sexoRacaCorMSE = ({ services, createData }:any) => [
+  createData('Feminino',
+
+    services['mseracasexo[fem_branca]'],
+    services['mseracasexo[fem_preta]'],
+    services['mseracasexo[fem_parda]'],
+    services['mseracasexo[fem_amarela]'],
+    services['mseracasexo[fem_indigena]'],
+    services['mseracasexo[fem_naoinf]'],
+    parseInt(services['mseracasexo[fem_branca]'], 10)
+    + parseInt(services['mseracasexo[fem_preta]'], 10)
+    + parseInt(services['mseracasexo[fem_parda]'], 10)
+    + parseInt(services['mseracasexo[fem_amarela]'], 10)
+    + parseInt(services['mseracasexo[fem_indigena]'], 10)
+    + parseInt(services['mseracasexo[fem_naoinf]'], 10), 1, 1),
+  createData('Masculino',
+    services['mseracasexo[masc_branca]'],
+    services['mseracasexo[masc_preta]'],
+    services['mseracasexo[masc_parda]'],
+    services['mseracasexo[masc_amarela]'],
+    services['mseracasexo[masc_indigena]'],
+    services['mseracasexo[masc_naoinf]'],
+    parseInt(services['mseracasexo[masc_branca]'], 10)
+    + parseInt(services['mseracasexo[masc_preta]'], 10)
+    + parseInt(services['mseracasexo[masc_parda]'], 10)
+    + parseInt(services['mseracasexo[masc_amarela]'], 10)
+    + parseInt(services['mseracasexo[masc_indigena]'], 10)
+    + parseInt(services['mseracasexo[masc_naoinf]'], 10), 1, 1),
+  createData('Total Geral',
+    parseInt(services['mseracasexo[masc_branca]'], 10)
+    + parseInt(services['mseracasexo[fem_branca]'], 10),
+    parseInt(services['mseracasexo[masc_preta]'], 10)
+    + parseInt(services['mseracasexo[fem_preta]'], 10),
+    parseInt(services['mseracasexo[masc_parda]'], 10)
+    + parseInt(services['mseracasexo[fem_parda]'], 10),
+    parseInt(services['mseracasexo[masc_amarela]'], 10)
+    + parseInt(services['mseracasexo[fem_amarela]'], 10),
+    parseInt(services['mseracasexo[masc_indigena]'], 10)
+    + parseInt(services['mseracasexo[fem_indigena]'], 10),
+    parseInt(services['mseracasexo[masc_naoinf]'], 10)
+    + parseInt(services['mseracasexo[fem_naoinf]'], 10),
+    parseInt(services['mseracasexo[masc_branca]'], 10)
+    + parseInt(services['mseracasexo[fem_branca]'], 10)
+    + parseInt(services['mseracasexo[masc_preta]'], 10)
+    + parseInt(services['mseracasexo[fem_preta]'], 10)
+    + parseInt(services['mseracasexo[masc_parda]'], 10)
+    + parseInt(services['mseracasexo[fem_parda]'], 10)
+    + parseInt(services['mseracasexo[masc_amarela]'], 10)
+    + parseInt(services['mseracasexo[fem_amarela]'], 10)
+    + parseInt(services['mseracasexo[masc_indigena]'], 10)
+    + parseInt(services['mseracasexo[fem_indigena]'], 10)
+    + parseInt(services['mseracasexo[masc_naoinf]'], 10)
+    + parseInt(services['mseracasexo[fem_naoinf]'], 10), 1, 1),
+];
+
+export const motivosSaidaMSE = ({ services, createData }:any) => [
+  createData('Cumprimento integral da MSE',
+    services['msesaida[cumprintegralmse_psc]'],
+    services['msesaida[cumprintegralmse_la]'],
+    services['msesaida[cumprintegralmse_pscla]'],
+    services['msesaida[cumprintegralmse_segmedida]'],
+    1, 1, 1, 1, 1),
+  createData('Descumprimento da MSE',
+    services['msesaida[descumprmse_psc]'],
+    services['msesaida[descumprmse_la]'],
+    services['msesaida[descumprmse_pscla]'],
+    services['msesaida[descumprmse_segmedida]'],
+    1, 1, 1, 1, 1),
+  createData('Transferência de SMSE',
+    services['msesaida[transfermse_psc]'],
+    services['msesaida[transfermse_la]'],
+    services['msesaida[transfermse_pscla]'],
+    services['msesaida[transfermse_segmedida]'],
+    1, 1, 1, 1, 1),
+  createData('Detenção',
+    services['msesaida[detencao_psc]'],
+    services['msesaida[detencao_la]'],
+    services['msesaida[detencao_pscla]'],
+    services['msesaida[detencao_segmedida]'],
+    1, 1, 1, 1, 1),
+  createData('Óbito',
+    services['msesaida[obito_psc]'],
+    services['msesaida[obito_la]'],
+    services['msesaida[obito_pscla]'],
+    services['msesaida[obito_segmedida]'],
+    1, 1, 1, 1, 1),
+  createData('Aplicação de medida em meio fechado (Fundação CASA)',
+    services['msesaida[fundcasa_psc]'],
+    services['msesaida[fundcasa_la]'],
+    services['msesaida[fundcasa_pscla]'],
+    services['msesaida[fundcasa_segmedida]'],
+    1, 1, 1, 1, 1),
+  createData('Limite de idade (21 anos)',
+    services['msesaida[limiteidade21anos_psc]'],
+    services['msesaida[limiteidade21anos_la]'],
+    services['msesaida[limiteidade21anos_pscla]'],
+    services['msesaida[limiteidade21anos_segmedida]'],
+    1, 1, 1, 1, 1),
+
+  createData('Total',
+    parseInt(services['msesaida[cumprintegralmse_psc]'], 10)
+  + parseInt(services['msesaida[descumprmse_psc]'], 10)
+  + parseInt(services['msesaida[transfermse_psc]'], 10)
+  + parseInt(services['msesaida[detencao_psc]'], 10)
+  + parseInt(services['msesaida[obito_psc]'], 10)
+  + parseInt(services['msesaida[fundcasa_psc]'], 10)
+  + parseInt(services['msesaida[limiteidade21anos_psc]'], 10),
+    parseInt(services['msesaida[cumprintegralmse_la]'], 10)
+  + parseInt(services['msesaida[descumprmse_la]'], 10)
+  + parseInt(services['msesaida[transfermse_la]'], 10)
+  + parseInt(services['msesaida[detencao_la]'], 10)
+  + parseInt(services['msesaida[obito_la]'], 10)
+  + parseInt(services['msesaida[fundcasa_la]'], 10)
+  + parseInt(services['msesaida[limiteidade21anos_la]'], 10),
+    parseInt(services['msesaida[cumprintegralmse_pscla]'], 10)
+  + parseInt(services['msesaida[descumprmse_pscla]'], 10)
+  + parseInt(services['msesaida[transfermse_pscla]'], 10)
+  + parseInt(services['msesaida[detencao_pscla]'], 10)
+  + parseInt(services['msesaida[obito_pscla]'], 10)
+  + parseInt(services['msesaida[fundcasa_pscla]'], 10)
+  + parseInt(services['msesaida[limiteidade21anos_pscla]'], 10),
+    parseInt(services['msesaida[cumprintegralmse_segmedida]'], 10)
+  + parseInt(services['msesaida[descumprmse_segmedida]'], 10)
+  + parseInt(services['msesaida[transfermse_segmedida]'], 10)
+  + parseInt(services['msesaida[detencao_segmedida]'], 10)
+  + parseInt(services['msesaida[obito_segmedida]'], 10)
+  + parseInt(services['msesaida[fundcasa_segmedida]'], 10)
+  + parseInt(services['msesaida[limiteidade21anos_segmedida]'], 10),
+    1,
+    1,
+    1,
+    1,
+    1),
+
+];
+
+export const atendimentosIndividualGrupoMSE = ({ services, createData }:any) => [
+  createData('Atendimento individual', services['mseatendtecnico[atendindiusuario_atendpresencial]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Atendimento em grupo com os usuários', services['mseatendtecnico[atendgrupousuario_atendpresencial]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const visistasTecnicasMSE = ({ services, createData }:any) => [
+  createData('Saúde', services['msevisitatecnica[saude_adolescentes]'], services['msevisitatecnica[saude_visitas]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Educação', services['msevisitatecnica[educacao_adolescentes]'], services['msevisitatecnica[educacao_visitas]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Cultura', services['msevisitatecnica[cultuta_visitas]'], services['msevisitatecnica[cultuta_visitas]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('SMADS', services['msevisitatecnica[smads_adolescentes]'], services['msevisitatecnica[smads_visitas]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Organização da Sociedade Civil', services['msevisitatecnica[osc_adolescentes]'], services['msevisitatecnica[osc_visitas]'], 1, 1, 1, 1, 1, 1, 1),
+  createData('Outros', services['msevisitatecnica[outros_visitas]'], services['msevisitatecnica[outros_visitas]'], 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const residentesMSE = ({ services, createData }:any) => [
+  createData('Serviço de Acolhimento Institucional para Crianças e Adolescentes', services['mseacolhimento[saica]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('República', services['mseacolhimento[republica]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Centro de Acolhida', services['mseacolhimento[ca]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const escolarMSE = ({ services, createData }:any) => [
+  createData('Estuda', services['msesitescolar[estuda_12a14]'], services['msesitescolar[estuda_15a17]'], services['msesitescolar[estuda_18oumais]'], 1, 1, 1, 1, 1, 1),
+  createData('Não estuda', services['msesitescolar[naoestuda_12a14]'], services['msesitescolar[naoestuda_15a17]'], services['msesitescolar[naoestuda_18oumais]'], 1, 1, 1, 1, 1, 1),
+  createData('Concluiu o ensino regular', services['msesitescolar[concluiu_12a14]'], services['msesitescolar[concluiu_15a17]'], services['msesitescolar[concluiu_18oumais]'], 1, 1, 1, 1, 1, 1),
+];
+
+export const trabalhoMSE = ({ services, createData }:any) => [
+  createData('Com vínculo empregatício (CLT)', services['msesittrabalho[comvinc_12a14]'], services['msesittrabalho[comvinc_15a17]'], services['msesittrabalho[comvinc_18oumais]'], 1, 1, 1, 1, 1, 1),
+  createData('Sem vínculo empregatício', services['msesittrabalho[semvinc_12a14]'], services['msesittrabalho[semvinc_15a17]'], services['msesittrabalho[semvinc_18oumais]'], 1, 1, 1, 1, 1, 1),
+  createData('Não Trabalha', services['msesittrabalho[naotrabalha_12a14]'], services['msesittrabalho[naotrabalha_15a17]'], services['msesittrabalho[naotrabalha_18oumais]'], 1, 1, 1, 1, 1, 1),
+];
+
+export const entraramAtoInfracionalMSE = ({ services, createData }:any) => [
+  createData('Agressão/Briga', services['mseatoinfracional[agressaobriga_qtde]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Crime de trânsito', services['mseatoinfracional[crimetransito_qtde]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Dano ao patrimônio', services['mseatoinfracional[danopatrimonio_qtde]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Furto', services['mseatoinfracional[furto_qtde]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Lesão Corporal', services['mseatoinfracional[lesaocorporal_qtde]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Porte de drogas', services['mseatoinfracional[portedrogas_qtde]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Receptação', services['mseatoinfracional[receptacao_qtde]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Roubo', services['mseatoinfracional[roubo_qtde]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Tentativa de Homicídio', services['mseatoinfracional[tenthomicidio_qtde]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Tráfico de Drogas', services['mseatoinfracional[traficodrogas_qtde]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outros', services['mseatoinfracional[outros_qtde]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Total', parseInt(services['mseatoinfracional[agressaobriga_qtde]'], 10)
+  + parseInt(services['mseatoinfracional[crimetransito_qtde]'], 10)
+  + parseInt(services['mseatoinfracional[danopatrimonio_qtde]'], 10)
+  + parseInt(services['mseatoinfracional[furto_qtde]'], 10)
+  + parseInt(services['mseatoinfracional[lesaocorporal_qtde]'], 10)
+  + parseInt(services['mseatoinfracional[portedrogas_qtde]'], 10)
+  + parseInt(services['mseatoinfracional[receptacao_qtde]'], 10)
+  + parseInt(services['mseatoinfracional[roubo_qtde]'], 10)
+  + parseInt(services['mseatoinfracional[tenthomicidio_qtde]'], 10)
+  + parseInt(services['mseatoinfracional[traficodrogas_qtde]'], 10)
+  + parseInt(services['mseatoinfracional[outros_qtde]'], 10),
+
+  1, 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const encaminhamentosMSE = ({ services, createData }:any) => [
+  createData('CRAS', services['mseencaminhamentos[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('CREAS', services['mseencaminhamentos[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outro serviço da rede socioassistencial', services['mseencaminhamentos[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Outras políticas públicas', services['mseencaminhamentos[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];
+
+export const atendimentosRemotosFamiliaSemanaMSE = ({ services, createData }:any) => [
+  createData('Semana 1', services['mseperiofam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 2', services['mseperiofam[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 3', services['mseperiofam[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 4', services['mseperiofam[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 5', services['mseperiofam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 6', services['mseperiofam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+];

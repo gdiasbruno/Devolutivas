@@ -236,8 +236,23 @@ const Response:any = () => {
               na lista de espera (demanda reprimida) do serviço no mês:
             </h2>
             <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Mulher(es)', services.cdcmlistaespera, 1, 1, 1, 1, 1, 1, 1, 1)]} />
-
             <br />
+            {/* {mes === '0121' ? (<h1>Frango </h1>) : ( <h2>
+              13. Quantidade de atendimentos remotos de familiares por semana no mês
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosFamiliaSemanaHeaders}
+              body={atendimentosRemotosFamiliaSemana}
+            />
+
+            <h2>
+              14. Quantidade de atividades remotas realizadas
+              no mês, pelos meios em que foram disponibilizadas
+            </h2>
+            <TableTwoColumns
+              headers={atendimentosRemotosTiposHeaders}
+              body={atendimentosRemotosTipos}
+            />)} */}
             <h2>
               13. Quantidade de atendimentos remotos de familiares por semana no mês
             </h2>

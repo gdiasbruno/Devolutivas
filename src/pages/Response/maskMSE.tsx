@@ -47,12 +47,10 @@ function createData(
 }
 
 const atendidosMesHeaders = [
-
   'PSC',
   'LA',
   'Medida Acumulada - PSC+LA',
   'Segunda Medida',
-
 ];
 
 const sexoRacaCorHeaders = [
