@@ -21,6 +21,7 @@ import {
   violenciaAgressorCDCM,
   atendimentoTecnicoCDCM,
   atendimentosRemotosTiposCDCM,
+  atendimentosRemotosMulheresCDMC,
   atendimentosRemotosFamiliaSemanaCDCM,
 } from './ServiceValues';
 
@@ -106,6 +107,8 @@ const atendimentosRemotosTiposHeaders = ['Tipos', ''];
 
 const atendimentosRemotosFamiliaSemanaHeaders = ['Semanas', 'Nº de famílias'];
 
+const atendimentosRemotosMulheresHeaders = ['Semanas', 'Nº de mulheres'];
+
 const Response:any = () => {
   const [services, setServices]:any = useState([]);
   const { context }:any = useContext(infoContext);
@@ -148,6 +151,8 @@ const Response:any = () => {
     services,
     createData,
   });
+
+  const atendimentosRemotosMulheres = atendimentosRemotosMulheresCDMC({ services, createData });
 
   return (
     loading
@@ -237,7 +242,55 @@ const Response:any = () => {
             </h2>
             <TableTwoColumns headers={['', 'Quantidade']} body={[createData('Mulher(es)', services.cdcmlistaespera, 1, 1, 1, 1, 1, 1, 1, 1)]} />
             <br />
-            {/* {mes === '0121' ? (<h1>Frango </h1>) : ( <h2>
+            {mes === '0421' ? (
+              <>
+                <h2>
+                  13. Quantidade de atendimentos remotos de mulheres por semana no mês
+                </h2>
+                <TableTwoColumns
+                  headers={atendimentosRemotosMulheresHeaders}
+                  body={atendimentosRemotosMulheres}
+                />
+
+                <h2>
+                  14. Quantidade de atividades remotas realizadas
+                  no mês, pelos meios em que foram disponibilizadas
+                </h2>
+                <TableTwoColumns
+                  headers={atendimentosRemotosTiposHeaders}
+                  body={atendimentosRemotosTipos}
+                />
+
+                <h2>
+                  15. Quantidade de atendimentos remotos de familiares por semana no mês
+                </h2>
+                <TableTwoColumns
+                  headers={atendimentosRemotosFamiliaSemanaHeaders}
+                  body={atendimentosRemotosFamiliaSemana}
+                />
+
+              </>
+            ) : (
+              <>
+                <h2>
+                  13. Quantidade de atendimentos remotos de familiares por semana no mês
+                </h2>
+                <TableTwoColumns
+                  headers={atendimentosRemotosFamiliaSemanaHeaders}
+                  body={atendimentosRemotosFamiliaSemana}
+                />
+
+                <h2>
+                  14. Quantidade de atividades remotas realizadas
+                  no mês, pelos meios em que foram disponibilizadas
+                </h2>
+                <TableTwoColumns
+                  headers={atendimentosRemotosTiposHeaders}
+                  body={atendimentosRemotosTipos}
+                />
+              </>
+            )}
+            {/* <h2>
               13. Quantidade de atendimentos remotos de familiares por semana no mês
             </h2>
             <TableTwoColumns
@@ -252,23 +305,7 @@ const Response:any = () => {
             <TableTwoColumns
               headers={atendimentosRemotosTiposHeaders}
               body={atendimentosRemotosTipos}
-            />)} */}
-            <h2>
-              13. Quantidade de atendimentos remotos de familiares por semana no mês
-            </h2>
-            <TableTwoColumns
-              headers={atendimentosRemotosFamiliaSemanaHeaders}
-              body={atendimentosRemotosFamiliaSemana}
-            />
-
-            <h2>
-              14. Quantidade de atividades remotas realizadas
-              no mês, pelos meios em que foram disponibilizadas
-            </h2>
-            <TableTwoColumns
-              headers={atendimentosRemotosTiposHeaders}
-              body={atendimentosRemotosTipos}
-            />
+            /> */}
 
           </Section>
         </>

@@ -57,6 +57,7 @@ const Routes: React.FC = () => {
               <Route path="/responseCDCM" component={ResponseCDCM} />
               <Route path="/responseCDI" component={ResponseCDI} />
               <Route path="/responseMSE-MA" component={ResponseMSE} />
+              <Route path="/responseMSE" component={ResponseMSE} />
               <Route path="/responseNUCLEO DE CONVIVENCIA PARA ADULTOS EM SITUACAO DE RUA" component={ResponseNCPOPRUA} />
               <Route path="/responseBAGAGEIRO" component={ResponseBAGAGEIRO} />
               <Route path="/responseSPVV" component={ResponseSPVV} />

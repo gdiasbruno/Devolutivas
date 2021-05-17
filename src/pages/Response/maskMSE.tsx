@@ -357,8 +357,8 @@ const Response:any = () => {
   ];
 
   const atendimentosIndividualGrupo = [
-    createData('Atendimento individual', services['mseatendtecnico[atendindiusuario_atendpresencial]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Atendimento em grupo com os usuários', services['mseatendtecnico[atendgrupousuario_atendpresencial]'], 1, 1, 1, 1, 1, 1, 1, 1),
+    createData('Atendimento individual', services['mseatendtecnico[atendindiusuario_atendpresencial]'], services['mseatendtecnico[atendindiusuario_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
+    createData('Atendimento em grupo com os usuários', services['mseatendtecnico[atendgrupousuario_atendpresencial]'], services['mseatendtecnico[atendgrupousuario_atendrem]'], 1, 1, 1, 1, 1, 1, 1),
   ];
 
   const visistasTecnicas = [
@@ -480,6 +480,23 @@ const Response:any = () => {
             </h2>
             <TableFiveColumns headers={atendidosMesHeaders} body={motivosSaida} />
             <br />
+            {mes === '0421' ? (
+              <>
+                <h2>
+                  6. Nº de atendimentos realizados no mês de referência:
+                </h2>
+                <TableThreeColumns headers={['Atendimento Presencial', 'Atendimento remoto']} body={atendimentosIndividualGrupo} />
+              </>
+            )
+              : (
+                <>
+                  <h2>
+                    6. Nº de atendimentos realizados no mês de referência:
+                  </h2>
+                  <TableTwoColumns headers={['', 'Atendimento Presencial']} body={atendimentosIndividualGrupo} />
+                </>
+
+              )}
             <h2>
               6. Nº de atendimentos realizados no mês de referência:
             </h2>

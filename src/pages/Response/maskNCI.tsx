@@ -400,6 +400,68 @@ const Response:any = () => {
 
   ];
 
+  const motivosSaidaAbril = [
+    createData('Mudança de endereço',
+      services['ncisaidaconvivencia[mudancaendereco_quantidade]'],
+      1,
+      1, 1, 1, 1, 1, 1, 1),
+    createData('Transferência para outro serviço',
+      services['ncisaidaconvivencia[transferencia_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Óbito',
+      services['ncisaidaconvivencia[obito_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Oferta do Serviço em Domicílio',
+      services['ncisaidaconvivencia[ofertadom_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Desistência',
+      services['ncisaidaconvivencia[desistencia_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Total',
+      parseInt(services['ncisaidaconvivencia[ofertadom_quantidade]'], 10)
+    + parseInt(services['ncisaidaconvivencia[obito_quantidade]'], 10)
+    + parseInt(services['ncisaidaconvivencia[transferencia_quantidade]'], 10)
+    + parseInt(services['ncisaidaconvivencia[mudancaendereco_quantidade]'], 10)
+    + parseInt(services['ncisaidaconvivencia[desistencia_quantidade]'], 10),
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+
+  ];
+
   const motivosSaidaDomicilio = [
     createData('Mudança de endereço',
       services['ncisaidadomicilio[mudancaendereco_quantidade]'],
@@ -473,6 +535,101 @@ const Response:any = () => {
     + parseInt(services['ncisaidadomicilio[obito_quantidade]'], 10)
     + parseInt(services['ncisaidadomicilio[transferencia_quantidade]'], 10)
     + parseInt(services['ncisaidadomicilio[mudancaendereco_quantidade]'], 10),
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+
+  ];
+
+  const motivosSaidaDomicilioAbril = [
+    createData('Mudança de endereço',
+      services['ncisaidadomicilio[mudancaendereco_quantidade]'],
+      1,
+      1, 1, 1, 1, 1, 1, 1),
+    createData('Transferência para outro serviço',
+      services['ncisaidadomicilio[transferencia_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Óbito',
+      services['ncisaidadomicilio[obito_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Recusa de acompanhamento',
+      services['ncisaidadomicilio[recusa_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Ganhou autonomia',
+      services['ncisaidadomicilio[autonomia_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Resgate de vínculos familiares',
+      services['ncisaidadomicilio[resgate_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Passou a participar das atividades de convivência',
+      services['ncisaidadomicilio[conclusaocurso_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Desistência',
+      services['ncisaidadomicilio[desistencia_quantidade]'],
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1),
+    createData('Total',
+      parseInt(services['ncisaidadomicilio[conclusaocurso_quantidade]'], 10)
+      + parseInt(services['ncisaidadomicilio[resgate_quantidade]'], 10)
+      + parseInt(services['ncisaidadomicilio[autonomia_quantidade]'], 10)
+      + parseInt(services['ncisaidadomicilio[recusa_quantidade]'], 10)
+      + parseInt(services['ncisaidadomicilio[obito_quantidade]'], 10)
+      + parseInt(services['ncisaidadomicilio[transferencia_quantidade]'], 10)
+      + parseInt(services['ncisaidadomicilio[mudancaendereco_quantidade]'], 10)
+      + parseInt(services['ncisaidadomicilio[desistencia_quantidade]'], 10),
       1,
       1,
       1,
@@ -705,7 +862,7 @@ const Response:any = () => {
             <h2>
               3. Quantidade de usuários por motivo de saída do serviço no mês:
             </h2>
-            <TableTwoColumns headers={motivosSaidaHeaders} body={motivosSaida} />
+            <TableTwoColumns headers={motivosSaidaHeaders} body={mes === '0421' ? motivosSaidaAbril : motivosSaida} />
 
             <h2>
               4. N° de idosos atendidos no serviço de convivência que moram sozinhos
@@ -782,7 +939,7 @@ const Response:any = () => {
             <h2>
               3. Nº de pessoas por motivo de saída do serviço em domicílio  no mês de referência:
             </h2>
-            <TableTwoColumns headers={motivosSaidaHeaders} body={motivosSaidaDomicilio} />
+            <TableTwoColumns headers={motivosSaidaHeaders} body={mes === '0421' ? motivosSaidaDomicilioAbril : motivosSaidaDomicilio} />
 
             <h2>
               4.N° de idosos atendidos no serviço em domicílio que moram sozinhos e

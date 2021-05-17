@@ -1114,6 +1114,16 @@ export const atendimentosRemotosTiposCDCM = ({ services, createData }:any) => [
   createData('Entrega de kits de atividades', services['cdcmdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
   createData('Outros', services['cdcmdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
 ];
+
+export const atendimentosRemotosMulheresCDMC = ({ services, createData }:any) => [
+
+  createData('Semana 1', services['cdcmatendremmulher[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 2', services['cdcmatendremmulher[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 3', services['cdcmatendremmulher[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 4', services['cdcmatendremmulher[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 5', services['cdcmatendremmulher[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  createData('Semana 6', services['cdcmatendremmulher[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1)];
+
 export const atendimentosRemotosFamiliaSemanaCDCM = ({ services, createData }:any) => [
 
   createData('Semana 1', services['cdcmatendremfam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
