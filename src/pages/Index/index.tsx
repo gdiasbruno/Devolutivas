@@ -11,6 +11,7 @@ const Index: React.FC = () => {
   const history = useHistory();
 
   const fetchUserProfiles = () => {
+    history.push('/Disabled');
     axios.get('http://localhost:9091/devolutivas').then((res) => {
       setSas(res.data);
     }).catch((err):any => {
