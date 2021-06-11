@@ -187,7 +187,7 @@ export const familiasAtendidasCCA = ({ services, createData }:any) => [
 export const familiasVulnerabilidadeCCA = ({ services, createData }:any) => [
   createData('Conflitos', services['ccavulnerab[conflit]'], 1, 1, 1, 1, 1, 1),
   createData('Preconceitos/discriminação', services['ccavulnerab[Precon]'], 1, 1, 1, 1, 1, 1),
-  createData('Abandono', services['ccavulnerab[aband]'], 1, 1, 1, 1, 1, 1),
+  createData('Abandono', services['ccavulnerab[aband]'] ? services['ccavulnerab[aband]'] : services['ccavulnerab[abandono]'], 1, 1, 1, 1, 1, 1),
   createData('Apartação', services['ccavulnerab[apart]'], 1, 1, 1, 1, 1, 1),
   createData('Confinamento', services['ccavulnerab[confinamet]'], 1, 1, 1, 1, 1, 1),
   createData('Isolamento', services['ccavulnerab[isolament]'], 1, 1, 1, 1, 1, 1),

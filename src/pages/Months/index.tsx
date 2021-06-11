@@ -137,6 +137,13 @@ const Months: React.FC = () => {
         index: month,
       };
     }
+
+    if (monthString === '0521') {
+      return {
+        name: 'Maio 2021',
+        index: month,
+      };
+    }
     return null;
   });
 
