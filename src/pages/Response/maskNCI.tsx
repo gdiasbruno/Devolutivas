@@ -8,7 +8,37 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import {
   Section, LoaderBody,
 } from './styles';
-import { fetchServicesAnswers } from './ServiceValues';
+
+import fetchServicesAnswers from './Request';
+
+import {
+  infoIdososNCI,
+  temasItemsNCI,
+  sexoRacaCorNCI,
+  atendidosMesNCI,
+  motivosSaidaNCI,
+  idososFamiliasNCI,
+  atividadesItemsNCI,
+  encaminhamentosNCI,
+  familiasInsumosNCI,
+  demandaReprimidaNCI,
+  motivosSaidaAbrilNCI,
+  idososMoramSozinhoNCI,
+  atendimentosRemotosNCI,
+  sexoRacaCorDomicilioNCI,
+  atendidosMesDomicilioNCI,
+  motivosSaidaDomicilioNCI,
+  familiasVulnerabilidadeNCI,
+  idososFamiliasDomicilioNCI,
+  atendimentosRemotosTiposNCI,
+  motivosSaidaDomicilioAbrilNCI,
+  idososMoramSozinhoDomicilioNCI,
+  atendimentosRemotosDomicilioNCI,
+  atendimentosRemotosFamiliaSemanaNCI,
+  familiasVulnerabilidadeDomicilioNCI,
+  atendimentosRemotosTiposDomicilioNCI,
+  atendimentosRemotosFamiliaSemanaDomicilioNCI,
+} from './ServiceValues';
 
 import TableEigthColumns from '../../components/TableEightColumns';
 import TableFourColumns from '../../components/TableFourColumns';
@@ -101,736 +131,69 @@ const Response:any = () => {
     });
   }, []);
 
-  const atendidosMes = [
-    createData('60 a 64 anos (M)',
-      services['ncifluxoconvivencia[60a64m_atendmesatual]'],
-      services['ncifluxoconvivencia[60a64m_presmesatual]'],
-      services['ncifluxoconvivencia[60a64m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('60 a 64 anos (F)',
-      services['ncifluxoconvivencia[60a64f_atendmesatual]'],
-      services['ncifluxoconvivencia[60a64f_presmesatual]'],
-      services['ncifluxoconvivencia[60a64f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('65 a 69 anos (M)',
-      services['ncifluxoconvivencia[65a69m_atendmesatual]'],
-      services['ncifluxoconvivencia[65a69m_presmesatual]'],
-      services['ncifluxoconvivencia[65a69m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('65 a 69 anos (F)',
-      services['ncifluxoconvivencia[65a69f_atendmesatual]'],
-      services['ncifluxoconvivencia[65a69f_presmesatual]'],
-      services['ncifluxoconvivencia[65a69f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('70 a 74 anos (M)',
-      services['ncifluxoconvivencia[70a74m_atendmesatual]'],
-      services['ncifluxoconvivencia[70a74m_presmesatual]'],
-      services['ncifluxoconvivencia[70a74m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('70 a 74 anos (F)',
-      services['ncifluxoconvivencia[70a74f_atendmesatual]'],
-      services['ncifluxoconvivencia[70a74f_presmesatual]'],
-      services['ncifluxoconvivencia[70a74f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('75 anos mais (M)',
-      services['ncifluxoconvivencia[75maism_atendmesatual]'],
-      services['ncifluxoconvivencia[75maism_presmesatual]'],
-      services['ncifluxoconvivencia[75maism_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('75 anos mais (F)',
-      services['ncifluxoconvivencia[75maisf_atendmesatual]'],
-      services['ncifluxoconvivencia[75maisf_presmesatual]'],
-      services['ncifluxoconvivencia[75maisf_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
+  const atendidosMes = atendidosMesNCI({ services, createData });
 
-    createData('Total',
-      parseInt(services['ncifluxoconvivencia[60a64m_atendmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[60a64f_atendmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[65a69m_atendmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[65a69f_atendmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[70a74m_atendmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[70a74f_atendmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[75maism_atendmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[75maisf_atendmesatual]'], 10),
-      parseInt(services['ncifluxoconvivencia[60a64m_presmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[60a64f_presmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[65a69m_presmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[65a69f_presmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[70a74m_presmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[70a74f_presmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[75maism_presmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[75maisf_presmesatual]'], 10),
-      parseInt(services['ncifluxoconvivencia[60a64m_remmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[60a64f_remmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[65a69m_remmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[65a69f_remmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[70a74m_remmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[70a74f_remmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[75maism_remmesatual]'], 10)
-      + parseInt(services['ncifluxoconvivencia[75maisf_remmesatual]'], 10),
-      1, 1, 1, 1, 1, 1),
-  ];
+  const atendidosMesDomicilio = atendidosMesDomicilioNCI({ services, createData });
 
-  const atendidosMesDomicilio = [
-    createData('60 a 64 anos (M)',
-      services['ncifluxodomicilio[60a64m_atendmesatual]'],
-      services['ncifluxodomicilio[60a64m_presmesatual]'],
-      services['ncifluxodomicilio[60a64m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('60 a 64 anos (F)',
-      services['ncifluxodomicilio[60a64f_atendmesatual]'],
-      services['ncifluxodomicilio[60a64f_presmesatual]'],
-      services['ncifluxodomicilio[60a64f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('65 a 69 anos (M)',
-      services['ncifluxodomicilio[65a69m_atendmesatual]'],
-      services['ncifluxodomicilio[65a69m_presmesatual]'],
-      services['ncifluxodomicilio[65a69m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('65 a 69 anos (F)',
-      services['ncifluxodomicilio[65a69f_atendmesatual]'],
-      services['ncifluxodomicilio[65a69f_presmesatual]'],
-      services['ncifluxodomicilio[65a69f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('70 a 74 anos (M)',
-      services['ncifluxodomicilio[70a74m_atendmesatual]'],
-      services['ncifluxodomicilio[70a74m_presmesatual]'],
-      services['ncifluxodomicilio[70a74m_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('70 a 74 anos (F)',
-      services['ncifluxodomicilio[70a74f_atendmesatual]'],
-      services['ncifluxodomicilio[70a74f_presmesatual]'],
-      services['ncifluxodomicilio[70a74f_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('75 anos mais (M)',
-      services['ncifluxodomicilio[75maism_atendmesatual]'],
-      services['ncifluxodomicilio[75maism_presmesatual]'],
-      services['ncifluxodomicilio[75maism_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
-    createData('75 anos mais (F)',
-      services['ncifluxodomicilio[75maisf_atendmesatual]'],
-      services['ncifluxodomicilio[75maisf_presmesatual]'],
-      services['ncifluxodomicilio[75maisf_remmesatual]'],
-      1, 1, 1, 1, 1, 1),
+  const sexoRacaCor = sexoRacaCorNCI({ services, createData });
 
-    createData('Total',
-      parseInt(services['ncifluxodomicilio[60a64m_atendmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[60a64f_atendmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[65a69m_atendmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[65a69f_atendmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[70a74m_atendmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[70a74f_atendmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[75maism_atendmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[75maisf_atendmesatual]'], 10),
-      parseInt(services['ncifluxodomicilio[60a64m_presmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[60a64f_presmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[65a69m_presmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[65a69f_presmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[70a74m_presmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[70a74f_presmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[75maism_presmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[75maisf_presmesatual]'], 10),
-      parseInt(services['ncifluxodomicilio[60a64m_remmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[60a64f_remmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[65a69m_remmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[65a69f_remmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[70a74m_remmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[70a74f_remmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[75maism_remmesatual]'], 10)
-      + parseInt(services['ncifluxodomicilio[75maisf_remmesatual]'], 10),
-      1, 1, 1, 1, 1, 1),
+  const sexoRacaCorDomicilio = sexoRacaCorDomicilioNCI({ services, createData });
 
-  ];
+  const motivosSaida = motivosSaidaNCI({ services, createData });
 
-  const sexoRacaCor = [
-    createData('Feminino',
-      services['nciconvracasexo[fem_branc]'],
-      services['nciconvracasexo[fem_preto]'],
-      services['nciconvracasexo[fem_pardo]'],
-      services['nciconvracasexo[fem_amarelo]'],
-      services['nciconvracasexo[fem_indigena]'],
-      services['nciconvracasexo[fem_naoinf]'],
-      parseInt(services['nciconvracasexo[fem_branc]'], 10)
-      + parseInt(services['nciconvracasexo[fem_preto]'], 10)
-      + parseInt(services['nciconvracasexo[fem_pardo]'], 10)
-      + parseInt(services['nciconvracasexo[fem_amarelo]'], 10)
-      + parseInt(services['nciconvracasexo[fem_indigena]'], 10)
-      + parseInt(services['nciconvracasexo[fem_naoinf]'], 10), 1, 1),
-    createData('Masculino',
-      services['nciconvracasexo[masc_branc]'],
-      services['nciconvracasexo[masc_preto]'],
-      services['nciconvracasexo[masc_pardo]'],
-      services['nciconvracasexo[masc_amarelo]'],
-      services['nciconvracasexo[masc_indigena]'],
-      services['nciconvracasexo[masc_naoinf]'],
-      parseInt(services['nciconvracasexo[masc_branc]'], 10)
-      + parseInt(services['nciconvracasexo[masc_preto]'], 10)
-      + parseInt(services['nciconvracasexo[masc_pardo]'], 10)
-      + parseInt(services['nciconvracasexo[masc_amarelo]'], 10)
-      + parseInt(services['nciconvracasexo[masc_indigena]'], 10)
-      + parseInt(services['nciconvracasexo[masc_naoinf]'], 10), 1, 1),
-    createData('Total Geral',
-      parseInt(services['nciconvracasexo[masc_branc]'], 10)
-      + parseInt(services['nciconvracasexo[fem_branc]'], 10),
-      parseInt(services['nciconvracasexo[masc_preto]'], 10)
-      + parseInt(services['nciconvracasexo[fem_preto]'], 10),
-      parseInt(services['nciconvracasexo[masc_pardo]'], 10)
-      + parseInt(services['nciconvracasexo[fem_pardo]'], 10),
-      parseInt(services['nciconvracasexo[masc_amarelo]'], 10)
-      + parseInt(services['nciconvracasexo[fem_amarelo]'], 10),
-      parseInt(services['nciconvracasexo[masc_indigena]'], 10)
-      + parseInt(services['nciconvracasexo[fem_indigena]'], 10),
-      parseInt(services['nciconvracasexo[masc_naoinf]'], 10)
-      + parseInt(services['nciconvracasexo[fem_naoinf]'], 10),
-      parseInt(services['nciconvracasexo[masc_branc]'], 10)
-      + parseInt(services['nciconvracasexo[fem_branc]'], 10)
-      + parseInt(services['nciconvracasexo[masc_preto]'], 10)
-      + parseInt(services['nciconvracasexo[fem_preto]'], 10)
-      + parseInt(services['nciconvracasexo[masc_pardo]'], 10)
-      + parseInt(services['nciconvracasexo[fem_pardo]'], 10)
-      + parseInt(services['nciconvracasexo[masc_amarelo]'], 10)
-      + parseInt(services['nciconvracasexo[fem_amarelo]'], 10)
-      + parseInt(services['nciconvracasexo[masc_indigena]'], 10)
-      + parseInt(services['nciconvracasexo[fem_indigena]'], 10)
-      + parseInt(services['nciconvracasexo[masc_naoinf]'], 10)
-      + parseInt(services['nciconvracasexo[fem_naoinf]'], 10), 1, 1),
-  ];
-  const sexoRacaCorDomicilio = [
-    createData('Feminino',
-      services['ncidomracasexo[fem_branc]'],
-      services['ncidomracasexo[fem_preto]'],
-      services['ncidomracasexo[fem_pardo]'],
-      services['ncidomracasexo[fem_amarelo]'],
-      services['ncidomracasexo[fem_indigena]'],
-      services['ncidomracasexo[fem_naoinf]'],
-      parseInt(services['ncidomracasexo[fem_branc]'], 10)
-      + parseInt(services['ncidomracasexo[fem_preto]'], 10)
-      + parseInt(services['ncidomracasexo[fem_pardo]'], 10)
-      + parseInt(services['ncidomracasexo[fem_amarelo]'], 10)
-      + parseInt(services['ncidomracasexo[fem_indigena]'], 10)
-      + parseInt(services['ncidomracasexo[fem_naoinf]'], 10), 1, 1),
-    createData('Masculino',
-      services['ncidomracasexo[masc_branc]'],
-      services['ncidomracasexo[masc_preto]'],
-      services['ncidomracasexo[masc_pardo]'],
-      services['ncidomracasexo[masc_amarelo]'],
-      services['ncidomracasexo[masc_indigena]'],
-      services['ncidomracasexo[masc_naoinf]'],
-      parseInt(services['ncidomracasexo[masc_branc]'], 10)
-      + parseInt(services['ncidomracasexo[masc_preto]'], 10)
-      + parseInt(services['ncidomracasexo[masc_pardo]'], 10)
-      + parseInt(services['ncidomracasexo[masc_amarelo]'], 10)
-      + parseInt(services['ncidomracasexo[masc_indigena]'], 10)
-      + parseInt(services['ncidomracasexo[masc_naoinf]'], 10), 1, 1),
-    createData('Total Geral',
-      parseInt(services['ncidomracasexo[masc_branc]'], 10)
-      + parseInt(services['ncidomracasexo[fem_branc]'], 10),
-      parseInt(services['ncidomracasexo[masc_preto]'], 10)
-      + parseInt(services['ncidomracasexo[fem_preto]'], 10),
-      parseInt(services['ncidomracasexo[masc_pardo]'], 10)
-      + parseInt(services['ncidomracasexo[fem_pardo]'], 10),
-      parseInt(services['ncidomracasexo[masc_amarelo]'], 10)
-      + parseInt(services['ncidomracasexo[fem_amarelo]'], 10),
-      parseInt(services['ncidomracasexo[masc_indigena]'], 10)
-      + parseInt(services['ncidomracasexo[fem_indigena]'], 10),
-      parseInt(services['ncidomracasexo[masc_naoinf]'], 10)
-      + parseInt(services['ncidomracasexo[fem_naoinf]'], 10),
-      parseInt(services['ncidomracasexo[masc_branc]'], 10)
-      + parseInt(services['ncidomracasexo[fem_branc]'], 10)
-      + parseInt(services['ncidomracasexo[masc_preto]'], 10)
-      + parseInt(services['ncidomracasexo[fem_preto]'], 10)
-      + parseInt(services['ncidomracasexo[masc_pardo]'], 10)
-      + parseInt(services['ncidomracasexo[fem_pardo]'], 10)
-      + parseInt(services['ncidomracasexo[masc_amarelo]'], 10)
-      + parseInt(services['ncidomracasexo[fem_amarelo]'], 10)
-      + parseInt(services['ncidomracasexo[masc_indigena]'], 10)
-      + parseInt(services['ncidomracasexo[fem_indigena]'], 10)
-      + parseInt(services['ncidomracasexo[masc_naoinf]'], 10)
-      + parseInt(services['ncidomracasexo[fem_naoinf]'], 10), 1, 1),
-  ];
+  const motivosSaidaAbril = motivosSaidaAbrilNCI({ services, createData });
 
-  const motivosSaida = [
-    createData('Mudança de endereço',
-      services['ncisaidaconvivencia[mudancaendereco_quantidade]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-    createData('Transferência para outro serviço',
-      services['ncisaidaconvivencia[transferencia_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Óbito',
-      services['ncisaidaconvivencia[obito_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Oferta do Serviço em Domicílio',
-      services['ncisaidaconvivencia[ofertadom_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Total',
-      parseInt(services['ncisaidaconvivencia[ofertadom_quantidade]'], 10)
-    + parseInt(services['ncisaidaconvivencia[obito_quantidade]'], 10)
-    + parseInt(services['ncisaidaconvivencia[transferencia_quantidade]'], 10)
-    + parseInt(services['ncisaidaconvivencia[mudancaendereco_quantidade]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
+  const motivosSaidaDomicilio = motivosSaidaDomicilioNCI({ services, createData });
 
-  ];
+  const motivosSaidaDomicilioAbril = motivosSaidaDomicilioAbrilNCI({ services, createData });
 
-  const motivosSaidaAbril = [
-    createData('Mudança de endereço',
-      services['ncisaidaconvivencia[mudancaendereco_quantidade]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-    createData('Transferência para outro serviço',
-      services['ncisaidaconvivencia[transferencia_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Óbito',
-      services['ncisaidaconvivencia[obito_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Oferta do Serviço em Domicílio',
-      services['ncisaidaconvivencia[ofertadom_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Desistência',
-      services['ncisaidaconvivencia[desistencia_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Total',
-      parseInt(services['ncisaidaconvivencia[ofertadom_quantidade]'], 10)
-    + parseInt(services['ncisaidaconvivencia[obito_quantidade]'], 10)
-    + parseInt(services['ncisaidaconvivencia[transferencia_quantidade]'], 10)
-    + parseInt(services['ncisaidaconvivencia[mudancaendereco_quantidade]'], 10)
-    + parseInt(services['ncisaidaconvivencia[desistencia_quantidade]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
+  const idososMoramSozinho = idososMoramSozinhoNCI({ services, createData });
 
-  ];
+  const idososFamilias = idososFamiliasNCI({ services, createData });
 
-  const motivosSaidaDomicilio = [
-    createData('Mudança de endereço',
-      services['ncisaidadomicilio[mudancaendereco_quantidade]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-    createData('Transferência para outro serviço',
-      services['ncisaidadomicilio[transferencia_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Óbito',
-      services['ncisaidadomicilio[obito_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Recusa de acompanhamento',
-      services['ncisaidadomicilio[recusa_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Ganhou autonomia',
-      services['ncisaidadomicilio[autonomia_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Resgate de vínculos familiares',
-      services['ncisaidadomicilio[resgate_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Passou a participar das atividades de convivência',
-      services['ncisaidadomicilio[conclusaocurso_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Total',
-      parseInt(services['ncisaidadomicilio[conclusaocurso_quantidade]'], 10)
-      + parseInt(services['ncisaidadomicilio[resgate_quantidade]'], 10)
-      + parseInt(services['ncisaidadomicilio[autonomia_quantidade]'], 10)
-      + parseInt(services['ncisaidadomicilio[recusa_quantidade]'], 10)
-    + parseInt(services['ncisaidadomicilio[obito_quantidade]'], 10)
-    + parseInt(services['ncisaidadomicilio[transferencia_quantidade]'], 10)
-    + parseInt(services['ncisaidadomicilio[mudancaendereco_quantidade]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
+  const idososFamiliasDomicilio = idososFamiliasDomicilioNCI({ services, createData });
 
-  ];
+  const familiasInsumos = familiasInsumosNCI({ services, createData });
 
-  const motivosSaidaDomicilioAbril = [
-    createData('Mudança de endereço',
-      services['ncisaidadomicilio[mudancaendereco_quantidade]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-    createData('Transferência para outro serviço',
-      services['ncisaidadomicilio[transferencia_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Óbito',
-      services['ncisaidadomicilio[obito_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Recusa de acompanhamento',
-      services['ncisaidadomicilio[recusa_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Ganhou autonomia',
-      services['ncisaidadomicilio[autonomia_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Resgate de vínculos familiares',
-      services['ncisaidadomicilio[resgate_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Passou a participar das atividades de convivência',
-      services['ncisaidadomicilio[conclusaocurso_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Desistência',
-      services['ncisaidadomicilio[desistencia_quantidade]'],
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
-    createData('Total',
-      parseInt(services['ncisaidadomicilio[conclusaocurso_quantidade]'], 10)
-      + parseInt(services['ncisaidadomicilio[resgate_quantidade]'], 10)
-      + parseInt(services['ncisaidadomicilio[autonomia_quantidade]'], 10)
-      + parseInt(services['ncisaidadomicilio[recusa_quantidade]'], 10)
-      + parseInt(services['ncisaidadomicilio[obito_quantidade]'], 10)
-      + parseInt(services['ncisaidadomicilio[transferencia_quantidade]'], 10)
-      + parseInt(services['ncisaidadomicilio[mudancaendereco_quantidade]'], 10)
-      + parseInt(services['ncisaidadomicilio[desistencia_quantidade]'], 10),
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1),
+  const infoIdosos = infoIdososNCI({ services, createData });
 
-  ];
+  const familiasVulnerabilidade = familiasVulnerabilidadeNCI({ services, createData });
 
-  const idososMoramSozinho = [
-    createData('Quantidade de idosos que moram sozinhos',
-      services['nciconvidososozinho[idososo]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-    createData('Desses idosos, informe a quantidade de idosos que precisam de ajuda',
-      services['nciconvidososozinho[ajudaidosos]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-  ];
+  const familiasVulnerabilidadeDomicilio = familiasVulnerabilidadeDomicilioNCI({
+    services,
+    createData,
+  });
 
-  const idososMoramSozinhoDomicilio = [
-    createData('Quantidade de idosos que moram sozinhos',
-      services['ncidomsosozinho[idososo]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-    createData('Desses idosos, informe a quantidade de idosos que precisam de ajuda',
-      services['ncidomsosozinho[ajudaidosos]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atividadesItems = atividadesItemsNCI({ services, createData });
 
-  const idososFamilias = [
-    createData('Nº de famílias de idosos atendidas presencialmente no mês de referência ',
-      services['nciconvatenfam[ccafampres]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de famílias de idosos acompanhadas de forma remota no mês de referência',
-      services['nciconvatenfam[ccafamrem]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-    createData('Nº total de famílias de idosos atendidas no mês de referência',
-      services['nciconvatenfam[ccafamtotal]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-  ];
+  const temasItems = temasItemsNCI({ services, createData });
 
-  const idososFamiliasDomicilio = [
-    createData('Nº de famílias de idosos atendidas presencialmente no mês de referência ',
-      services['ncidomatendfam[ccafampres]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de famílias de idosos acompanhadas de forma remota no mês de referência',
-      services['ncidomatendfam[ccafamrem]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-    createData('Nº total de famílias de idosos atendidas no mês de referência',
-      services['ncidomatendfam[ccafamtotal]'],
-      1,
-      1, 1, 1, 1, 1, 1, 1),
-  ];
+  const demandaReprimida = demandaReprimidaNCI({ services, createData });
 
-  const familiasInsumos = [
-    createData('Cesta de alimentos', services['nciinsumos[alimentos_SQ001]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Kit de material de higiene', services['nciinsumos[higiene_SQ001]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const encaminhamentos = encaminhamentosNCI({ services, createData });
 
-  const infoIdosos = [
-    createData('Nº de idosos do serviço em domicílio que recebem BPC', services['nciinfoimportantes[bpcdomicilio_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de idosos do serviço de convivência que recebem BPC', services['nciinfoimportantes[bpcconvivencia_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de idosos do serviço em domicílio com PDU em andamento', services['nciinfoimportantes[pdudomicilio_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de visitas domiciliares realizadas no mês para o público da convivência', services['nciinfoimportantes[visitasconvivi_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Nº de visitas domiciliares realizadas no mês para o público do serviço em domicílio', services['nciinfoimportantes[residemsos1_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotos = atendimentosRemotosNCI({ services, createData });
 
-  const familiasVulnerabilidade = [
-    createData('Conflitos', services['nciconvvulnerab[conflit]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Preconceitos/discriminação', services['nciconvvulnerab[Precon]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Abandono', services['nciconvvulnerab[aband]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Apartação', services['nciconvvulnerab[apart]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Confinamento', services['nciconvvulnerab[confinamet]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Isolamento', services['nciconvvulnerab[isolament]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Violência', services['nciconvvulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotosDomicilio = atendimentosRemotosDomicilioNCI({ services, createData });
 
-  const familiasVulnerabilidadeDomicilio = [
-    createData('Conflitos', services['ncidomvulnerab[conflit]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Preconceitos/discriminação', services['ncidomvulnerab[Precon]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Abandono', services['ncidomvulnerab[aband]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Apartação', services['ncidomvulnerab[apart]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Confinamento', services['ncidomvulnerab[confinamet]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Isolamento', services['ncidomvulnerab[isolament]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Violência', services['ncidomvulnerab[violen]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const atendimentosRemotosTipos = atendimentosRemotosTiposNCI({ services, createData });
 
-  const atividadesItems = [
-    ['Atividades esportivas', services['nciatvidades[atvesporte]']],
-    ['Musicalidade (cantar, tocar instrumentos etc.)', services['nciatvidades[atvmusica]']],
-    ['Atividades de arte e cultura (pintura, circo, dança, teatro, trabalhos em papel etc.)', services['nciatvidades[atvcultura]']],
-    ['Artesanato (bijuterias, pintura em tecido, bordado, crochê etc.)', services['nciatvidades[atvarte]']],
-    ['Atividades de inclusão digital', services['nciatvidades[atvincdigital]']],
-    ['Atividades de linguagem (produção de texto, contação de histórias, roda de conversa etc.)', services['nciatvidades[atvlinguagem]']],
-    ['Atividades que envolvam manipulação de alimentos (culinária, hortas etc.)', services['nciatvidades[atvculinaria]']],
-    ['Atividades recreativas (jogos, brincadeiras, etc.)', services['nciatvidades[atvrecreacao]']],
+  const atendimentosRemotosTiposDomicilio = atendimentosRemotosTiposDomicilioNCI({
+    services,
+    createData,
+  });
 
-  ];
+  const atendimentosRemotosFamiliaSemana = atendimentosRemotosFamiliaSemanaNCI({
+    services,
+    createData,
+  });
 
-  const temasItems = [
-    ['Temas transversais (saúde, meio ambiente, cultura, esporte etc.)', services['ncitema[tematransversal]']],
-    ['Direitos e programas sociais', services['ncitema[temadireitos]']],
-    ['Segurança alimentar e nutricional', services['ncitema[temanutricao]']],
-    ['Igualdade entre homens e mulheres', services['ncitema[temaigualdade]']],
-    ['Orientação sexual e de identidade de gênero', services['ncitema[temaorientsexual]']],
-    ['Relações étnico-raciais', services['ncitema[temaetnico]']],
-    ['Prevenção ao uso de álcool e drogas', services['ncitema[temaalccoldrogas]']],
-    ['Prevenção à violência', services['ncitema[temaprevencaovio]']],
-    ['Parentalidade', services['ncitema[temaparental]']],
-    ['Deficiência e acessibilidade', services['ncitema[temapcd]']],
-    ['Envelhecimento saudável', services['ncitema[temaenvelhsaudavel]']],
-  ];
-  const demandaReprimida = [
-    createData('60 a 64 anos', services['ncilistaespera[60a64_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('65 a 69 anos', services['ncilistaespera[65a69_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('70 a 74 anos', services['ncilistaespera[70a74_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('75 anos ou mais', services['ncilistaespera[75mais_qtdade]'], 1, 1, 1, 1, 1, 1, 1, 1),
+  const atendimentosRemotosFamiliaSemanaDomicilio = atendimentosRemotosFamiliaSemanaDomicilioNCI({
+    services,
+    createData,
+  });
 
-    createData('Total',
-      parseInt(services['ncilistaespera[60a64_qtdade]'], 10)
-      + parseInt(services['ncilistaespera[65a69_qtdade]'], 10)
-      + parseInt(services['ncilistaespera[70a74_qtdade]'], 10)
-      + parseInt(services['ncilistaespera[75mais_qtdade]'], 10),
-      1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const encaminhamentos = [
-    createData('CRAS', services['nciencaminhamento[cras]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('CREAS', services['nciencaminhamento[creas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outro serviço da rede socioassistencial', services['nciencaminhamento[servicosrede]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Saúde', services['nciencaminhamento[saude]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Habitação', services['nciencaminhamento[hab]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Previdêncial Social', services['nciencaminhamento[prev]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Conselhos de direito', services['nciencaminhamento[direito]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras políticas públicas', services['nciencaminhamento[outraspoliticas]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotos = [
-    createData('Semana 1', services['nciconvivatendrempes[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['nciconvivatendrempes[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['nciconvivatendrempes[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['nciconvivatendrempes[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['nciconvivatendrempes[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['nciconvivatendrempes[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosDomicilio = [
-    createData('Semana 1', services['ncidomatendremperio[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['ncidomatendremperio[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['ncidomatendremperio[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['ncidomatendremperio[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['ncidomatendremperio[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['ncidomatendremperio[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosTipos = [
-    createData('Telefone / Celular / Whatsapp', services['nciconvivenciremdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Email', services['nciconvivenciremdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['nciconvivenciremdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['nciconvivenciremdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['nciconvivenciremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['nciconvivenciremdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['nciconvivenciremdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosTiposDomicilio = [
-    createData('Telefone / Celular / Whatsapp', services['ncidomremdisp[telef]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Email', services['ncidomremdisp[email]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Facebook', services['ncidomremdisp[face]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('YouTube', services['ncidomremdisp[youtu]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outras redes sociais', services['ncidomremdisp[outrasredes]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Entrega de kits de atividades', services['ncidomremdisp[entreg]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Outros', services['ncidomremdisp[outros]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosFamiliaSemana = [
-    createData('Semana 1', services['nciconvivatendremfam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['nciconvivatendremfam[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['nciconvivatendremfam[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['nciconvivatendremfam[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['nciconvivatendremfam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['nciconvivatendremfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
-
-  const atendimentosRemotosFamiliaSemanaDomicilio = [
-    createData('Semana 1', services['ncidomatendremfam[1sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 2', services['ncidomatendremfam[2sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 3', services['ncidomatendremfam[3sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 4', services['ncidomatendremfam[4sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 5', services['ncidomatendremfam[5sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-    createData('Semana 6', services['ncidomatendremfam[6sem]'], 1, 1, 1, 1, 1, 1, 1, 1),
-  ];
+  const idososMoramSozinhoDomicilio = idososMoramSozinhoDomicilioNCI({ services, createData });
 
   return (
     loading

@@ -8,8 +8,10 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import {
   Section, LoaderBody,
 } from './styles';
+
+import fetchServicesAnswers from './Request';
+
 import {
-  fetchServicesAnswers,
   temasItemsCEDESP,
   sexoRacaCorCEDESP,
   motivosSaidaCEDESP,

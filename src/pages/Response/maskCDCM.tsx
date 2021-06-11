@@ -5,11 +5,13 @@ import { useHistory } from 'react-router-dom';
 
 import MoonLoader from 'react-spinners/MoonLoader';
 
+import fetchServicesAnswers from './Request';
+
 import {
   Section, LoaderBody,
 } from './styles';
 import {
-  fetchServicesAnswers,
+
   testeCDCM,
   sexoRacaCorCDCM,
   atendidosMesCDCM,
@@ -290,22 +292,6 @@ const Response:any = () => {
                 />
               </>
             )}
-            {/* <h2>
-              13. Quantidade de atendimentos remotos de familiares por semana no mês
-            </h2>
-            <TableTwoColumns
-              headers={atendimentosRemotosFamiliaSemanaHeaders}
-              body={atendimentosRemotosFamiliaSemana}
-            />
-
-            <h2>
-              14. Quantidade de atividades remotas realizadas
-              no mês, pelos meios em que foram disponibilizadas
-            </h2>
-            <TableTwoColumns
-              headers={atendimentosRemotosTiposHeaders}
-              body={atendimentosRemotosTipos}
-            /> */}
 
           </Section>
         </>

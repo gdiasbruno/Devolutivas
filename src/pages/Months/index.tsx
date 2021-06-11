@@ -96,7 +96,7 @@ const Months: React.FC = () => {
   const [service, setService]:any = React.useState([]);
 
   const fetchUserProfiles = () => {
-    axios.get(`http://10.13.24.137:9090/devolutivas/${nomeSAS}`).then((res) => {
+    axios.get(`http://localhost:9090/devolutivas/${nomeSAS}`).then((res) => {
       setService(res.data);
       console.log(res.data);
 

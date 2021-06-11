@@ -3,11 +3,12 @@ import { useHistory } from 'react-router-dom';
 
 import MoonLoader from 'react-spinners/MoonLoader';
 
+import fetchServicesAnswers from './Request';
+
 import {
   Section, LoaderBody,
 } from './styles';
 import {
-  fetchServicesAnswers,
   atendidosMesCCA,
   sexoRacaCorCCA,
   motivoSaidaCCA,

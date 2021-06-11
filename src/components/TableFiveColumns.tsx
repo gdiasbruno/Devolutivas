@@ -41,7 +41,7 @@ const useStyles = makeStyles({
   },
 });
 
-function TableFourColumns(props:any): JSX.Element {
+function TableFiveColumns(props:any): JSX.Element {
   const classes = useStyles();
 
   const { headers, body } = props;
@@ -75,4 +75,4 @@ function TableFourColumns(props:any): JSX.Element {
   );
 }
 
-export default TableFourColumns;
+export default TableFiveColumns;

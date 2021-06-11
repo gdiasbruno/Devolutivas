@@ -53,12 +53,12 @@ const Routes: React.FC = () => {
               <Route path="/responseCIRCO SOCIAL" component={ResponseCIRCOSOCIAL} />
               <Route path="/responseNCI" component={ResponseNCI} />
               <Route path="/responseRESTAURANTE ESCOLA" component={ResponseRE} />
-              <Route path="/responseSERVIÇO DE ALIMENTACAO DOMICILIAR PARA PESSOA IDOSA" component={ResponseSADPI} />
+              <Route path="/responseSADPI" component={ResponseSADPI} />
               <Route path="/responseCDCM" component={ResponseCDCM} />
               <Route path="/responseCDI" component={ResponseCDI} />
               <Route path="/responseMSE-MA" component={ResponseMSE} />
               <Route path="/responseMSE" component={ResponseMSE} />
-              <Route path="/responseNUCLEO DE CONVIVENCIA PARA ADULTOS EM SITUACAO DE RUA" component={ResponseNCPOPRUA} />
+              <Route path="/responseNCPOPRUA" component={ResponseNCPOPRUA} />
               <Route path="/responseBAGAGEIRO" component={ResponseBAGAGEIRO} />
               <Route path="/responseSPVV" component={ResponseSPVV} />
               <Route path="/responseSISP" component={ResponseSISP} />

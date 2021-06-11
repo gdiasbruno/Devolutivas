@@ -8,8 +8,11 @@ import { useHistory } from 'react-router-dom';
 import {
   Section, LoaderBody,
 } from './styles';
+
+import fetchServicesAnswers from './Request';
+
 import {
-  fetchServicesAnswers,
+
   sexoRacaCorCDI,
   motivosSaidaCDI,
   encaminhamentosCDI,

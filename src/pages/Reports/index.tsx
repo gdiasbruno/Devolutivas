@@ -16,6 +16,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
 import MoonLoader from 'react-spinners/MoonLoader';
 
 import { Button } from '@material-ui/core';
@@ -24,6 +32,40 @@ import {
 } from './styles';
 
 import { infoContext } from '../../providers/reactContext';
+
+import TableSixColumns from '../../components/TableSixColumns';
+
+const StyledTableCell = withStyles((theme: Theme) => createStyles({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme: Theme) => createStyles({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
+  return {
+    name, calories, fat, carbs, protein,
+  };
+}
+
+const rows = [
+  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+  createData('Eclair', 262, 16.0, 24, 6.0),
+  createData('Cupcake', 305, 3.7, 67, 4.3),
+  createData('Gingerbread', 356, 16.0, 49, 3.9),
+];
 
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
@@ -89,6 +131,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   buttonIcon: {
     marginRight: '10px',
   },
+  table: {
+    minWidth: 700,
+  },
 }));
 
 const Reports: React.FC = () => {
@@ -103,7 +148,7 @@ const Reports: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchUserProfiles = () => {
-    axios.get(`http://10.13.24.137:9090/devolutivas/${nomeSAS}/${mes}`).then((res) => {
+    axios.get(`http://localhost:9090/devolutivas/${nomeSAS}/${mes}`).then((res) => {
       setServices(res.data);
       setServicesFiltered(res.data);
       console.log(res.data);
@@ -133,7 +178,7 @@ const Reports: React.FC = () => {
     console.log(servicesFiltered);
   };
   const handleClickPSE = () => {
-    const result = services.filter((service:any) => service.protection === 'PSE Media');
+    const result = services.filter((service:any) => service.protection.toUpperCase() === 'PSE MEDIA');
     setServicesFiltered(result);
     console.log(servicesFiltered);
   };
@@ -217,7 +262,12 @@ const Reports: React.FC = () => {
               </Button>
             </Filter>
             <div className={classes.bodyServicesItems}>
-              <List component="nav" aria-label="main mailbox folders">
+              <TableSixColumns
+                headers={['Tipologia', 'Nome do Serviço', 'E-mail do Gerente', 'Respondido', 'Data da Resposta', 'Consultar']}
+                body={servicesFiltered}
+              />
+
+              {/* <List component="nav" aria-label="main mailbox folders">
                 {servicesFiltered.map((service:any) => (
 
                   <ListItem
@@ -247,7 +297,7 @@ const Reports: React.FC = () => {
 
                 ))}
 
-              </List>
+              </List> */}
 
             </div>
 
