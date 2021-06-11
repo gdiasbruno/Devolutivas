@@ -11,7 +11,7 @@ const Index: React.FC = () => {
   const history = useHistory();
 
   const fetchUserProfiles = () => {
-    axios.get('http://localhost:9090/devolutivas').then((res) => {
+    axios.get('http://localhost:9091/devolutivas').then((res) => {
       setSas(res.data);
     }).catch((err):any => {
       console.log(err);
